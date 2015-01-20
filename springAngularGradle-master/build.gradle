@@ -1,0 +1,208 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "http://repo.springsource.org/libs-snapshot"
+            url = 'https://raw.github.com/akhikhl/gretty/master/maven_repo'
+        }
+    }
+
+    apply plugin: "maven"
+
+    dependencies {
+        //classpath "org.springframework.boot:spring-boot-gradle-plugin:0.5.0.M5"
+        classpath "com.eriwen:gradle-js-plugin:1.11.0"
+        classpath "au.com.ish.gradle:release:2.1.3" // release plugin
+        classpath 'org.akhikhl.gretty:gretty-plugin:+'
+    }
+}
+
+ext {
+    springVersion = "4.0.0.RC1"
+    hibernateVersion = "4.2.7.SP1"
+    slf4jVersion = "1.7.5"
+    logbackVersion = "1.0.13"
+    metricsVersion = "3.0.1"
+}
+
+allprojects {
+//    apply plugin: "eclipse"
+    apply plugin: "idea"
+    apply plugin: "java"
+    apply plugin: "release"
+
+    group = "com.yesnault.sag"
+
+    release {
+        failOnSnapshotDependencies = true
+        allowLocalModifications = false
+        releaseDryRun = false
+        scm = "git"
+        //scm = "svn"
+        //username = "yesnault"
+        //password = "secret01"
+    }
+    version = release.projectVersion
+
+    dependencies {
+        compile "org.slf4j:slf4j-api:$slf4jVersion"
+        compile "ch.qos.logback:logback-classic:$logbackVersion"
+    }
+}
+
+compileJava {
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+subprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+            url "http://hudson.renn.fr.sopra:8081/nexus/content/groups/public/"
+//            url "http://repo.springsource.org/libs-milestone"
+//            url "https://repository.jboss.org/nexus/content/repositories/releases"
+//            url "https://maven.alfresco.com/nexus/content/groups/public"
+//            url "http://repo.springsource.org/libs-snapshot"
+//            url = 'https://raw.github.com/akhikhl/gretty/master/maven_repo'
+        }
+        maven{ url "http://repo.springsource.org/libs-milestone"}
+        maven{ url "https://repository.jboss.org/nexus/content/repositories/releases"}
+        maven{  url "https://maven.alfresco.com/nexus/content/groups/public"}
+        maven{  url "http://repo.springsource.org/libs-snapshot"}
+        maven{  url "https://raw.github.com/akhikhl/gretty/master/maven_repo"}
+    }
+    dependencies {
+        testCompile "junit:junit:4.11"
+        compile "org.slf4j:slf4j-api:$slf4jVersion"
+        compile "ch.qos.logback:logback-classic:$logbackVersion"
+        compile "ch.qos.logback:logback-core:$logbackVersion"
+        compile "org.fusesource.jansi:jansi:1.8"
+    }
+}
+
+apply plugin: "java"
+
+project(":services") {
+    //apply plugin: "spring-boot"
+    apply plugin: "war"
+    apply plugin: "gretty"
+    apply plugin: "js"
+    apply plugin: "project-report"
+
+    gretty {
+        contextPath '/services'
+        scanInterval = 5
+    }
+
+
+    /*jettyRun {
+        reload = "automatic"
+        scanIntervalSeconds = 2
+    }*/
+
+    war {
+        baseName = "sag-services"
+    }
+
+    jar {
+        baseName = "sag-services"
+    }
+
+    dependencies {
+        compile project(":infrastructure")
+        compile project(":business")
+        compile project(":persistence")
+        //compile "org.springframework.boot:spring-boot-starter-web:0.5.0.M5"
+        compile "org.springframework:spring-web:$springVersion"
+        compile "org.springframework:spring-webmvc:$springVersion"
+        compile "net.sf.ehcache:ehcache-web:2.0.4"
+        compile "commons-lang:commons-lang:2.6"
+        compile "commons-fileupload:commons-fileupload:1.3"
+        compile "commons-io:commons-io:2.4"
+        compile "javax.servlet:javax.servlet-api:3.1.0"
+        compile "javax.servlet:jstl:1.2"
+    }
+
+    repositories {
+        // mavenCentral() if needed for other dependencies
+//        maven {
+//            url 'https://raw.github.com/akhikhl/gretty/master/maven_repo'
+//        }
+    }
+
+
+    javascript.source {
+        app {
+            js {
+                srcDir "${projectDir}/src/main/webapp/js/app/"
+                include "**/*.js"
+            }
+        }
+    }
+
+    task jsApp(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
+        source = javascript.source.app.js.files
+        dest = file("${projectDir}/src/main/webapp/js/build/all-app.js")
+    }
+
+    task jsLibs(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
+        source = ["${projectDir}/src/main/webapp/js/libs/jquery-1.10.2.min.js",
+                "${projectDir}/src/main/webapp/js/libs/bootstrap.min.js",
+                "${projectDir}/src/main/webapp/js/libs/angular.min.js",
+                "${projectDir}/src/main/webapp/js/libs/angular-resource.min.js",
+                "${projectDir}/src/main/webapp/js/libs/angular-route.min.js"]
+        dest = file("${projectDir}/src/main/webapp/js/build/all-libs.js")
+    }
+
+    task minifyjs(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
+        source = jsApp
+        dest = file("${projectDir}/src/main/webapp/js/build/all-app.min.js")
+    }
+
+    classes {
+        doFirst {
+            jsApp.execute()
+            jsLibs.execute()
+        }
+    }
+}
+
+project(":infrastructure") {
+    dependencies {
+        compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-context-support:$springVersion"
+
+        compile "com.codahale.metrics:metrics-core:$metricsVersion"
+        compile "com.codahale.metrics:metrics-ehcache:$metricsVersion"
+        compile "com.codahale.metrics:metrics-graphite:$metricsVersion"
+        compile "com.codahale.metrics:metrics-jvm:$metricsVersion"
+        compile "com.codahale.metrics:metrics-servlet:$metricsVersion"
+        compile "com.codahale.metrics:metrics-servlets:$metricsVersion"
+        compile "com.ryantenney.metrics:metrics-spring:3.0.0-RC2"
+
+        compile "org.aspectj:aspectjrt:1.7.4"
+        compile "org.aspectj:aspectjweaver:1.7.4"
+
+        compile "javax.inject:javax.inject:1"
+
+        compile "org.apache.geronimo.javamail:geronimo-javamail_1.4_mail:1.8.3"
+    }
+}
+
+project(":persistence") {
+    dependencies {
+        compile project(":infrastructure")
+        //compile "mysql:mysql-connector-java:5.1.26"
+        compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
+
+        compile "org.springframework:spring-orm:$springVersion"
+        compile "org.springframework.data:spring-data-jpa:1.4.2.RELEASE"
+        compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
+        compile "org.slf4j:jcl-over-slf4j:$slf4jVersion"
+        compile "com.h2database:h2:1.3.172"
+    }
+}
