@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +20,10 @@ public class UsersController {
 
     Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
 
-    @Autowired
+    @Inject
     UserRepository userRepository;
 
-    @Autowired(required = true)
+    @Inject
     UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
