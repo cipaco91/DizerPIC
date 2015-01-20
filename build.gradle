@@ -27,7 +27,6 @@ ext {
 }
 
 allprojects {
-//    apply plugin: "eclipse"
     apply plugin: "idea"
     apply plugin: "java"
     apply plugin: "release"
@@ -60,14 +59,7 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
-        maven {
-            url "http://hudson.renn.fr.sopra:8081/nexus/content/groups/public/"
-//            url "http://repo.springsource.org/libs-milestone"
-//            url "https://repository.jboss.org/nexus/content/repositories/releases"
-//            url "https://maven.alfresco.com/nexus/content/groups/public"
-//            url "http://repo.springsource.org/libs-snapshot"
-//            url = 'https://raw.github.com/akhikhl/gretty/master/maven_repo'
-        }
+        maven { url "http://hudson.renn.fr.sopra:8081/nexus/content/groups/public/" }
         maven{ url "http://repo.springsource.org/libs-milestone"}
         maven{ url "https://repository.jboss.org/nexus/content/repositories/releases"}
         maven{  url "https://maven.alfresco.com/nexus/content/groups/public"}
@@ -193,12 +185,24 @@ project(":infrastructure") {
     }
 }
 
+
+project(":business") {
+    dependencies {
+        compile "org.springframework:spring-context:$springVersion"
+        compile "org.springframework:spring-core:$springVersion"
+        compile "org.springframework:spring-context-support:$springVersion"
+        compile 'org.springframework.social:spring-social-facebook:1.1.0.RELEASE'
+        compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
+        compile 'org.springframework.social:spring-social-linkedin:1.0.0.RELEASE'
+        compile "javax.inject:javax.inject:1"
+    }
+}
+
 project(":persistence") {
     dependencies {
         compile project(":infrastructure")
         //compile "mysql:mysql-connector-java:5.1.26"
         compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
-
         compile "org.springframework:spring-orm:$springVersion"
         compile "org.springframework.data:spring-data-jpa:1.4.2.RELEASE"
         compile "org.hibernate:hibernate-entitymanager:$hibernateVersion"
