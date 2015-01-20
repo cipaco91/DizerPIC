@@ -1,5 +1,6 @@
 package com.yesnault.sag.controller;
 
+import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.repository.UserRepository;
 import org.slf4j.Logger;
@@ -21,8 +22,16 @@ public class UsersController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired(required = true)
+    UserService userService;
+
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody List<User> list() {
+    public @ResponseBody List<User> list()
+    {
+        List<User> users = userService.findByLastname("ciprian");
+        if(users.size()>0) {
+            System.out.println(users.get(0).getLastname());
+        }
         return new ArrayList<User>(userRepository.findAll());
     }
 
