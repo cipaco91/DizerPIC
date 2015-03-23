@@ -24,6 +24,7 @@ ext {
     slf4jVersion = "1.7.5"
     logbackVersion = "1.0.13"
     metricsVersion = "3.0.1"
+    springSecurityVersion= "3.2.3.RELEASE"
 }
 
 allprojects {
@@ -85,7 +86,7 @@ project(":services") {
     apply plugin: "project-report"
 
     gretty {
-        contextPath '/services'
+        contextPath '/social'
         scanInterval = 5
     }
 
@@ -167,6 +168,8 @@ project(":infrastructure") {
         compile "org.springframework:spring-context:$springVersion"
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-context-support:$springVersion"
+        compile "org.springframework:spring-jdbc:$springVersion"
+        compile 'org.springframework.security:spring-security-web:3.2.6.RELEASE'
 
         compile "com.codahale.metrics:metrics-core:$metricsVersion"
         compile "com.codahale.metrics:metrics-ehcache:$metricsVersion"
@@ -176,12 +179,22 @@ project(":infrastructure") {
         compile "com.codahale.metrics:metrics-servlets:$metricsVersion"
         compile "com.ryantenney.metrics:metrics-spring:3.0.0-RC2"
 
+        compile 'org.springframework.social:spring-social-facebook:1.1.0.RELEASE'
+        compile 'org.springframework.social:spring-social-twitter:1.1.0.RELEASE'
+        compile 'org.springframework.social:spring-social-linkedin:1.0.0.RELEASE'
+        compile 'org.springframework.social:spring-social-config:1.1.0.RELEASE'
+        compile 'org.springframework.social:spring-social-core:1.1.0.RELEASE'
+        compile 'org.springframework.social:spring-social-web:1.1.0.RELEASE'
+
+
         compile "org.aspectj:aspectjrt:1.7.4"
         compile "org.aspectj:aspectjweaver:1.7.4"
 
         compile "javax.inject:javax.inject:1"
 
         compile "org.apache.geronimo.javamail:geronimo-javamail_1.4_mail:1.8.3"
+
+        compile 'javax.servlet:javax.servlet-api:3.0.1'
     }
 }
 
