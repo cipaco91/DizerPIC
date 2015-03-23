@@ -169,7 +169,9 @@ project(":infrastructure") {
         compile "org.springframework:spring-core:$springVersion"
         compile "org.springframework:spring-context-support:$springVersion"
         compile "org.springframework:spring-jdbc:$springVersion"
-        compile 'org.springframework.security:spring-security-web:3.2.6.RELEASE'
+        compile "org.springframework.security:spring-security-config:$springSecurityVersion"
+        compile "org.springframework.security:spring-security-taglibs:$springSecurityVersion"
+        compile "org.springframework.security:spring-security-web:$springSecurityVersion"
 
         compile "com.codahale.metrics:metrics-core:$metricsVersion"
         compile "com.codahale.metrics:metrics-ehcache:$metricsVersion"
