@@ -7,13 +7,19 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.init.DatabasePopulator;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -24,7 +30,17 @@ public class PersistenceApplication {
 
     @Bean
     public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder().setType(H2).build();
+        EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
+        factory.setDatabaseName("spring-social-showcase");
+        factory.setDatabaseType(EmbeddedDatabaseType.H2);
+        factory.setDatabasePopulator(databasePopulator());
+        return factory.getDatabase();
+    }
+
+    private DatabasePopulator databasePopulator() {
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
+        return populator;
     }
 
     @Bean

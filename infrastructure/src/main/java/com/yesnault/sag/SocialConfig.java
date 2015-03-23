@@ -16,7 +16,6 @@
 package com.yesnault.sag;
 
 import com.yesnault.sag.interceptors.PostToWallAfterConnectInterceptor;
-import com.yesnault.sag.interceptors.TweetAfterConnectInterceptor;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
@@ -81,10 +80,12 @@ public class SocialConfig implements SocialConfigurer {
 			@Override
 			public String getUserId() {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-				if (authentication == null) {
-					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
-				}
-				return authentication.getName();
+				return "ciprian";
+//				if (authentication == null) {
+//					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
+//				}
+////				return authentication.getName();
+//				return "";
 			}
 		};
 	}

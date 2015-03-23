@@ -25,4 +25,6 @@ public interface FacebookService {
 
     void simulateExpiredToken();
 
+    void login();
+
 }

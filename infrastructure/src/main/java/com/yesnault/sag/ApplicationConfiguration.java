@@ -17,7 +17,6 @@ import java.io.IOException;
         "com.mycompany.myapp.security"})
 */
 @Import(value = {
-        //AsyncConfiguration.class,
         CacheConfiguration.class,
         MainConfig.class,
         SocialConfig.class,

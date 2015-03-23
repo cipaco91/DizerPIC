@@ -57,4 +57,9 @@ public class FacebookServiceImpl implements FacebookService{
     public void simulateExpiredToken() {
         throw new ExpiredAuthorizationException("facebook");
     }
+
+    @Override
+    public void login() {
+
+    }
 }

@@ -4,6 +4,8 @@ import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.repository.UserRepository;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Post;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +28,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> findByLastname(String lastname) {
+        PagedList<Post> posts= facebook.feedOperations().getFeed();
         return userRepository.findByLastname(lastname);
     }
+
+
+
+
 
 
 }

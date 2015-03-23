@@ -27,17 +27,19 @@ public class UsersController {
     UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody List<User> list()
-    {
+    public
+    @ResponseBody
+    List<User> list() {
         List<User> users = userService.findByLastname("ciprian");
-        if(users.size()>0) {
+        if (users.size() > 0) {
             System.out.println(users.get(0).getLastname());
         }
         return new ArrayList<User>(userRepository.findAll());
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody
+    public
+    @ResponseBody
     User getById(@PathVariable long id) {
         return userRepository.findOne(id);
     }

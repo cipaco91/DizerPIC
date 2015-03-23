@@ -48,7 +48,7 @@ public class MainConfig {
 		EmbeddedDatabaseFactory factory = new EmbeddedDatabaseFactory();
 		factory.setDatabaseName("dizerpic");
 		factory.setDatabaseType(EmbeddedDatabaseType.H2);
-//		factory.setDatabasePopulator(databasePopulator());
+		factory.setDatabasePopulator(databasePopulator());
 		return factory.getDatabase();
 	}
 	
@@ -69,11 +69,9 @@ public class MainConfig {
 	
 	// internal helpers
 
-//	private DatabasePopulator databasePopulator() {
-//		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-//		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
-//		populator.addScript(new ClassPathResource("Account.sql", JdbcAccountRepository.class));
-//		populator.addScript(new ClassPathResource("data.sql", JdbcAccountRepository.class));
-//		return populator;
-//	}
+	private DatabasePopulator databasePopulator() {
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScript(new ClassPathResource("JdbcUsersConnectionRepository.sql", JdbcUsersConnectionRepository.class));
+		return populator;
+	}
 }
