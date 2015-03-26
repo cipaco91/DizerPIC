@@ -29,7 +29,6 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
-import org.springframework.social.security.SpringSocialConfigurer;
 
 
 import javax.inject.Inject;

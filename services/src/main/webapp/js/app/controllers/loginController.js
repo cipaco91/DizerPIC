@@ -1,11 +1,6 @@
 function LoginCtrl($scope, $location,$window,UsersService) {
-    //
-    //$scope.login = function() {
-    //    console.log("login");
-    //    UsersService.login().success(function (response) {
-    //        $window.location.href=response;
-    //    });
-    //}
+    $scope.showUser = false;
+    $scope.showMenu = false;
 
     $scope.connectionGoogle = function() {
         console.log("redirect google");
@@ -17,7 +12,8 @@ function LoginCtrl($scope, $location,$window,UsersService) {
     $scope.connectionFacebook = function() {
         console.log("redirect facebook");
         UsersService.login('facebook').success(function (response) {
-            $window.location.href=response;
+            $scope.showUser = true;
+            //$window.location.href=response;
         });
     }
 

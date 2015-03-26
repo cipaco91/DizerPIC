@@ -1,12 +1,80 @@
-<form class="form-signin">
-    <h2 class="form-signin-heading">Connexion</h2>
-    <input type="text" class="form-control" placeholder="Email" autofocus="">
-    <input type="password" class="form-control" placeholder="Password">
-    <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionGoogle()">Login Google+</button>
-    <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionFacebook()">Login Facebook</button>
-    <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionLinkedin()">Login Linkedin</button>
-    <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionTwitter()">Login twitter</button>
-</form>
+<!--<form class="form-signin">-->
+    <!--<h2 class="form-signin-heading">Connexion</h2>-->
+    <!--<input type="text" class="form-control" placeholder="Email" autofocus="">-->
+    <!--<input type="password" class="form-control" placeholder="Password">-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionGoogle()">Login Google+</button>-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionFacebook()">Login Facebook</button>-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionLinkedin()">Login Linkedin</button>-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionTwitter()">Login twitter</button>-->
+<!--</form>-->
+
+<body class="login">
+<div id="content">
+    <div class="container-fluid">
+        <div class="lock-container">
+            <h1>Account Access</h1>
+            <div class="panel panel-default text-center">
+                <img src="images/people/110/guy-5.jpg" class="img-circle">
+                <div class="panel-body">
+                    <input class="form-control" type="text" placeholder="Username">
+                    <input class="form-control" type="password" placeholder="Enter Password">
+                    <a href="index.html" class="btn btn-primary">Login <i class="fa fa-fw fa-unlock-alt"></i></a>
+                    <button class="btn btn-lg btn-primary btn-block" type="button" ng-click="connectionFacebook()">Login Facebook</button>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var colors = {
+        "danger-color": "#e74c3c",
+        "success-color": "#81b53e",
+        "warning-color": "#f0ad4e",
+        "inverse-color": "#2c3e50",
+        "info-color": "#2d7cb5",
+        "default-color": "#6e7882",
+        "default-light-color": "#cfd9db",
+        "purple-color": "#9D8AC7",
+        "mustard-color": "#d4d171",
+        "lightred-color": "#e15258",
+        "body-bg": "#f6f6f6"
+    };
+    var config = {
+        theme: "social-1",
+        skins: {
+            "default": {
+                "primary-color": "#16ae9f"
+            },
+            "orange": {
+                "primary-color": "#e74c3c"
+            },
+            "blue": {
+                "primary-color": "#4687ce"
+            },
+            "purple": {
+                "primary-color": "#af86b9"
+            },
+            "brown": {
+                "primary-color": "#c3a961"
+            }
+        }
+    };
+</script>
+<script src="js/libs/vendor-core.min.js"></script>
+<script src="js/libs/vendor-tables.min.js"></script>
+<script src="js/libs/vendor-forms.min.js"></script>
+<script src="js/libs/vendor-maps.min.js"></script>
+<script src="js/libs/module-essentials.min.js"></script>
+<script src="js/libs/module-layout.min.js"></script>
+<script src="js/libs/module-sidebar.min.js"></script>
+<script src="js/libs/module-timeline.min.js"></script>
+<script src="js/libs/module-chat.min.js"></script>
+<script src="js/libs/module-maps.min.js"></script>
+<script src="js/libs/theme-core.min.js"></script>
+</body>
+
+
 
 
 
