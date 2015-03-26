@@ -38,6 +38,7 @@ import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.connect.web.ReconnectFilter;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.twitter.api.Twitter;
@@ -71,6 +72,11 @@ public class SocialConfig implements SocialConfigurer {
 		    cfConfig.addConnectionFactory(new TwitterConnectionFactory("YR571S2JiVBOFyJS5MEg", "Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4"));
 			cfConfig.addConnectionFactory(new FacebookConnectionFactory("631469100286834", "41e4754bf5b580707709eb00168a329f", "dizerpicnew"));
 		    cfConfig.addConnectionFactory(new LinkedInConnectionFactory("75f8kyd5hxvczf", "7ApOqcqTi9BkiYn3"));
+			GoogleConnectionFactory googleConnectionFactory=new GoogleConnectionFactory(
+					"123293092084-q14e0hhedmnauob7a4s2luas6fniin4p.apps.googleusercontent.com",
+					"I89Ws8lgMXkGKyXJ6ILm3wk8");
+			googleConnectionFactory.setScope("profile");
+			cfConfig.addConnectionFactory(googleConnectionFactory);
 			flag=false;
 		}
 	}

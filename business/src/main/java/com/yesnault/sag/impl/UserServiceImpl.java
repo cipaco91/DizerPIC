@@ -6,6 +6,8 @@ import com.yesnault.sag.repository.UserRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import org.springframework.social.google.api.Google;
+import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.twitter.api.Twitter;
@@ -35,6 +37,9 @@ public class UserServiceImpl implements UserService {
     @Inject
     private LinkedIn linkedIn;
 
+//    @Inject
+//    private Google google;
+
 
     @Override
     public List<User> findByLastname(String lastname) {
@@ -42,14 +47,10 @@ public class UserServiceImpl implements UserService {
             LinkedInProfile linkedInProfile=linkedIn.profileOperations().getUserProfile();
             TwitterProfile twitterProfile = twitter.userOperations().getUserProfile();
             PagedList<Post> posts = facebook.feedOperations().getFeed();
+//            Person person= google.plusOperations().getGoogleProfile();
         }catch(Exception e){
         }
         return userRepository.findByLastname(lastname);
     }
-
-
-
-
-
 
 }
