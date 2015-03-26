@@ -7,6 +7,7 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/home', {  controller: HomeCtrl, templateUrl: 'partials/home/home.html' })
         .when('/login', {  controller: LoginCtrl, templateUrl: 'partials/login/login.html' })
+        .when('/rest/connect/facebook', {  controller: HomeCtrl, templateUrl: 'partials/home/home.html' })
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })
@@ -19,4 +20,5 @@ app.config(function ($routeProvider) {
         .otherwise({
             redirectTo: '/login'
         });
+
 });

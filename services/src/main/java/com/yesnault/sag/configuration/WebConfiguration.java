@@ -5,23 +5,33 @@ import com.codahale.metrics.servlets.AdminServlet;
 import com.codahale.metrics.servlets.HealthCheckServlet;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.yesnault.sag.ApplicationConfiguration;
+import com.yesnault.sag.CORSInterceptor;
+import com.yesnault.sag.SimpleCORSFilter;
 import com.yesnault.sag.metrics.MetricsConfiguration;
 import net.sf.ehcache.constructs.web.filter.GzipFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.Conventions;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.*;
 import java.util.EnumSet;
 
 @ComponentScan
 //@EnableAutoConfiguration
-public class WebConfiguration implements ServletContextListener {
+public class WebConfiguration extends WebMvcConfigurerAdapter implements ServletContextListener {
 
     /*    public static void main(String[] args)  {
             ApplicationContext rootContext = SpringApplication.run(WebConfiguration.class, args);
@@ -49,8 +59,16 @@ public class WebConfiguration implements ServletContextListener {
         initSpringSecurity(servletContext, disps);
         initMetrics(servletContext, disps);
         initGzip(servletContext, disps);
-
+//        registerServletFilter(servletContext,new SimpleCORSFilter());
         LOGGER.debug("Web application fully configured");
+    }
+
+    protected FilterRegistration.Dynamic registerServletFilter(ServletContext servletContext, Filter filter) {
+        String filterName = Conventions.getVariableName(filter);
+        FilterRegistration.Dynamic registration = servletContext.addFilter(filterName, filter);
+        registration.setAsyncSupported(true);
+        registration.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, "/*");
+        return registration;
     }
 
     /**
@@ -133,6 +151,24 @@ public class WebConfiguration implements ServletContextListener {
         AnnotationConfigWebApplicationContext gwac = (AnnotationConfigWebApplicationContext) ac;
         gwac.close();
         LOGGER.debug("Web application destroyed");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/**").setViewName("index");
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("/");
+        resolver.setSuffix(".html");
+        return resolver;
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 
 }

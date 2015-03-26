@@ -26,8 +26,19 @@ app.factory('User', function ($resource) {
 
 app.factory("UsersService", function ($http) {
     return {
+
         findAll: function () {
             return $http.get('rest/users');
+        },
+        login: function () {
+            return $http.get('rest/login');
+        },
+        loginFacebook: function () {
+            return $http.post('rest/connect/facebook').success(function (response) {
+                return response;
+            }).error(function(err){
+                return err;
+            });
         }
     }
 });

@@ -19,6 +19,7 @@ import java.io.IOException;
 @Import(value = {
         CacheConfiguration.class,
         MainConfig.class,
+        SecurityConfig.class,
         SocialConfig.class,
         MailConfiguration.class})
 //@ImportResource("classpath:META-INF/spring/applicationContext-*.xml")

@@ -80,19 +80,19 @@ public class SocialConfig implements SocialConfigurer {
 			@Override
 			public String getUserId() {
 				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-				return "ciprian";
-//				if (authentication == null) {
+				if (authentication == null) {
+					return "ciprian";
 //					throw new IllegalStateException("Unable to get a ConnectionRepository: no user signed in");
-//				}
-////				return authentication.getName();
-//				return "";
+				}
+				return authentication.getName();
 			}
 		};
 	}
-	
+
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
-		return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+		UsersConnectionRepository usersConnectionRepository= new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+		return usersConnectionRepository;
 	}
 	
 	//
@@ -126,6 +126,7 @@ public class SocialConfig implements SocialConfigurer {
 	@Bean
 	public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
 		ConnectController connectController = new ConnectController(connectionFactoryLocator, connectionRepository);
+//		connectController.setApplicationUrl("http://localhost:8080/social");
 		connectController.addInterceptor(new PostToWallAfterConnectInterceptor());
 //		connectController.addInterceptor(new TweetAfterConnectInterceptor());
 		return connectController;
@@ -133,8 +134,14 @@ public class SocialConfig implements SocialConfigurer {
 
 	@Bean
 	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
-		return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
+		ProviderSignInController providerSignInController=new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
+		try {
+			providerSignInController.setApplicationUrl("http://localhost:8080/social");
+		}catch(Exception e){
+		}
+			return providerSignInController;
 	}
+
 	
 //	@Bean
 //	public DisconnectController disconnectController(UsersConnectionRepository usersConnectionRepository, Environment env) {
@@ -145,5 +152,7 @@ public class SocialConfig implements SocialConfigurer {
 	public ReconnectFilter apiExceptionHandler(UsersConnectionRepository usersConnectionRepository, UserIdSource userIdSource) {
 		return new ReconnectFilter(usersConnectionRepository, userIdSource);
 	}
+
+
 
 }
