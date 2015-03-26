@@ -16,6 +16,7 @@
 package com.yesnault.sag;
 
 import com.yesnault.sag.interceptors.PostToWallAfterConnectInterceptor;
+import com.yesnault.sag.interceptors.TweetAfterConnectInterceptor;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
@@ -69,7 +70,7 @@ public class SocialConfig implements SocialConfigurer {
 		if(flag) {
 		    cfConfig.addConnectionFactory(new TwitterConnectionFactory("YR571S2JiVBOFyJS5MEg", "Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4"));
 			cfConfig.addConnectionFactory(new FacebookConnectionFactory("631469100286834", "41e4754bf5b580707709eb00168a329f", "dizerpicnew"));
-		    cfConfig.addConnectionFactory(new LinkedInConnectionFactory("754fvz2njoxqfm", "rolyKemRYmBXxlDJ"));
+		    cfConfig.addConnectionFactory(new LinkedInConnectionFactory("75f8kyd5hxvczf", "7ApOqcqTi9BkiYn3"));
 			flag=false;
 		}
 	}
@@ -126,20 +127,15 @@ public class SocialConfig implements SocialConfigurer {
 	@Bean
 	public ConnectController connectController(ConnectionFactoryLocator connectionFactoryLocator, ConnectionRepository connectionRepository) {
 		ConnectController connectController = new ConnectController(connectionFactoryLocator, connectionRepository);
-//		connectController.setApplicationUrl("http://localhost:8080/social");
 		connectController.addInterceptor(new PostToWallAfterConnectInterceptor());
-//		connectController.addInterceptor(new TweetAfterConnectInterceptor());
+		connectController.addInterceptor(new TweetAfterConnectInterceptor());
 		return connectController;
 	}
 
 	@Bean
 	public ProviderSignInController providerSignInController(ConnectionFactoryLocator connectionFactoryLocator, UsersConnectionRepository usersConnectionRepository) {
 		ProviderSignInController providerSignInController=new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new SimpleSignInAdapter(new HttpSessionRequestCache()));
-		try {
-			providerSignInController.setApplicationUrl("http://localhost:8080/social");
-		}catch(Exception e){
-		}
-			return providerSignInController;
+		return providerSignInController;
 	}
 
 	

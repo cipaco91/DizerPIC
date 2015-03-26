@@ -57,18 +57,27 @@ public class FacebookController {
         return facebookService.getFriendsFacebook();
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/login/{providerId}",method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String login(NativeWebRequest nativeWebRequest) {
-        RedirectView redirectView = connectController.connect("facebook", nativeWebRequest);
+    public String login(@PathVariable("providerId") String providerId,NativeWebRequest nativeWebRequest) {
+        RedirectView redirectView = connectController.connect(providerId, nativeWebRequest);
         SignInUtils.signin("ciprian");
         return redirectView.getUrl();
     }
 
-    @RequestMapping(value = "/login", method=RequestMethod.GET, params="code")
+    @RequestMapping(value = "/login/{providerId}", method=RequestMethod.GET, params="code")
     @ResponseBody
-    public RedirectView login2(NativeWebRequest nativeWebRequest) {
-        RedirectView redirectView = connectController.oauth2Callback("facebook", nativeWebRequest);
+    public RedirectView loginWithCode(@PathVariable("providerId") String providerId,NativeWebRequest nativeWebRequest) {
+        RedirectView redirectView = connectController.oauth2Callback(providerId, nativeWebRequest);
+        SignInUtils.signin("ciprian");
+        redirectView.setUrl("/#/home");
+        return redirectView;
+    }
+
+    @RequestMapping(value = "/login/{providerId}", method=RequestMethod.GET, params="oauth_token")
+    @ResponseBody
+    public RedirectView loginWithOauthToken(@PathVariable("providerId") String providerId,NativeWebRequest nativeWebRequest) {
+        RedirectView redirectView = connectController.oauth1Callback(providerId, nativeWebRequest);
         SignInUtils.signin("ciprian");
         redirectView.setUrl("/#/home");
         return redirectView;
