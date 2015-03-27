@@ -5282,7 +5282,8 @@ a.list-group-item-danger.active:focus {
   padding-right: 15px;
 }
 .panel > .table:first-child,
-
+.panel > .table-responsive:first-child > .table:first-child {
+}
 .panel > .table:first-child > thead:first-child > tr:first-child,
 .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
 .panel > .table:first-child > tbody:first-child > tr:first-child,

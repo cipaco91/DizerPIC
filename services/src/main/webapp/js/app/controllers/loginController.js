@@ -1,6 +1,8 @@
-function LoginCtrl($scope, $location,$window,UsersService) {
+function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
     $scope.showUser = false;
     $scope.showMenu = false;
+    $scope.loginClass='login';
+    $rootScope.bodylayout = 'login';
 
     $scope.connectionGoogle = function() {
         console.log("redirect google");
