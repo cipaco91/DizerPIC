@@ -13,7 +13,7 @@ function LoginCtrl($scope, $location,$window,UsersService) {
         console.log("redirect facebook");
         UsersService.login('facebook').success(function (response) {
             $scope.showUser = true;
-            //$window.location.href=response;
+            $window.location.href=response;
         });
     }
 
