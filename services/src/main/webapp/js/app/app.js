@@ -7,8 +7,8 @@ app.config(function ($routeProvider) {
     $routeProvider
         .when('/home', {  controller: HomeCtrl, templateUrl: 'partials/home/home.html' })
         .when('/login', {  controller: LoginCtrl, templateUrl: 'partials/login/login.html' })
+        .when('/logout', {  controller: LoginCtrl, templateUrl: 'partials/login/login.html' })
         .when('/privateFriends', {  controller: MenuCtrl, templateUrl: 'partials/friends/private-friends.html' })
-        .when('/index', {  controller: MenuCtrl, templateUrl: 'partials/index.html' })
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })
