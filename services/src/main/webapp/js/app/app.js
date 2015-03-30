@@ -10,6 +10,7 @@ app.config(function ($routeProvider) {
         .when('/logout', {  controller: LoginCtrl, templateUrl: 'partials/login/login.html' })
         .when('/privateFriends', {  controller: MenuCtrl, templateUrl: 'partials/friends/private-friends.html' })
         .when('/settings', {  controller: SettingsCtrl, templateUrl: 'partials/settings/settings.html' })
+        .when('/manageSocialNetwork', {  controller: HomeCtrl, templateUrl: 'partials/settings/manageSocialNetwork.html' })
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })
