@@ -40,6 +40,6 @@ public class TwitterController {
     public
     @ResponseBody
     CursoredList<TwitterProfile> friendsTwitter() {
-        return twitterService.getFollowers();
+        return twitterService.getFriends();
     }
 }

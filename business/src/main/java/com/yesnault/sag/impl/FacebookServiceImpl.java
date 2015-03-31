@@ -3,6 +3,7 @@ package com.yesnault.sag.impl;
 import com.yesnault.sag.interfaces.FacebookService;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,8 @@ public class FacebookServiceImpl implements FacebookService{
 
     @Override
     public PagedList<Reference> getFriendsFacebook() {
-        return facebook.friendOperations().getFriends();
+        Facebook facebook1=new FacebookTemplate("CAACEdEose0cBAAXRznDfpTRqs9X6zp5FAGswd83ZBSvDVJiemsdXs8aujedpVwcWyo18g7aUIJfwmEdOouAcFXE8dhkuPSs7YgLtNZAPOsda4sn8Rn38IfNZCRCI0wQycpIehlNi393ZBYs4Dg3D19htHVyleZCt7Rk3bidDGz2kb35eyyiC1AZAP3IkbJlZCuEQhikzyB2ehfG73mTqO2r9mJA6AQZAbkcZD");
+        return facebook1.friendOperations().getFriends();
     }
 
     @Override

@@ -70,7 +70,9 @@ public class SocialConfig implements SocialConfigurer {
 	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
 		if(flag) {
 		    cfConfig.addConnectionFactory(new TwitterConnectionFactory("YR571S2JiVBOFyJS5MEg", "Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4"));
-			cfConfig.addConnectionFactory(new FacebookConnectionFactory("631469100286834", "41e4754bf5b580707709eb00168a329f", "dizerpicnew"));
+			FacebookConnectionFactory facebookConnectionFactory=new FacebookConnectionFactory("631469100286834", "41e4754bf5b580707709eb00168a329f", "dizerpicnew");
+			facebookConnectionFactory.setScope("user_friends,publish_stream,user_photos,offline_access");
+			cfConfig.addConnectionFactory(facebookConnectionFactory);
 		    cfConfig.addConnectionFactory(new LinkedInConnectionFactory("75f8kyd5hxvczf", "7ApOqcqTi9BkiYn3"));
 			GoogleConnectionFactory googleConnectionFactory=new GoogleConnectionFactory(
 					"123293092084-q14e0hhedmnauob7a4s2luas6fniin4p.apps.googleusercontent.com",
