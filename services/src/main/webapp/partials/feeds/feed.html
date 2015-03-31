@@ -4,7 +4,6 @@
     <div class="container-fluid">
         <div class="jumbotron bg-transparent text-center margin-none">
             <h1>Manage social network</h1>
-
         </div>
         <div class="row" data-toggle="isotope">
             <div class="item col-lg-4 col-md-6 col-xs-12">
@@ -14,12 +13,12 @@
                     </div>
 
                     <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="friend in friendsTwitter">
+                        <li class="list-group-item" ng-repeat="feed in feedTwitter">
                             <div>
-                                <img ng-src="{{friend.profileImageUrl}}" width="48" height="48" align="left"/>
-                                <a ng-href="'http://twitter.com/' + {{friend.screenName}}" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
+                                <a class="overlay overlay-full overlay-hover overlay-bg-white">
                                         <span class="v-center">
-                                <span class="text-h4">{{friend.screenName}}</span>
+                                <span class="text-h4">{{feed.text}}</span>
                                         </span>
                                 </a>
                             </div>
@@ -34,10 +33,10 @@
                     </div>
 
                     <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="friend in friendsFacebook">
+                        <li class="list-group-item" ng-repeat="feed in feedFacebook">
                             <div>
-                                <img src="/{{friend.id}}" width="48" height="48" align="left"/>
-                                <a ng-href="'http://graph.facebook.com/' + {{friend.id}} + '/picture" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                <img src="/{{feed.id}}" width="48" height="48" align="left"/>
+                                <a ng-href="'http://graph.facebook.com/' + {{feed.id}} + '/picture" class="overlay overlay-full overlay-hover overlay-bg-white">
                                         <span class="v-center">
                                 <span class="text-h4">{{friend.name}}</span>
                                         </span>
@@ -54,12 +53,12 @@
                     </div>
 
                     <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="friend in friendsLinkedin">
+                        <li class="list-group-item" ng-repeat="feed in feedLinkedin">
                             <div>
-                                <img ng-src="{{friend.profilePictureUrl}}" width="48" height="48" align="left"/>
-                                <a ng-href="'http://twitter.com/' + {{friend.firstName}}" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
+                                <a ng-href="'http://twitter.com/' + {{feed.firstName}}" class="overlay overlay-full overlay-hover overlay-bg-white">
                                         <span class="v-center">
-                                <span class="text-h4">{{friend.firstName}} {{friend.lastName}}</span>
+                                <span class="text-h4">{{feed.text}}</span>
                                         </span>
                                 </a>
                             </div>

@@ -1,8 +1,10 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.pojo.FacebookFriend;
 import org.springframework.social.facebook.api.*;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by Ciprian on 3/22/2015.
@@ -13,7 +15,7 @@ public interface FacebookService {
 
     void postUpdate(String message);
 
-    PagedList<Reference> getFriendsFacebook();
+    List<FacebookFriend> getFriendsFacebook();
 
     FacebookProfile getUserProfile();
 

@@ -1,11 +1,13 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.LinkedinService;
+import com.yesnault.sag.pojo.LinkedinFeed;
 import org.springframework.social.linkedin.api.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,7 +56,24 @@ public class LinkedinServiceImpl implements LinkedinService{
     }
 
     @Override
-    public List<LinkedInNetworkUpdate> feeds() {
-        return linkedIn.networkUpdateOperations().getNetworkUpdates();
+    public List<LinkedinFeed> feeds() {
+        List<LinkedInNetworkUpdate> linkedInNetworkUpdateList= linkedIn.networkUpdateOperations().getNetworkUpdates();
+        List<LinkedinFeed> linkedinFeeds= new ArrayList<>();
+        for(LinkedInNetworkUpdate linkedInNetworkUpdate:linkedInNetworkUpdateList){
+            LinkedinFeed linkedinFeed=new LinkedinFeed();
+            linkedinFeed.setProfileImageUrl(linkedInNetworkUpdate.getUpdateContent().getProfilePictureUrl());
+            if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentShare){
+                linkedinFeed.setText(((UpdateContentShare)linkedInNetworkUpdate.getUpdateContent()).getCurrentShare().getContent().getDescription());
+            }
+            if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentViral){
+                linkedinFeed.setText(((UpdateContentViral)linkedInNetworkUpdate.getUpdateContent()).getUpdateAction().getAction());
+            }
+            if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentConnection){
+                linkedinFeed.setText(((UpdateContentConnection)linkedInNetworkUpdate.getUpdateContent()).getSummary());
+            }
+            linkedinFeed.setText(linkedInNetworkUpdate.getUpdateContent().toString());
+            linkedinFeeds.add(linkedinFeed);
+        }
+        return linkedinFeeds;
     }
 }

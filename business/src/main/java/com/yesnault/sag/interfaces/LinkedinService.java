@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.pojo.LinkedinFeed;
 import org.springframework.social.linkedin.api.*;
 
 import java.util.List;
@@ -23,5 +24,5 @@ public interface LinkedinService {
 
     LinkedInProfiles search(SearchParameters var1);
 
-    List<LinkedInNetworkUpdate> feeds();
+    List<LinkedinFeed> feeds();
 }

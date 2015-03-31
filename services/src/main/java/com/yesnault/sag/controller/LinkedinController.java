@@ -3,6 +3,7 @@ package com.yesnault.sag.controller;
 import com.yesnault.sag.interfaces.LinkedinService;
 import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
+import com.yesnault.sag.pojo.LinkedinFeed;
 import com.yesnault.sag.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class LinkedinController {
     @RequestMapping(value = "/feedsLinkedin", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<LinkedInNetworkUpdate> feedsLinkedin() {
+    List<LinkedinFeed> feedsLinkedin() {
         return linkedinService.feeds();
     }
 

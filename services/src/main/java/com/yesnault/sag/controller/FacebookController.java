@@ -4,6 +4,7 @@ import com.yesnault.sag.SignInUtils;
 import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
+import com.yesnault.sag.pojo.FacebookFriend;
 import com.yesnault.sag.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +54,7 @@ public class FacebookController {
     @RequestMapping(value = "/friendsFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    PagedList<Reference> friendsFacebook() {
+    List<FacebookFriend> friendsFacebook() {
         return facebookService.getFriendsFacebook();
     }
 

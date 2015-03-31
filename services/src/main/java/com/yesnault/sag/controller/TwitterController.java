@@ -33,7 +33,7 @@ public class TwitterController {
     public
     @ResponseBody
     List<Tweet> feedsTwitter() {
-        return twitterService.getUserTimeline();
+        return twitterService.getHomeTimeline();
     }
 
     @RequestMapping(value = "/friendsTwitter", method = RequestMethod.GET, produces = "application/json")

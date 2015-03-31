@@ -12,6 +12,7 @@ app.config(function ($routeProvider) {
         .when('/settings', {  controller: SettingsCtrl, templateUrl: 'partials/settings/settings.html' })
         .when('/manageSocialNetwork', {  controller: HomeCtrl, templateUrl: 'partials/settings/manageSocialNetwork.html' })
         .when('/publicFriends', {  controller: FriendsCtrl, templateUrl: 'partials/friends/public-friends.html'})
+        .when('/feeds', {  controller: FeedCtrl, templateUrl: 'partials/feeds/feed.html'})
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })

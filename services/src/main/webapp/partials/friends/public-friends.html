@@ -47,7 +47,7 @@
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="friend in friendsFacebook">
                             <div>
-                                <img src="/{{friend.id}}" width="48" height="48" align="left"/>
+                                <img ng-src="{{friend.profileImageUrl}}" width="48" height="48" align="left"/>
                                 <a ng-href="'http://graph.facebook.com/' + {{friend.id}} + '/picture" class="overlay overlay-full overlay-hover overlay-bg-white">
                                         <span class="v-center">
                                 <span class="text-h4">{{friend.name}}</span>

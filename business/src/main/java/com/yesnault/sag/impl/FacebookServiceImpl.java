@@ -1,6 +1,7 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
+import com.yesnault.sag.pojo.FacebookFriend;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ciprian on 3/22/2015.
@@ -30,9 +33,18 @@ public class FacebookServiceImpl implements FacebookService{
     }
 
     @Override
-    public PagedList<Reference> getFriendsFacebook() {
-        Facebook facebook1=new FacebookTemplate("CAACEdEose0cBAAXRznDfpTRqs9X6zp5FAGswd83ZBSvDVJiemsdXs8aujedpVwcWyo18g7aUIJfwmEdOouAcFXE8dhkuPSs7YgLtNZAPOsda4sn8Rn38IfNZCRCI0wQycpIehlNi393ZBYs4Dg3D19htHVyleZCt7Rk3bidDGz2kb35eyyiC1AZAP3IkbJlZCuEQhikzyB2ehfG73mTqO2r9mJA6AQZAbkcZD");
-        return facebook1.friendOperations().getFriends();
+    public  List<FacebookFriend> getFriendsFacebook() {
+        Facebook facebook1=new FacebookTemplate("CAACEdEose0cBAARP8lPP75zx7oQmf8FktWWoUK10wuUN0goDZCD2tn0GnadO6ZCGaa9kiwvmht6sIRZCZAOXKcXmAYraTluXhCaRqSvpww2jdkLIKAmwt1ph5ZCpfMHqFk04MiZCqIbEa9fF5NL8EagLwdhdYhx73nCage1aZAF3GYZCwQw1ZBN9LmHphn4eZBrU8yHCeMfc8q033mIOiPA5XYKuc6gzH87jgZD");
+        PagedList<Reference> references=facebook1.friendOperations().getFriends();
+        List<FacebookFriend> facebookFriends=new ArrayList<>();
+        for(Reference reference:references){
+            FacebookFriend facebookFriend=new FacebookFriend();
+            facebookFriend.setId(reference.getId());
+            facebookFriend.setName(reference.getName());
+            facebookFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId()+ "/picture");
+            facebookFriends.add(facebookFriend);
+        }
+        return facebookFriends;
     }
 
     @Override
