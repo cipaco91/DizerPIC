@@ -63,15 +63,18 @@ public class LinkedinServiceImpl implements LinkedinService{
             LinkedinFeed linkedinFeed=new LinkedinFeed();
             linkedinFeed.setProfileImageUrl(linkedInNetworkUpdate.getUpdateContent().getProfilePictureUrl());
             if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentShare){
-                linkedinFeed.setText(((UpdateContentShare)linkedInNetworkUpdate.getUpdateContent()).getCurrentShare().getContent().getDescription());
+                linkedinFeed.setText(((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare() != null ?
+                        ((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare().getContent().getDescription():
+                          "nullnullnullnullnull");
             }
             if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentViral){
-                linkedinFeed.setText(((UpdateContentViral)linkedInNetworkUpdate.getUpdateContent()).getUpdateAction().getAction());
+                linkedinFeed.setText("Like post "+((UpdateContentShare)((UpdateContentViral)linkedInNetworkUpdate.getUpdateContent()).getUpdateAction().
+                        getUpdateContent()).getCurrentShare().getContent().getDescription());
             }
             if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentConnection){
-                linkedinFeed.setText(((UpdateContentConnection)linkedInNetworkUpdate.getUpdateContent()).getSummary());
+                linkedinFeed.setText("You connected with "+((UpdateContentConnection)linkedInNetworkUpdate.getUpdateContent()).getFirstName()+" "+
+                        ((UpdateContentConnection)linkedInNetworkUpdate.getUpdateContent()).getLastName());
             }
-            linkedinFeed.setText(linkedInNetworkUpdate.getUpdateContent().toString());
             linkedinFeeds.add(linkedinFeed);
         }
         return linkedinFeeds;
