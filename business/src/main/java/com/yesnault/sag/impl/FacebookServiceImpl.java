@@ -23,8 +23,17 @@ public class FacebookServiceImpl implements FacebookService{
     private Facebook facebook;
 
     @Override
-    public PagedList<Post> getFeed() {
-        return facebook.feedOperations().getFeed();
+    public  List<FacebookFriend> getFeed() {
+        PagedList<Post> posts=facebook.feedOperations().getFeed();
+        List<FacebookFriend> facebookFriends=new ArrayList<>();
+        for(Post post:posts){
+            FacebookFriend facebookFriend=new FacebookFriend();
+            facebookFriend.setId(post.getFrom().getId());
+            facebookFriend.setName(post.getMessage());
+            facebookFriend.setProfileImageUrl("http://graph.facebook.com/" + post.getFrom().getId()+ "/picture");
+            facebookFriends.add(facebookFriend);
+        }
+        return facebookFriends;
     }
 
     @Override

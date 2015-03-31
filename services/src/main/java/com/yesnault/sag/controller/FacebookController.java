@@ -47,7 +47,7 @@ public class FacebookController {
     @RequestMapping(value = "/feedsFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    PagedList<Post> feedsFacebook() {
+    List<FacebookFriend> feedsFacebook() {
         return facebookService.getFeed();
     }
 

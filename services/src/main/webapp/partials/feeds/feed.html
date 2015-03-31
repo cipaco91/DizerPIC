@@ -16,11 +16,9 @@
                         <li class="list-group-item" ng-repeat="feed in feedTwitter">
                             <div>
                                 <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
-                                <a class="overlay overlay-full overlay-hover overlay-bg-white">
                                         <span class="v-center">
                                 <span class="text-h4">{{feed.text}}</span>
                                         </span>
-                                </a>
                             </div>
                         </li>
                     </ul>
@@ -35,12 +33,10 @@
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="feed in feedFacebook">
                             <div>
-                                <img src="/{{feed.id}}" width="48" height="48" align="left"/>
-                                <a ng-href="'http://graph.facebook.com/' + {{feed.id}} + '/picture" class="overlay overlay-full overlay-hover overlay-bg-white">
+                                <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
                                         <span class="v-center">
-                                <span class="text-h4">{{friend.name}}</span>
+                                <span class="text-h4">{{feed.name}}</span>
                                         </span>
-                                </a>
                             </div>
                         </li>
                     </ul>
@@ -56,11 +52,9 @@
                         <li class="list-group-item" ng-repeat="feed in feedLinkedin">
                             <div>
                                 <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
-                                <a ng-href="'http://twitter.com/' + {{feed.firstName}}" class="overlay overlay-full overlay-hover overlay-bg-white">
                                         <span class="v-center">
                                 <span class="text-h4">{{feed.text}}</span>
                                         </span>
-                                </a>
                             </div>
                         </li>
                     </ul>

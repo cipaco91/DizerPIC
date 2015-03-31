@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface FacebookService {
 
-    PagedList<Post> getFeed();
+    List<FacebookFriend>getFeed();
 
     void postUpdate(String message);
 
