@@ -123,4 +123,10 @@ public class FacebookServiceImpl implements FacebookService{
 //        }
         return profileImage;
     }
+
+    @Override
+    public PagedList<Photo> getPhotosProfile() {
+        String userId=facebook.userOperations().getUserProfile().getId();
+        return facebook.mediaOperations().getPhotos(userId);
+    }
 }

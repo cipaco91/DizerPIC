@@ -8,6 +8,8 @@ import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Photo;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +35,9 @@ public class SocialNetworkController {
 
     @Inject
     private LinkedinService linkedinService;
+
+    @Inject
+    private FacebookService facebookService;
 
     @RequestMapping(value = "/postStatus/{facebookFlag}/{twitterFlag}/{linkedinFlag}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -81,6 +86,14 @@ public class SocialNetworkController {
     List<LinkedInProfile> friendsProfile() {
         //todo get 3 friends from facebbok,twiiter,linkedn
         return linkedinService.getConnections(1,10);
+    }
+
+    @RequestMapping(value = "/photosProfile", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    PagedList<Photo> photosProfile() {
+        //todo get 3 photos from facebbok,twiiter,linkedn
+        return facebookService.getPhotosProfile();
     }
 
 

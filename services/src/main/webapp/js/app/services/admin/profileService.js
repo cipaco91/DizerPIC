@@ -11,6 +11,9 @@ app.factory("ProfileService", function ($http) {
         },
         friendsProfile: function () {
             return $http.get('rest/friendsProfile');
+        },
+        photosProfile: function () {
+            return $http.get('rest/photosProfile');
         }
     }
 });

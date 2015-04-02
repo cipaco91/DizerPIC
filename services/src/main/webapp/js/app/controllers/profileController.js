@@ -2,6 +2,7 @@ function ProfileCtrl($scope, $location,ProfileService) {
 
     $scope.profileImage={};
     $scope.userProfile={};
+    $scope.photosProfile={};
     $scope.friends={};
 
         ProfileService.findProfileImageFacebook().success(function (response) {
@@ -14,6 +15,10 @@ function ProfileCtrl($scope, $location,ProfileService) {
 
     ProfileService.friendsProfile().success(function (response) {
         $scope.friends=response;
+    });
+
+    ProfileService.photosProfile().success(function (response) {
+        $scope.photosProfile=response;
     });
 
 

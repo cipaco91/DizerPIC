@@ -31,4 +31,7 @@ public interface FacebookService {
 
     byte [] getProfileImage();
 
+    PagedList<Photo> getPhotosProfile();
+
+
 }
