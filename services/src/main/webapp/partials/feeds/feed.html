@@ -1,64 +1,70 @@
 <ng-include src="'partials/menu/menu.html'"></ng-include>
 
 
-    <div class="container-fluid">
-        <div class="jumbotron bg-transparent text-center margin-none">
-            <h1>Manage social network</h1>
-        </div>
-        <div class="row" data-toggle="isotope">
-            <div class="item col-lg-4 col-md-6 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h4 class="panel-title">Twiiter Feeds</h4>
-                    </div>
+<div id="content">
 
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="feed in feedTwitter">
-                            <div>
-                                <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="container">
+                <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
+                <div class="row" data-toggle="isotope">
+                    <div class="item col-lg-4 col-md-6 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4 class="panel-title">Twiiter Feeds</h4>
+                            </div>
+
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="feed in feedTwitter">
+                                    <div>
+                                        <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
                                         <span class="v-center">
                                 <span class="text-h4">{{feed.text}}</span>
                                         </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="item col-lg-4 col-md-6 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h4 class="panel-title">Facebook Feeds</h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="item col-lg-4 col-md-6 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4 class="panel-title">Facebook Feeds</h4>
+                            </div>
 
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="feed in feedFacebook">
-                            <div>
-                                <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="feed in feedFacebook">
+                                    <div>
+                                        <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
                                         <span class="v-center">
                                 <span class="text-h4">{{feed.name}}</span>
                                         </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="item col-lg-4 col-md-6 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h4 class="panel-title">Linkedin Feeds</h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="item col-lg-4 col-md-6 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <h4 class="panel-title">Linkedin Feeds</h4>
+                            </div>
 
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="feed in feedLinkedin">
-                            <div>
-                                <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
+                            <ul class="list-group">
+                                <li class="list-group-item" ng-repeat="feed in feedLinkedin">
+                                    <div>
+                                        <img ng-src="{{feed.profileImageUrl}}" width="48" height="48" align="left"/>
                                         <span class="v-center">
                                 <span class="text-h4">{{feed.text}}</span>
                                         </span>
-                            </div>
-                        </li>
-                    </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+

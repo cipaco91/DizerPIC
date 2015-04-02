@@ -10,20 +10,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.codec.Base64;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
-import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Post;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,9 @@ import java.util.List;
 public class FacebookController {
 
     Logger LOGGER = LoggerFactory.getLogger(FacebookController.class);
+
+    @Inject
+    private Facebook facebook;
 
 
     @Inject
@@ -61,7 +66,16 @@ public class FacebookController {
     public
     @ResponseBody
     String profileImageFacebook() {
-       return  "http://graph.facebook.com/" + facebookService.getUserProfile().getId() + "/picture";
+        URL url = this.getClass().getClassLoader().getResource("/images");
+        InputStream in = new ByteArrayInputStream(facebook.userOperations().getUserProfileImage());
+        try {
+            BufferedImage bImageFromConvert = ImageIO.read(in);
+            ImageIO.write(bImageFromConvert, "jpg", new File(
+                    url.getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  "http://graph.facebook.com/" + facebookService.getUserProfile().getId() + "/picture";
     }
 
     @RequestMapping(value = "/profileFacebook", method = RequestMethod.GET, produces = "application/json")
