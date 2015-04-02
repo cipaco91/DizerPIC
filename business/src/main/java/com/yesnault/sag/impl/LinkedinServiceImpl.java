@@ -22,22 +22,34 @@ public class LinkedinServiceImpl implements LinkedinService{
 
     @Override
     public LinkedInProfileFull getUserProfileFull() {
-        return linkedIn.profileOperations().getUserProfileFull();
+        if(linkedIn!=null) {
+            return linkedIn.profileOperations().getUserProfileFull();
+        }
+        return null;
     }
 
     @Override
     public LinkedInProfile getUserProfile() {
-        return linkedIn.profileOperations().getUserProfile();
+        if(linkedIn!=null) {
+            return linkedIn.profileOperations().getUserProfile();
+        }
+        return null;
     }
 
     @Override
     public List<LinkedInProfile> getConnections() {
-        return linkedIn.connectionOperations().getConnections();
+        if(linkedIn!=null) {
+            return linkedIn.connectionOperations().getConnections();
+        }
+        return null;
     }
 
     @Override
     public NetworkStatistics getNetworkStatistics() {
-        return linkedIn.connectionOperations().getNetworkStatistics();
+        if(linkedIn!=null) {
+            return linkedIn.connectionOperations().getNetworkStatistics();
+        }
+        return null;
     }
 
     @Override
@@ -47,36 +59,45 @@ public class LinkedinServiceImpl implements LinkedinService{
 
     @Override
     public List<LinkedInProfile> getConnections(int start, int count) {
-        return linkedIn.connectionOperations().getConnections(start,count);
+        if(linkedIn!=null) {
+            return linkedIn.connectionOperations().getConnections(start, count);
+        }
+        return null;
     }
 
     @Override
     public LinkedInProfiles search(SearchParameters var1) {
-        return linkedIn.profileOperations().search(var1);
+        if(linkedIn!=null) {
+            return linkedIn.profileOperations().search(var1);
+        }
+        return null;
     }
 
     @Override
     public List<LinkedinFeed> feeds() {
-        List<LinkedInNetworkUpdate> linkedInNetworkUpdateList= linkedIn.networkUpdateOperations().getNetworkUpdates();
-        List<LinkedinFeed> linkedinFeeds= new ArrayList<>();
-        for(LinkedInNetworkUpdate linkedInNetworkUpdate:linkedInNetworkUpdateList){
-            LinkedinFeed linkedinFeed=new LinkedinFeed();
-            linkedinFeed.setProfileImageUrl(linkedInNetworkUpdate.getUpdateContent().getProfilePictureUrl());
-            if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentShare){
-                linkedinFeed.setText(((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare() != null ?
-                        ((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare().getContent().getDescription():
-                          "nullnullnullnullnull");
+        if(linkedIn!=null) {
+            List<LinkedInNetworkUpdate> linkedInNetworkUpdateList = linkedIn.networkUpdateOperations().getNetworkUpdates();
+            List<LinkedinFeed> linkedinFeeds = new ArrayList<>();
+            for (LinkedInNetworkUpdate linkedInNetworkUpdate : linkedInNetworkUpdateList) {
+                LinkedinFeed linkedinFeed = new LinkedinFeed();
+                linkedinFeed.setProfileImageUrl(linkedInNetworkUpdate.getUpdateContent().getProfilePictureUrl());
+                if (linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentShare) {
+                    linkedinFeed.setText(((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare() != null ?
+                            ((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare().getContent().getDescription() :
+                            "nullnullnullnullnull");
+                }
+                if (linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentViral) {
+                    linkedinFeed.setText("Like post " + ((UpdateContentShare) ((UpdateContentViral) linkedInNetworkUpdate.getUpdateContent()).getUpdateAction().
+                            getUpdateContent()).getCurrentShare().getContent().getDescription());
+                }
+                if (linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentConnection) {
+                    linkedinFeed.setText("You connected with " + ((UpdateContentConnection) linkedInNetworkUpdate.getUpdateContent()).getFirstName() + " " +
+                            ((UpdateContentConnection) linkedInNetworkUpdate.getUpdateContent()).getLastName());
+                }
+                linkedinFeeds.add(linkedinFeed);
             }
-            if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentViral){
-                linkedinFeed.setText("Like post "+((UpdateContentShare)((UpdateContentViral)linkedInNetworkUpdate.getUpdateContent()).getUpdateAction().
-                        getUpdateContent()).getCurrentShare().getContent().getDescription());
-            }
-            if(linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentConnection){
-                linkedinFeed.setText("You connected with "+((UpdateContentConnection)linkedInNetworkUpdate.getUpdateContent()).getFirstName()+" "+
-                        ((UpdateContentConnection)linkedInNetworkUpdate.getUpdateContent()).getLastName());
-            }
-            linkedinFeeds.add(linkedinFeed);
+            return linkedinFeeds;
         }
-        return linkedinFeeds;
+        return null;
     }
 }

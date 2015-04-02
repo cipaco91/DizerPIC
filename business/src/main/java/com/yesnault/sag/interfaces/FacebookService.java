@@ -29,4 +29,6 @@ public interface FacebookService {
 
     void login();
 
+    byte [] getProfileImage();
+
 }

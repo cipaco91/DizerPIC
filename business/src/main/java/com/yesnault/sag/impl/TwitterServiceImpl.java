@@ -24,32 +24,50 @@ public class TwitterServiceImpl implements TwitterService{
 
     @Override
     public CursoredList<TwitterProfile> getFriends() {
-        return twitter.friendOperations().getFriends();
+        if(twitter!=null) {
+            return twitter.friendOperations().getFriends();
+        }
+        return null;
     }
 
     @Override
     public CursoredList<TwitterProfile> getFollowers() {
-        return twitter.friendOperations().getFollowers();
+        if(twitter!=null) {
+            return twitter.friendOperations().getFollowers();
+        }
+        return null;
     }
 
     @Override
     public List<DirectMessage> getDirectMessagesReceived() {
-        return  twitter.directMessageOperations().getDirectMessagesReceived();
+        if(twitter!=null) {
+            return twitter.directMessageOperations().getDirectMessagesReceived();
+        }
+        return null;
     }
 
     @Override
     public List<DirectMessage> getDirectMessagesSent() {
-        return twitter.directMessageOperations().getDirectMessagesSent();
+        if(twitter!=null) {
+            return twitter.directMessageOperations().getDirectMessagesSent();
+        }
+        return null;
     }
 
     @Override
     public DirectMessage sendDirectMessage(String messageTo, String messageText) {
-        return twitter.directMessageOperations().sendDirectMessage(messageTo,messageText);
+        if(twitter!=null) {
+            return twitter.directMessageOperations().sendDirectMessage(messageTo, messageText);
+        }
+        return null;
     }
 
     @Override
     public TwitterProfile getUserProfile() {
-        return twitter.userOperations().getUserProfile();
+        if(twitter!=null) {
+            return twitter.userOperations().getUserProfile();
+        }
+        return null;
     }
 
     @Override
@@ -59,36 +77,57 @@ public class TwitterServiceImpl implements TwitterService{
 
     @Override
     public List<Tweet> getTweets(String search) {
-        return twitter.searchOperations().search(search).getTweets();
+        if(twitter!=null) {
+            return twitter.searchOperations().search(search).getTweets();
+        }
+        return null;
     }
 
     @Override
     public List<Tweet> getHomeTimeline() {
-        return twitter.timelineOperations().getHomeTimeline();
+        if(twitter!=null) {
+            return twitter.timelineOperations().getHomeTimeline();
+        }
+        return null;
     }
 
     @Override
     public List<Tweet> getUserTimeline() {
-        return twitter.timelineOperations().getUserTimeline();
+        if(twitter!=null) {
+            return twitter.timelineOperations().getUserTimeline();
+        }
+        return null;
     }
 
     @Override
     public List<Tweet> getMentions() {
-        return twitter.timelineOperations().getMentions();
+        if(twitter!=null) {
+            return twitter.timelineOperations().getMentions();
+        }
+        return null;
     }
 
     @Override
     public List<Tweet> getFavorites() {
-        return twitter.timelineOperations().getFavorites();
+        if(twitter!=null) {
+            return twitter.timelineOperations().getFavorites();
+        }
+        return null;
     }
 
     @Override
     public Tweet updateStatus(String message) {
-        return 	twitter.timelineOperations().updateStatus(message);
+        if(twitter!=null) {
+            return twitter.timelineOperations().updateStatus(message);
+        }
+        return null;
     }
 
     @Override
     public Trends getLocalTrends(long var1) {
-        return twitter.searchOperations().getLocalTrends(WORLDWIDE_WOE);
+        if(twitter!=null) {
+            return twitter.searchOperations().getLocalTrends(WORLDWIDE_WOE);
+        }
+        return null;
     }
 }

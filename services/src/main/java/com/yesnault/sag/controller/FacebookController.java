@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.Reference;
@@ -32,8 +33,6 @@ public class FacebookController {
 
     Logger LOGGER = LoggerFactory.getLogger(FacebookController.class);
 
-    @Inject
-    private ConnectController connectController;
 
     @Inject
     private FacebookService facebookService;
@@ -58,31 +57,17 @@ public class FacebookController {
         return facebookService.getFriendsFacebook();
     }
 
-    @RequestMapping(value = "/login/{providerId}",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/profileImageFacebook", method = RequestMethod.GET, produces = "application/json")
+    public
     @ResponseBody
-    public String login(@PathVariable("providerId") String providerId,NativeWebRequest nativeWebRequest) {
-        RedirectView redirectView = connectController.connect(providerId, nativeWebRequest);
-        SignInUtils.signin("ciprian");
-        return redirectView.getUrl();
+    String profileImageFacebook() {
+       return  "http://graph.facebook.com/" + facebookService.getUserProfile().getId() + "/picture";
     }
 
-    @RequestMapping(value = "/login/{providerId}", method=RequestMethod.GET, params="code")
+    @RequestMapping(value = "/profileFacebook", method = RequestMethod.GET, produces = "application/json")
+    public
     @ResponseBody
-    public RedirectView loginWithCode(@PathVariable("providerId") String providerId,NativeWebRequest nativeWebRequest) {
-        RedirectView redirectView = connectController.oauth2Callback(providerId, nativeWebRequest);
-        SignInUtils.signin("ciprian");
-        redirectView.setUrl("/#/home");
-        return redirectView;
+    FacebookProfile profileFacebook() {
+        return facebookService.getUserProfile();
     }
-
-    @RequestMapping(value = "/login/{providerId}", method=RequestMethod.GET, params="oauth_token")
-    @ResponseBody
-    public RedirectView loginWithOauthToken(@PathVariable("providerId") String providerId,NativeWebRequest nativeWebRequest) {
-        RedirectView redirectView = connectController.oauth1Callback(providerId, nativeWebRequest);
-        SignInUtils.signin("ciprian");
-        redirectView.setUrl("/#/home");
-        return redirectView;
-    }
-
-
 }
