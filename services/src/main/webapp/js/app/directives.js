@@ -1,5 +1,8 @@
 app.directive('appShowresults', function () {
     return {
+        scope: {
+            screenName: '='
+        },
         restrict: 'E',
         replace: true,
         templateUrl: "partials/common/friendDirective.html",
