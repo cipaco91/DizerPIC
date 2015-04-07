@@ -1,9 +1,21 @@
-function FriendsCtrl($scope, $location,FriendsService,ProfileService) {
+function FriendsCtrl($scope, $location,FriendsService,ProfileService,MenuService) {
 
     $scope.friendsTwitter={};
     $scope.friendsLinkedin={};
     $scope.friendsFacebook={};
     $scope.profileImage={};
+
+    MenuService.isConnectFacebook().success(function (response) {
+        $scope.facebookVisible=response;
+    });
+
+    MenuService.isConnectTwittter().success(function (response) {
+        $scope.twitterVisible=response;
+    });
+
+    MenuService.isConnectLinkedin().success(function (response) {
+        $scope.linkedinVisible=response;
+    });
 
     ProfileService.findProfileImageFacebook().success(function (response) {
         $scope.profileImage=response;

@@ -42,4 +42,11 @@ public class TwitterController {
     CursoredList<TwitterProfile> friendsTwitter() {
         return twitterService.getFriends();
     }
+
+    @RequestMapping(value = "/isConnectTwitter", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    boolean isConnectTwitter(){
+        return twitterService.isConnectTwitter();
+    }
 }

@@ -33,5 +33,7 @@ public interface FacebookService {
 
     PagedList<Photo> getPhotosProfile();
 
+    boolean isConnectFacebook();
+
 
 }

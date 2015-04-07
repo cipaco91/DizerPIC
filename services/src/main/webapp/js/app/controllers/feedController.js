@@ -1,8 +1,20 @@
-function FeedCtrl($scope, $location,FeedService,ProfileService) {
+function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService) {
 
     $scope.feedTwitter={};
     $scope.feedLinkedin={};
     $scope.feedFacebook={};
+
+    MenuService.isConnectFacebook().success(function (response) {
+        $scope.facebookVisible=response;
+    });
+
+    MenuService.isConnectTwittter().success(function (response) {
+        $scope.twitterVisible=response;
+    });
+
+    MenuService.isConnectLinkedin().success(function (response) {
+        $scope.linkedinVisible=response;
+    });
 
     ProfileService.findProfileImageFacebook().success(function (response) {
         $scope.profileImage=response;

@@ -15,6 +15,7 @@ import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.facebook.api.*;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -37,6 +38,9 @@ public class FacebookController {
 
     @Inject
     private Facebook facebook;
+
+    @Inject
+    private Twitter twitter;
 
 
     @Inject
@@ -66,16 +70,8 @@ public class FacebookController {
     public
     @ResponseBody
     String profileImageFacebook() {
-        URL url = this.getClass().getClassLoader().getResource("/images");
-        InputStream in = new ByteArrayInputStream(facebook.userOperations().getUserProfileImage());
-        try {
-            BufferedImage bImageFromConvert = ImageIO.read(in);
-            ImageIO.write(bImageFromConvert, "jpg", new File(
-                    url.getPath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return  "http://graph.facebook.com/" + facebookService.getUserProfile().getId() + "/picture";
+//        return  "http://graph.facebook.com/" + facebookService.getUserProfile().getId() + "/picture";
+         return twitter.userOperations().getUserProfile().getProfileImageUrl();
     }
 
     @RequestMapping(value = "/profileFacebook", method = RequestMethod.GET, produces = "application/json")
@@ -83,6 +79,13 @@ public class FacebookController {
     @ResponseBody
     FacebookProfile profileFacebook() {
         return facebookService.getUserProfile();
+    }
+
+    @RequestMapping(value = "/isConnectFacebook", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    boolean isConnectFacebook(){
+        return facebookService.isConnectFacebook();
     }
 
 

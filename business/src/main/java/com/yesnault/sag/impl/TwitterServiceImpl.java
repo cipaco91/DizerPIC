@@ -130,4 +130,13 @@ public class TwitterServiceImpl implements TwitterService{
         }
         return null;
     }
+
+    @Override
+    public boolean isConnectTwitter() {
+        try{
+            return twitter.userOperations()!=null;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

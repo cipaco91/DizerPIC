@@ -129,4 +129,13 @@ public class FacebookServiceImpl implements FacebookService{
         String userId=facebook.userOperations().getUserProfile().getId();
         return facebook.mediaOperations().getPhotos(userId);
     }
+
+    @Override
+    public boolean isConnectFacebook() {
+        try{
+            return facebook.userOperations()!=null;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

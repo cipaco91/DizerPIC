@@ -25,4 +25,6 @@ public interface LinkedinService {
     LinkedInProfiles search(SearchParameters var1);
 
     List<LinkedinFeed> feeds();
+
+    boolean isConnectLinkedin();
 }

@@ -1,4 +1,16 @@
-function HomeCtrl($scope, $rootScope,$window,UsersService) {
+function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService) {
+
+    MenuService.isConnectFacebook().success(function (response) {
+        $scope.facebookVisible=response;
+    });
+
+    MenuService.isConnectTwittter().success(function (response) {
+        $scope.twitterVisible=response;
+    });
+
+    MenuService.isConnectLinkedin().success(function (response) {
+        $scope.linkedinVisible=response;
+    });
 
     $scope.connectionFacebook = function() {
         console.log("redirect facebook");

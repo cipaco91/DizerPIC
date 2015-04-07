@@ -37,5 +37,5 @@ public interface TwitterService {
 
     Trends getLocalTrends(long var1);
 
-
+    boolean isConnectTwitter();
 }

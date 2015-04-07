@@ -100,4 +100,13 @@ public class LinkedinServiceImpl implements LinkedinService{
         }
         return null;
     }
+
+    @Override
+    public boolean isConnectLinkedin() {
+        try{
+            return linkedIn.communicationOperations()!=null;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
