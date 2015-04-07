@@ -1,91 +1,83 @@
 <ng-include src="'partials/menu/menu.html'"></ng-include>
 
-<!--<div class="container">-->
-<!--Public friends-->
-
-<!--&lt;!&ndash;<ul>&ndash;&gt;-->
-<!--&lt;!&ndash;<li ng-repeat="friend in friends">&ndash;&gt;-->
-<!--&lt;!&ndash;<img ng-src="{{friend.profileImageUrl}}" width="48" height="48" align="left"/>&ndash;&gt;-->
-<!--&lt;!&ndash;<p><a ng-href="'http://twitter.com/' + {{friend.screenName}}">{{friend.screenName}}</a></p>&ndash;&gt;-->
-<!--&lt;!&ndash;</li>&ndash;&gt;-->
-<!--&lt;!&ndash;</ul>&ndash;&gt;-->
-
-<!--</div>-->
 <div id="content">
 
     <div class="st-pusher">
         <div class="st-content">
-                <div class="container">
-                    <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
-                    <div class="row" data-toggle="isotope">
-                        <div class="item col-lg-4 col-md-6 col-xs-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="panel-title">Twiiter Friends</h4>
-                                </div>
+            <div class="container">
+                <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
+                <div class="row" data-toggle="isotope">
+                    <app-showresults></app-showresults>
+                    <app-showresults></app-showresults>
+                    <app-showresults></app-showresults>
+                    <!--<div class="item col-lg-4 col-md-6 col-xs-12">-->
+                    <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-body">-->
+                    <!--<h4 class="panel-title">Twiiter Friends</h4>-->
+                    <!--</div>-->
 
-                                <ul class="list-group">
-                                    <li class="list-group-item" ng-repeat="friend in friendsTwitter">
-                                        <div>
-                                            <img ng-src="{{friend.profileImageUrl}}" width="48" height="48"
-                                                 align="left"/>
-                                            <a ng-href="'http://twitter.com/' + {{friend.screenName}}"
-                                               class="overlay overlay-full overlay-hover overlay-bg-white">
-                                        <span class="v-center">
-                                <span class="text-h4">{{friend.screenName}}</span>
-                                        </span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="item col-lg-4 col-md-6 col-xs-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="panel-title">Facebook Friends</h4>
-                                </div>
+                    <!--<ul class="list-group">-->
+                    <!--<li class="list-group-item" ng-repeat="friend in friendsTwitter">-->
+                    <!--<div>-->
+                    <!--<img ng-src="{{friend.profileImageUrl}}" width="48" height="48"-->
+                    <!--align="left"/>-->
+                    <!--<a ng-href="'http://twitter.com/' + {{friend.screenName}}"-->
+                    <!--class="overlay overlay-full overlay-hover overlay-bg-white">-->
+                    <!--<span class="v-center">-->
+                    <!--<span class="text-h4">{{friend.screenName}}</span>-->
+                    <!--</span>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="item col-lg-4 col-md-6 col-xs-12">-->
+                    <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-body">-->
+                    <!--<h4 class="panel-title">Facebook Friends</h4>-->
+                    <!--</div>-->
 
-                                <ul class="list-group">
-                                    <li class="list-group-item" ng-repeat="friend in friendsFacebook">
-                                        <div>
-                                            <img ng-src="{{friend.profileImageUrl}}" width="48" height="48"
-                                                 align="left"/>
-                                            <a ng-href="'http://graph.facebook.com/' + {{friend.id}} + '/picture"
-                                               class="overlay overlay-full overlay-hover overlay-bg-white">
-                                        <span class="v-center">
-                                <span class="text-h4">{{friend.name}}</span>
-                                        </span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="item col-lg-4 col-md-6 col-xs-12">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <h4 class="panel-title">Linkedin Friends</h4>
-                                </div>
+                    <!--<ul class="list-group">-->
+                    <!--<li class="list-group-item" ng-repeat="friend in friendsFacebook">-->
+                    <!--<div>-->
+                    <!--<img ng-src="{{friend.profileImageUrl}}" width="48" height="48"-->
+                    <!--align="left"/>-->
+                    <!--<a ng-href="'http://graph.facebook.com/' + {{friend.id}} + '/picture"-->
+                    <!--class="overlay overlay-full overlay-hover overlay-bg-white">-->
+                    <!--<span class="v-center">-->
+                    <!--<span class="text-h4">{{friend.name}}</span>-->
+                    <!--</span>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="item col-lg-4 col-md-6 col-xs-12">-->
+                    <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-body">-->
+                    <!--<h4 class="panel-title">Linkedin Friends</h4>-->
+                    <!--</div>-->
 
-                                <ul class="list-group">
-                                    <li class="list-group-item" ng-repeat="friend in friendsLinkedin">
-                                        <div>
-                                            <img ng-src="{{friend.profilePictureUrl}}" width="48" height="48"
-                                                 align="left"/>
-                                            <a ng-href="'http://twitter.com/' + {{friend.firstName}}"
-                                               class="overlay overlay-full overlay-hover overlay-bg-white">
-                                        <span class="v-center">
-                                <span class="text-h4">{{friend.firstName}} {{friend.lastName}}</span>
-                                        </span>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<ul class="list-group">-->
+                    <!--<li class="list-group-item" ng-repeat="friend in friendsLinkedin">-->
+                    <!--<div>-->
+                    <!--<img ng-src="{{friend.profilePictureUrl}}" width="48" height="48"-->
+                    <!--align="left"/>-->
+                    <!--<a ng-href="'http://twitter.com/' + {{friend.firstName}}"-->
+                    <!--class="overlay overlay-full overlay-hover overlay-bg-white">-->
+                    <!--<span class="v-center">-->
+                    <!--<span class="text-h4">{{friend.firstName}} {{friend.lastName}}</span>-->
+                    <!--</span>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--</div>-->
                 </div>
+            </div>
         </div>
     </div>
 </div>
