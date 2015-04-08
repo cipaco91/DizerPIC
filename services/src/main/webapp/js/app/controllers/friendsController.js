@@ -34,15 +34,6 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
 
     $scope.changeName= function () {
         console.log($scope.name);
-        //if($scope.name = ""){
-        //    FriendsService.findFriendsLinkedin().
-        //        success(function (users) {
-        //            $scope.friendsLinkedin = users;
-        //        })
-        //        .error(function (resp) {
-        //            console.log("Error with FriendsService.findFriendsTwitter" + resp);
-        //        });
-        //}
     };
 
     $scope.changeJobName= function () {
