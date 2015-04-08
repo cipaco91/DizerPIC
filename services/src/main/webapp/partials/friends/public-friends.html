@@ -6,6 +6,41 @@
         <div class="st-content">
             <div class="container">
                 <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
+                <br/><br/>
+                <div id="filter">
+                    <form class="form-inline">
+                        <label>Filter:</label>
+                        <!--<select name="users-filter" id="users-filter-select" style="font-weight: 400;" class="btn btn-primary"-->
+                                <!--data-style="btn-primary" data-width="auto">-->
+                            <!--<option value="all">All</option>-->
+                            <!--<option value="socialNetwork">by Social Network</option>-->
+                            <!--<option value="name">by Name</option>-->
+                            <!--<option value="job">by Job</option>-->
+                            <!--<option value="company">by Company</option>-->
+                        <!--</select>-->
+                        <select ng-options="code as code.value for code in codes" style="font-weight: 400;" class="btn btn-primary"
+                                ng-model="selectedItem" ng-change="update()"></select>
+                        </select>
+                        <div id="users-filter-trigger">
+                            <div ng-show="{{bySocialNetworkShow}}">
+                                <select name="users-filter-friends" style="font-weight: 400;" class="btn btn-primary" data-style="btn-primary" data-live-search="true">
+                                    <option value="0">Facebook</option>
+                                    <option value="1">Twitter</option>
+                                    <option value="2">Linkedin</option>
+                                </select>
+                            </div>
+                            <div ng-show="{{byNameShow}">
+                                <input type="text" class="form-control" name="user-first" placeholder="First Last Name" id="name" />
+                                <a href="#" class="btn btn-default hidden" id="user-search-name"><i class="fa fa-search"></i> Search</a>
+                            </div>
+                            <div ng-show="{{byJobShow}">
+                                <input type="text" class="form-control" name="user-first" placeholder="Job Name" id="job" />
+                                <a href="#" class="btn btn-default hidden" id="user-search-job"><i class="fa fa-search"></i> Search</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="row" data-toggle="isotope">
                     <h1>Facebook</h1>
 

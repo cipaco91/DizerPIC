@@ -4,6 +4,31 @@ function FriendsCtrl($scope, $location,FriendsService,ProfileService,MenuService
     $scope.friendsLinkedin={};
     $scope.friendsFacebook={};
     $scope.profileImage={};
+    //$scope.bySocialNetworkShow=false;
+    //$scope.byNameShow=false;
+    //$scope.byJobShow=false;
+
+    $scope.codes = [{code: 'all', value: "All" },{ code: 'socialNetwork', value: "by Social Network" },{ code: 'name', value: "by Name" },
+                   { code: 'job', value: "by Job" },{ code: 'company', value: "by Company" }];
+
+    $scope.update = function() {
+        $scope.searchCode = $scope.selectedItem.code
+        if($scope.searchCode == 'all'){
+            $scope.bySocialNetworkShow=false;
+            $scope.byNameShow=false;
+            $scope.byJobShow=false;
+        }else if($scope.searchCode == 'socialNetwork'){
+            $scope.bySocialNetworkShow=true;
+        }else if($scope.searchCode == 'name'){
+            $scope.byNameShow=true;
+        }else if($scope.searchCode == 'job'){
+            $scope.byJobShow=true;
+        }else if($scope.searchCode == 'company'){
+            $scope.byJobShow=true;
+        }
+    };
+
+
 
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;

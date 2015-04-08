@@ -123,6 +123,7 @@ public class LinkedinServiceImpl implements LinkedinService{
             snFriend.setName(linkedInProfile.getFirstName()+" "+linkedInProfile.getLastName());
             snFriend.setProfileImageUrl(linkedInProfile.getProfilePictureUrl());
             snFriend.setProfileURL(linkedInProfile.getPublicProfileUrl());
+//            snFriend.setProfileURL(linkedInProfile.getSiteStandardProfileRequest().getUrl());
             snFriends.add(snFriend);
         }
         return snFriends;

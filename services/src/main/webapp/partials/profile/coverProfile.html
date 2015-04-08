@@ -5,8 +5,8 @@
         </div>
         <ul class="friends">
             <li ng-repeat="friend in friends">
-                <a ng-href="{{friend.siteStandardProfileRequest.url}}">
-                    <img ng-src="{{friend.profilePictureUrl}}" alt="image"/>
+                <a ng-href="{{friend.profileURL}}">
+                    <img ng-src="{{friend.profileImageUrl}}" alt="image"/>
                 </a>
             </li>
         </ul>
@@ -18,13 +18,13 @@
         <div class="name"><a href="#">{{userProfile.firstName}} {{userProfile.lastName}}</a>
         </div>
         <ul class="cover-nav">
-            <li class="active"><a href=#/feeds"><i class="fa fa-fw icon-ship-wheel"></i>
-                Timeline</a>
-            </li>
-            <li class="active"><a href="#/profile"><i
+            <li ><a href="#/profile"><i
                     class="fa fa-fw icon-user-1"></i> About</a>
             </li>
             <li><a href="#/publicFriends"><i class="fa fa-fw fa-users"></i> Friends</a>
+            </li>
+            <li><a href="#/feeds"><i class="fa fa-fw icon-ship-wheel"></i>
+                Timeline</a>
             </li>
         </ul>
     </div>
