@@ -1,53 +1,106 @@
-function FriendsCtrl($scope, $location,FriendsService,ProfileService,MenuService) {
+function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuService) {
 
-    $scope.friendsTwitter={};
-    $scope.friendsLinkedin={};
-    $scope.friendsFacebook={};
-    $scope.profileImage={};
-    //$scope.bySocialNetworkShow=false;
-    //$scope.byNameShow=false;
-    //$scope.byJobShow=false;
+    $scope.friendsTwitter = {};
+    $scope.friendsLinkedin = {};
+    $scope.friendsFacebook = {};
+    $scope.profileImage = {};
+    $scope.selectedItem = {};
+    $scope.selectedItem.code = 'all';
+    $scope.selectedItem.value = 'All';
+    $scope.bySocialNetworkShow = false;
+    $scope.byNameShow = false;
+    $scope.byJobShow = false;
+    $scope.byCompanyShow = false;
+    $scope.name="";
+    $scope.jobName="";
+    $scope.companyName="";
 
-    $scope.codes = [{code: 'all', value: "All" },{ code: 'socialNetwork', value: "by Social Network" },{ code: 'name', value: "by Name" },
-                   { code: 'job', value: "by Job" },{ code: 'company', value: "by Company" }];
 
-    $scope.update = function() {
-        $scope.searchCode = $scope.selectedItem.code
-        if($scope.searchCode == 'all'){
-            $scope.bySocialNetworkShow=false;
-            $scope.byNameShow=false;
-            $scope.byJobShow=false;
-        }else if($scope.searchCode == 'socialNetwork'){
-            $scope.bySocialNetworkShow=true;
-        }else if($scope.searchCode == 'name'){
-            $scope.byNameShow=true;
-        }else if($scope.searchCode == 'job'){
-            $scope.byJobShow=true;
-        }else if($scope.searchCode == 'company'){
-            $scope.byJobShow=true;
+    $scope.codes = [{code: 'all', value: "All"}, {code: 'socialNetwork', value: "by Social Network"}, {code: 'name', value: "by Name"},
+        {code: 'job', value: "by Job"}, {code: 'company', value: "by Company"}];
+
+    $scope.socialNetworks = [{code: 'facebook', value: "Facebook"}, {code: 'linkedin', value: "Linkedin"}, {code: 'twitter', value: "Twitter"}];
+
+    $scope.changeSocial= function(){
+        $scope.socialNetworkCode = $scope.selectedItemSocial.code;
+        if($scope.socialNetworkCode == 'facebook'){
+          console.log($scope.socialNetworkCode);
+        }else if($scope.socialNetworkCode == 'linkedin'){
+            console.log($scope.socialNetworkCode);
+        }else{
+            console.log($scope.socialNetworkCode);
         }
     };
 
+    $scope.changeName= function () {
+        console.log($scope.name);
+        //if($scope.name = ""){
+        //    FriendsService.findFriendsLinkedin().
+        //        success(function (users) {
+        //            $scope.friendsLinkedin = users;
+        //        })
+        //        .error(function (resp) {
+        //            console.log("Error with FriendsService.findFriendsTwitter" + resp);
+        //        });
+        //}
+    };
 
+    $scope.changeJobName= function () {
+        console.log($scope.jobName);
+    };
+
+    $scope.changeCompanyName= function () {
+        console.log($scope.companyName);
+    };
+
+    $scope.update = function () {
+        $scope.searchCode = $scope.selectedItem.code;
+        if ($scope.searchCode == 'all') {
+            $scope.bySocialNetworkShow = false;
+            $scope.byNameShow = false;
+            $scope.byJobShow = false;
+            $scope.byCompanyShow = false;
+        } else if ($scope.searchCode == 'socialNetwork') {
+            $scope.bySocialNetworkShow = true;
+            $scope.byNameShow = false;
+            $scope.byJobShow = false;
+            $scope.byCompanyShow = false;
+        } else if ($scope.searchCode == 'name') {
+            $scope.byNameShow = true;
+            $scope.bySocialNetworkShow = false;
+            $scope.byJobShow = false;
+            $scope.byCompanyShow = false;
+        } else if ($scope.searchCode == 'job') {
+            $scope.byJobShow = true;
+            $scope.bySocialNetworkShow = false;
+            $scope.byNameShow = false;
+            $scope.byCompanyShow = false;
+        } else if ($scope.searchCode == 'company') {
+            $scope.byJobShow = false;
+            $scope.bySocialNetworkShow = false;
+            $scope.byNameShow = false;
+            $scope.byCompanyShow = true;
+        }
+    };
 
     MenuService.isConnectFacebook().success(function (response) {
-        $scope.facebookVisible=response;
+        $scope.facebookVisible = response;
     });
 
     MenuService.isConnectTwittter().success(function (response) {
-        $scope.twitterVisible=response;
+        $scope.twitterVisible = response;
     });
 
     MenuService.isConnectLinkedin().success(function (response) {
-        $scope.linkedinVisible=response;
+        $scope.linkedinVisible = response;
     });
 
     ProfileService.findProfileImageFacebook().success(function (response) {
-        $scope.profileImage=response;
+        $scope.profileImage = response;
     });
 
     ProfileService.friendsProfile().success(function (response) {
-        $scope.friends=response;
+        $scope.friends = response;
     });
 
     FriendsService.findFriendsTwitter().
@@ -74,6 +127,12 @@ function FriendsCtrl($scope, $location,FriendsService,ProfileService,MenuService
             console.log("Error with FriendsService.findFriendsTwitter" + resp);
         });
 
+    $scope.filterFunctionLinkedin = function(element) {
+       if($scope.name == ""){
+           return true;
+       }
+        return element.name.search($scope.name) >0 ;
+    };
 
 
 }
