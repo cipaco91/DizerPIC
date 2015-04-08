@@ -1,20 +1,15 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
-import com.yesnault.sag.pojo.FacebookFriend;
+import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,18 +24,18 @@ public class FacebookServiceImpl implements FacebookService{
     private Facebook facebook;
 
     @Override
-    public  List<FacebookFriend> getFeed() {
+    public  List<SNFriend> getFeed() {
         if(facebook!=null) {
             PagedList<Post> posts = facebook.feedOperations().getFeed();
-            List<FacebookFriend> facebookFriends = new ArrayList<>();
+            List<SNFriend> snFriends = new ArrayList<>();
             for (Post post : posts) {
-                FacebookFriend facebookFriend = new FacebookFriend();
-                facebookFriend.setId(post.getFrom().getId());
-                facebookFriend.setName(post.getMessage());
-                facebookFriend.setProfileImageUrl("http://graph.facebook.com/" + post.getFrom().getId() + "/picture");
-                facebookFriends.add(facebookFriend);
+                SNFriend snFriend = new SNFriend();
+                snFriend.setId(post.getFrom().getId());
+                snFriend.setName(post.getMessage());
+                snFriend.setProfileImageUrl("http://graph.facebook.com/" + post.getFrom().getId() + "/picture");
+                snFriends.add(snFriend);
             }
-            return facebookFriends;
+            return snFriends;
         }
         return new ArrayList<>();
     }
@@ -51,19 +46,11 @@ public class FacebookServiceImpl implements FacebookService{
     }
 
     @Override
-    public  List<FacebookFriend> getFriendsFacebook() {
+    public  List<SNFriend> getFriendsFacebook() {
         if(facebook!=null) {
-            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAARP8lPP75zx7oQmf8FktWWoUK10wuUN0goDZCD2tn0GnadO6ZCGaa9kiwvmht6sIRZCZAOXKcXmAYraTluXhCaRqSvpww2jdkLIKAmwt1ph5ZCpfMHqFk04MiZCqIbEa9fF5NL8EagLwdhdYhx73nCage1aZAF3GYZCwQw1ZBN9LmHphn4eZBrU8yHCeMfc8q033mIOiPA5XYKuc6gzH87jgZD");
+            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAOHm3ZCRaqtHiF5LYoPU5VSphob5YS09q2moZBdAZA3LBnHsxjrbV7opTFYrcZBAIZBR8ksiwMLbBOlEWsZAwCgwt30c9UPwCrFR9BhtPAtThu9vm4KGNPV1rIbVfQziYwIRU1SOPR9fqQc8PksPuAyWt4UGng11yqMDCAYZBy534sqwtjvtEHmK13skZAII67s1skaRD18lPunP3XpITZAUZD");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
-            List<FacebookFriend> facebookFriends = new ArrayList<>();
-            for (Reference reference : references) {
-                FacebookFriend facebookFriend = new FacebookFriend();
-                facebookFriend.setId(reference.getId());
-                facebookFriend.setName(reference.getName());
-                facebookFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId() + "/picture");
-                facebookFriends.add(facebookFriend);
-            }
-            return facebookFriends;
+            return  getSnFriends(references);
         }
         return new ArrayList<>();
     }
@@ -113,14 +100,6 @@ public class FacebookServiceImpl implements FacebookService{
     @Override
     public byte [] getProfileImage() {
         byte [] profileImage=facebook.userOperations().getUserProfileImage();
-//        InputStream in = new ByteArrayInputStream(profileImage);
-//        try {
-//            BufferedImage bImageFromConvert = ImageIO.read(in);
-//            ImageIO.write(bImageFromConvert, "jpg", new File(
-//                    "c:/new-darksouls.jpg"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         return profileImage;
     }
 
@@ -137,5 +116,18 @@ public class FacebookServiceImpl implements FacebookService{
         }catch (Exception e){
             return false;
         }
+    }
+
+    private List<SNFriend> getSnFriends(List<Reference> references){
+        List<SNFriend> snFriends = new ArrayList<>();
+        for (Reference reference : references) {
+            SNFriend snFriend = new SNFriend();
+            snFriend.setId(reference.getId());
+            snFriend.setName(reference.getName());
+            snFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId() + "/picture");
+            snFriend.setProfileURL("http://graph.facebook.com/" + reference.getId());
+            snFriends.add(snFriend);
+        }
+        return snFriends;
     }
 }

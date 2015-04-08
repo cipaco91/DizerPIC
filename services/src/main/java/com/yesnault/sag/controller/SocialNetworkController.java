@@ -6,6 +6,7 @@ import com.yesnault.sag.interfaces.LinkedinService;
 import com.yesnault.sag.interfaces.SocialNetworkService;
 import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.model.User;
+import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.facebook.api.PagedList;
@@ -83,7 +84,7 @@ public class SocialNetworkController {
     @RequestMapping(value = "/friendsProfile", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<LinkedInProfile> friendsProfile() {
+    List<SNFriend> friendsProfile() {
         //todo get 3 friends from facebbok,twiiter,linkedn
         return linkedinService.getConnections(1,10);
     }

@@ -2,6 +2,7 @@ package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.LinkedinService;
 import com.yesnault.sag.pojo.LinkedinFeed;
+import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.linkedin.api.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,11 +38,13 @@ public class LinkedinServiceImpl implements LinkedinService{
     }
 
     @Override
-    public List<LinkedInProfile> getConnections() {
+    public List<SNFriend> getConnections() {
+        List<SNFriend> snFriends = new ArrayList<>();
         if(linkedIn!=null) {
-            return linkedIn.connectionOperations().getConnections();
+            List<LinkedInProfile> linkedInProfiles= linkedIn.connectionOperations().getConnections();
+            snFriends=getSnFriends(linkedInProfiles);
         }
-        return null;
+        return snFriends;
     }
 
     @Override
@@ -58,11 +61,13 @@ public class LinkedinServiceImpl implements LinkedinService{
     }
 
     @Override
-    public List<LinkedInProfile> getConnections(int start, int count) {
+    public List<SNFriend> getConnections(int start, int count) {
+        List<SNFriend> snFriends = new ArrayList<>();
         if(linkedIn!=null) {
-            return linkedIn.connectionOperations().getConnections(start, count);
+            List<LinkedInProfile> linkedInProfiles= linkedIn.connectionOperations().getConnections(start, count);
+            snFriends=getSnFriends(linkedInProfiles);
         }
-        return null;
+        return snFriends;
     }
 
     @Override
@@ -108,5 +113,18 @@ public class LinkedinServiceImpl implements LinkedinService{
         }catch (Exception e){
             return false;
         }
+    }
+
+    private List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles){
+        List<SNFriend> snFriends = new ArrayList<>();
+        for(LinkedInProfile linkedInProfile:linkedInProfiles){
+            SNFriend snFriend = new SNFriend();
+            snFriend.setId(linkedInProfile.getId());
+            snFriend.setName(linkedInProfile.getFirstName()+" "+linkedInProfile.getLastName());
+            snFriend.setProfileImageUrl(linkedInProfile.getProfilePictureUrl());
+            snFriend.setProfileURL(linkedInProfile.getPublicProfileUrl());
+            snFriends.add(snFriend);
+        }
+        return snFriends;
     }
 }

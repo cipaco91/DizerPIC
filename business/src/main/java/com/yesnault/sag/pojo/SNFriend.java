@@ -5,13 +5,15 @@ import java.io.Serializable;
 /**
  * Created by CParaschivescu on 3/31/2015.
  */
-public class FacebookFriend implements Serializable{
+public class SNFriend implements Serializable{
 
     private String id;
 
     private String profileImageUrl;
 
     private String name;
+
+    private String profileURL;
 
     public String getProfileImageUrl() {
         return profileImageUrl;
@@ -35,5 +37,13 @@ public class FacebookFriend implements Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getProfileURL() {
+        return profileURL;
+    }
+
+    public void setProfileURL(String profileURL) {
+        this.profileURL = profileURL;
     }
 }

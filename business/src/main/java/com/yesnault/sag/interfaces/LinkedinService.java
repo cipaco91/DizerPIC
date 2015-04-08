@@ -1,6 +1,7 @@
 package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.pojo.LinkedinFeed;
+import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.linkedin.api.*;
 
 import java.util.List;
@@ -14,13 +15,13 @@ public interface LinkedinService {
 
     LinkedInProfile getUserProfile();
 
-    List<LinkedInProfile> getConnections();
+    List<SNFriend> getConnections();
 
     NetworkStatistics getNetworkStatistics();
 
     void sendMessage(String var1, String var2, String... var3);
 
-    List<LinkedInProfile> getConnections(int start, int count);
+    List<SNFriend> getConnections(int start, int count);
 
     LinkedInProfiles search(SearchParameters var1);
 

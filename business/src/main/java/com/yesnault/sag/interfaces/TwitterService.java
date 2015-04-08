@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.twitter.api.*;
 
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.List;
  */
 public interface TwitterService {
 
-    CursoredList<TwitterProfile> getFriends();
+    List<SNFriend> getFriends();
 
-    CursoredList<TwitterProfile> getFollowers();
+    List<SNFriend> getFollowers();
 
     List<DirectMessage> getDirectMessagesReceived();
 

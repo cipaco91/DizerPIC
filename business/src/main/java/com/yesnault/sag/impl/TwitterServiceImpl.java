@@ -1,12 +1,15 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.TwitterService;
+import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
+import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.twitter.api.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,19 +26,23 @@ public class TwitterServiceImpl implements TwitterService{
     private Twitter twitter;
 
     @Override
-    public CursoredList<TwitterProfile> getFriends() {
+    public List<SNFriend> getFriends() {
+        List<SNFriend> snFriends = new ArrayList<>();
         if(twitter!=null) {
-            return twitter.friendOperations().getFriends();
+            CursoredList<TwitterProfile> twitterProfiles= twitter.friendOperations().getFriends();
+            return getSnFriends(twitterProfiles);
         }
-        return null;
+        return snFriends;
     }
 
     @Override
-    public CursoredList<TwitterProfile> getFollowers() {
+    public List<SNFriend> getFollowers() {
+        List<SNFriend> snFriends = new ArrayList<>();
         if(twitter!=null) {
-            return twitter.friendOperations().getFollowers();
+            CursoredList<TwitterProfile> twitterProfiles= twitter.friendOperations().getFollowers();
+            return getSnFriends(twitterProfiles);
         }
-        return null;
+        return snFriends;
     }
 
     @Override
@@ -138,5 +145,18 @@ public class TwitterServiceImpl implements TwitterService{
         }catch (Exception e){
             return false;
         }
+    }
+
+    private List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles){
+        List<SNFriend> snFriends = new ArrayList<>();
+        for(TwitterProfile twitterProfile:twitterProfiles){
+            SNFriend snFriend = new SNFriend();
+            snFriend.setId(Long.toString(twitterProfile.getId()));
+            snFriend.setName(twitterProfile.getScreenName());
+            snFriend.setProfileImageUrl(twitterProfile.getProfileImageUrl());
+            snFriend.setProfileURL(twitterProfile.getProfileUrl());
+            snFriends.add(snFriend);
+        }
+        return snFriends;
     }
 }
