@@ -38,7 +38,7 @@
                     </form>
                 </div>
 
-                <div class="row" data-toggle="isotope">
+                <div class="row" data-toggle="isotope" ng-show="facebookFriendsShow">
                     <h1>Facebook</h1>
                     <div data-ng-repeat="friend in friendsFacebook">
                         <app-showresults></app-showresults>
@@ -46,7 +46,7 @@
                 </div>
                 <br/><br/>
 
-                <div class="row" data-toggle="isotope">
+                <div class="row" data-toggle="isotope" ng-show="twitterFriendsShow">
                     <h1>Twitter</h1>
                     <div data-ng-repeat="friend in friendsTwitter">
                         <app-showresults friend="{{friend}}"></app-showresults>
@@ -56,7 +56,7 @@
 
                 <br/><br/>
 
-                <div class="row" data-toggle="isotope">
+                <div class="row" data-toggle="isotope" ng-show="linkedinFriendsShow">
                     <h1>Linkedin</h1>
                     <div data-ng-repeat="friend in friendsLinkedin | filter: filterFunctionLinkedin | orderBy: 'name'">
                         <app-showresults friend="{{friend}}"></app-showresults>

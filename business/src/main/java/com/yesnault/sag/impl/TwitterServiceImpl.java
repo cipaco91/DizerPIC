@@ -155,6 +155,7 @@ public class TwitterServiceImpl implements TwitterService{
             snFriend.setName(twitterProfile.getScreenName());
             snFriend.setProfileImageUrl(twitterProfile.getProfileImageUrl());
             snFriend.setProfileURL(twitterProfile.getProfileUrl());
+            snFriend.setSocialNetworkType("twitter");
             snFriends.add(snFriend);
         }
         return snFriends;

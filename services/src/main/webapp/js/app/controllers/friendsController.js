@@ -25,10 +25,19 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         $scope.socialNetworkCode = $scope.selectedItemSocial.code;
         if($scope.socialNetworkCode == 'facebook'){
           console.log($scope.socialNetworkCode);
+            $scope.facebookFriendsShow=true;
+            $scope.twitterFriendsShow=false;
+            $scope.linkedinFriendsShow=false;
         }else if($scope.socialNetworkCode == 'linkedin'){
             console.log($scope.socialNetworkCode);
+            $scope.facebookFriendsShow=false;
+            $scope.twitterFriendsShow=false;
+            $scope.linkedinFriendsShow=true;
         }else{
             console.log($scope.socialNetworkCode);
+            $scope.facebookFriendsShow=false;
+            $scope.twitterFriendsShow=true;
+            $scope.linkedinFriendsShow=false;
         }
     };
 
