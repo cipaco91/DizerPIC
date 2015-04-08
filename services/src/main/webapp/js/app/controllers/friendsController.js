@@ -14,6 +14,9 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.name="";
     $scope.jobName="";
     $scope.companyName="";
+    $scope.facebookFriendsShow=true;
+    $scope.twitterFriendsShow=true;
+    $scope.linkedinFriendsShow=true;
 
 
     $scope.codes = [{code: 'all', value: "All"}, {code: 'socialNetwork', value: "by Social Network"}, {code: 'name', value: "by Name"},
@@ -28,6 +31,9 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.facebookFriendsShow=true;
             $scope.twitterFriendsShow=false;
             $scope.linkedinFriendsShow=false;
+            $scope.facebookFriendsShow=true;
+            $scope.twitterFriendsShow=true;
+            $scope.linkedinFriendsShow=true;
         }else if($scope.socialNetworkCode == 'linkedin'){
             console.log($scope.socialNetworkCode);
             $scope.facebookFriendsShow=false;
