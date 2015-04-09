@@ -40,7 +40,7 @@
 
                 <div class="row" data-toggle="isotope" ng-show="facebookFriendsShow">
                     <h1>Facebook</h1>
-                    <div data-ng-repeat="friend in friendsFacebook">
+                    <div data-ng-repeat="friend in friendsFacebook | filter: filterFunctionFacebook | orderBy: 'name'">
                         <app-showresults></app-showresults>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
 
                 <div class="row" data-toggle="isotope" ng-show="twitterFriendsShow">
                     <h1>Twitter</h1>
-                    <div data-ng-repeat="friend in friendsTwitter">
+                    <div data-ng-repeat="friend in friendsTwitter | filter: filterFunctionTwitter | orderBy: 'name'">
                         <app-showresults friend="{{friend}}"></app-showresults>
                     </div>
                 </div>

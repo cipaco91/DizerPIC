@@ -27,13 +27,10 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.changeSocial= function(){
         $scope.socialNetworkCode = $scope.selectedItemSocial.code;
         if($scope.socialNetworkCode == 'facebook'){
-          console.log($scope.socialNetworkCode);
+           console.log($scope.socialNetworkCode);
             $scope.facebookFriendsShow=true;
             $scope.twitterFriendsShow=false;
             $scope.linkedinFriendsShow=false;
-            $scope.facebookFriendsShow=true;
-            $scope.twitterFriendsShow=true;
-            $scope.linkedinFriendsShow=true;
         }else if($scope.socialNetworkCode == 'linkedin'){
             console.log($scope.socialNetworkCode);
             $scope.facebookFriendsShow=false;
@@ -66,6 +63,9 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.byNameShow = false;
             $scope.byJobShow = false;
             $scope.byCompanyShow = false;
+            $scope.facebookFriendsShow=true;
+            $scope.twitterFriendsShow=true;
+            $scope.linkedinFriendsShow=true;
         } else if ($scope.searchCode == 'socialNetwork') {
             $scope.bySocialNetworkShow = true;
             $scope.byNameShow = false;
@@ -137,7 +137,21 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
        if($scope.name == ""){
            return true;
        }
-        return element.name.search($scope.name) >0 ;
+        return element.name.indexOf($scope.name) >=0 ;
+    };
+
+    $scope.filterFunctionTwitter = function(element) {
+        if($scope.name == ""){
+            return true;
+        }
+        return element.name.indexOf($scope.name) >=0 ;
+    };
+
+    $scope.filterFunctionFacebook = function(element) {
+        if($scope.name == ""){
+            return true;
+        }
+        return element.name.indexOf($scope.name) >=0 ;
     };
 
 

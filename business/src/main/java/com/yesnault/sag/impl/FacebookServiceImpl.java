@@ -1,6 +1,7 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
@@ -48,7 +49,7 @@ public class FacebookServiceImpl implements FacebookService{
     @Override
     public  List<SNFriend> getFriendsFacebook() {
         if(facebook!=null) {
-            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAOHm3ZCRaqtHiF5LYoPU5VSphob5YS09q2moZBdAZA3LBnHsxjrbV7opTFYrcZBAIZBR8ksiwMLbBOlEWsZAwCgwt30c9UPwCrFR9BhtPAtThu9vm4KGNPV1rIbVfQziYwIRU1SOPR9fqQc8PksPuAyWt4UGng11yqMDCAYZBy534sqwtjvtEHmK13skZAII67s1skaRD18lPunP3XpITZAUZD");
+            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBABE4R2rEHPQYFRfvm1wWGtlKZBTrW8fZCua6CKqUVhZBS0riTZAu5YoKLPUTGomuBEsc4Kb3ZB9MZCoA02f0NTLzzStfP5zZCSP7YQb0nYrWm1JiwEs5Qg2rvmq7uZACdcSS1v4dZAq8FuHNb49tugwk4zYnsczSXPn4v3I3csXBOfM7ZAlIdTwe0LQAT81qVhGNzG5V4cYzfDdzUAWnTFR4cZD");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
             return  getSnFriends(references);
         }
@@ -130,5 +131,32 @@ public class FacebookServiceImpl implements FacebookService{
             snFriends.add(snFriend);
         }
         return snFriends;
+    }
+
+    private List<SNFeed> getSnFeeds(PagedList<Post> posts){
+        List<SNFeed> snFeeds = new ArrayList<>();
+        for(Post post:posts){
+            SNFeed snFeed=new SNFeed();
+            snFeed.setId(post.getId());
+            snFeed.setFrom(post.getFrom());
+            snFeed.setCreatedTime(post.getCreatedTime());
+            snFeed.setUpdatedTime(post.getUpdatedTime());
+            snFeed.setTo(post.getTo());
+            snFeed.setMessage(post.getMessage());
+            snFeed.setPicture(post.getPicture());
+            snFeed.setLink(post.getLink());
+            snFeed.setName(post.getName());
+            snFeed.setCaption(post.getCaption());
+            snFeed.setDescription(post.getDescription());
+            snFeed.setIcon(post.getIcon());
+            snFeed.setApplication(post.getApplication());
+            snFeed.setLikes(post.getLikes());
+            snFeed.setComments(post.getComments());
+            snFeed.setSharesCount(post.getSharesCount());
+            snFeed.setStory(post.getStory());
+            snFeed.setFeedType(post.getType().name());
+            snFeed.setSocialNetworkType("facebook");
+        }
+        return snFeeds;
     }
 }
