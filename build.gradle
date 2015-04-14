@@ -220,6 +220,7 @@ project(":persistence") {
     dependencies {
         compile project(":infrastructure")
         //compile "mysql:mysql-connector-java:5.1.26"
+        compile 'mysql:mysql-connector-java:5.1.6'
         compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
         compile "org.springframework:spring-orm:$springVersion"
         compile "org.springframework.data:spring-data-jpa:1.4.2.RELEASE"

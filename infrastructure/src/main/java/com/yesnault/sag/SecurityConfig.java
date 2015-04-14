@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema();
+//        auth.jdbcAuthentication().dataSource(dataSource).withDefaultSchema();
     }
 
     @Override

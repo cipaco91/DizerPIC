@@ -2,12 +2,31 @@ package com.yesnault.sag.model;
 
 import org.springframework.util.Assert;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "USER")
 public class User extends AbstractEntity {
 
-    private String firstname, lastname;
+    @Column(name = "FIRST_NAME", nullable = false, insertable = true, updatable = true)
+    private String firstname;
+
+    @Column(name = "LAST_NAME", nullable = false, insertable = true, updatable = true)
+    private String lastname;
+
+    @Column(name = "USERNAME", nullable = false, insertable = true, updatable = true)
+    private String username;
+
+    @Column(name = "PASSWORD", nullable = false, insertable = true, updatable = true)
+    private String password;
+
+    @Column(name = "ACTIVE", nullable = false, insertable = true, updatable = true)
+    private boolean active;
+
+    @Column(name = "PROFILE_CONFIGURE", nullable = false, insertable = true, updatable = true)
+    private boolean profileConf;
 
     public User(String firstname, String lastname) {
 
@@ -19,7 +38,6 @@ public class User extends AbstractEntity {
     }
 
     protected User() {
-
     }
 
 
@@ -40,5 +58,41 @@ public class User extends AbstractEntity {
         return String.format(
                 "User[id=%d, firstname='%s', lastname='%s']",
                 getId(), firstname, lastname);
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isProfileConf() {
+        return profileConf;
+    }
+
+    public void setProfileConf(boolean profileConf) {
+        this.profileConf = profileConf;
     }
 }

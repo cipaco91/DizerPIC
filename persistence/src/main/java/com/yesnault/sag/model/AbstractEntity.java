@@ -1,14 +1,12 @@
 package com.yesnault.sag.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public class AbstractEntity {
 
 	@Id
+	@Column(name = "ID", nullable = false, insertable = true, updatable = true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 

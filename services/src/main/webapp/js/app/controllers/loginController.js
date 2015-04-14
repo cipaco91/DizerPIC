@@ -8,10 +8,15 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
         });
     }
 
-    $scope.connectionFacebook = function() {
+    $scope.login = function() {
         console.log("redirect facebook");
-        UsersService.login('facebook').success(function (response) {
-            $window.location.href=response;
+        UsersService.login($scope.username,$scope.password).success(function (response) {
+           if(response == 'false'){
+               console.log("false");
+           }else{
+               $window.location.href="http://localhost:8080/social/#/home"
+              //$location.path("/home");
+           }
         });
     }
 
