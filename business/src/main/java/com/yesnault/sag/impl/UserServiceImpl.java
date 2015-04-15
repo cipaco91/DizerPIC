@@ -2,6 +2,8 @@ package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
+import com.yesnault.sag.model.UserProfile;
+import com.yesnault.sag.repository.UserProfileRepository;
 import com.yesnault.sag.repository.UserRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
@@ -27,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private UserRepository userRepository;
+
+    @Inject
+    private UserProfileRepository userProfileRepository;
 
     @Inject
     private Facebook facebook;
@@ -55,6 +60,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username,password);
+        User user=userRepository.findByUsernameAndPassword(username,password);
+        UserProfile userProfile=userProfileRepository.findByUser(user);
+        return user;
     }
 }

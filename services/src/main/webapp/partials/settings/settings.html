@@ -2,35 +2,23 @@
 
 
 <div id="content">
-    <ng-include src="'partials/menu/menuSettings.html'"></ng-include>
-    <div class="item col-lg-4 col-md-6 col-xs-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <h4 class="panel-title">Basic Fluid Layout</h4>
+    <!--<ng-include src="'partials/menu/menuSettings.html'"></ng-include>-->
+    <div ng-controller="SettingsCtrl">
+        <div ng-switch="step">
+            <div ng-switch-when="1">
+                // here you can include your step 1 template , or simply just hardcode it here :
+                <div ng-include src="'partials/settings/step1.html'"></div>
+                <button ng-click="setStep(1)">Step2</button>
             </div>
-            <div class="panel-footer">Most simple and common fluid layouts to get started from.</div>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="cover overlay hover cover-image-full">
-                        <img src="images/choose/1-sidebar-left.jpg" alt="Buttons" />
-                        <a href="index.html" class="overlay overlay-full overlay-hover overlay-bg-white">
-                                                <span class="v-center">
-                                <span class="text-h1">1 Sidebar</span>
-                                                </span>
-                        </a>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="cover overlay hover cover-image-full">
-                        <img src="images/choose/no-sidebar.jpg" alt="Buttons" />
-                        <a href="layout-fluid-no-sidebar.html" class="overlay overlay-full overlay-hover overlay-bg-white">
-                                                <span class="v-center">
-                                <span class="text-h1">No Sidebar</span>
-                                                </span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
+            <div ng-switch-when="2">
+                <div ng-include src="'partials/settings/step2.html'"></div>
+                <button ng-click="setStep(2)">Step3</button>
+            </div>
+            <div ng-switch-when="3">
+                <div ng-include src="'partials/settings/step3.html'"></div>
+                <button ng-click="setStep(3)">Finish</button>
+            </div>
+
         </div>
     </div>
 </div>
