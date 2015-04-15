@@ -12,12 +12,11 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
         console.log("redirect facebook");
         UsersService.login($scope.username,$scope.password).success(function (response) {
            if(response == 'false'){
-               $('#modal-slide-down').modal('hide');
                console.log("false");
            }else{
-               //$window.location.href="http://localhost:8080/social/#/home"
+               $window.location.href="http://localhost:8080/social/#/settings"
               //$location.path("/home");
-               $('#dialog').modal('show');
+
            }
         });
     }
