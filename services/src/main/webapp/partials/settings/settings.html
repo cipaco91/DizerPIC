@@ -2,23 +2,34 @@
 
 
 <div id="content">
-    <!--<ng-include src="'partials/menu/menuSettings.html'"></ng-include>-->
-    <div ng-controller="SettingsCtrl">
-        <div ng-switch="step">
-            <div ng-switch-when="1">
-                // here you can include your step 1 template , or simply just hardcode it here :
-                <div ng-include src="'partials/settings/step1.html'"></div>
-                <button ng-click="setStep(1)">Step2</button>
-            </div>
-            <div ng-switch-when="2">
-                <div ng-include src="'partials/settings/step2.html'"></div>
-                <button ng-click="setStep(2)">Step3</button>
-            </div>
-            <div ng-switch-when="3">
-                <div ng-include src="'partials/settings/step3.html'"></div>
-                <button ng-click="setStep(3)">Finish</button>
-            </div>
+    <div class="st-content">
+        <div class="container-fluid">
+            <div class="page-section">
+                <div class="row">
+                    <div class="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+                        <h1 class="page-section-heading">Create your profile</h1>
 
+                        <div class="wizard-container wizard-1" id="wizard-demo-1">
+                                <ul class="wiz-progress">
+                                    <li class="{{first}}">Account Setup</li>
+                                    <li class="{{social}}">Social Profiles</li>
+                                    <li class="{{personal}}">Personal Details</li>
+                                </ul>
+                            <form action="#" data-toggle="wizard" class="max-width-400 h-center">
+                                <fieldset class="step" ng-show="step1">
+                                    <div ng-include src="'partials/settings/step1.html'"></div>
+                                </fieldset>
+                                <fieldset class="step" ng-show="step2">
+                                    <div ng-include src="'partials/settings/step2.html'"></div>
+                                </fieldset>
+                                <fieldset class="step" ng-show="step3">
+                                    <div ng-include src="'partials/settings/step3.html'"></div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

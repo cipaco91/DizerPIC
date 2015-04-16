@@ -1,1 +1,30 @@
-<h1>STEP3</h1>
+<div class="page-section-heading">
+    <h2 class="text-h3 margin-v-0">Personal Details</h2>
+
+    <h3 class="text-h4 margin-v-10 text-grey-400">Your personal details are safe
+        with us</h3>
+</div>
+<div class="form-group form-control-default">
+    <label for="wiz-fname">First name:</label>
+    <input class="form-control" type="text" id="wiz-fname"
+           placeholder="First name"/>
+</div>
+<div class="form-group form-control-default">
+    <label for="wiz-lname">Last name:</label>
+    <input class="form-control" type="tel" id="wiz-lname" placeholder="Last name"/>
+</div>
+<div class="form-group form-control-default">
+    <label for="wiz-phone">Phone:</label>
+    <input class="form-control" type="text" id="wiz-phone" placeholder="Phone"/>
+</div>
+<div class="form-group form-control-default">
+    <label for="wiz-address">Address:</label>
+    <textarea rows="5" class="form-control" id="wiz-address"
+              placeholder="Your address"></textarea>
+</div>
+<button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(3)">
+    Previous
+</button>
+<button type="button" class="wiz-step btn btn-primary" data-target="0"
+        ng-click="setStep(3)">Submit
+</button>
