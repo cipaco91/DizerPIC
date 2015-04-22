@@ -4,10 +4,8 @@
             <img src="images/social/wallPhoto.jpg" alt="people"/>
         </div>
         <ul class="friends">
-            <li ng-repeat="friend in friends">
-                <a ng-href="{{friend.profileURL}}">
-                    <img ng-src="{{friend.profileImageUrl}}" alt="image"/>
-                </a>
+            <li ng-repeat="photo in photosProfile">
+                <img ng-src="{{photo.picture}}" alt="image" width="85" height="85"/>
             </li>
         </ul>
     </div>
