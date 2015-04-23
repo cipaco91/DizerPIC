@@ -8,4 +8,6 @@ public interface SocialNetworkService {
     void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String message);
 
     void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String search);
+
+    String profileImageURL();
 }

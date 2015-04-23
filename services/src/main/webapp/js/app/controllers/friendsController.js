@@ -101,7 +101,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         $scope.linkedinVisible = response;
     });
 
-    ProfileService.findProfileImageFacebook().success(function (response) {
+    ProfileService.findProfileImage().success(function (response) {
         $scope.profileImage = response;
     });
 

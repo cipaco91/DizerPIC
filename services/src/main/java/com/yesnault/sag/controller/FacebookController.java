@@ -50,14 +50,6 @@ public class FacebookController {
         return facebookService.getFriendsFacebook();
     }
 
-    @RequestMapping(value = "/profileImageFacebook", method = RequestMethod.GET, produces = "application/json")
-    public
-    @ResponseBody
-    String profileImageFacebook() {
-//        return  "http://graph.facebook.com/" + facebookService.getUserProfile().getId() + "/picture";
-         return twitter.userOperations().getUserProfile().getProfileImageUrl();
-    }
-
     @RequestMapping(value = "/profileFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody

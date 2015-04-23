@@ -16,7 +16,7 @@ function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService) {
         $scope.linkedinVisible=response;
     });
 
-    ProfileService.findProfileImageFacebook().success(function (response) {
+    ProfileService.findProfileImage().success(function (response) {
         $scope.profileImage=response;
     });
 

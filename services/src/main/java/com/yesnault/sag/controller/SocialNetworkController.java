@@ -97,5 +97,12 @@ public class SocialNetworkController {
         return facebookService.getPhotosProfile();
     }
 
+    @RequestMapping(value = "/profileImage", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    String profileImageFacebook() {
+        return socialNetworkService.profileImageURL();
+    }
+
 
 }
