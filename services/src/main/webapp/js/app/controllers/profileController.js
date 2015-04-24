@@ -21,7 +21,7 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService) {
             $scope.profileImage=response;
         });
 
-    ProfileService.findProfileFacebook().success(function (response) {
+    ProfileService.profileSN().success(function (response) {
         $scope.userProfile=response;
     });
 

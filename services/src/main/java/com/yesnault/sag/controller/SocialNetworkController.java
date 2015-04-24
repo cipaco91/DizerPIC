@@ -6,9 +6,11 @@ import com.yesnault.sag.interfaces.LinkedinService;
 import com.yesnault.sag.interfaces.SocialNetworkService;
 import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.model.User;
+import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Photo;
 import org.springframework.social.linkedin.api.LinkedInProfile;
@@ -102,6 +104,13 @@ public class SocialNetworkController {
     @ResponseBody
     String profileImageFacebook() {
         return socialNetworkService.profileImageURL();
+    }
+
+    @RequestMapping(value = "/profileSN", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    ProfileSN profileSN() {
+        return socialNetworkService.getProfileUser();
     }
 
 

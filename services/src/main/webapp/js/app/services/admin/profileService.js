@@ -6,8 +6,8 @@ app.factory("ProfileService", function ($http) {
         findProfileImage: function () {
             return $http.get('rest/profileImage');
         },
-        findProfileFacebook: function () {
-            return $http.get('rest/profileFacebook');
+        profileSN: function () {
+            return $http.get('rest/profileSN');
         },
         friendsProfile: function () {
             return $http.get('rest/friendsProfile');
