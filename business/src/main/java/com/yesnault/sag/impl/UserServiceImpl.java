@@ -5,6 +5,7 @@ import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.repository.UserProfileRepository;
 import com.yesnault.sag.repository.UserRepository;
+import com.yesnault.sag.util.WizzardDTO;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
@@ -63,5 +64,11 @@ public class UserServiceImpl implements UserService {
         User user=userRepository.findByUsernameAndPassword(username,password);
         UserProfile userProfile=userProfileRepository.findByUser(user);
         return user;
+    }
+
+    @Override
+    public Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO) {
+        UserProfile userProfile=new UserProfile();
+        return null;
     }
 }
