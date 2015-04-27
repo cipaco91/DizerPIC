@@ -115,13 +115,16 @@ public class LinkedinServiceImpl implements LinkedinService{
         }
     }
 
-    private List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles){
+    @Override
+    public List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles){
         List<SNFriend> snFriends = new ArrayList<>();
         for(LinkedInProfile linkedInProfile:linkedInProfiles){
             SNFriend snFriend = new SNFriend();
             snFriend.setId(linkedInProfile.getId());
             snFriend.setName(linkedInProfile.getFirstName()+" "+linkedInProfile.getLastName());
-            snFriend.setProfileImageUrl(linkedInProfile.getProfilePictureUrl());
+            if(linkedInProfile.getProfilePictureUrl()!=null) {
+                snFriend.setProfileImageUrl(linkedInProfile.getProfilePictureUrl());
+            }else continue;
             snFriend.setProfileURL(linkedInProfile.getPublicProfileUrl());
 //            snFriend.setProfileURL(linkedInProfile.getSiteStandardProfileRequest().getUrl());
             snFriend.setSocialNetworkType("linkedin");

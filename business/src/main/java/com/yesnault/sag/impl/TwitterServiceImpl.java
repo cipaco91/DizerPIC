@@ -147,7 +147,8 @@ public class TwitterServiceImpl implements TwitterService{
         }
     }
 
-    private List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles){
+    @Override
+    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles){
         List<SNFriend> snFriends = new ArrayList<>();
         for(TwitterProfile twitterProfile:twitterProfiles){
             SNFriend snFriend = new SNFriend();

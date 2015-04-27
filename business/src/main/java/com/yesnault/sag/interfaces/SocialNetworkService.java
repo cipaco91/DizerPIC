@@ -1,6 +1,9 @@
 package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.pojo.ProfileSN;
+import com.yesnault.sag.pojo.SNFriend;
+
+import java.util.List;
 
 /**
  * Created by Ciprian on 3/22/2015.
@@ -14,4 +17,6 @@ public interface SocialNetworkService {
     String profileImageURL();
 
     ProfileSN getProfileUser();
+
+    List<SNFriend> getFriendsProfile();
 }

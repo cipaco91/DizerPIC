@@ -34,5 +34,8 @@ public interface FacebookService {
 
     boolean isConnectFacebook();
 
+    List<SNFriend> getCommonFriendsFacebook();
+
+
 
 }

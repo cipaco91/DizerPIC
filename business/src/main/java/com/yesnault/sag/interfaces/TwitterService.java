@@ -39,4 +39,6 @@ public interface TwitterService {
     Trends getLocalTrends(long var1);
 
     boolean isConnectTwitter();
+
+    List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles);
 }

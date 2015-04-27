@@ -4,15 +4,21 @@ import com.yesnault.sag.interfaces.*;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.ProfileSN;
+import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.repository.UserProfileRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.linkedin.api.LinkedIn;
+import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.linkedin.api.SearchParameters;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ciprian on 3/22/2015.
@@ -114,4 +120,30 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                     facebook.userOperations().getUserProfile().getRelationshipStatus());
         }
     }
+
+    @Override
+    public List<SNFriend> getFriendsProfile() {
+        List<SNFriend> snFriends=new ArrayList<>();
+        facebookService.getCommonFriendsFacebook();
+        snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));
+//        List<TwitterProfile> friendList=twitter.friendOperations().getFriends().subList(0, 4);
+//        snFriends.addAll(getSnFriendsTwitter(friendList));
+        return snFriends;
+    }
+
+    private List<SNFriend> getSnFriendsTwitter(List<TwitterProfile> twitterProfiles){
+        List<SNFriend> snFriends = new ArrayList<>();
+        for(TwitterProfile twitterProfile:twitterProfiles){
+            SNFriend snFriend = new SNFriend();
+            snFriend.setId(Long.toString(twitterProfile.getId()));
+            snFriend.setName(twitterProfile.getScreenName());
+            snFriend.setProfileImageUrl(twitterProfile.getProfileImageUrl());
+            snFriend.setProfileURL(twitterProfile.getProfileUrl());
+            snFriend.setSocialNetworkType("twitter");
+            snFriends.add(snFriend);
+        }
+        return snFriends;
+    }
+
+
 }

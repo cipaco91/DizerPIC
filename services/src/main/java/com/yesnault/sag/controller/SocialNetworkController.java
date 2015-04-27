@@ -87,8 +87,7 @@ public class SocialNetworkController {
     public
     @ResponseBody
     List<SNFriend> friendsProfile() {
-        //todo get 3 friends from facebbok,twiiter,linkedn
-        return linkedinService.getConnections(1,10);
+        return socialNetworkService.getFriendsProfile();
     }
 
     @RequestMapping(value = "/photosProfile", method = RequestMethod.GET, produces = "application/json")

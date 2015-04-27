@@ -19,14 +19,14 @@ import java.util.List;
  */
 @Service(value = "facebookServiceImpl")
 @Transactional
-public class FacebookServiceImpl implements FacebookService{
+public class FacebookServiceImpl implements FacebookService {
 
     @Inject
     private Facebook facebook;
 
     @Override
-    public  List<SNFriend> getFeed() {
-        if(facebook!=null) {
+    public List<SNFriend> getFeed() {
+        if (facebook != null) {
             PagedList<Post> posts = facebook.feedOperations().getFeed();
             List<SNFriend> snFriends = new ArrayList<>();
             for (Post post : posts) {
@@ -47,18 +47,18 @@ public class FacebookServiceImpl implements FacebookService{
     }
 
     @Override
-    public  List<SNFriend> getFriendsFacebook() {
-        if(facebook!=null) {
+    public List<SNFriend> getFriendsFacebook() {
+        if (facebook != null) {
             Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBABE4R2rEHPQYFRfvm1wWGtlKZBTrW8fZCua6CKqUVhZBS0riTZAu5YoKLPUTGomuBEsc4Kb3ZB9MZCoA02f0NTLzzStfP5zZCSP7YQb0nYrWm1JiwEs5Qg2rvmq7uZACdcSS1v4dZAq8FuHNb49tugwk4zYnsczSXPn4v3I3csXBOfM7ZAlIdTwe0LQAT81qVhGNzG5V4cYzfDdzUAWnTFR4cZD");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
-            return  getSnFriends(references);
+            return getSnFriends(references);
         }
         return new ArrayList<>();
     }
 
     @Override
     public FacebookProfile getUserProfile() {
-        if(facebook!=null) {
+        if (facebook != null) {
             return facebook.userOperations().getUserProfile();
         }
         return null;
@@ -66,7 +66,7 @@ public class FacebookServiceImpl implements FacebookService{
 
     @Override
     public PagedList<Reference> search(String var1) {
-        if(facebook!=null) {
+        if (facebook != null) {
             return facebook.userOperations().search(var1);
         }
         return null;
@@ -74,7 +74,7 @@ public class FacebookServiceImpl implements FacebookService{
 
     @Override
     public PagedList<Album> getAlbums() {
-        if(facebook!=null) {
+        if (facebook != null) {
             return facebook.mediaOperations().getAlbums();
         }
         return null;
@@ -82,7 +82,7 @@ public class FacebookServiceImpl implements FacebookService{
 
     @Override
     public PagedList<Photo> getPhotos(String albumId) {
-        if(facebook!=null) {
+        if (facebook != null) {
             return facebook.mediaOperations().getPhotos(albumId);
         }
         return null;
@@ -99,27 +99,36 @@ public class FacebookServiceImpl implements FacebookService{
     }
 
     @Override
-    public byte [] getProfileImage() {
-        byte [] profileImage=facebook.userOperations().getUserProfileImage();
+    public byte[] getProfileImage() {
+        byte[] profileImage = facebook.userOperations().getUserProfileImage();
         return profileImage;
     }
 
     @Override
     public PagedList<Photo> getPhotosProfile() {
-        String userId=facebook.userOperations().getUserProfile().getId();
+        String userId = facebook.userOperations().getUserProfile().getId();
         return facebook.mediaOperations().getPhotos(userId);
     }
 
     @Override
     public boolean isConnectFacebook() {
-        try{
-            return facebook.userOperations()!=null;
-        }catch (Exception e){
+        try {
+            return facebook.userOperations() != null;
+        } catch (Exception e) {
             return false;
         }
     }
 
-    private List<SNFriend> getSnFriends(List<Reference> references){
+    @Override
+    public List<SNFriend> getCommonFriendsFacebook() {
+        List<SNFriend> snFriends = new ArrayList<>();
+        Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAI0EwlVQWEmPq1kBONSo2JT4A1aH3xB3wymq8q0ZBaGuBWCHstmjwWRoWZBEUf0ZACxYCXVkYf9ITsZAXDSaRPcAfyRjBHsTtsWfmj80olhU7QTTIx8yT9g5WvUPZA4JnvBkXjtZCPeSuDn4hffBCE04QZBrZCeig7b1EZB39IKzbgiIiLmKqQVkLpHc7IFhGO05vAi4cCQtHhAtGCxE7R6gZD");
+        PagedList<Reference> references = facebook1.friendOperations().getFriends();
+        facebook1.friendOperations().getMutualFriends(references.get(0).getId());
+        return null;
+    }
+
+    private List<SNFriend> getSnFriends(List<Reference> references) {
         List<SNFriend> snFriends = new ArrayList<>();
         for (Reference reference : references) {
             SNFriend snFriend = new SNFriend();
@@ -133,10 +142,10 @@ public class FacebookServiceImpl implements FacebookService{
         return snFriends;
     }
 
-    private List<SNFeed> getSnFeeds(PagedList<Post> posts){
+    private List<SNFeed> getSnFeeds(PagedList<Post> posts) {
         List<SNFeed> snFeeds = new ArrayList<>();
-        for(Post post:posts){
-            SNFeed snFeed=new SNFeed();
+        for (Post post : posts) {
+            SNFeed snFeed = new SNFeed();
             snFeed.setId(post.getId());
             snFeed.setFrom(post.getFrom());
             snFeed.setCreatedTime(post.getCreatedTime());

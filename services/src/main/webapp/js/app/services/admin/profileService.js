@@ -14,6 +14,12 @@ app.factory("ProfileService", function ($http) {
         },
         photosProfile: function () {
             return $http.get('rest/photosProfile');
+        },
+        getWizzardDTO: function () {
+            return $http.get('rest/wizzardDTO');
+        },
+        finishWizzardProfile: function (entity) {
+            return $http.post('rest/finishWizzardProfile',entity);
         }
     }
 });
