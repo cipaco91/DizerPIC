@@ -25,6 +25,16 @@ public class WizzardDTO implements Serializable{
 
     private String repassword;
 
+    private String profileAbout;
+
+    private String profileImage;
+
+    private String profileFriend;
+
+    private String profileName;
+
+    private String profileCover;
+
     public String getFirstName() {
         return firstName;
     }
@@ -95,5 +105,45 @@ public class WizzardDTO implements Serializable{
 
     public void setRepassword(String repassword) {
         this.repassword = repassword;
+    }
+
+    public String getProfileAbout() {
+        return profileAbout;
+    }
+
+    public void setProfileAbout(String profileAbout) {
+        this.profileAbout = profileAbout;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public String getProfileFriend() {
+        return profileFriend;
+    }
+
+    public void setProfileFriend(String profileFriend) {
+        this.profileFriend = profileFriend;
+    }
+
+    public String getProfileName() {
+        return profileName;
+    }
+
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
+    }
+
+    public String getProfileCover() {
+        return profileCover;
+    }
+
+    public void setProfileCover(String profileCover) {
+        this.profileCover = profileCover;
     }
 }

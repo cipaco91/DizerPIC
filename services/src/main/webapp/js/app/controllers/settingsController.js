@@ -52,9 +52,30 @@ function SettingsCtrl($scope, $location, $window, ProfileService) {
         $scope.wizzardDTO.firstName = $scope.firstName;
         $scope.wizzardDTO.lastName = $scope.lastName;
         $scope.wizzardDTO.email = $scope.email;
-        //$scope.wizzardDTO.isFacebook=$scope.isFacebook;
-        //$scope.wizzardDTO.isTwitter=$scope.isTwitter;
-        //$scope.wizzardDTO.isLinkedin=$scope.isLinkedin;
+        $scope.wizzardDTO.profileImage=$scope.profileImage;
+        $scope.wizzardDTO.profileAbout=$scope.profileAbout;
+        $scope.wizzardDTO.profileFriend=$scope.profileFriend;
+        $scope.wizzardDTO.profileName=$scope.profileName;
+        $scope.wizzardDTO.profileCover=$scope.profileCover;
+
+        if(angular.equals($scope.yesTwitter,true)){
+            $scope.wizzardDTO.isTwitter=true;
+        }else if(angular.equals($scope.noTwitter,true)){
+            $scope.wizzardDTO.isTwitter=false;
+        }
+
+        if(angular.equals($scope.yesFacebook,true)){
+            $scope.wizzardDTO.isFacebook=true;
+        }else if(angular.equals($scope.noFacebook,true)){
+            $scope.wizzardDTO.isFacebook=false;
+        }
+
+        if(angular.equals($scope.yesLinkedin,true)){
+            $scope.wizzardDTO.isLinkedin=true;
+        }else if(angular.equals($scope.noLinkedin,true)){
+            $scope.wizzardDTO.isLinkedin=false;
+        }
+
         $scope.wizzardDTO.isFacebook = true;
         $scope.wizzardDTO.isTwitter = true;
         $scope.wizzardDTO.isLinkedin = true;
