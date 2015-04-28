@@ -37,7 +37,7 @@ public class User extends AbstractEntity {
         this.lastname = lastname;
     }
 
-    protected User() {
+    public User() {
     }
 
 

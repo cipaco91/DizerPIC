@@ -1,10 +1,12 @@
 package com.yesnault.sag.controller;
 
+import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.util.WizzardDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,9 @@ import java.util.List;
  */
 @Controller
 public class SettingsController {
+
+    @Inject
+    private UserService userService;
 
     @RequestMapping(value = "/wizzardDTO", method = RequestMethod.GET, produces = "application/json")
     public
@@ -25,8 +30,7 @@ public class SettingsController {
     public
     @ResponseBody
     Boolean finishWizzardProfile(@RequestBody WizzardDTO wizzardDTO) {
-        System.out.println(wizzardDTO.getFirstName() + " " + wizzardDTO.getLastName());
-        return true;
+        return userService.saveUserWizzardProfile(wizzardDTO);
     }
 
 
