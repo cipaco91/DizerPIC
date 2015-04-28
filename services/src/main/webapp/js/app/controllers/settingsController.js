@@ -76,9 +76,6 @@ function SettingsCtrl($scope, $location, $window, ProfileService) {
             $scope.wizzardDTO.isLinkedin=false;
         }
 
-        $scope.wizzardDTO.isFacebook = true;
-        $scope.wizzardDTO.isTwitter = true;
-        $scope.wizzardDTO.isLinkedin = true;
         $scope.wizzardDTO.username = $scope.username;
         $scope.wizzardDTO.password = $scope.password;
         $scope.wizzardDTO.repassword = $scope.repassword;
