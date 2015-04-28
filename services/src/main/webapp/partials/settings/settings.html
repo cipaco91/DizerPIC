@@ -52,18 +52,37 @@
                                             networks</h3>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-twitter">Twitter:</label>
-                                        <input class="form-control" type="text" id="wiz-twitter" placeholder="Twitter"/>
+                                        <label>Twitter:</label>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckbox2" value="option1"S>
+                                            <label for="inlineCheckbox2">Yes</label>
+                                        </div>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckbox3" value="option1">
+                                            <label for="inlineCheckbox3">No</label>
+                                        </div>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-facebook">Facebook:</label>
-                                        <input class="form-control" type="text" id="wiz-facebook"
-                                               placeholder="Facebook"/>
+                                        <label >Facebook:</label>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckboxF2" value="option1" >
+                                            <label for="inlineCheckboxF2">Yes</label>
+                                        </div>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckboxF3" value="option1">
+                                            <label for="inlineCheckboxF3">No</label>
+                                        </div>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-linkedin">Linkedin</label>
-                                        <input class="form-control" type="text" id="wiz-linkedin"
-                                               placeholder="Linkedin"/>
+                                        <label>Linkedin</label>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckboxL2" value="option1">
+                                            <label for="inlineCheckboxL2">Yes</label>
+                                        </div>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckboxL3" value="option1">
+                                            <label for="inlineCheckboxL3">No</label>
+                                        </div>
                                     </div>
                                     <button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(2)">
                                         Previous
@@ -79,97 +98,97 @@
                                         <h3 class="text-h4 margin-v-10 text-grey-400">Configure your profile</h3>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-twitter">Profile Image:</label>
+                                        <label>Profile Image:</label>
 
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="inlineRadio1"
-                                                   ng-model="profileImage" value="profileImageF" name="radioInline1">
+                                                   ng-model="profileImage" value="facebook" name="radioInline1">
                                             <label for="inlineRadio1">Facebook</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
-                                            <input type="radio" id="inlineRadio2" ng-model="profileImage" value="profileImageT"
+                                            <input type="radio" id="inlineRadio2" ng-model="profileImage" value="twitter"
                                                    name="radioInline2">
                                             <label for="inlineRadio2">Twitter</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
-                                            <input type="radio" id="inlineRadio3" ng-model="profileImage" value="profileImageL"
+                                            <input type="radio" id="inlineRadio3" ng-model="profileImage" value="linkedin"
                                                    name="radioInline3">
                                             <label for="inlineRadio3">Linkedin</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-facebook">Profile About:</label>
+                                        <label >Profile About:</label>
 
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="iinlineRadioAbout1"
-                                                   ng-model="profileAbout" value="profileAboutF" name="radioInline4">
+                                                   ng-model="profileAbout" value="facebook" name="radioInline4">
                                             <label for="iinlineRadioAbout1">Facebook</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="iinlineRadioAbout2" ng-model="profileAbout"
-                                                   value="profileAboutT" name="radioInline5">
+                                                   value="twitter" name="radioInline5">
                                             <label for="iinlineRadioAbout2">Twitter</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="iinlineRadioAbout3" ng-model="profileAbout"
-                                                   value="profileAboutL" name="radioInline6">
+                                                   value="linkedin" name="radioInline6">
                                             <label for="iinlineRadioAbout3">Linkedin</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-linkedin">Profile Friends</label>
+                                        <label >Profile Friends</label>
 
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="iinlineRadioFriend1"
-                                                   ng-model="profileFriend" value="profileFriendF" name="radioInline7">
+                                                   ng-model="profileFriend" value="facebook" name="radioInline7">
                                             <label for="iinlineRadioFriend1">Facebook</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="iinlineRadioFriend2" ng-model="profileFriend"
-                                                   value="profileFriendT" name="radioInline8">
+                                                   value="twitter" name="radioInline8">
                                             <label for="iinlineRadioFriend2">Twitter</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="iinlineRadioFriend3" ng-model="profileFriend"
-                                                   value="profileFriendL" name="radioInline9">
+                                                   value="linkedin" name="radioInline9">
                                             <label for="iinlineRadioFriend3">Linkedin</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-linkedin">Profile Name</label>
+                                        <label >Profile Name</label>
 
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="inlineRadioName1"
-                                                   ng-model="profileName" value="profileNameF" name="radioInline10">
+                                                   ng-model="profileName" value="facebook" name="radioInline10">
                                             <label for="inlineRadioName1">Facebook</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
-                                            <input type="radio" id="inlineRadioName2" ng-model="profileName" value="profileNameT"
+                                            <input type="radio" id="inlineRadioName2" ng-model="profileName" value="twitter"
                                                    name="radioInline11">
                                             <label for="inlineRadioName2">Twitter</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
-                                            <input type="radio" id="inlineRadioName3" ng-model="profileName" value="profileNameL"
+                                            <input type="radio" id="inlineRadioName3" ng-model="profileName" value="linkedin"
                                                    name="radioInline12">
                                             <label for="inlineRadioName3">Linkedin</label>
                                         </div>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-linkedin">Profile Cover</label>
+                                        <label>Profile Cover</label>
 
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="inlineRadioCover1"
-                                                   ng-model="profileCover" value="profileCoverF" name="radioInline13">
+                                                   ng-model="profileCover" value="facebook" name="radioInline13">
                                             <label for="inlineRadioCover1">Facebook</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
-                                            <input type="radio" id="inlineRadioCover2" ng-model="profileCover" value="profileCoverT"
+                                            <input type="radio" id="inlineRadioCover2" ng-model="profileCover" value="twitter"
                                                    name="radioInline14">
                                             <label for="inlineRadioCover2">Twitter</label>
                                         </div>
                                         <div class="radio radio-info radio-inline">
                                             <input type="radio" id="inlineRadioCover3" ng-model="profileCover"
-                                                   value="profileCoverL" name="radioInline15">
+                                                   value="linkedin" name="radioInline15">
                                             <label for="inlineRadioCover3">Linkedin</label>
                                         </div>
                                     </div>
