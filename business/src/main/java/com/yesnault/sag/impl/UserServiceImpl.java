@@ -53,7 +53,6 @@ public class UserServiceImpl implements UserService {
             LinkedInProfile linkedInProfile = linkedIn.profileOperations().getUserProfile();
             TwitterProfile twitterProfile = twitter.userOperations().getUserProfile();
             PagedList<Post> posts = facebook.feedOperations().getFeed();
-//            Person person= google.plusOperations().getGoogleProfile();
         } catch (Exception e) {
         }
         return userRepository.findByLastname(lastname);
