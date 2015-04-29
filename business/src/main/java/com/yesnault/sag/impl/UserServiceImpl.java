@@ -50,37 +50,43 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findByLastname(String lastname) {
         try {
-            LinkedInProfile linkedInProfile=linkedIn.profileOperations().getUserProfile();
+            LinkedInProfile linkedInProfile = linkedIn.profileOperations().getUserProfile();
             TwitterProfile twitterProfile = twitter.userOperations().getUserProfile();
             PagedList<Post> posts = facebook.feedOperations().getFeed();
 //            Person person= google.plusOperations().getGoogleProfile();
-        }catch(Exception e){
+        } catch (Exception e) {
         }
         return userRepository.findByLastname(lastname);
     }
 
     @Override
     public User findByUsernameAndPassword(String username, String password) {
-        User user=userRepository.findByUsernameAndPassword(username,password);
-        UserProfile userProfile=userProfileRepository.findByUser(user);
+        User user = userRepository.findByUsernameAndPassword(username, password);
+        UserProfile userProfile = userProfileRepository.findByUser(user);
         return user;
     }
 
     @Override
     public Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO) {
-        if(!wizzardDTO.getPassword().equals(wizzardDTO.getRepassword())){
-           return false;
+        if (!wizzardDTO.getPassword().equals(wizzardDTO.getRepassword())) {
+            return false;
         }
-        User user=new User();
+        User user = new User();
         user.setFirstname(wizzardDTO.getFirstName());
         user.setLastname(wizzardDTO.getLastName());
         user.setProfileConf(true);
         user.setUsername(wizzardDTO.getUsername());
         user.setPassword(wizzardDTO.getPassword());
         user.setActive(true);
-        userRepository.save(user);
-        UserProfile userProfile=new UserProfile();
+        user = userRepository.save(user);
+        UserProfile userProfile = new UserProfile();
         userProfile.setUser(user);
+        userProfile.setFromProfileImage(wizzardDTO.getProfileImage());
+        userProfile.setFromProfileAbout(wizzardDTO.getProfileAbout());
+        userProfile.setFromProfileCover(wizzardDTO.getProfileCover());
+        userProfile.setFromProfileFriends(wizzardDTO.getProfileFriend());
+        userProfile.setFromProfileName(wizzardDTO.getProfileName());
+        userProfileRepository.save(userProfile);
         return true;
     }
 }
