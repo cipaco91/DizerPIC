@@ -1,28 +1,10 @@
-function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService) {
+function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService,$controller) {
+
+    angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
     $scope.feedTwitter={};
     $scope.feedLinkedin={};
     $scope.feedFacebook={};
-
-    MenuService.isConnectFacebook().success(function (response) {
-        $scope.facebookVisible=response;
-    });
-
-    MenuService.isConnectTwittter().success(function (response) {
-        $scope.twitterVisible=response;
-    });
-
-    MenuService.isConnectLinkedin().success(function (response) {
-        $scope.linkedinVisible=response;
-    });
-
-    ProfileService.findProfileImage().success(function (response) {
-        $scope.profileImage=response;
-    });
-
-    ProfileService.friendsProfile().success(function (response) {
-        $scope.friends=response;
-    });
 
     FeedService.findFeedTwitter().
         success(function (users) {

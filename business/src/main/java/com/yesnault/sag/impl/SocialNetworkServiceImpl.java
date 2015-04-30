@@ -123,6 +123,9 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 
     @Override
     public List<SNFriend> getFriendsProfile() {
+        SearchParameters searchParameters=new SearchParameters();
+        searchParameters.setLastName("Paraschivescu");
+        searchParameters.setFirstName("Ciprian");
         List<SNFriend> snFriends=new ArrayList<>();
         facebookService.getCommonFriendsFacebook();
         snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));

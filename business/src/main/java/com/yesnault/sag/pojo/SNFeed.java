@@ -2,7 +2,10 @@ package com.yesnault.sag.pojo;
 
 import org.springframework.social.facebook.api.Comment;
 import org.springframework.social.facebook.api.ListAndCount;
+import org.springframework.social.facebook.api.Post;
 import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.linkedin.api.LinkedInNetworkUpdate;
+import org.springframework.social.twitter.api.Tweet;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -50,6 +53,29 @@ public class SNFeed implements Serializable{
     private String feedType;
 
     private String socialNetworkType;
+
+    public SNFeed(){
+    }
+
+    public SNFeed(Post post){
+        this.id=post.getId();
+        this.from=post.getFrom();
+        this.createdTime=post.getCreatedTime();
+        this.name=post.getName();
+        this.picture=post.getPicture();
+        this.link=post.getLink();
+        this.description=post.getDescription();
+        this.story=post.getStory();
+        this.feedType=post.getType().name();
+
+        //todo de facut constructori pentru facebook,linkedin si twiiter
+    }
+
+    public SNFeed(Tweet tweet){
+    }
+
+    public SNFeed(LinkedInNetworkUpdate linkedInNetworkUpdate){
+    }
 
     public String getId() {
         return id;

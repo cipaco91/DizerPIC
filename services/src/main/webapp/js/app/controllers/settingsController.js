@@ -1,4 +1,6 @@
-function SettingsCtrl($scope, $location, $window, ProfileService) {
+function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
+
+    angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
     $scope.step = 1;
     $scope.step1 = true;

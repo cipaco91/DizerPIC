@@ -1,0 +1,48 @@
+<ng-include src="'partials/menu/menu.html'"></ng-include>
+
+<div id="content">
+
+    <div class="st-pusher">
+        <div class="st-content">
+            <div class="container">
+                <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
+                <br/><br/>
+
+                <div id="filter">
+                    <form class="form-inline">
+                        <label>Filter:</label>
+                        <select ng-options="code as code.value for code in codes" style="font-weight: 400;" class="btn btn-primary"
+                                ng-model="selectedItem" ng-change="update()"></select>
+                        </select>
+                        <div id="users-filter-trigger">
+                            <div ng-show="bySocialNetworkShow">
+                                <select ng-options="sn as sn.value for sn in socialNetworks" style="font-weight: 400;" class="btn btn-primary"
+                                        ng-model="selectedItemSocial" ng-change="changeSocial()"></select>
+                                </select>
+                            </div>
+                            <div ng-show="byNameShow">
+                                <input type="text" class="form-control" name="user-first" ng-model="name"
+                                       placeholder="Write Name" id="name"  ng-change="changeName()"/>
+                                <!--<a href="#" class="btn btn-default" id="user-search-name"><i class="fa fa-search"></i> Search</a>-->
+                            </div>
+                            <div ng-show="byJobShow">
+                                <input type="text" class="form-control" name="user-first" ng-model="jobName"
+                                       placeholder="Job Name" id="job" ng-change="changeJobName()"/>
+                                <!--<a href="#" class="btn btn-default" id="user-search-job"><i class="fa fa-search"></i> Search</a>-->
+                            </div>
+                            <div ng-show="byCompanyShow">
+                                <input type="text" class="form-control" name="user-first" ng-model="companyName"
+                                       placeholder="Company Name" id="company" ng-change="changeCompanyName()"/>
+                                <!--<a href="#" class="btn btn-default" id="user-search-company"><i class="fa fa-search"></i> Search</a>-->
+                            </div>
+                        </div>
+                        <button ng-show="buttonSearch" class="btn btn-primary" ng-click="search()">Search</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

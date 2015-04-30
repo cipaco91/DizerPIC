@@ -14,6 +14,7 @@ app.config(function ($routeProvider) {
         .when('/publicFriends', {  controller: FriendsCtrl, templateUrl: 'partials/friends/public-friends.html'})
         .when('/feeds', {  controller: FeedCtrl, templateUrl: 'partials/feeds/feed.html'})
         .when('/profile', {  controller: ProfileCtrl, templateUrl: 'partials/profile/profile.html'})
+        .when('/searchUsers', {  controller: SearchUsersCtrl, templateUrl: 'partials/users/searchUsers.html'})
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })

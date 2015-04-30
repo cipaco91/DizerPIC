@@ -1,16 +1,6 @@
-function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService) {
+function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService,$controller) {
 
-    MenuService.isConnectFacebook().success(function (response) {
-        $scope.facebookVisible=response;
-    });
-
-    MenuService.isConnectTwittter().success(function (response) {
-        $scope.twitterVisible=response;
-    });
-
-    MenuService.isConnectLinkedin().success(function (response) {
-        $scope.linkedinVisible=response;
-    });
+    angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
     $scope.connectionFacebook = function() {
         console.log("redirect facebook");

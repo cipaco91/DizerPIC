@@ -1,4 +1,6 @@
-function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuService) {
+function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuService,$controller) {
+
+    angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
     $scope.friendsTwitter = {};
     $scope.friendsLinkedin = {};
@@ -89,26 +91,6 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         }
     };
 
-    MenuService.isConnectFacebook().success(function (response) {
-        $scope.facebookVisible = response;
-    });
-
-    MenuService.isConnectTwittter().success(function (response) {
-        $scope.twitterVisible = response;
-    });
-
-    MenuService.isConnectLinkedin().success(function (response) {
-        $scope.linkedinVisible = response;
-    });
-
-    ProfileService.findProfileImage().success(function (response) {
-        $scope.profileImage = response;
-    });
-
-    ProfileService.friendsProfile().success(function (response) {
-        $scope.friends = response;
-    });
-
     FriendsService.findFriendsTwitter().
         success(function (users) {
             $scope.friendsTwitter = users;
@@ -153,6 +135,4 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         }
         return element.name.indexOf($scope.name) >=0 ;
     };
-
-
 }
