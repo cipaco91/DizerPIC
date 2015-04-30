@@ -4,6 +4,8 @@ function SearchUsersCtrl($scope, $location, FriendsService, ProfileService, Menu
 
     $scope.byNameShow = false;
     $scope.buttonSearch=false;
+    $scope.searchUserDTO={};
+
 
     $scope.codes = [{code: 'all', value: "All"},{code: 'name', value: "by Name"}];
 
@@ -18,7 +20,14 @@ function SearchUsersCtrl($scope, $location, FriendsService, ProfileService, Menu
         }
     };
 
+    FriendsService.searchUsersDTO().success(function (response) {
+        $scope.searchUserDTO = response;
+    });
+
     $scope.search= function () {
-        console.log($scope.name);
+        $scope.searchUserDTO.name=$scope.name;
+        FriendsService.searchUsers($scope.searchUserDTO).success(function (response) {
+            console.log(response);
+        });
     };
 }

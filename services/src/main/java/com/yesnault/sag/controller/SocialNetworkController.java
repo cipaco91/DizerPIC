@@ -8,6 +8,8 @@ import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.util.SearchUsersDTO;
+import com.yesnault.sag.util.WizzardDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.facebook.api.FacebookProfile;
@@ -111,6 +113,22 @@ public class SocialNetworkController {
     ProfileSN profileSN() {
         return socialNetworkService.getProfileUser();
     }
+
+    @RequestMapping(value = "/searchUsers", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    String searchUsers(@RequestBody SearchUsersDTO searchUsersDTO) {
+        return searchUsersDTO.getName();
+    }
+
+    @RequestMapping(value = "/userDTO", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    SearchUsersDTO getUserDTO() {
+        return new SearchUsersDTO();
+    }
+
+
 
 
 }

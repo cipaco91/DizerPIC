@@ -11,6 +11,12 @@ app.factory("FriendsService", function ($http) {
         },
         findFriendsLinkedin: function () {
             return $http.get('rest/friendsLinkedin');
+        },
+        searchUsers: function (entity) {
+            return $http.get('rest/searchUsers',entity);
+        },
+        searchUsersDTO: function () {
+            return $http.get('rest/userDTO');
         }
     }
 });
