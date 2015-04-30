@@ -13,7 +13,7 @@ app.factory("FriendsService", function ($http) {
             return $http.get('rest/friendsLinkedin');
         },
         searchUsers: function (entity) {
-            return $http.get('rest/searchUsers',entity);
+            return $http.post('rest/searchUsers',entity);
         },
         searchUsersDTO: function () {
             return $http.get('rest/userDTO');

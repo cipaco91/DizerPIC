@@ -6,7 +6,11 @@ import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.repository.UserProfileRepository;
+import com.yesnault.sag.util.SearchUsersDTO;
 import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.PagedList;
+import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.linkedin.api.SearchParameters;
@@ -132,6 +136,16 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 //        List<TwitterProfile> friendList=twitter.friendOperations().getFriends().subList(0, 4);
 //        snFriends.addAll(getSnFriendsTwitter(friendList));
         return snFriends;
+    }
+
+    @Override
+    public void findUsers(SearchUsersDTO searchUsersDTO) {
+        PagedList<Reference> references= facebook.userOperations().search(searchUsersDTO.getName());
+        if(references!=null&&references.size()>0) {
+            FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(references.get(0).getId());
+        }
+        List<TwitterProfile> twitterProfiles=twitter.userOperations().searchForUsers(searchUsersDTO.getName());
+//        linkedIn.profileOperations().search()
     }
 
     private List<SNFriend> getSnFriendsTwitter(List<TwitterProfile> twitterProfiles){

@@ -114,10 +114,11 @@ public class SocialNetworkController {
         return socialNetworkService.getProfileUser();
     }
 
-    @RequestMapping(value = "/searchUsers", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/searchUsers", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
     String searchUsers(@RequestBody SearchUsersDTO searchUsersDTO) {
+        socialNetworkService.findUsers(searchUsersDTO);
         return searchUsersDTO.getName();
     }
 
@@ -127,8 +128,4 @@ public class SocialNetworkController {
     SearchUsersDTO getUserDTO() {
         return new SearchUsersDTO();
     }
-
-
-
-
 }
