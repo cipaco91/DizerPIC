@@ -17,6 +17,10 @@ public class UsersDTO implements Serializable{
 
     private String socialNetType;
 
+    private String imageURL;
+
+    private  String profileURL;
+
     public String getId() {
         return id;
     }
@@ -55,5 +59,21 @@ public class UsersDTO implements Serializable{
 
     public void setSocialNetType(String socialNetType) {
         this.socialNetType = socialNetType;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getProfileURL() {
+        return profileURL;
+    }
+
+    public void setProfileURL(String profileURL) {
+        this.profileURL = profileURL;
     }
 }

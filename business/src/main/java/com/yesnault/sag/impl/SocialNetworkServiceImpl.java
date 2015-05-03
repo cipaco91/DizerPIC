@@ -142,38 +142,43 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO) {
         List<UsersDTO> usersDTOs = new ArrayList<UsersDTO>();
-//        PagedList<Reference> references = facebook.userOperations().search(searchUsersDTO.getName());
-//        if (references != null && references.size() > 0) {
-//            for (Reference reference : references) {
-//                FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
-//                UsersDTO usersDTO = new UsersDTO();
-//                usersDTO.setName(facebookProfile.getName());
-//                usersDTO.setFirstName(facebookProfile.getFirstName());
-//                usersDTO.setLastName(facebookProfile.getLastName());
-//                usersDTO.setId(facebookProfile.getId());
-//                usersDTO.setSocialNetType("facebook");
-//                usersDTOs.add(usersDTO);
-//            }
-//        }
-//        List<TwitterProfile> twitterProfiles = twitter.userOperations().searchForUsers(searchUsersDTO.getName());
-//        if (twitterProfiles != null && twitterProfiles.size() > 0) {
-//            for (TwitterProfile twitterProfile : twitterProfiles) {
-//                UsersDTO userDTO = new UsersDTO();
-//                userDTO.setName(twitterProfile.getName());
-//                userDTO.setId(String.valueOf(twitterProfile.getId()));
-//                userDTO.setSocialNetType("twitter");
-//                usersDTOs.add(userDTO);
-//            }
+        PagedList<Reference> references = facebook.userOperations().search(searchUsersDTO.getName());
+        if (references != null && references.size() > 0) {
+            for (Reference reference : references) {
+                FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
+                UsersDTO usersDTO = new UsersDTO();
+                usersDTO.setName(facebookProfile.getName());
+                usersDTO.setFirstName(facebookProfile.getFirstName());
+                usersDTO.setLastName(facebookProfile.getLastName());
+                usersDTO.setId(facebookProfile.getId());
+                usersDTO.setProfileURL(facebookProfile.getLink());
+//                usersDTO.setImageURL(facebook.userOperations().getUserProfileImage());
+                usersDTO.setSocialNetType("facebook");
+                usersDTOs.add(usersDTO);
+            }
+        }
+        List<TwitterProfile> twitterProfiles = twitter.userOperations().searchForUsers(searchUsersDTO.getName());
+        if (twitterProfiles != null && twitterProfiles.size() > 0) {
+            for (TwitterProfile twitterProfile : twitterProfiles) {
+                UsersDTO userDTO = new UsersDTO();
+                userDTO.setName(twitterProfile.getName());
+                userDTO.setId(String.valueOf(twitterProfile.getId()));
+                userDTO.setSocialNetType("twitter");
+                userDTO.setImageURL(twitterProfile.getProfileImageUrl());
+                userDTO.setProfileURL(twitterProfile.getProfileUrl());
+                usersDTOs.add(userDTO);
+            }
+        }
 
-        UsersDTO usersDTO = new UsersDTO();
-        usersDTO.setName("Ciprian Paraschivescu");
-        usersDTO.setFirstName("Ciprian");
-        usersDTO.setLastName("Paraschivescu");
-        usersDTO.setId("123");
-        usersDTO.setSocialNetType("facebook");
-        usersDTOs.add(usersDTO);
-        return usersDTOs;
-    }
+//        UsersDTO usersDTO = new UsersDTO();
+//        usersDTO.setName("Ciprian Paraschivescu");
+//        usersDTO.setFirstName("Ciprian");
+//        usersDTO.setLastName("Paraschivescu");
+//        usersDTO.setId("123");
+//        usersDTO.setSocialNetType("facebook");
+//        usersDTOs.add(usersDTO);
+            return usersDTOs;
+        }
 
     private List<SNFriend> getSnFriendsTwitter(List<TwitterProfile> twitterProfiles) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
