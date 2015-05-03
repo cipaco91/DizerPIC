@@ -1,6 +1,8 @@
 function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
     $rootScope.bodylayout = 'login';
 
+    $scope.messageFlag=false;
+
     $scope.connectionGoogle = function() {
         console.log("redirect google");
         UsersService.login('google').success(function (response) {
@@ -13,10 +15,9 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
         UsersService.login($scope.username,$scope.password).success(function (response) {
            if(response == 'false'){
                console.log("false");
+               $scope.messageFlag=true;
            }else{
-               $window.location.href="http://localhost:8080/social/#/settings"
-              //$location.path("/home");
-
+               $window.location.href="http://localhost:8080/social/#/settings";
            }
         });
     }

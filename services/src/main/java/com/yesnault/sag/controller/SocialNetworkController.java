@@ -9,6 +9,7 @@ import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.SearchUsersDTO;
+import com.yesnault.sag.util.UsersDTO;
 import com.yesnault.sag.util.WizzardDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.connect.web.ConnectController;
@@ -117,9 +118,8 @@ public class SocialNetworkController {
     @RequestMapping(value = "/searchUsers", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
-    String searchUsers(@RequestBody SearchUsersDTO searchUsersDTO) {
-        socialNetworkService.findUsers(searchUsersDTO);
-        return searchUsersDTO.getName();
+    List<UsersDTO> searchUsers(@RequestBody SearchUsersDTO searchUsersDTO) {
+        return socialNetworkService.findUsers(searchUsersDTO);
     }
 
     @RequestMapping(value = "/userDTO", method = RequestMethod.GET, produces = "application/json")

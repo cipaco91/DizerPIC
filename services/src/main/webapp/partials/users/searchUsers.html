@@ -36,8 +36,36 @@
                                 <!--<a href="#" class="btn btn-default" id="user-search-company"><i class="fa fa-search"></i> Search</a>-->
                             </div>
                         </div>
-                        <button ng-show="buttonSearch" class="btn btn-primary" ng-click="search()">Search</button>
+                        <!--<button ng-show="buttonSearch" class="btn btn-primary" ng-click="search()">Search</button>-->
+                        <a ng-click="search()" ng-show="buttonSearch" class="btn btn-default"
+                           id="user-search-name"><i class="fa fa-search"></i> Search</a>
                     </form>
+                </div>
+
+                <div class="row" data-toggle="isotope" ng-show="usersShow">
+                    <div data-ng-repeat="user in users">
+                        <div class="col-md-6 col-lg-4 item">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <img src="images/people/50/guy-3.jpg" alt="people" class="media-object img-circle" />
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading margin-v-5"><a href="#">{{user.name}}</a>
+                                            </h4>
+                                            <!--<div class="profile-icons">
+                                                <span><i class="fa fa-users"></i> 372</span>
+                                                <span><i class="fa fa-photo"></i> 43</span>
+                                                <span><i class="fa fa-video-camera"></i> 3</span>
+                                            </div>
+                                            -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -3,6 +3,7 @@ package com.yesnault.sag.interfaces;
 import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.SearchUsersDTO;
+import com.yesnault.sag.util.UsersDTO;
 
 import java.util.List;
 
@@ -21,5 +22,5 @@ public interface SocialNetworkService {
 
     List<SNFriend> getFriendsProfile();
 
-    void findUsers(SearchUsersDTO searchUsersDTO);
+    List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO);
 }

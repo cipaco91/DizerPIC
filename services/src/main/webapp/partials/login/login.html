@@ -10,7 +10,8 @@
                     <input class="form-control" type="text" placeholder="Username" ng-model="username">
                     <input class="form-control" type="password" placeholder="Enter Password" ng-model="password">
                     <a ng-click="login()" class="btn btn-primary">Login <i class="fa fa-fw fa-unlock-alt"></i></a>
-                    <a class="forgot-password">Forgot password?</a>
+                    <!--<a class="forgot-password">Forgot password?</a>-->
+                    <label ng-show="messageFlag" style="color:red">Username or password invalid!!!</label>
                 </div>
             </div>
         </div>
