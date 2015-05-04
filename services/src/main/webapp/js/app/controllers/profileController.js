@@ -3,6 +3,7 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService,FriendsService
     $scope.profileImage={};
     $scope.userProfile={};
     $scope.photosProfile={};
+    $scope.photosAlbums={};
     $scope.friends={};
     $scope.albums={};
     $scope.firstTab=true;
@@ -30,6 +31,7 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService,FriendsService
 
     ProfileService.photosProfile().success(function (response) {
         $scope.photosProfile=response;
+        $scope.photosAlbums=response;
     });
 
     ProfileService.friendsProfile().success(function (response) {
@@ -43,6 +45,9 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService,FriendsService
     $scope.clickFIrstTab = function () {
        $scope.firstTab=true;
         $scope.secondTab=false;
+        ProfileService.photosProfile().success(function (response) {
+            $scope.photosAlbums=response;
+        });
     };
 
     $scope.clickSecondTab = function () {
@@ -52,10 +57,10 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService,FriendsService
 
     $scope.showPhotosFromAlbum = function (albumId) {
        console.log(albumId);
+        ProfileService.photosFromAlbum(albumId).success(function (response) {
+            $scope.photosAlbums=response;
+        });
         $scope.firstTab=true;
         $scope.secondTab=false;
-        ProfileService.photosFromAlbum(albumId).success(function (response) {
-            $scope.photosProfile=response;
-        });
     };
 }
