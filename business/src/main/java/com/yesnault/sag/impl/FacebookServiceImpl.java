@@ -128,6 +128,11 @@ public class FacebookServiceImpl implements FacebookService {
         return null;
     }
 
+    @Override
+    public List<Photo> getPhotosFromAlbum(String albumId) {
+        return new ArrayList<Photo>(facebook.mediaOperations().getPhotos(albumId));
+    }
+
     private List<SNFriend> getSnFriends(List<Reference> references) {
         List<SNFriend> snFriends = new ArrayList<>();
         for (Reference reference : references) {

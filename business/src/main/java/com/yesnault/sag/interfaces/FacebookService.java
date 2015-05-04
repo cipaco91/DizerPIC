@@ -37,5 +37,6 @@ public interface FacebookService {
     List<SNFriend> getCommonFriendsFacebook();
 
 
+    List<Photo> getPhotosFromAlbum(String albumId);
 
 }

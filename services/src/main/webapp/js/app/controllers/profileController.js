@@ -1,9 +1,12 @@
-function ProfileCtrl($scope, $location,ProfileService,MenuService) {
+function ProfileCtrl($scope, $location,ProfileService,MenuService,FriendsService) {
 
     $scope.profileImage={};
     $scope.userProfile={};
     $scope.photosProfile={};
     $scope.friends={};
+    $scope.albums={};
+    $scope.firstTab=true;
+    $scope.secondTab=false;
 
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;
@@ -33,6 +36,26 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService) {
         $scope.friends=response;
     });
 
+    FriendsService.albumsProfile().success(function (response) {
+        $scope.albums=response;
+    });
 
+    $scope.clickFIrstTab = function () {
+       $scope.firstTab=true;
+        $scope.secondTab=false;
+    };
 
+    $scope.clickSecondTab = function () {
+        $scope.firstTab=false;
+        $scope.secondTab=true;
+    };
+
+    $scope.showPhotosFromAlbum = function (albumId) {
+       console.log(albumId);
+        $scope.firstTab=true;
+        $scope.secondTab=false;
+        ProfileService.photosFromAlbum(albumId).success(function (response) {
+            $scope.photosProfile=response;
+        });
+    };
 }

@@ -17,6 +17,9 @@ app.factory("FriendsService", function ($http) {
         },
         searchUsersDTO: function () {
             return $http.get('rest/userDTO');
+        },
+        albumsProfile: function () {
+            return $http.get('rest/albumsFacebook');
         }
     }
 });

@@ -15,6 +15,9 @@ app.factory("ProfileService", function ($http) {
         photosProfile: function () {
             return $http.get('rest/photosProfile');
         },
+        photosFromAlbum: function (albumId) {
+            return $http.get('rest/photosFromAlbum/'+albumId);
+        },
         getWizzardDTO: function () {
             return $http.get('rest/wizzardDTO');
         },

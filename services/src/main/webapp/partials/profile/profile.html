@@ -5,149 +5,149 @@
 
     <div class="st-pusher">
         <div class="st-content">
-                <div class="container">
-                    <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
-                    <div class="panel panel-default share">
-                        <div class="input-group">
-                            <div class="input-group-btn">
-                                <a class="btn btn-primary" href="#"><i class="fa fa-envelope"></i>Send</a>
-                            </div>
-                            <!-- /btn-group -->
-                            <input type="text" class="form-control share-text" placeholder="Write message..."/>
+            <div class="container">
+                <ng-include src="'partials/profile/coverProfile.html'"></ng-include>
+                <div class="panel panel-default share">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <a class="btn btn-primary" href="#"><i class="fa fa-envelope"></i>Send</a>
                         </div>
-                        <!-- /input-group -->
+                        <!-- /btn-group -->
+                        <input type="text" class="form-control share-text" placeholder="Write message..."/>
                     </div>
+                    <!-- /input-group -->
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading panel-heading-gray">
-                                    <a href="#" class="btn btn-white btn-xs pull-right"><i class="fa fa-pencil"></i></a>
-                                    <i class="fa fa-fw fa-info-circle"></i> About
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="list-unstyled profile-about margin-none">
-                                        <li class="padding-v-5">
-                                            <div class="row">
-                                                <div class="col-sm-4"><span class="text-muted">Date of Birth</span>
-                                                </div>
-                                                <div class="col-sm-8">{{userProfile.birthday}}</div>
-                                            </div>
-                                        </li>
-                                        <li class="padding-v-5">
-                                            <div class="row">
-                                                <div class="col-sm-4"><span class="text-muted">Email</span>
-                                                </div>
-                                                <div class="col-sm-8">{{userProfile.email}}</div>
-                                            </div>
-                                        </li>
-                                        <li class="padding-v-5">
-                                            <div class="row">
-                                                <div class="col-sm-4"><span class="text-muted">Gender</span>
-                                                </div>
-                                                <div class="col-sm-8">{{userProfile.gender}}</div>
-                                            </div>
-                                        </li>
-                                        <li class="padding-v-5">
-                                            <div class="row">
-                                                <div class="col-sm-4"><span class="text-muted">Lives in</span>
-                                                </div>
-                                                <div class="col-sm-8">{{userProfile.location}}</div>
-                                            </div>
-                                        </li>
-                                        <li class="padding-v-5">
-                                            <div class="row">
-                                                <div class="col-sm-4"><span
-                                                        class="text-muted">Relationship Status</span>
-                                                </div>
-                                                <div class="col-sm-8">{{userProfile.statusRel}}</div>
-                                            </div>
-                                        </li>
-                                        <!--<li class="padding-v-5">
-                                            <div class="row">
-                                                <div class="col-sm-4"><span
-                                                        class="text-muted">About</span>
-                                                </div>
-                                                <div class="col-sm-8">{{userProfile.about}}</div>
-                                            </div>
-                                        </li>
-                                        -->
-                                    </ul>
-                                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading panel-heading-gray">
+                                <a href="#" class="btn btn-white btn-xs pull-right"><i class="fa fa-pencil"></i></a>
+                                <i class="fa fa-fw fa-info-circle"></i> About
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading panel-heading-gray">
-                                    <div class="pull-right">
-                                        <a href="/social/#/publicFriends" class="btn btn-primary btn-xs">More friends</a>
-                                    </div>
-                                    <i class="icon-user-1"></i> Friends
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="img-grid">
-                                        <li ng-repeat="friend in friends">
-                                            <a ng-href="{{friend.profileURL}}">
-                                                <img ng-src="{{friend.profileImageUrl}}" alt="image"/>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled profile-about margin-none">
+                                    <li class="padding-v-5">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span class="text-muted">Date of Birth</span>
+                                            </div>
+                                            <div class="col-sm-8">{{userProfile.birthday}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="padding-v-5">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span class="text-muted">Email</span>
+                                            </div>
+                                            <div class="col-sm-8">{{userProfile.email}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="padding-v-5">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span class="text-muted">Gender</span>
+                                            </div>
+                                            <div class="col-sm-8">{{userProfile.gender}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="padding-v-5">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span class="text-muted">Lives in</span>
+                                            </div>
+                                            <div class="col-sm-8">{{userProfile.location}}</div>
+                                        </div>
+                                    </li>
+                                    <li class="padding-v-5">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span
+                                                    class="text-muted">Relationship Status</span>
+                                            </div>
+                                            <div class="col-sm-8">{{userProfile.statusRel}}</div>
+                                        </div>
+                                    </li>
+                                    <!--<li class="padding-v-5">
+                                        <div class="row">
+                                            <div class="col-sm-4"><span
+                                                    class="text-muted">About</span>
+                                            </div>
+                                            <div class="col-sm-8">{{userProfile.about}}</div>
+                                        </div>
+                                    </li>
+                                    -->
+                                </ul>
                             </div>
                         </div>
                     </div>
-
-                    <div class="tabbable">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-fw fa-picture-o"></i>
-                                Photos</a>
-                            </li>
-                            <li class=""><a href="#profile" data-toggle="tab"><i class="fa fa-fw fa-folder"></i> Albums</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane fade active in" id="home">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading panel-heading-gray">
+                                <div class="pull-right">
+                                    <a href="/social/#/publicFriends" class="btn btn-primary btn-xs">More friends</a>
+                                </div>
+                                <i class="icon-user-1"></i> Friends
+                            </div>
+                            <div class="panel-body">
                                 <ul class="img-grid">
-                                    <li ng-repeat="photo in photosProfile">
-                                        <img ng-src="{{photo.picture}}" alt="image"/>
+                                    <li ng-repeat="friend in friends">
+                                        <a ng-href="{{friend.profileURL}}">
+                                            <img ng-src="{{friend.profileImageUrl}}" alt="image"/>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="tab-pane fade" id="profile">
-                                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee
-                                    squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes
-                                    anderson artisan four loko farm-to-table craft beer twee. Qui photo booth
-                                    letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl
-                                    cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
-                                    Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan
-                                    fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY
-                                    ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr
-                                    butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-                            </div>
-                            <div class="tab-pane fade" id="dropdown1">
-                                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's
-                                    organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify
-                                    pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy
-                                    hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred
-                                    pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel
-                                    fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of
-                                    them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray
-                                    yr.</p>
-                            </div>
-                            <div class="tab-pane fade" id="dropdown2">
-                                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they
-                                    sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny
-                                    pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin.
-                                    Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS
-                                    viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats
-                                    keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park
-                                    vegan.</p>
-                            </div>
                         </div>
                     </div>
-
                 </div>
+
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a ng-click="clickFIrstTab()" data-toggle="tab"> Photos</a>
+                        </li>
+                        <li><a ng-click="clickSecondTab()" data-toggle="tab"> Albums</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div ng-show="firstTab" class="tab-pane active">
+                            <ul class="img-grid">
+                                <li ng-repeat="photo in photosProfile">
+                                    <img ng-src="{{photo.picture}}" alt="image"/>
+                                </li>
+                            </ul>
+                        </div>
+                        <div  ng-show="secondTab" class="tab-pane active">
+                            <ul class="img-grid">
+                                <li ng-repeat="album in albums">
+                                    <a ng-click="showPhotosFromAlbum(album.id)">{{album.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+               <!-- <div class="tabbable">
+                    <tabset>
+                        <tab>
+                            <tab-heading>
+                                <i class="fa fa-fw fa-picture-o"></i> Photos
+                            </tab-heading>
+                            <ul class="img-grid">
+                                <li ng-repeat="photo in photosProfile">
+                                    <img ng-src="{{photo.picture}}" alt="image"/>
+                                </li>
+                            </ul>
+                        </tab>
+                        <tab>
+                            <tab-heading>
+                                <i class="a fa-fw fa-folder"></i> Albums
+                            </tab-heading>
+                            <ul class="img-grid">
+                                <li ng-repeat="album in albums">
+                                    <label>{{album.name}}</label>
+                                </li>
+                            </ul>
+                        </tab>
+                    </tabset>
+                </div>-->
+            </div>
             <!-- /st-content-inner -->
         </div>
         <!-- /st-content -->

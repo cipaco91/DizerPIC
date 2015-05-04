@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -63,6 +64,22 @@ public class FacebookController {
     boolean isConnectFacebook(){
         return facebookService.isConnectFacebook();
     }
+
+    @RequestMapping(value = "/albumsFacebook", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<Album> albumsFacebook() {
+        return new ArrayList<>(facebookService.getAlbums());
+    }
+
+    @RequestMapping(value = "/photosFromAlbum/{albumId}", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<Photo> getPhotosFromAlbum(@PathVariable String albumId) {
+        return facebookService.getPhotosFromAlbum(albumId);
+    }
+
+
 
 
 }
