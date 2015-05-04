@@ -9,10 +9,7 @@ import com.yesnault.sag.repository.UserProfileRepository;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
 import org.apache.geronimo.mail.util.Base64;
-import org.springframework.social.facebook.api.Facebook;
-import org.springframework.social.facebook.api.FacebookProfile;
-import org.springframework.social.facebook.api.PagedList;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.*;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.linkedin.api.LinkedInProfiles;
@@ -29,6 +26,7 @@ import javax.inject.Inject;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -149,21 +147,39 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO) {
         List<UsersDTO> usersDTOs = new ArrayList<UsersDTO>();
+        BASE64Encoder encoder = new BASE64Encoder();
+        PagingParameters pagingParameters=new PagingParameters(10,10,new Long(1000),new Long(1000));
+
         PagedList<Reference> references = facebook.userOperations().search(searchUsersDTO.getName());
-        if (references != null && references.size() > 0) {
+        if (references != null && references.size() > 0 ){
+//            List<Reference> referencesList=references.subList(0,19);
             for (Reference reference : references) {
-                FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
-                UsersDTO usersDTO = new UsersDTO();
-                usersDTO.setName(facebookProfile.getName());
-                usersDTO.setFirstName(facebookProfile.getFirstName());
-                usersDTO.setLastName(facebookProfile.getLastName());
-                usersDTO.setId(facebookProfile.getId());
-                usersDTO.setProfileURL(facebookProfile.getLink());
-                BASE64Encoder encoder = new BASE64Encoder();
-                usersDTO.setImageURL("data:image/jpeg;base64,"+encoder.encode(facebook.userOperations().getUserProfileImage(reference.getId())));
-                usersDTO.setSocialNetType("facebook");
-                usersDTOs.add(usersDTO);
+                if(reference.getName().equals(searchUsersDTO.getName())) {
+                    FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
+                    UsersDTO usersDTO = new UsersDTO();
+                    usersDTO.setName(facebookProfile.getName());
+                    usersDTO.setFirstName(facebookProfile.getFirstName());
+                    usersDTO.setLastName(facebookProfile.getLastName());
+                    usersDTO.setId(facebookProfile.getId());
+                    usersDTO.setProfileURL(facebookProfile.getLink());
+                    usersDTO.setImageURL("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(reference.getId())));
+                    usersDTO.setSocialNetType("facebook");
+                    usersDTOs.add(usersDTO);
+                }
             }
+        }else{
+            for (Reference reference : references) {
+                    FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
+                    UsersDTO usersDTO = new UsersDTO();
+                    usersDTO.setName(facebookProfile.getName());
+                    usersDTO.setFirstName(facebookProfile.getFirstName());
+                    usersDTO.setLastName(facebookProfile.getLastName());
+                    usersDTO.setId(facebookProfile.getId());
+                    usersDTO.setProfileURL(facebookProfile.getLink());
+                    usersDTO.setImageURL("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(reference.getId())));
+                    usersDTO.setSocialNetType("facebook");
+                    usersDTOs.add(usersDTO);
+                }
         }
         List<TwitterProfile> twitterProfiles = twitter.userOperations().searchForUsers(searchUsersDTO.getName());
         if (twitterProfiles != null && twitterProfiles.size() > 0) {
@@ -192,7 +208,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 //        usersDTO.setId("123");
 //        usersDTO.setSocialNetType("facebook");
 //        usersDTOs.add(usersDTO);
-            return usersDTOs;
+        return usersDTOs;
         }
 
     private List<SNFriend> getSnFriendsTwitter(List<TwitterProfile> twitterProfiles) {
