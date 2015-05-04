@@ -29,6 +29,10 @@ function ProfileCtrl($scope, $location,ProfileService,MenuService) {
         $scope.photosProfile=response;
     });
 
+    ProfileService.friendsProfile().success(function (response) {
+        $scope.friends=response;
+    });
+
 
 
 }
