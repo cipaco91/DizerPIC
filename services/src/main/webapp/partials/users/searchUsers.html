@@ -49,11 +49,15 @@
                                 <div class="panel-heading">
                                     <div class="media">
                                         <div class="pull-left">
-                                            <img src="{{user.imageURL}}" alt="people" class="media-object img-circle" />
+                                            <img width="70px"  height="70px" src="{{user.imageURL}}" alt="people" class="media-object img-circle" />
                                         </div>
                                         <div class="media-body">
                                             <h4 class="media-heading margin-v-5"><a href="{{user.profileURL}}">{{user.name}}</a>
                                             </h4>
+                                            <img width="100px" ng-if="user.socialNetType == 'facebook'"
+                                                           src="images/social/Facebook-logo.jpg"/>
+                                            <img width="100px" ng-if="user.socialNetType == 'twitter'"
+                                                 src="images/social/twitter-logo.png"/>
                                             <!--<div class="profile-icons">
                                                 <span><i class="fa fa-users"></i> 372</span>
                                                 <span><i class="fa fa-photo"></i> 43</span>

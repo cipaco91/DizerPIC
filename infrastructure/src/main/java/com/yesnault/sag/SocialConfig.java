@@ -71,12 +71,9 @@ public class SocialConfig implements SocialConfigurer {
 			FacebookConnectionFactory facebookConnectionFactory=new FacebookConnectionFactory("631469100286834", "41e4754bf5b580707709eb00168a329f", "dizerpicnew");
 			facebookConnectionFactory.setScope("user_birthday, user_religion_politics, user_relationships, user_relationship_details, user_hometown, user_location, user_likes, user_education_history, user_work_history, user_website, user_groups, user_managed_groups, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_games_activity, user_tagged_places, user_posts, read_stream, read_mailbox, email, read_custom_friendlists, user_actions.books, user_actions.music, user_actions.video, user_actions.news, user_actions.fitness, public_profile");
 			cfConfig.addConnectionFactory(facebookConnectionFactory);
-		    cfConfig.addConnectionFactory(new LinkedInConnectionFactory("75f8kyd5hxvczf", "7ApOqcqTi9BkiYn3"));
-//			GoogleConnectionFactory googleConnectionFactory=new GoogleConnectionFactory(
-//					"123293092084-q14e0hhedmnauob7a4s2luas6fniin4p.apps.googleusercontent.com",
-//					"I89Ws8lgMXkGKyXJ6ILm3wk8");
-//			googleConnectionFactory.setScope("profile");
-//			cfConfig.addConnectionFactory(googleConnectionFactory);
+			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("75f8kyd5hxvczf", "7ApOqcqTi9BkiYn3");
+			linkedInConnectionFactory.setScope("r_fullprofile,r_basicprofile,rw_groups,w_share,r_contactinfo,r_network,rw_nus,r_emailaddress,rw_company_admin,w_messages");
+		    cfConfig.addConnectionFactory(linkedInConnectionFactory);
 			flag=false;
 		}
 	}

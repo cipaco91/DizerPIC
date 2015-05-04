@@ -8,20 +8,26 @@ import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.repository.UserProfileRepository;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
+import org.apache.geronimo.mail.util.Base64;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
+import org.springframework.social.linkedin.api.LinkedInProfiles;
 import org.springframework.social.linkedin.api.SearchParameters;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.misc.BASE64Encoder;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +96,8 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         User user = userService.findByUsernameAndPassword("admin", "1");
         UserProfile userProfile = userProfileRepository.findByUser(user);
         if ("facebook".equals(userProfile.getFromProfileImage())) {
-            return "http://graph.facebook.com/" + facebook.userOperations().getUserProfile().getId() + "/picture";
+            BASE64Encoder encoder = new BASE64Encoder();
+            return "data:image/jpeg;base64,"+encoder.encode(facebook.userOperations().getUserProfileImage());
         } else if ("twitter".equals(userProfile.getFromProfileImage())) {
             return twitter.userOperations().getUserProfile().getProfileImageUrl();
         } else {
@@ -152,7 +159,8 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                 usersDTO.setLastName(facebookProfile.getLastName());
                 usersDTO.setId(facebookProfile.getId());
                 usersDTO.setProfileURL(facebookProfile.getLink());
-//                usersDTO.setImageURL(facebook.userOperations().getUserProfileImage());
+                BASE64Encoder encoder = new BASE64Encoder();
+                usersDTO.setImageURL("data:image/jpeg;base64,"+encoder.encode(facebook.userOperations().getUserProfileImage(reference.getId())));
                 usersDTO.setSocialNetType("facebook");
                 usersDTOs.add(usersDTO);
             }
@@ -169,6 +177,13 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                 usersDTOs.add(userDTO);
             }
         }
+
+        //todo wait approved from linkedn support
+//        SearchParameters searchParameters=new SearchParameters();
+////        searchParameters.setFirstName("Ciprian");
+////        searchParameters.setLastName("Paraschivescu");
+//        searchParameters.setKeywords("Hacker");
+//        LinkedInProfiles linkedInProfiles=linkedIn.profileOperations().search(searchParameters);
 
 //        UsersDTO usersDTO = new UsersDTO();
 //        usersDTO.setName("Ciprian Paraschivescu");
