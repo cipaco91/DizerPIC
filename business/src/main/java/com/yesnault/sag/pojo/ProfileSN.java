@@ -32,7 +32,7 @@ public class ProfileSN implements Serializable{
         this.about = about;
     }
 
-    public ProfileSN(String id, String fullName, String gender, String email, String birthday, String about, String location, String statusRel) {
+    public ProfileSN(String id, String gender, String fullName, String email, String birthday, String about, String location, String statusRel) {
         this.id = id;
         this.fullName = fullName;
         this.gender = gender;

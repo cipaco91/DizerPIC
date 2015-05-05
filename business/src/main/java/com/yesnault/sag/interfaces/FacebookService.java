@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.facebook.api.*;
 
@@ -20,7 +21,7 @@ public interface FacebookService {
 
     PagedList<Reference> search(String var1);
 
-    PagedList<Album> getAlbums();
+    List<AlbumSN> getAlbums();
 
     PagedList<Photo> getPhotos(String var1);
 

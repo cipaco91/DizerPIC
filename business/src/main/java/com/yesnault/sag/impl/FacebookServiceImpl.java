@@ -1,6 +1,7 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
+import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
@@ -73,11 +74,23 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public PagedList<Album> getAlbums() {
+    public List<AlbumSN> getAlbums() {
+        List<AlbumSN> albumSNs=new ArrayList<>();
         if (facebook != null) {
-            return facebook.mediaOperations().getAlbums();
+            List<Album> albums=facebook.mediaOperations().getAlbums();
+            for(Album album:albums){
+                AlbumSN albumSN=new AlbumSN();
+                albumSN.setAlbum(album);
+                if(album.getCoverPhotoId()!=null) {
+                    Photo photoCover = facebook.mediaOperations().getPhoto(album.getCoverPhotoId());
+                    if (photoCover != null) {
+                        albumSN.setPhotoCover(photoCover);
+                    }
+                    albumSNs.add(albumSN);
+                }
+            }
         }
-        return null;
+        return albumSNs;
     }
 
     @Override

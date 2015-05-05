@@ -115,7 +115,8 @@
                         <div  ng-show="secondTab" class="tab-pane active">
                             <ul class="img-grid">
                                 <li ng-repeat="album in albums">
-                                    <a ng-click="showPhotosFromAlbum(album.id)">{{album.name}}</a>
+                                    <img ng-src="{{album.photoCover.picture}}" alt="image"/>
+                                    <a ng-click="showPhotosFromAlbum(album.album.id)">{{album.album.name}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -123,30 +124,6 @@
                     </div>
                 </div>
 
-               <!-- <div class="tabbable">
-                    <tabset>
-                        <tab>
-                            <tab-heading>
-                                <i class="fa fa-fw fa-picture-o"></i> Photos
-                            </tab-heading>
-                            <ul class="img-grid">
-                                <li ng-repeat="photo in photosProfile">
-                                    <img ng-src="{{photo.picture}}" alt="image"/>
-                                </li>
-                            </ul>
-                        </tab>
-                        <tab>
-                            <tab-heading>
-                                <i class="a fa-fw fa-folder"></i> Albums
-                            </tab-heading>
-                            <ul class="img-grid">
-                                <li ng-repeat="album in albums">
-                                    <label>{{album.name}}</label>
-                                </li>
-                            </ul>
-                        </tab>
-                    </tabset>
-                </div>-->
             </div>
             <!-- /st-content-inner -->
         </div>

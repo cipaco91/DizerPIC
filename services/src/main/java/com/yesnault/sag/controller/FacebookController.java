@@ -1,6 +1,7 @@
 package com.yesnault.sag.controller;
 
 import com.yesnault.sag.interfaces.FacebookService;
+import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFriend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,8 +69,8 @@ public class FacebookController {
     @RequestMapping(value = "/albumsFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<Album> albumsFacebook() {
-        return new ArrayList<>(facebookService.getAlbums());
+    List<AlbumSN> albumsFacebook() {
+        return facebookService.getAlbums();
     }
 
     @RequestMapping(value = "/photosFromAlbum/{albumId}", method = RequestMethod.GET, produces = "application/json")
