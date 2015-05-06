@@ -1,6 +1,7 @@
 package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.pojo.AlbumSN;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.facebook.api.*;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface FacebookService {
 
-    List<SNFriend>getFeed();
+    List<SNFeed>getFeed();
 
     void postUpdate(String message);
 

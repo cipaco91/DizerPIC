@@ -2,6 +2,7 @@ package com.yesnault.sag.controller;
 
 import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.pojo.AlbumSN;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class FacebookController {
     @RequestMapping(value = "/feedsFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> feedsFacebook() {
+    List<SNFeed> feedsFacebook() {
         return facebookService.getFeed();
     }
 

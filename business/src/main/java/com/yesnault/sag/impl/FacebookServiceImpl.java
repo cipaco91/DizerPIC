@@ -2,6 +2,7 @@ package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.pojo.AlbumSN;
+import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
@@ -10,6 +11,7 @@ import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sun.misc.BASE64Encoder;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -26,18 +28,19 @@ public class FacebookServiceImpl implements FacebookService {
     private Facebook facebook;
 
     @Override
-    public List<SNFriend> getFeed() {
+    public List<SNFeed> getFeed() {
         if (facebook != null) {
-            PagedList<Post> posts = facebook.feedOperations().getFeed();
-            List<SNFriend> snFriends = new ArrayList<>();
-            for (Post post : posts) {
-                SNFriend snFriend = new SNFriend();
-                snFriend.setId(post.getFrom().getId());
-                snFriend.setName(post.getMessage());
-                snFriend.setProfileImageUrl("http://graph.facebook.com/" + post.getFrom().getId() + "/picture");
-                snFriends.add(snFriend);
-            }
-            return snFriends;
+            PagingParameters pagingParameters=new PagingParameters(10,0,null,null);
+            PagedList<Post> posts = facebook.feedOperations().getHomeFeed(pagingParameters);
+
+//            for (Post post : posts) {
+//                SNFriend snFriend = new SNFriend();
+//                snFriend.setId(post.getFrom().getId());
+//                snFriend.setName(post.getMessage());
+//                snFriend.setProfileImageUrl("http://graph.facebook.com/" + post.getFrom().getId() + "/picture");
+//                snFriends.add(snFriend);
+//            }
+            return getSnFeeds(posts);
         }
         return new ArrayList<>();
     }
@@ -161,6 +164,7 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     private List<SNFeed> getSnFeeds(PagedList<Post> posts) {
+        BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<>();
         for (Post post : posts) {
             SNFeed snFeed = new SNFeed();
@@ -178,11 +182,23 @@ public class FacebookServiceImpl implements FacebookService {
             snFeed.setIcon(post.getIcon());
             snFeed.setApplication(post.getApplication());
             snFeed.setLikes(post.getLikes());
-            snFeed.setComments(post.getComments());
+
+            if(post.getComments()!=null){
+                List<CommentFeed> commentFeeds=new ArrayList<>();
+                for(Comment comment:post.getComments()){
+                    CommentFeed commentFeed=new CommentFeed();
+                    commentFeed.setComment(comment);
+                    commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                    commentFeeds.add(commentFeed);
+                }
+                snFeed.setCommentsFeeds(commentFeeds);
+            }
             snFeed.setSharesCount(post.getSharesCount());
             snFeed.setStory(post.getStory());
             snFeed.setFeedType(post.getType().name());
             snFeed.setSocialNetworkType("facebook");
+            snFeed.setPhotoFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(post.getFrom().getId())));
+            snFeeds.add(snFeed);
         }
         return snFeeds;
     }

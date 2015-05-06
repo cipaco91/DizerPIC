@@ -1,9 +1,6 @@
 package com.yesnault.sag.pojo;
 
-import org.springframework.social.facebook.api.Comment;
-import org.springframework.social.facebook.api.ListAndCount;
-import org.springframework.social.facebook.api.Post;
-import org.springframework.social.facebook.api.Reference;
+import org.springframework.social.facebook.api.*;
 import org.springframework.social.linkedin.api.LinkedInNetworkUpdate;
 import org.springframework.social.twitter.api.Tweet;
 
@@ -44,7 +41,7 @@ public class SNFeed implements Serializable{
 
     private List<Reference> likes;
 
-    private List<Comment> comments;
+    private List<CommentFeed> commentsFeeds;
 
     private int sharesCount;
 
@@ -53,6 +50,8 @@ public class SNFeed implements Serializable{
     private String feedType;
 
     private String socialNetworkType;
+
+    private String photoFrom;
 
     public SNFeed(){
     }
@@ -191,12 +190,12 @@ public class SNFeed implements Serializable{
         this.likes = likes;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public List<CommentFeed> getCommentsFeeds() {
+        return commentsFeeds;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setCommentsFeeds(List<CommentFeed> commentsFeeds) {
+        this.commentsFeeds = commentsFeeds;
     }
 
     public int getSharesCount() {
@@ -229,5 +228,13 @@ public class SNFeed implements Serializable{
 
     public void setSocialNetworkType(String socialNetworkType) {
         this.socialNetworkType = socialNetworkType;
+    }
+
+    public String getPhotoFrom() {
+        return photoFrom;
+    }
+
+    public void setPhotoFrom(String photoFrom) {
+        this.photoFrom = photoFrom;
     }
 }
