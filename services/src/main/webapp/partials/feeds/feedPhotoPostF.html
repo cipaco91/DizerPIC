@@ -15,6 +15,13 @@
                     <img src="{{feed.picture}}" width="200px" class="img-responsive">
                     <br/>
                     <label>{{feed.message}}</label>
+                    <br/>
+                    <div class="profile-icons">
+                        <a href="#" style="color:blue">Like</a>
+                        <span><i class="fa fa-users"></i> {{feed.likesCount}} Likes</span>
+                        <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
+                    </div>
+                    <br/>
                     <ul class="comments">
                         <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds">
                             <div class="media-left">
@@ -38,7 +45,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control"/>
                                                                         <span class="input-group-btn">
-                                <a href="" class="btn btn-default"><i class="fa fa-photo"></i></a>
+                                <a href="" class="btn btn-default"><img src="images/accept.png"/></a>
                             </span>
                             </div>
                         </li>

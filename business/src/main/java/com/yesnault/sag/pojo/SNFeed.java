@@ -53,6 +53,12 @@ public class SNFeed implements Serializable{
 
     private String photoFrom;
 
+    private Integer likesCount;
+
+    private Integer commentsCount;
+
+    private String sourceVideo;
+
     public SNFeed(){
     }
 
@@ -236,5 +242,29 @@ public class SNFeed implements Serializable{
 
     public void setPhotoFrom(String photoFrom) {
         this.photoFrom = photoFrom;
+    }
+
+    public Integer getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(Integer likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public Integer getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(Integer commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
+    public String getSourceVideo() {
+        return sourceVideo;
+    }
+
+    public void setSourceVideo(String sourceVideo) {
+        this.sourceVideo = sourceVideo;
     }
 }

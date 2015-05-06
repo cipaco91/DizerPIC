@@ -30,16 +30,9 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFeed> getFeed() {
         if (facebook != null) {
-            PagingParameters pagingParameters=new PagingParameters(10,0,null,null);
+            PagingParameters pagingParameters = new PagingParameters(7, 0, null, null);
             PagedList<Post> posts = facebook.feedOperations().getHomeFeed(pagingParameters);
 
-//            for (Post post : posts) {
-//                SNFriend snFriend = new SNFriend();
-//                snFriend.setId(post.getFrom().getId());
-//                snFriend.setName(post.getMessage());
-//                snFriend.setProfileImageUrl("http://graph.facebook.com/" + post.getFrom().getId() + "/picture");
-//                snFriends.add(snFriend);
-//            }
             return getSnFeeds(posts);
         }
         return new ArrayList<>();
@@ -78,13 +71,13 @@ public class FacebookServiceImpl implements FacebookService {
 
     @Override
     public List<AlbumSN> getAlbums() {
-        List<AlbumSN> albumSNs=new ArrayList<>();
+        List<AlbumSN> albumSNs = new ArrayList<>();
         if (facebook != null) {
-            List<Album> albums=facebook.mediaOperations().getAlbums();
-            for(Album album:albums){
-                AlbumSN albumSN=new AlbumSN();
+            List<Album> albums = facebook.mediaOperations().getAlbums();
+            for (Album album : albums) {
+                AlbumSN albumSN = new AlbumSN();
                 albumSN.setAlbum(album);
-                if(album.getCoverPhotoId()!=null) {
+                if (album.getCoverPhotoId() != null) {
                     Photo photoCover = facebook.mediaOperations().getPhoto(album.getCoverPhotoId());
                     if (photoCover != null) {
                         albumSN.setPhotoCover(photoCover);
@@ -182,11 +175,13 @@ public class FacebookServiceImpl implements FacebookService {
             snFeed.setIcon(post.getIcon());
             snFeed.setApplication(post.getApplication());
             snFeed.setLikes(post.getLikes());
+            snFeed.setLikesCount(post.getLikes()!=null?post.getLikes().size():0);
+            snFeed.setCommentsCount(post.getComments()!=null?post.getComments().size():0);
 
-            if(post.getComments()!=null){
-                List<CommentFeed> commentFeeds=new ArrayList<>();
-                for(Comment comment:post.getComments()){
-                    CommentFeed commentFeed=new CommentFeed();
+            if (post.getComments() != null) {
+                List<CommentFeed> commentFeeds = new ArrayList<>();
+                for (Comment comment : post.getComments()) {
+                    CommentFeed commentFeed = new CommentFeed();
                     commentFeed.setComment(comment);
                     commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
                     commentFeeds.add(commentFeed);
@@ -198,6 +193,9 @@ public class FacebookServiceImpl implements FacebookService {
             snFeed.setFeedType(post.getType().name());
             snFeed.setSocialNetworkType("facebook");
             snFeed.setPhotoFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(post.getFrom().getId())));
+           if("VIDEO".equals(post.getType().name())) {
+               snFeed.setSourceVideo(((VideoPost)post).getSource());
+           }
             snFeeds.add(snFeed);
         }
         return snFeeds;

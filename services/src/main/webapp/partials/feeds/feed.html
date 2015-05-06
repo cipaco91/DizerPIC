@@ -15,12 +15,12 @@
                                 <li class="media media-clearfix-xs">
                                     <div class="media-left">
                                         <div class="user-wrapper">
-                                            <img src="images/people/110/guy-5.jpg" alt="people" class="img-circle"
+                                            <img src="{{profileImage}}" alt="people" class="img-circle"
                                                  width="80"/>
 
-                                            <div><a href="#">Ciprian Paraschivescu</a>
+                                            <div><a href="#">{{userProfile.fullName}}</a>
                                             </div>
-                                            <div class="date">06 MAY</div>
+                                            <div class="date"> {{date | date:'dd-MM'}}</div>
                                         </div>
                                     </div>
                                     <div class="media-body">
@@ -55,6 +55,9 @@
                                 <li ng-repeat="feed in feedFacebook" class="media media-clearfix-x" >
                                     <div ng-if="feed.feedType == 'PHOTO'">
                                        <ng-include src="'partials/feeds/feedPhotoPostF.html'"></ng-include>
+                                    </div>
+                                    <div ng-if="feed.feedType == 'VIDEO'">
+                                        <ng-include src="'partials/feeds/feedVideoPostF.html'"></ng-include>
                                     </div>
                                 </li>
                             </ul>

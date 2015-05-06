@@ -5,6 +5,7 @@ function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService,$cont
     $scope.feedTwitter={};
     $scope.feedLinkedin={};
     $scope.feedFacebook={};
+    $scope.date = new Date();
 
     //FeedService.findFeedTwitter().
     //    success(function (users) {
