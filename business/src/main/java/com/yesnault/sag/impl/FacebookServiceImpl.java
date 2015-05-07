@@ -31,9 +31,8 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFeed> getFeed() {
         if (facebook != null) {
-            PagingParameters pagingParameters = new PagingParameters(7, 0, null, null);
+            PagingParameters pagingParameters = new PagingParameters(20, 0, null, null);
             PagedList<Post> posts = facebook.feedOperations().getHomeFeed(pagingParameters);
-
             return getSnFeeds(posts);
         }
         return new ArrayList<>();
@@ -171,66 +170,67 @@ public class FacebookServiceImpl implements FacebookService {
         BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<>();
         for (Post post : posts) {
-            SNFeed snFeed = new SNFeed();
-            snFeed.setId(post.getId());
-            snFeed.setFrom(post.getFrom());
-            snFeed.setCreatedTime(post.getCreatedTime());
-            snFeed.setUpdatedTime(post.getUpdatedTime());
-            if(post.getCreatedTime()!=null&&post.getUpdatedTime()!=null&&post.getCreatedTime().compareTo(post.getUpdatedTime())<0){
-                snFeed.setCreatedTime(post.getUpdatedTime());
-            }
-            snFeed.setTo(post.getTo());
-            snFeed.setMessage(post.getMessage());
-            snFeed.setPicture(post.getPicture());
-            snFeed.setLink(post.getLink());
-            snFeed.setName(post.getName());
-            snFeed.setCaption(post.getCaption());
-            snFeed.setDescription(post.getDescription());
-            snFeed.setIcon(post.getIcon());
-            snFeed.setApplication(post.getApplication());
-            snFeed.setLikes(post.getLikes());
-            snFeed.setLikesCount(post.getLikes()!=null?post.getLikes().size():0);
-            snFeed.setCommentsCount(post.getComments()!=null?post.getComments().size():0);
+            if("VIDEO".equals(post.getType().name())||"PHOTO".equals(post.getType().name())||"StatusOnlyFrom".equals(post.getType().name())) {
+                SNFeed snFeed = new SNFeed();
+                snFeed.setId(post.getId());
+                snFeed.setFrom(post.getFrom());
+                snFeed.setCreatedTime(post.getCreatedTime());
+                snFeed.setUpdatedTime(post.getUpdatedTime());
+                if (post.getCreatedTime() != null && post.getUpdatedTime() != null && post.getCreatedTime().compareTo(post.getUpdatedTime()) < 0) {
+                    snFeed.setCreatedTime(post.getUpdatedTime());
+                }
+                snFeed.setTo(post.getTo());
+                snFeed.setMessage(post.getMessage());
+                snFeed.setPicture(post.getPicture());
+                snFeed.setLink(post.getLink());
+                snFeed.setName(post.getName());
+                snFeed.setCaption(post.getCaption());
+                snFeed.setDescription(post.getDescription());
+                snFeed.setIcon(post.getIcon());
+                snFeed.setApplication(post.getApplication());
+                snFeed.setLikes(post.getLikes());
+                snFeed.setLikesCount(post.getLikes() != null ? post.getLikes().size() : 0);
+                snFeed.setCommentsCount(post.getComments() != null ? post.getComments().size() : 0);
 
-            if (post.getComments() != null) {
-                List<CommentFeed> commentFeeds = new ArrayList<>();
-                if( post.getComments().size()>5) {
-                    for (Comment comment : post.getComments().subList(0,4)) {
-                        CommentFeed commentFeed = new CommentFeed();
-                        commentFeed.setComment(comment);
-                        commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-                        commentFeeds.add(commentFeed);
+                if (post.getComments() != null) {
+                    List<CommentFeed> commentFeeds = new ArrayList<>();
+                    if (post.getComments().size() > 5) {
+                        for (Comment comment : post.getComments().subList(0, 4)) {
+                            CommentFeed commentFeed = new CommentFeed();
+                            commentFeed.setComment(comment);
+                            commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                            commentFeeds.add(commentFeed);
+                        }
+                    } else {
+                        for (Comment comment : post.getComments()) {
+                            CommentFeed commentFeed = new CommentFeed();
+                            commentFeed.setComment(comment);
+                            commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                            commentFeeds.add(commentFeed);
+                        }
                     }
-                }else{
-                    for (Comment comment : post.getComments()) {
-                        CommentFeed commentFeed = new CommentFeed();
-                        commentFeed.setComment(comment);
-                        commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-                        commentFeeds.add(commentFeed);
+                    snFeed.setCommentsFeeds(commentFeeds);
+                }
+                snFeed.setSharesCount(post.getSharesCount());
+                snFeed.setStory(post.getStory());
+                snFeed.setFeedType(post.getType().name());
+                snFeed.setSocialNetworkType("facebook");
+                snFeed.setPhotoFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(post.getFrom().getId())));
+                if ("VIDEO".equals(post.getType().name())) {
+                    snFeed.setSrc(((VideoPost) post).getSource());
+                }
+
+                if ("STATUS".equals(post.getType().name())) {
+                    if (post.getTo() != null && post.getMessage() != null) {
+                        snFeed.setFeedType("StatusFromTo");
+                    } else if (post.getMessage() != null) {
+                        snFeed.setFeedType("StatusOnlyFrom");
+                    } else if (post.getStory() != null) {
+                        snFeed.setFeedType("StatusStory");
                     }
                 }
-                snFeed.setCommentsFeeds(commentFeeds);
+                snFeeds.add(snFeed);
             }
-            snFeed.setSharesCount(post.getSharesCount());
-            snFeed.setStory(post.getStory());
-            snFeed.setFeedType(post.getType().name());
-            snFeed.setSocialNetworkType("facebook");
-            snFeed.setPhotoFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(post.getFrom().getId())));
-           if("VIDEO".equals(post.getType().name())) {
-               snFeed.setSourceVideo(((VideoPost)post).getSource());
-           }
-
-            if("STATUS".equals(post.getType().name())) {
-               if(post.getTo()!=null&&post.getMessage()!=null){
-                   snFeed.setFeedType("StatusFromTo");
-               }else if(post.getMessage()!=null){
-                   snFeed.setFeedType("StatusOnlyFrom");
-               }else if(post.getStory()!=null){
-                   snFeed.setFeedType("StatusStory");
-               }
-            }
-
-            snFeeds.add(snFeed);
         }
         return snFeeds;
     }

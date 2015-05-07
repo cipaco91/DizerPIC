@@ -57,7 +57,7 @@ public class SNFeed implements Serializable{
 
     private Integer commentsCount;
 
-    private String sourceVideo;
+    private String src;
 
     public SNFeed(){
     }
@@ -260,11 +260,11 @@ public class SNFeed implements Serializable{
         this.commentsCount = commentsCount;
     }
 
-    public String getSourceVideo() {
-        return sourceVideo;
+    public String getSrc() {
+        return src;
     }
 
-    public void setSourceVideo(String sourceVideo) {
-        this.sourceVideo = sourceVideo;
+    public void setSrc(String src) {
+        this.src = src;
     }
 }

@@ -1,4 +1,4 @@
-function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService,$controller) {
+function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService,$controller,$sce) {
 
     angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
@@ -32,6 +32,10 @@ function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService,$cont
         console.log(feedId);
         FeedService.addComment(feedId,':)');
     };
+
+    $scope.trustSrc = function(src) {
+        return $sce.trustAsResourceUrl(src);
+    }
 
     //FeedService.findFeedLinkedin().
     //    success(function (users) {
