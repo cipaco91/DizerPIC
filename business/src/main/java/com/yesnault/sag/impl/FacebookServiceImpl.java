@@ -180,11 +180,20 @@ public class FacebookServiceImpl implements FacebookService {
 
             if (post.getComments() != null) {
                 List<CommentFeed> commentFeeds = new ArrayList<>();
-                for (Comment comment : post.getComments()) {
-                    CommentFeed commentFeed = new CommentFeed();
-                    commentFeed.setComment(comment);
-                    commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-                    commentFeeds.add(commentFeed);
+                if( post.getComments().size()>5) {
+                    for (Comment comment : post.getComments().subList(0,4)) {
+                        CommentFeed commentFeed = new CommentFeed();
+                        commentFeed.setComment(comment);
+                        commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                        commentFeeds.add(commentFeed);
+                    }
+                }else{
+                    for (Comment comment : post.getComments()) {
+                        CommentFeed commentFeed = new CommentFeed();
+                        commentFeed.setComment(comment);
+                        commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                        commentFeeds.add(commentFeed);
+                    }
                 }
                 snFeed.setCommentsFeeds(commentFeeds);
             }
@@ -196,6 +205,17 @@ public class FacebookServiceImpl implements FacebookService {
            if("VIDEO".equals(post.getType().name())) {
                snFeed.setSourceVideo(((VideoPost)post).getSource());
            }
+
+            if("STATUS".equals(post.getType().name())) {
+               if(post.getTo()!=null&&post.getMessage()!=null){
+                   snFeed.setFeedType("StatusFromTo");
+               }else if(post.getMessage()!=null){
+                   snFeed.setFeedType("StatusOnlyFrom");
+               }else if(post.getStory()!=null){
+                   snFeed.setFeedType("StatusStory");
+               }
+            }
+
             snFeeds.add(snFeed);
         }
         return snFeeds;

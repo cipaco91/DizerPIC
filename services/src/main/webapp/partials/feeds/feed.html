@@ -59,6 +59,15 @@
                                     <div ng-if="feed.feedType == 'VIDEO'">
                                         <ng-include src="'partials/feeds/feedVideoPostF.html'"></ng-include>
                                     </div>
+                                    <div ng-if="feed.feedType == 'StatusFromTo'">
+                                        <ng-include src="'partials/feeds/feedStatusFromTo.html'"></ng-include>
+                                    </div>
+                                    <div ng-if="feed.feedType == 'StatusOnlyFrom'">
+                                        <ng-include src="'partials/feeds/feedStatusOnlyFrom.html'"></ng-include>
+                                    </div>
+                                    <div ng-if="feed.feedType == 'StatusStory'">
+                                        <ng-include src="'partials/feeds/feedStatusStory.html'"></ng-include>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
