@@ -15,6 +15,7 @@ import sun.misc.BASE64Encoder;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -175,6 +176,9 @@ public class FacebookServiceImpl implements FacebookService {
             snFeed.setFrom(post.getFrom());
             snFeed.setCreatedTime(post.getCreatedTime());
             snFeed.setUpdatedTime(post.getUpdatedTime());
+            if(post.getCreatedTime()!=null&&post.getUpdatedTime()!=null&&post.getCreatedTime().compareTo(post.getUpdatedTime())<0){
+                snFeed.setCreatedTime(post.getUpdatedTime());
+            }
             snFeed.setTo(post.getTo());
             snFeed.setMessage(post.getMessage());
             snFeed.setPicture(post.getPicture());
