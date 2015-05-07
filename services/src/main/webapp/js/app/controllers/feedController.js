@@ -23,6 +23,16 @@ function FeedCtrl($scope, $location,FeedService,ProfileService,MenuService,$cont
             console.log("Error with FriendsService.feedFacebook" + resp);
         });
 
+    $scope.addLike = function (feedId) {
+        console.log(feedId);
+        FeedService.addLike(feedId);
+    };
+
+    $scope.addComment = function (feedId) {
+        console.log(feedId);
+        FeedService.addComment(feedId,':)');
+    };
+
     //FeedService.findFeedLinkedin().
     //    success(function (users) {
     //        $scope.feedLinkedin = users;

@@ -4,6 +4,8 @@ import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.util.SearchUsersDTO;
+import com.yesnault.sag.util.UsersDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.social.connect.ConnectionRepository;
@@ -80,6 +82,22 @@ public class FacebookController {
     List<Photo> getPhotosFromAlbum(@PathVariable String albumId) {
         return facebookService.getPhotosFromAlbum(albumId);
     }
+
+    @RequestMapping(value = "/addComment/{id}/{message}", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    String addComment(@PathVariable String id,@PathVariable String message) {
+        return facebookService.addComment(id, message);
+    }
+
+    @RequestMapping(value = "/addLike/{id}", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    void addLike(@PathVariable String id) {
+        facebookService.addLike(id);
+    }
+
+
 
 
 

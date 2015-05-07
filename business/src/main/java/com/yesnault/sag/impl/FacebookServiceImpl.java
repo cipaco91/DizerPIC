@@ -142,6 +142,16 @@ public class FacebookServiceImpl implements FacebookService {
         return new ArrayList<Photo>(facebook.mediaOperations().getPhotos(albumId));
     }
 
+    @Override
+    public String addComment(String id, String message) {
+        return facebook.commentOperations().addComment(id,message);
+    }
+
+    @Override
+    public void addLike(String id) {
+        facebook.likeOperations().like(id);
+    }
+
     private List<SNFriend> getSnFriends(List<Reference> references) {
         List<SNFriend> snFriends = new ArrayList<>();
         for (Reference reference : references) {

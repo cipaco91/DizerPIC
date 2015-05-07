@@ -54,7 +54,7 @@
                                 </li>
                                 <li ng-repeat="feed in feedFacebook" class="media media-clearfix-x" >
                                     <div ng-if="feed.feedType == 'PHOTO'">
-                                       <ng-include src="'partials/feeds/feedPhotoPostF.html'"></ng-include>
+                                       <div ng-include ="'partials/feeds/feedPhotoPostF.html'"></div>
                                     </div>
                                     <div ng-if="feed.feedType == 'VIDEO'">
                                         <ng-include src="'partials/feeds/feedVideoPostF.html'"></ng-include>

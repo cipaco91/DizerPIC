@@ -11,6 +11,12 @@ app.factory("FeedService", function ($http) {
         },
         findFeedLinkedin: function () {
             return $http.get('rest/feedsLinkedin');
+        },
+        addComment: function (id,message) {
+            return $http.post('rest/addComment/'+id+"/"+message);
+        },
+        addLike: function (id) {
+            return $http.post('rest/addLike/'+id);
         }
     }
 });

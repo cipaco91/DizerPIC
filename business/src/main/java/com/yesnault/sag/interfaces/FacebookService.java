@@ -3,6 +3,7 @@ package com.yesnault.sag.interfaces;
 import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.util.UsersDTO;
 import org.springframework.social.facebook.api.*;
 
 import java.util.List;
@@ -38,7 +39,9 @@ public interface FacebookService {
 
     List<SNFriend> getCommonFriendsFacebook();
 
-
     List<Photo> getPhotosFromAlbum(String albumId);
 
+    String addComment(String id, String message);
+
+    void addLike(String id);
 }

@@ -22,7 +22,7 @@
                     <label>{{feed.message}}</label>
                     <br/>
                     <div class="profile-icons">
-                        <a href="#" style="color:blue">Like</a>
+                        <a href="addLike(feed.id)" style="color:blue">Like</a>
                         <span><i class="fa fa-users"></i> {{feed.likesCount}} Likes</span>
                         <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
                     </div>
@@ -46,15 +46,15 @@
                                 <div class="comment-date">2 days</div>
                             </div>
                         </li>
-                        <li class="comment-form">
-                            <div class="input-group">
-                                <input type="text" class="form-control"/>
-                                                                        <span class="input-group-btn">
-                                <a href="" class="btn btn-default"><img src="images/accept.png"/></a>
-                            </span>
-                            </div>
-                        </li>
                     </ul>
+                    <li class="comment-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control"/>
+                                                                        <span class="input-group-btn">
+                                <a href="addComment(feed.id)" class="btn btn-default"><img src="images/accept.png"/></a>
+                            </span>
+                        </div>
+                    </li>
                 </div>
             </div>
         </div>
