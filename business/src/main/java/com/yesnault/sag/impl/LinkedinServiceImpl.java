@@ -2,7 +2,9 @@ package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.LinkedinService;
 import com.yesnault.sag.pojo.LinkedinFeed;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
+import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.linkedin.api.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,7 +41,7 @@ public class LinkedinServiceImpl implements LinkedinService{
 
     @Override
     public List<SNFriend> getConnections() {
-        List<SNFriend> snFriends = new ArrayList<>();
+        List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if(linkedIn!=null) {
             List<LinkedInProfile> linkedInProfiles= linkedIn.connectionOperations().getConnections();
             snFriends=getSnFriends(linkedInProfiles);
@@ -62,7 +64,7 @@ public class LinkedinServiceImpl implements LinkedinService{
 
     @Override
     public List<SNFriend> getConnections(int start, int count) {
-        List<SNFriend> snFriends = new ArrayList<>();
+        List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if(linkedIn!=null) {
             List<LinkedInProfile> linkedInProfiles= linkedIn.connectionOperations().getConnections(start, count);
             snFriends=getSnFriends(linkedInProfiles);
@@ -82,7 +84,7 @@ public class LinkedinServiceImpl implements LinkedinService{
     public List<LinkedinFeed> feeds() {
         if(linkedIn!=null) {
             List<LinkedInNetworkUpdate> linkedInNetworkUpdateList = linkedIn.networkUpdateOperations().getNetworkUpdates();
-            List<LinkedinFeed> linkedinFeeds = new ArrayList<>();
+            List<LinkedinFeed> linkedinFeeds = new ArrayList<LinkedinFeed>();
             for (LinkedInNetworkUpdate linkedInNetworkUpdate : linkedInNetworkUpdateList) {
                 LinkedinFeed linkedinFeed = new LinkedinFeed();
                 linkedinFeed.setProfileImageUrl(linkedInNetworkUpdate.getUpdateContent().getProfilePictureUrl());
@@ -117,7 +119,7 @@ public class LinkedinServiceImpl implements LinkedinService{
 
     @Override
     public List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles){
-        List<SNFriend> snFriends = new ArrayList<>();
+        List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for(LinkedInProfile linkedInProfile:linkedInProfiles){
             SNFriend snFriend = new SNFriend();
             snFriend.setId(linkedInProfile.getId());
@@ -131,5 +133,48 @@ public class LinkedinServiceImpl implements LinkedinService{
             snFriends.add(snFriend);
         }
         return snFriends;
+    }
+
+    @Override
+    public List<SNFeed> getFeed() {
+        if(linkedIn!=null) {
+            List<LinkedInNetworkUpdate> linkedInNetworkUpdateList = linkedIn.networkUpdateOperations().getNetworkUpdates();
+            List<LinkedinFeed> linkedinFeeds = new ArrayList<LinkedinFeed>();
+
+            for (LinkedInNetworkUpdate linkedInNetworkUpdate : linkedInNetworkUpdateList) {
+                LinkedinFeed linkedinFeed = new LinkedinFeed();
+                linkedinFeed.setProfileImageUrl(linkedInNetworkUpdate.getUpdateContent().getProfilePictureUrl());
+                if (linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentShare) {
+                    linkedinFeed.setText(((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare() != null ?
+                            ((UpdateContentShare) linkedInNetworkUpdate.getUpdateContent()).getCurrentShare().getContent().getDescription() :
+                            "nullnullnullnullnull");
+                }
+                if (linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentViral) {
+                    linkedinFeed.setText("Like post " + ((UpdateContentShare) ((UpdateContentViral) linkedInNetworkUpdate.getUpdateContent()).getUpdateAction().
+                            getUpdateContent()).getCurrentShare().getContent().getDescription());
+                }
+                if (linkedInNetworkUpdate.getUpdateContent() instanceof UpdateContentConnection) {
+                    linkedinFeed.setText("You connected with " + ((UpdateContentConnection) linkedInNetworkUpdate.getUpdateContent()).getFirstName() + " " +
+                            ((UpdateContentConnection) linkedInNetworkUpdate.getUpdateContent()).getLastName());
+                }
+                linkedinFeeds.add(linkedinFeed);
+            }
+            return getSnFeeds(linkedInNetworkUpdateList);
+        }
+        return null;
+    }
+
+    private List<SNFeed> getSnFeeds(List<LinkedInNetworkUpdate> linkedInNetworkUpdates) {
+        List<SNFeed> snFeeds = new ArrayList<SNFeed>();
+        for (LinkedInNetworkUpdate linkedInNetworkUpdate : linkedInNetworkUpdates) {
+            SNFeed snFeed = new SNFeed();
+//            snFeed.setFrom(new Reference(linkedInNetworkUpdate.getUpdateContent().tweet.getFromUser()));
+//            snFeed.setCreatedTime(tweet.getCreatedAt());
+//            snFeed.setMessage(tweet.getText());
+//            snFeed.setPhotoFrom(tweet.getProfileImageUrl());
+//            snFeed.setSocialNetworkType("linkedin");
+//            snFeeds.add(snFeed);
+        }
+        return snFeeds;
     }
 }

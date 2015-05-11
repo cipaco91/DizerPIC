@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.twitter.api.*;
 
@@ -41,4 +42,6 @@ public interface TwitterService {
     boolean isConnectTwitter();
 
     List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles);
+
+    List<SNFeed> getFeed();
 }

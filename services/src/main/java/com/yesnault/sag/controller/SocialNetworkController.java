@@ -7,6 +7,7 @@ import com.yesnault.sag.interfaces.SocialNetworkService;
 import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.ProfileSN;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
@@ -127,5 +128,12 @@ public class SocialNetworkController {
     @ResponseBody
     SearchUsersDTO getUserDTO() {
         return new SearchUsersDTO();
+    }
+
+    @RequestMapping(value = "/feedsSocialNetwork", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<SNFeed> feedsSocialNetwork() {
+        return socialNetworkService.getFeed();
     }
 }

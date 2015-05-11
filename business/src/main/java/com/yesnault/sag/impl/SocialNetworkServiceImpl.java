@@ -4,6 +4,7 @@ import com.yesnault.sag.interfaces.*;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.ProfileSN;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.repository.UserProfileRepository;
 import com.yesnault.sag.util.SearchUsersDTO;
@@ -210,6 +211,15 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 //        usersDTOs.add(usersDTO);
         return usersDTOs;
         }
+
+    @Override
+    public List<SNFeed> getFeed() {
+        List<SNFeed> snFeeds=facebookService.getFeed();
+        snFeeds.addAll(twitterService.getFeed());
+        snFeeds.addAll(linkedinService.getFeed());
+        Collections.shuffle(snFeeds);
+        return snFeeds;
+    }
 
     private List<SNFriend> getSnFriendsTwitter(List<TwitterProfile> twitterProfiles) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();

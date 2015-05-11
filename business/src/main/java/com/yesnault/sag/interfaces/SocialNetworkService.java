@@ -1,6 +1,7 @@
 package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.pojo.ProfileSN;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
@@ -23,4 +24,6 @@ public interface SocialNetworkService {
     List<SNFriend> getFriendsProfile();
 
     List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO);
+
+    List<SNFeed>getFeed();
 }

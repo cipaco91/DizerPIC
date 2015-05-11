@@ -31,11 +31,11 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFeed> getFeed() {
         if (facebook != null) {
-            PagingParameters pagingParameters = new PagingParameters(20, 0, null, null);
+            PagingParameters pagingParameters = new PagingParameters(2, 0, null, null);
             PagedList<Post> posts = facebook.feedOperations().getHomeFeed(pagingParameters);
             return getSnFeeds(posts);
         }
-        return new ArrayList<>();
+        return new ArrayList<SNFeed>();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class FacebookServiceImpl implements FacebookService {
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
             return getSnFriends(references);
         }
-        return new ArrayList<>();
+        return new ArrayList<SNFriend>();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class FacebookServiceImpl implements FacebookService {
 
     @Override
     public List<AlbumSN> getAlbums() {
-        List<AlbumSN> albumSNs = new ArrayList<>();
+        List<AlbumSN> albumSNs = new ArrayList<AlbumSN>();
         if (facebook != null) {
             List<Album> albums = facebook.mediaOperations().getAlbums();
             for (Album album : albums) {
@@ -130,7 +130,7 @@ public class FacebookServiceImpl implements FacebookService {
 
     @Override
     public List<SNFriend> getCommonFriendsFacebook() {
-        List<SNFriend> snFriends = new ArrayList<>();
+        List<SNFriend> snFriends = new ArrayList<SNFriend>();
         Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAGgu2NOF6w6PjgUZBEP6ErOypekG0l1qg4GLEH6fj0PpLuYR718TZCauhZBLQ5ox7jyQlJWvuvl8ciFWkq4r6VfmtDhH6wdDzc7F9OwUci2DKJoAX1NzPCvWcKAy9odVJeaXn0EZCu6lFsYqtmdIWtQ0XmBm8AUnZBASZBHIf8c6sZCEUeTk9jnNNKrjpBGgZAwHycJSOKDbU7fkBgujQmYZD");
         PagedList<Reference> references = facebook1.friendOperations().getFriends();
         facebook1.friendOperations().getMutualFriends(references.get(0).getId());
@@ -153,7 +153,7 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     private List<SNFriend> getSnFriends(List<Reference> references) {
-        List<SNFriend> snFriends = new ArrayList<>();
+        List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Reference reference : references) {
             SNFriend snFriend = new SNFriend();
             snFriend.setId(reference.getId());
@@ -168,7 +168,7 @@ public class FacebookServiceImpl implements FacebookService {
 
     private List<SNFeed> getSnFeeds(PagedList<Post> posts) {
         BASE64Encoder encoder = new BASE64Encoder();
-        List<SNFeed> snFeeds = new ArrayList<>();
+        List<SNFeed> snFeeds = new ArrayList<SNFeed>();
         for (Post post : posts) {
             if("VIDEO".equals(post.getType().name())||"PHOTO".equals(post.getType().name())||"StatusOnlyFrom".equals(post.getType().name())) {
                 SNFeed snFeed = new SNFeed();
@@ -193,7 +193,7 @@ public class FacebookServiceImpl implements FacebookService {
                 snFeed.setCommentsCount(post.getComments() != null ? post.getComments().size() : 0);
 
                 if (post.getComments() != null) {
-                    List<CommentFeed> commentFeeds = new ArrayList<>();
+                    List<CommentFeed> commentFeeds = new ArrayList<CommentFeed>();
                     if (post.getComments().size() > 5) {
                         for (Comment comment : post.getComments().subList(0, 4)) {
                             CommentFeed commentFeed = new CommentFeed();

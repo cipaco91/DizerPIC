@@ -1,6 +1,7 @@
 package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.pojo.LinkedinFeed;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.linkedin.api.*;
 
@@ -30,4 +31,6 @@ public interface LinkedinService {
     boolean isConnectLinkedin();
 
     List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles);
+
+    List<SNFeed> getFeed();
 }

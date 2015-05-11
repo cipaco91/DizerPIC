@@ -4,7 +4,7 @@ app.factory("FeedService", function ($http) {
     return {
 
         findFeedFacebook: function () {
-            return $http.get('rest/feedsFacebook');
+            return $http.get('rest/feedsSocialNetwork');
         },
         findFeedTwitter: function () {
             return $http.get('rest/feedsTwitter');
