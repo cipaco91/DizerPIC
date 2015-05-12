@@ -1,5 +1,6 @@
-function ProfileCtrl($scope, $location,ProfileService,MenuService,FriendsService) {
+function ProfileCtrl($scope,$rootScope, $location,ProfileService,MenuService,FriendsService) {
 
+    $rootScope.bodylayout = 'login2';
     $scope.profileImage={};
     $scope.userProfile={};
     $scope.photosProfile={};

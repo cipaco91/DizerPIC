@@ -8367,6 +8367,11 @@ body.login {
   background: url('../images/lock-1.jpg');
   padding-top: 0;
 }
+body.login2 {
+  position: initial;
+  background:#f5f5f5;
+  padding-top: 0;
+}
 body.login #content {
   max-width: 760px;
   margin: auto;
