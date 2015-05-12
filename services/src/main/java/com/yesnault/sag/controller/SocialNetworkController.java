@@ -24,6 +24,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,8 +106,8 @@ public class SocialNetworkController {
     @RequestMapping(value = "/profileImage", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    String profileImageFacebook() {
-        return socialNetworkService.profileImageURL();
+    String profileImageFacebook(HttpServletRequest httpServletRequest) {
+        return socialNetworkService.profileImageURL((User)httpServletRequest.getSession().getAttribute("user"));
     }
 
     @RequestMapping(value = "/profileSN", method = RequestMethod.GET, produces = "application/json")

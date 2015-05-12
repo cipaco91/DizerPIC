@@ -1,11 +1,13 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ public interface SocialNetworkService {
 
     void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String search);
 
-    String profileImageURL();
+    String profileImageURL(User user);
 
     ProfileSN getProfileUser();
 

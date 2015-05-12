@@ -91,8 +91,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 
 
     @Override
-    public String profileImageURL() {
-        User user = userService.findByUsernameAndPassword("admin", "1");
+    public String profileImageURL(User user) {
         UserProfile userProfile = userProfileRepository.findByUser(user);
         if ("facebook".equals(userProfile.getFromProfileImage())) {
             BASE64Encoder encoder = new BASE64Encoder();
