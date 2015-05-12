@@ -31,7 +31,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFeed> getFeed() {
         if (facebook != null) {
-            PagingParameters pagingParameters = new PagingParameters(2, 0, null, null);
+            PagingParameters pagingParameters = new PagingParameters(7, 0, null, null);
             PagedList<Post> posts = facebook.feedOperations().getHomeFeed(pagingParameters);
             return getSnFeeds(posts);
         }
