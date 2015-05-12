@@ -13,11 +13,15 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
     $scope.login = function() {
         console.log("redirect facebook");
         UsersService.login($scope.username,$scope.password).success(function (response) {
-           if(response == 'false'){
+           if(response == 'notOK'){
                console.log("false");
                $scope.messageFlag=true;
+           }else if(response == 'okProfile'){
+               $window.location.href="http://localhost:8080/social/#/profile";
+               //$cookieStore.put("username",$scope.username);
            }else{
                $window.location.href="http://localhost:8080/social/#/settings";
+               //$cookieStore.put("username",$scope.username);
            }
         });
     }

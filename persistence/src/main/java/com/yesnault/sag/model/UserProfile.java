@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "USER_PROFILE")
 public class UserProfile extends AbstractEntity{
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "FK_USER_ID", referencedColumnName = "id")
     private User user;
 

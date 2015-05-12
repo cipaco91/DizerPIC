@@ -28,8 +28,14 @@ public class LoginController {
     @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
-    Boolean login(@PathVariable String username,@PathVariable String password) {
-        User user=userService.findByUsernameAndPassword(username,password);
-        return user!=null;
+    String login(@PathVariable String username, @PathVariable String password) {
+        User user = userService.findByUsernameAndPassword(username, password);
+        if (user == null) {
+            return "notOK";
+        } else {
+            if (user.getUserProfile() != null)
+                return "okProfile";
+            else return "okSettings";
+        }
     }
 }

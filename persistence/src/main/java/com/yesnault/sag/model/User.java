@@ -2,9 +2,7 @@ package com.yesnault.sag.model;
 
 import org.springframework.util.Assert;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "USER")
@@ -27,6 +25,9 @@ public class User extends AbstractEntity {
 
     @Column(name = "PROFILE_CONFIGURE", nullable = false, insertable = true, updatable = true)
     private boolean profileConf;
+
+    @OneToOne(fetch=FetchType.LAZY, mappedBy="user")
+    private UserProfile userProfile;
 
     public User(String firstname, String lastname) {
 
@@ -94,5 +95,13 @@ public class User extends AbstractEntity {
 
     public void setProfileConf(boolean profileConf) {
         this.profileConf = profileConf;
+    }
+
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
     }
 }
