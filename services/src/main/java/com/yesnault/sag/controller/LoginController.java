@@ -45,4 +45,12 @@ public class LoginController {
             }
         }
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "okLogout";
+    }
 }

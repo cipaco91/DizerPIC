@@ -18,10 +18,8 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
                $scope.messageFlag=true;
            }else if(response == 'okProfile'){
                $window.location.href="http://localhost:8080/social/#/profile";
-               //$cookieStore.put("username",$scope.username);
            }else{
                $window.location.href="http://localhost:8080/social/#/settings";
-               //$cookieStore.put("username",$scope.username);
            }
         });
     }

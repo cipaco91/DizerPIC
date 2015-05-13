@@ -1,4 +1,4 @@
-function ProfileCtrl($scope,$rootScope, $location,ProfileService,MenuService,FriendsService) {
+function ProfileCtrl($scope,$rootScope, $location,$window,ProfileService,MenuService,FriendsService,UsersService) {
 
     $rootScope.bodylayout = 'login2';
     $scope.profileImage={};
@@ -54,6 +54,14 @@ function ProfileCtrl($scope,$rootScope, $location,ProfileService,MenuService,Fri
     $scope.clickSecondTab = function () {
         $scope.firstTab=false;
         $scope.secondTab=true;
+    };
+
+    $scope.logout = function() {
+        UsersService.logout().success(function (response) {
+            if(response == 'okLogout'){
+                $window.location.href="http://localhost:8080/social/#/login";
+            }
+        });
     };
 
     $scope.showPhotosFromAlbum = function (albumId) {

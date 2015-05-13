@@ -104,8 +104,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     }
 
     @Override
-    public ProfileSN getProfileUser() {
-        User user = userService.findByUsernameAndPassword("admin", "1");
+    public ProfileSN getProfileUser(User user) {
         UserProfile userProfile = userProfileRepository.findByUser(user);
         if ("facebook".equals(userProfile.getFromProfileAbout())) {
             return new ProfileSN(facebook.userOperations().getUserProfile().getId(),
@@ -132,15 +131,9 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     }
 
     @Override
-    public List<SNFriend> getFriendsProfile() {
-//        SearchParameters searchParameters = new SearchParameters();
-//        searchParameters.setLastName("Paraschivescu");
-//        searchParameters.setFirstName("Ciprian");
+    public List<SNFriend> getFriendsProfile(User user) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
-//        facebookService.getCommonFriendsFacebook();
         snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));
-//        List<TwitterProfile> friendList=twitter.friendOperations().getFriends().subList(0, 4);
-//        snFriends.addAll(getSnFriendsTwitter(friendList));
         return snFriends;
     }
 

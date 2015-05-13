@@ -33,6 +33,9 @@ app.factory("UsersService", function ($http) {
         login: function (username,password) {
             return $http.post('rest/login/'+username+'/'+password);
         },
+        logout: function () {
+            return $http.post('rest/logout');
+        },
         loginFacebook: function () {
             return $http.post('rest/connect/facebook').success(function (response) {
                 return response;

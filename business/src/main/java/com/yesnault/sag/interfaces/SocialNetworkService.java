@@ -21,9 +21,9 @@ public interface SocialNetworkService {
 
     String profileImageURL(User user);
 
-    ProfileSN getProfileUser();
+    ProfileSN getProfileUser(User user);
 
-    List<SNFriend> getFriendsProfile();
+    List<SNFriend> getFriendsProfile(User user);
 
     List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO);
 

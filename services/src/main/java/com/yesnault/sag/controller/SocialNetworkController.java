@@ -91,8 +91,8 @@ public class SocialNetworkController {
     @RequestMapping(value = "/friendsProfile", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsProfile() {
-        return socialNetworkService.getFriendsProfile();
+    List<SNFriend> friendsProfile(HttpServletRequest httpServletRequest) {
+        return socialNetworkService.getFriendsProfile((User)httpServletRequest.getSession().getAttribute("user"));
     }
 
     @RequestMapping(value = "/photosProfile", method = RequestMethod.GET, produces = "application/json")
@@ -113,8 +113,8 @@ public class SocialNetworkController {
     @RequestMapping(value = "/profileSN", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    ProfileSN profileSN() {
-        return socialNetworkService.getProfileUser();
+    ProfileSN profileSN(HttpServletRequest httpServletRequest) {
+        return socialNetworkService.getProfileUser((User)httpServletRequest.getSession().getAttribute("user"));
     }
 
     @RequestMapping(value = "/searchUsers", method = RequestMethod.POST, produces = "application/json")
