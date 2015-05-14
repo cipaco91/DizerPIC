@@ -48,6 +48,14 @@ public class LoginController {
         return userService.login(username,password,request);
     }
 
+    @RequestMapping(value = "/signUp/{username}/{password}/{firstName}/{lastName}", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    String signUp(@PathVariable String username, @PathVariable String password,@PathVariable String firstName,
+                  @PathVariable String lastName, HttpServletRequest request) {
+        return userService.signUp(username, password,firstName,lastName);
+    }
+
     @RequestMapping(value = "/logout", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody

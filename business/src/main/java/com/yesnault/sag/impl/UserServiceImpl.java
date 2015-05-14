@@ -152,4 +152,17 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    @Override
+    public String signUp(String username, String password,String firstName,String lastName) {
+        User user=new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setActive(true);
+        user.setLoginActive(false);
+        user.setFirstname(firstName);
+        user.setLastname(lastName);
+        userRepository.save(user);
+        return "okSignUp";
+    }
 }

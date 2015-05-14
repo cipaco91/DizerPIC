@@ -20,4 +20,6 @@ public interface UserService {
     void logoutFromSocialNetworks(User user);
 
     String login(String username, String password, HttpServletRequest request);
+
+    String signUp(String username, String password,String firstName,String lastName);
 }

@@ -15,10 +15,13 @@
                 </div>
 
                 <div class="panel-body" ng-show="signUpForm">
-                    <input class="form-control" type="text" placeholder="Username" ng-model="username">
-                    <input class="form-control" type="password" placeholder="Enter Password" ng-model="password">
-                    <input class="form-control" type="password" placeholder="Retype Password" ng-model="rePassword">
+                    <input class="form-control" type="text" placeholder="First Name" ng-model="firstName">
+                    <input class="form-control" type="text" placeholder="Last Name" ng-model="lastName">
+                    <input class="form-control" type="text" placeholder="Username" ng-model="usernameSignUp">
+                    <input class="form-control" type="password" placeholder="Enter Password" ng-model="passwordSignUp">
+                    <input class="form-control" type="password" placeholder="Retype Password" ng-model="rePasswordSignUp">
                     <a ng-click="signUp2()" class="btn btn-primary">Sign up <i class="fa fa-fw fa-unlock-alt"></i></a>
+                    <label ng-show="messageFlagSignUp" style="color:red">Passwords are not the same!!!</label>
                 </div>
             </div>
         </div>
