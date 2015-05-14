@@ -3,6 +3,7 @@ package com.yesnault.sag.interfaces;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.util.WizzardDTO;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -16,4 +17,7 @@ public interface UserService {
 
     Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO);
 
+    void logoutFromSocialNetworks(User user);
+
+    String login(String username, String password, HttpServletRequest request);
 }

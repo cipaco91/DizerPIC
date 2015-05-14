@@ -29,6 +29,9 @@ public class User extends AbstractEntity {
     @OneToOne(fetch=FetchType.LAZY, mappedBy="user")
     private UserProfile userProfile;
 
+    @Column(name = "LOGIN_ACTIVE", nullable = false, insertable = true, updatable = true)
+    private Boolean loginActive;
+
     public User(String firstname, String lastname) {
 
         Assert.hasText(firstname);
@@ -103,5 +106,13 @@ public class User extends AbstractEntity {
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
+    }
+
+    public Boolean getLoginActive() {
+        return loginActive;
+    }
+
+    public void setLoginActive(Boolean loginActive) {
+        this.loginActive = loginActive;
     }
 }

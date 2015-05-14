@@ -33,6 +33,9 @@ app.factory("UsersService", function ($http) {
         login: function (username,password) {
             return $http.post('rest/login/'+username+'/'+password);
         },
+        loginSocialNetwork: function (providerId) {
+            return $http.get('rest/login/'+providerId);
+        },
         logout: function () {
             return $http.post('rest/logout');
         },
