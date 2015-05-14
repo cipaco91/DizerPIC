@@ -3,6 +3,10 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
 
     $scope.messageFlag=false;
 
+    $scope.loginForm=true;
+    $scope.signUpForm=false;
+    $scope.messageSign="Sign In";
+
     $scope.connectionGoogle = function() {
         console.log("redirect google");
         UsersService.login('google').success(function (response) {
@@ -24,6 +28,18 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
                $window.location.href="http://localhost:8080/social/#/settings";
            }
         });
+    };
+
+    $scope.signUp = function() {
+        $scope.loginForm=false;
+        $scope.signUpForm=true;
+        $scope.messageSign="Sign Up";
+    };
+
+    $scope.signUp2 = function() {
+        $scope.loginForm=true;
+        $scope.signUpForm=false;
+        $scope.messageSign="Sign In";
     }
 
     $scope.connectionLinkedin = function() {

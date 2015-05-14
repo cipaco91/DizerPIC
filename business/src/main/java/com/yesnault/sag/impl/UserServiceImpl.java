@@ -52,10 +52,6 @@ public class UserServiceImpl implements UserService {
     @Inject
     private LinkedIn linkedIn;
 
-//    @Inject
-//    private Google google;
-
-
     @Override
     public List<User> findByLastname(String lastname) {
         try {

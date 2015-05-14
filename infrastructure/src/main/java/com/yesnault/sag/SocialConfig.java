@@ -69,7 +69,6 @@ public class SocialConfig implements SocialConfigurer {
 			cfConfig.addConnectionFactory(facebookConnectionFactory);
 			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("77f94iq6kehtaz", "GHoKSQzyrnMRMliR");
 //			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("754fvz2njoxqfm", "rolyKemRYmBXxlDJ");
-
 //			linkedInConnectionFactory.setScope("r_fullprofile,r_basicprofile,rw_groups,w_share,r_network,rw_nus,r_emailaddress,rw_company_admin,w_messages");
 
 			cfConfig.addConnectionFactory(linkedInConnectionFactory);
