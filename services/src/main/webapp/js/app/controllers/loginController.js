@@ -12,7 +12,7 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
         UsersService.login('google').success(function (response) {
             $window.location.href=response;
         });
-    }
+    };
 
     $scope.login = function() {
         console.log("redirect facebook");
@@ -40,18 +40,18 @@ function LoginCtrl($scope, $rootScope,  $location,$window,UsersService) {
         $scope.loginForm=true;
         $scope.signUpForm=false;
         $scope.messageSign="Sign In";
-    }
+    };
 
     $scope.connectionLinkedin = function() {
         console.log("redirect linkedin");
         UsersService.login('linkedin').success(function (response) {
             $window.location.href = response;
         });
-    }
+    };
     $scope.connectionTwitter = function() {
         console.log("redirect twitter");
         UsersService.login('twitter').success(function (response) {
             $window.location.href = response;
         });
-    }
+    };
 }

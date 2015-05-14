@@ -48,7 +48,7 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
             $scope.profile = 'active';
             $scope.personal = 'active';
         }
-    }
+    };
 
     $scope.finish = function () {
         $scope.wizzardDTO.firstName = $scope.firstName;
@@ -120,5 +120,5 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
             $scope.personal = 'inactive';
 
         }
-    }
+    };
 }
