@@ -22,7 +22,7 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService) {
                 console.log("false");
                 $scope.messageFlag = true;
             } else if (response == 'okLoginSocialNetwork') {
-                $window.location.href = "http://localhost:8080/social/#/manageSocialNetwork";
+                $window.location.href = "http://localhost:8080/social/#/home";
             } else if (response == 'okProfile') {
                 $window.location.href = "http://localhost:8080/social/#/profile";
             } else {
