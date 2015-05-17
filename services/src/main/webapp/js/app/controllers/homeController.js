@@ -4,19 +4,26 @@ function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService,$controlle
 
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;
+        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'){
+            $window.location.href="http://localhost:8080/social/#/profile";
+        }
     });
 
     MenuService.isConnectTwittter().success(function (response) {
         $scope.twitterVisible=response;
+        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'){
+            $window.location.href="http://localhost:8080/social/#/profile";
+        }
     });
 
     MenuService.isConnectLinkedin().success(function (response) {
         $scope.linkedinVisible=response;
+        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'){
+            $window.location.href="http://localhost:8080/social/#/profile";
+        }
     });
 
-    if( $scope.facebookVisible&&$scope.twitterVisible&&$scope.linkedinVisible){
-        $window.location.href="http://localhost:8080/social/#/profile";
-    }
+
 
     $scope.connectionFacebook = function() {
         console.log("redirect facebook");
