@@ -12,8 +12,6 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
-import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.twitter.api.Twitter;

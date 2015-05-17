@@ -133,7 +133,18 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public List<SNFriend> getFriendsProfile(User user) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
-        snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));
+        if("facebook".equals(user.getUserProfile().getFromProfileFriends())){
+
+        }else if("twitter".equals(user.getUserProfile().getFromProfileFriends())){
+            List<SNFriend> snFriendList=twitterService.getFollowers();
+            if(snFriendList.size()>10) {
+                snFriends.addAll(twitterService.getFriends().subList(0, 10));
+            }else{
+                snFriends.addAll(twitterService.getFriends());
+            }
+        }else {
+            snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));
+        }
         return snFriends;
     }
 

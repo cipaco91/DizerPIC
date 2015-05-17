@@ -1,8 +1,23 @@
 <ng-include src="'partials/menu/menu.html'"></ng-include>
- <form>
-     <h1>Manage Social Network</h1>
+<form>
+    <h1>Manage Social Network</h1>
 
-     <button class="btn btn-lg btn-primary btn-block" type="button" ng-hide="facebookVisible"  ng-click="connectionFacebook()">Login Facebook</button>
-     <button class="btn btn-lg btn-primary btn-block" type="button" ng-hide="linkedinVisible"  ng-click="connectionLinkedin()">Login Linkedin</button>
-     <button class="btn btn-lg btn-primary btn-block" type="button" ng-hide="twitterVisible"  ng-click="connectionTwitter()">Login Twitter</button>
- </form>
+    <a ng-hide="facebookVisible" ng-click="connectionFacebook()">
+        <img src="images/loginFacebook.png"
+             width="400"/>
+    </a>
+
+    <a ng-hide="linkedinVisible" ng-click="connectionLinkedin()">
+        <img src="images/loginLinkedin.png"
+             width="400"/>
+    </a>
+
+    <a ng-hide="twitterVisible" ng-click="connectionTwitter()">
+        <img src="images/loginTwitter.png"
+             width="400"/>
+    </a>
+
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-hide="facebookVisible"  ng-click="connectionFacebook()">Login Facebook</button>-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-hide="linkedinVisible"  ng-click="connectionLinkedin()">Login Linkedin</button>-->
+    <!--<button class="btn btn-lg btn-primary btn-block" type="button" ng-hide="twitterVisible"  ng-click="connectionTwitter()">Login Twitter</button>-->
+</form>
