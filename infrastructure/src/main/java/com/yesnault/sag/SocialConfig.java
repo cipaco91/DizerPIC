@@ -70,7 +70,6 @@ public class SocialConfig implements SocialConfigurer {
 			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("77f94iq6kehtaz", "GHoKSQzyrnMRMliR");
 //			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("754fvz2njoxqfm", "rolyKemRYmBXxlDJ");
 //			linkedInConnectionFactory.setScope("r_fullprofile,r_basicprofile,rw_groups,w_share,r_network,rw_nus,r_emailaddress,rw_company_admin,w_messages");
-
 			cfConfig.addConnectionFactory(linkedInConnectionFactory);
 			flag=false;
 		}
@@ -96,10 +95,7 @@ public class SocialConfig implements SocialConfigurer {
 		UsersConnectionRepository usersConnectionRepository= new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
 		return usersConnectionRepository;
 	}
-	
-	//
-	// API Binding Beans
-	//
+
 	
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)

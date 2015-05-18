@@ -25,7 +25,6 @@ public class SignInUtils {
 	 */
 	public static void signin(String userId) {
 		SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(userId, null, null));
-
 	}
 	
 }

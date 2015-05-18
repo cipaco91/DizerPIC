@@ -1,6 +1,5 @@
 package com.yesnault.sag;
 
-import com.yesnault.sag.mail.MailConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.*;
@@ -11,18 +10,10 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 @Configuration
-//@PropertySource({"classpath:/META-INF/infrastructure.properties"})
-/*@ComponentScan(basePackages = {
-        "com.mycompany.myapp.service",
-        "com.mycompany.myapp.security"})
-*/
 @Import(value = {
-        CacheConfiguration.class,
         MainConfig.class,
         SecurityConfig.class,
-        SocialConfig.class,
-        MailConfiguration.class})
-//@ImportResource("classpath:META-INF/spring/applicationContext-*.xml")
+        SocialConfig.class})
 public class ApplicationConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfiguration.class);

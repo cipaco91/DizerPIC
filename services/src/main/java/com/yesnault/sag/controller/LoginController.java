@@ -35,12 +35,6 @@ public class LoginController {
     @Inject
     private UserService userService;
 
-    @Inject
-    private Facebook facebook;
-
-    @Inject
-    private Twitter twitter;
-
     @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody

@@ -1,13 +1,6 @@
 package com.yesnault.sag.configuration;
 
-import com.codahale.metrics.servlet.InstrumentedFilter;
-import com.codahale.metrics.servlets.AdminServlet;
-import com.codahale.metrics.servlets.HealthCheckServlet;
-import com.codahale.metrics.servlets.MetricsServlet;
 import com.yesnault.sag.ApplicationConfiguration;
-import com.yesnault.sag.CORSInterceptor;
-import com.yesnault.sag.SimpleCORSFilter;
-import com.yesnault.sag.metrics.MetricsConfiguration;
 import net.sf.ehcache.constructs.web.filter.GzipFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +10,9 @@ import org.springframework.core.Conventions;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -57,7 +48,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Servlet
 
         initSpring(servletContext, rootContext);
         initSpringSecurity(servletContext, disps);
-        initMetrics(servletContext, disps);
+//        initMetrics(servletContext, disps);
         initGzip(servletContext, disps);
 //        registerServletFilter(servletContext,new SimpleCORSFilter());
         LOGGER.debug("Web application fully configured");
@@ -121,28 +112,28 @@ public class WebConfiguration extends WebMvcConfigurerAdapter implements Servlet
     /**
      * Initializes Metrics.
      */
-    private void initMetrics(ServletContext servletContext, EnumSet<DispatcherType> disps) {
-        LOGGER.debug("Initializing Metrics registries");
-        servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE,
-                MetricsConfiguration.METRIC_REGISTRY);
-        servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY,
-                MetricsConfiguration.METRIC_REGISTRY);
-        servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY,
-                MetricsConfiguration.HEALTH_CHECK_REGISTRY);
-
-        LOGGER.debug("Registering Metrics Filter");
-        FilterRegistration.Dynamic metricsFilter = servletContext.addFilter("webappMetricsFilter",
-                new InstrumentedFilter());
-
-        metricsFilter.addMappingForUrlPatterns(disps, true, "/*");
-
-        LOGGER.debug("Registering Metrics Admin Servlet");
-        ServletRegistration.Dynamic metricsAdminServlet =
-                servletContext.addServlet("metricsAdminServlet", new AdminServlet());
-
-        metricsAdminServlet.addMapping("/metrics/*");
-        metricsAdminServlet.setLoadOnStartup(2);
-    }
+//    private void initMetrics(ServletContext servletContext, EnumSet<DispatcherType> disps) {
+//        LOGGER.debug("Initializing Metrics registries");
+//        servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE,
+//                MetricsConfiguration.METRIC_REGISTRY);
+//        servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY,
+//                MetricsConfiguration.METRIC_REGISTRY);
+//        servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY,
+//                MetricsConfiguration.HEALTH_CHECK_REGISTRY);
+//
+//        LOGGER.debug("Registering Metrics Filter");
+//        FilterRegistration.Dynamic metricsFilter = servletContext.addFilter("webappMetricsFilter",
+//                new InstrumentedFilter());
+//
+//        metricsFilter.addMappingForUrlPatterns(disps, true, "/*");
+//
+//        LOGGER.debug("Registering Metrics Admin Servlet");
+//        ServletRegistration.Dynamic metricsAdminServlet =
+//                servletContext.addServlet("metricsAdminServlet", new AdminServlet());
+//
+//        metricsAdminServlet.addMapping("/metrics/*");
+//        metricsAdminServlet.setLoadOnStartup(2);
+//    }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {

@@ -1,6 +1,5 @@
 package com.yesnault.sag.configuration;
 
-import com.yesnault.sag.metrics.MetricsConfiguration;
 import org.apache.commons.lang.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +34,7 @@ import java.util.List;
 @ComponentScan("com.yesnault.sag")
 @EnableWebMvc
 //@PropertySource({"classpath:/META-INF/services.properties"})
-@Import(value = {MetricsConfiguration.class})
+//@Import(value = {MetricsConfiguration.class})
 public class DispatcherServletConfiguration extends WebMvcConfigurerAdapter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServletConfiguration.class);

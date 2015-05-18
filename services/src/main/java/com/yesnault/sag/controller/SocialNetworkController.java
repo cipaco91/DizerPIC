@@ -42,9 +42,6 @@ public class SocialNetworkController {
     private SocialNetworkService socialNetworkService;
 
     @Inject
-    private LinkedinService linkedinService;
-
-    @Inject
     private FacebookService facebookService;
 
     @RequestMapping(value = "/postStatus/{facebookFlag}/{twitterFlag}/{linkedinFlag}", method = RequestMethod.POST)

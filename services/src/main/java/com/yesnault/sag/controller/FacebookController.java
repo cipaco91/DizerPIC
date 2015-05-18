@@ -26,20 +26,7 @@ public class FacebookController {
     Logger LOGGER = LoggerFactory.getLogger(FacebookController.class);
 
     @Inject
-    private Facebook facebook;
-
-    @Inject
-    private Twitter twitter;
-
-
-    @Inject
     private FacebookService facebookService;
-
-    @Inject
-    private ConnectionRepository connectionRepository;
-
-    @Inject
-    private UsersConnectionRepository usersConnectionRepository;
 
     @RequestMapping(value = "/feedsFacebook", method = RequestMethod.GET, produces = "application/json")
     public
