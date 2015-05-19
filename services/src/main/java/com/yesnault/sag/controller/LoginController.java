@@ -3,6 +3,7 @@ package com.yesnault.sag.controller;
 import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.util.WizzardDTO;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,5 +58,16 @@ public class LoginController {
         userService.logoutFromSocialNetworks((User)request.getSession().getAttribute("user"));
         request.getSession().invalidate();
         return "okLogout";
+    }
+
+    @RequestMapping(value = "/isLoginActive", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    Boolean isLoginActive(HttpServletRequest request) {
+        User user=(User)request.getSession().getAttribute("user");
+        if(user!=null){
+            return true;
+        }
+        return false;
     }
 }
