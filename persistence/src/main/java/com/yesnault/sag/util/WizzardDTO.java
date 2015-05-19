@@ -21,9 +21,9 @@ public class WizzardDTO implements Serializable{
 
     private String username;
 
-    private String password;
-
-    private String repassword;
+//    private String password;
+//
+//    private String repassword;
 
     private String profileAbout;
 
@@ -43,13 +43,13 @@ public class WizzardDTO implements Serializable{
         this.firstName = firstName;
     }
 
-    public String getPassword() {
-        return password;
-    }
+//    public String getPassword() {
+//        return password;
+//    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 
     public String getUsername() {
         return username;
@@ -99,13 +99,13 @@ public class WizzardDTO implements Serializable{
         this.isFacebook = isFacebook;
     }
 
-    public String getRepassword() {
-        return repassword;
-    }
+//    public String getRepassword() {
+//        return repassword;
+//    }
 
-    public void setRepassword(String repassword) {
-        this.repassword = repassword;
-    }
+//    public void setRepassword(String repassword) {
+//        this.repassword = repassword;
+//    }
 
     public String getProfileAbout() {
         return profileAbout;

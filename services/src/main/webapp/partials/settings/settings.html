@@ -14,7 +14,6 @@
                                 <li class="{{first}}">Account Setup</li>
                                 <li class="{{social}}">Social Profiles</li>
                                 <li class="{{profile}}">Config your profile</li>
-                                <li class="{{personal}}">Personal Details</li>
                             </ul>
                             <form data-toggle="wizard" class="max-width-400 h-center">
                                 <fieldset class="step" ng-show="step1">
@@ -30,7 +29,7 @@
                                                placeholder="First Name"/>
                                     </div>
                                     <div class="form-group form-control-default">
-                                        <label for="wiz-password">Last Name:</label>
+                                        <label >Last Name:</label>
                                         <input class="form-control" type="text" ng-model="lastName" id="lastName"
                                                placeholder="Last name"/>
                                     </div>
@@ -195,40 +194,40 @@
                                     <button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(3)">
                                         Previous
                                     </button>
-                                    <button type="button" class="wiz-next btn btn-primary" ng-click="setStep(3)">Next
+                                    <button type="button" class="wiz-next btn btn-primary" ng-click="finish()">Finish
                                     </button>
                                 </fieldset>
-                                <fieldset class="step" ng-show="step4">
-                                    <!--    <ng-include src="'partials/settings/step3.html'"/> -->
-                                    <div class="page-section-heading">
-                                        <h2 class="text-h3 margin-v-0">Personal account</h2>
+                                <!--<fieldset class="step" ng-show="step4">-->
+                                    <!--&lt;!&ndash;    <ng-include src="'partials/settings/step3.html'"/> &ndash;&gt;-->
+                                    <!--<div class="page-section-heading">-->
+                                        <!--<h2 class="text-h3 margin-v-0">Personal account</h2>-->
 
-                                        <h3 class="text-h4 margin-v-10 text-grey-400">Your personal details are safe
-                                            with us</h3>
-                                    </div>
-                                    <div class="form-group form-control-default">
-                                        <label for="wiz-fname">Username:</label>
-                                        <input class="form-control" type="text" id="wiz-fname" ng-model="username"
-                                               placeholder="Username"/>
-                                    </div>
-                                    <div class="form-group form-control-default">
-                                        <label for="wiz-password">Password:</label>
-                                        <input class="form-control" type="password" id="wiz-password"
-                                               ng-model="password" placeholder="Last name"/>
-                                    </div>
-                                    <div class="form-group form-control-default">
-                                        <label for="wiz-password2">Retype Password:</label>
-                                        <input class="form-control" type="password" id="wiz-password2"
-                                               ng-model="repassword" placeholder="Password"/>
-                                    </div>
+                                        <!--<h3 class="text-h4 margin-v-10 text-grey-400">Your personal details are safe-->
+                                            <!--with us</h3>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group form-control-default">-->
+                                        <!--<label for="wiz-fname">Username:</label>-->
+                                        <!--<input class="form-control" type="text" id="wiz-fname" ng-model="username"-->
+                                               <!--placeholder="Username"/>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group form-control-default">-->
+                                        <!--<label for="wiz-password">Password:</label>-->
+                                        <!--<input class="form-control" type="password" id="wiz-password"-->
+                                               <!--ng-model="password" placeholder="Last name"/>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group form-control-default">-->
+                                        <!--<label for="wiz-password2">Retype Password:</label>-->
+                                        <!--<input class="form-control" type="password" id="wiz-password2"-->
+                                               <!--ng-model="repassword" placeholder="Password"/>-->
+                                    <!--</div>-->
 
-                                    <button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(4)">
-                                        Previous
-                                    </button>
-                                    <button type="button" class="wiz-step btn btn-primary" data-target="0"
-                                            ng-click="finish()">Submit
-                                    </button>
-                                </fieldset>
+                                    <!--<button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(4)">-->
+                                        <!--Previous-->
+                                    <!--</button>-->
+                                    <!--<button type="button" class="wiz-step btn btn-primary" data-target="0"-->
+                                            <!--ng-click="finish()">Submit-->
+                                    <!--</button>-->
+                                <!--</fieldset>-->
                             </form>
                         </div>
                     </div>

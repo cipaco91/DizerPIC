@@ -69,16 +69,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO) {
-        if (!wizzardDTO.getPassword().equals(wizzardDTO.getRepassword())) {
-            return false;
-        }
-        User user = new User();
+    public Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO,User user) {
+
         user.setFirstname(wizzardDTO.getFirstName());
         user.setLastname(wizzardDTO.getLastName());
         user.setProfileConf(true);
-        user.setUsername(wizzardDTO.getUsername());
-        user.setPassword(wizzardDTO.getPassword());
         user.setActive(true);
         user = userRepository.save(user);
         UserProfile userProfile = new UserProfile();

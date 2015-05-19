@@ -15,7 +15,7 @@ public interface UserService {
 
     User findByUsernameAndPassword(String username,String password);
 
-    Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO);
+    Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO,User user);
 
     void logoutFromSocialNetworks(User user);
 

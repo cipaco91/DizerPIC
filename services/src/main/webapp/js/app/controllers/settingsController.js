@@ -11,7 +11,6 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
     $scope.first = 'active';
     $scope.social = 'inactive';
     $scope.profile = 'inactive';
-    $scope.personal = 'inactive';
 
     $scope.wizzardDTO = {};
 
@@ -24,29 +23,16 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
             $scope.step1 = false;
             $scope.step2 = true;
             $scope.step3 = false;
-            $scope.step4 = false;
             $scope.first = 'active';
             $scope.social = 'active';
             $scope.profile = 'inactive';
-            $scope.personal = 'inactive';
         } else if (step == 2) {
             $scope.step1 = false;
             $scope.step2 = false;
             $scope.step3 = true;
-            $scope.step4 = false;
             $scope.first = 'active';
             $scope.social = 'active';
             $scope.profile = 'active';
-            $scope.personal = 'inactive';
-        } else if (step == 3) {
-            $scope.step1 = false;
-            $scope.step2 = false;
-            $scope.step3 = false;
-            $scope.step4 = true;
-            $scope.first = 'active';
-            $scope.social = 'active';
-            $scope.profile = 'active';
-            $scope.personal = 'active';
         }
     };
 
@@ -95,29 +81,23 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
             $scope.step1 = true;
             $scope.step2 = false;
             $scope.step3 = false;
-            $scope.step4 = false;
             $scope.first = 'active';
             $scope.social = 'inactive';
             $scope.profile = 'inactive';
-            $scope.personal = 'inactive';
         } else if (step == 3) {
             $scope.step1 = false;
             $scope.step2 = true;
             $scope.step3 = false;
-            $scope.step4 = false;
             $scope.first = 'active';
             $scope.social = 'active';
             $scope.profile = 'inactive';
-            $scope.personal = 'inactive';
         } else {
             $scope.step1 = false;
             $scope.step2 = false;
             $scope.step3 = true;
-            $scope.step4 = false;
             $scope.first = 'active';
             $scope.social = 'active';
             $scope.profile = 'inactive';
-            $scope.personal = 'inactive';
 
         }
     };

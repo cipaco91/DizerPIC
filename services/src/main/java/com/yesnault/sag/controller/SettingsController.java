@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +30,8 @@ public class SettingsController {
     @RequestMapping(value = "/finishWizzardProfile", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
-    Boolean finishWizzardProfile(@RequestBody WizzardDTO wizzardDTO) {
-        return userService.saveUserWizzardProfile(wizzardDTO);
+    Boolean finishWizzardProfile(@RequestBody WizzardDTO wizzardDTO,HttpServletRequest httpServletRequest) {
+        return userService.saveUserWizzardProfile(wizzardDTO,(User)httpServletRequest.getSession().getAttribute("user"));
     }
 
 
