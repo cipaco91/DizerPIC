@@ -1,6 +1,6 @@
 function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService,$controller) {
 
-    angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
+    //angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;

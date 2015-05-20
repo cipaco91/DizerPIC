@@ -1,4 +1,4 @@
-function LoginCtrl($scope, $rootScope, $location, $window, UsersService) {
+function LoginCtrl($scope, $rootScope, $location, $window, UsersService,ProfileService) {
     $rootScope.bodylayout = 'login';
 
     $scope.messageFlag = false;
@@ -7,6 +7,12 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService) {
     $scope.loginForm = true;
     $scope.signUpForm = false;
     $scope.messageSign = "Sign In";
+
+    ProfileService.isLoginActive().success(function (response) {
+        if(response == false) {
+            $location.path("login");
+        }
+    });
 
     $scope.connectionGoogle = function () {
         console.log("redirect google");

@@ -73,7 +73,7 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
             $scope.wizzardDTO = response;
         });
 
-        $window.location.href = "http://localhost:8080/social/#/profile"
+        $window.location.href = "http://localhost:8080/social/#/home"
     };
 
     $scope.setStepBack = function (step) {

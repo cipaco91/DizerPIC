@@ -23,6 +23,9 @@ app.factory("ProfileService", function ($http) {
         },
         finishWizzardProfile: function (entity) {
             return $http.post('rest/finishWizzardProfile',entity);
+        },
+        isLoginActive: function () {
+            return $http.get('rest/isLoginActive');
         }
     }
 });
