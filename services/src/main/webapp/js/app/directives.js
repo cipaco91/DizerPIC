@@ -12,8 +12,8 @@ app.directive('appShowresults', function () {
             $scope.screenName=$scope.friend.name;
             $scope.profileImageUrl = $scope.friend.profileImageUrl;
             $scope.profileURL=$scope.friend.profileURL;
-            $scope.choiceNbResults = [ 10, 50, 100, 1000, 10000 ];
-            $scope.nbResults = 50
+            $scope.socialNetworkType=$scope.friend.socialNetworkType;
+            $scope.socialNetworkTypePicture=$scope.friend.socialNetworkTypePicture;
         }
     }
 });

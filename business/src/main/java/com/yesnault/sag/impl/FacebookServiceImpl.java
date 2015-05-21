@@ -161,6 +161,7 @@ public class FacebookServiceImpl implements FacebookService {
             snFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId() + "/picture");
             snFriend.setProfileURL("http://graph.facebook.com/" + reference.getId());
             snFriend.setSocialNetworkType("facebook");
+            snFriend.setSocialNetworkTypePicture("images/loginFacebook.png");
             snFriends.add(snFriend);
         }
         return snFriends;

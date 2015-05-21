@@ -230,20 +230,4 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         Collections.shuffle(snFeeds);
         return snFeeds;
     }
-
-    private List<SNFriend> getSnFriendsTwitter(List<TwitterProfile> twitterProfiles) {
-        List<SNFriend> snFriends = new ArrayList<SNFriend>();
-        for (TwitterProfile twitterProfile : twitterProfiles) {
-            SNFriend snFriend = new SNFriend();
-            snFriend.setId(Long.toString(twitterProfile.getId()));
-            snFriend.setName(twitterProfile.getScreenName());
-            snFriend.setProfileImageUrl(twitterProfile.getProfileImageUrl());
-            snFriend.setProfileURL(twitterProfile.getProfileUrl());
-            snFriend.setSocialNetworkType("twitter");
-            snFriends.add(snFriend);
-        }
-        return snFriends;
-    }
-
-
 }

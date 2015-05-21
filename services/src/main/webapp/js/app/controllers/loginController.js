@@ -9,7 +9,7 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService,ProfileS
     $scope.messageSign = "Sign In";
 
     ProfileService.isLoginActive().success(function (response) {
-        if(response == false) {
+        if(response == "false") {
             $location.path("login");
         }else{
             $location.path("profile");

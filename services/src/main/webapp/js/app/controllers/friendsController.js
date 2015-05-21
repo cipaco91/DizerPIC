@@ -104,7 +104,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.friendsFacebook = users;
         })
         .error(function (resp) {
-            console.log("Error with FriendsService.findFriendsTwitter" + resp);
+            console.log("Error with FriendsService.findFriendsFacebook" + resp);
         });
 
     FriendsService.findFriendsLinkedin().
@@ -112,7 +112,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.friendsLinkedin = users;
         })
         .error(function (resp) {
-            console.log("Error with FriendsService.findFriendsTwitter" + resp);
+            console.log("Error with FriendsService.findFriendsLinkedin" + resp);
         });
 
     $scope.filterFunctionLinkedin = function(element) {

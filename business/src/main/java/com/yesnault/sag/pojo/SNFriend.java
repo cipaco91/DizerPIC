@@ -17,6 +17,8 @@ public class SNFriend implements Serializable{
 
     private String socialNetworkType;
 
+    private String socialNetworkTypePicture;
+
     public String getProfileImageUrl() {
         return profileImageUrl;
     }
@@ -55,5 +57,13 @@ public class SNFriend implements Serializable{
 
     public void setSocialNetworkType(String socialNetworkType) {
         this.socialNetworkType = socialNetworkType;
+    }
+
+    public String getSocialNetworkTypePicture() {
+        return socialNetworkTypePicture;
+    }
+
+    public void setSocialNetworkTypePicture(String socialNetworkTypePicture) {
+        this.socialNetworkTypePicture = socialNetworkTypePicture;
     }
 }
