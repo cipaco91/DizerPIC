@@ -11,6 +11,8 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService,ProfileS
     ProfileService.isLoginActive().success(function (response) {
         if(response == false) {
             $location.path("login");
+        }else{
+            $location.path("profile");
         }
     });
 
