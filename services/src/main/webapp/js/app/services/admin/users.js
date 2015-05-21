@@ -42,6 +42,9 @@ app.factory("UsersService", function ($http) {
         logout: function () {
             return $http.post('rest/logout');
         },
+        setLoginActive: function () {
+            return $http.post('rest/setLoginActive');
+        },
         loginFacebook: function () {
             return $http.post('rest/connect/facebook').success(function (response) {
                 return response;

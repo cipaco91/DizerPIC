@@ -60,6 +60,13 @@ public class LoginController {
         return "okLogout";
     }
 
+    @RequestMapping(value = "/setLoginActive", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    void setLoginActive(HttpServletRequest request) {
+        userService.setLoginActive((User)request.getSession().getAttribute("user"));
+    }
+
     @RequestMapping(value = "/isLoginActive", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody

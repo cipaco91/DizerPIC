@@ -22,4 +22,6 @@ public interface UserService {
     String login(String username, String password, HttpServletRequest request);
 
     String signUp(String username, String password,String firstName,String lastName);
+
+    void setLoginActive(User user);
 }

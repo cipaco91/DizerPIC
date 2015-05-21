@@ -158,4 +158,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return "okSignUp";
     }
+
+    @Override
+    public void setLoginActive(User user) {
+         user.setLoginActive(true);
+         userRepository.save(user);
+    }
 }
