@@ -130,7 +130,7 @@ public class LinkedinServiceImpl implements LinkedinService{
             snFriend.setProfileURL(linkedInProfile.getPublicProfileUrl());
 //            snFriend.setProfileURL(linkedInProfile.getSiteStandardProfileRequest().getUrl());
             snFriend.setSocialNetworkType("linkedin");
-            snFriend.setSocialNetworkTypePicture("images/loginLinkedin.png");
+            snFriend.setSocialNetworkTypePicture("images/linkedin_logo.png");
             snFriends.add(snFriend);
         }
         return snFriends;
