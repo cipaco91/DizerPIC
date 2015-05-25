@@ -27,7 +27,7 @@ app.factory('User', function ($resource) {
 app.factory("UsersService", function ($http) {
     return {
 
-        findAll: function () {
+        findAll: function () {N
             return $http.get('rest/users');
         },
         signUp: function (username,password,firstName,lastName) {
