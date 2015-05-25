@@ -6,6 +6,7 @@ import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.linkedin.api.*;
+import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

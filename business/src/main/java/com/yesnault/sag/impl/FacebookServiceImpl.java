@@ -9,6 +9,7 @@ import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.social.linkedin.api.LinkedInProfile;
+import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Encoder;
@@ -46,7 +47,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFriend> getFriendsFacebook() {
         if (facebook != null) {
-//            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBABE4R2rEHPQYFRfvm1wWGtlKZBTrW8fZCua6CKqUVhZBS0riTZAu5YoKLPUTGomuBEsc4Kb3ZB9MZCoA02f0NTLzzStfP5zZCSP7YQb0nYrWm1JiwEs5Qg2rvmq7uZACdcSS1v4dZAq8FuHNb49tugwk4zYnsczSXPn4v3I3csXBOfM7ZAlIdTwe0LQAT81qVhGNzG5V4cYzfDdzUAWnTFR4cZD");
+//            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAFKG3EeBkK5KjUZAa9fSAYZAkvZCf6hZBT0MyyclZBIZCQEuvbHnaWqledZCwiaJ3kZCJZAO7jeIfFFSIDwA8fqBif5Sk9KulZCO3WOhj2zsaOYFWW3IUXPolnj7qA67ZCetWLD7iRw9fgxecdFuoxkFlseXw7rGrIDkidfex0eKt6l2KxGPRMsb6wNGJVmMwSjUbzMwB9aqA4YiiS0omkXwQ8ZD");
             PagedList<Reference> references = facebook.friendOperations().getFriends();
             return getSnFriends(references);
         }
@@ -131,7 +132,8 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFriend> getCommonFriendsFacebook() {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
-        Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAGgu2NOF6w6PjgUZBEP6ErOypekG0l1qg4GLEH6fj0PpLuYR718TZCauhZBLQ5ox7jyQlJWvuvl8ciFWkq4r6VfmtDhH6wdDzc7F9OwUci2DKJoAX1NzPCvWcKAy9odVJeaXn0EZCu6lFsYqtmdIWtQ0XmBm8AUnZBASZBHIf8c6sZCEUeTk9jnNNKrjpBGgZAwHycJSOKDbU7fkBgujQmYZD");
+        Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAFKG3EeBkK5KjUZAa9fSAYZAkvZCf6hZBT0MyyclZBIZCQEuvbHnaWqledZCwiaJ3kZCJZAO7jeIfFFSIDwA8fqBif5Sk9KulZCO3WOhj2zsaOYFWW3IUXPolnj7qA67ZCetWLD7iRw9fgxecdFuoxkFlseXw7rGrIDkidfex0eKt6l2KxGPRMsb6wNGJVmMwSjUbzMwB9aqA4YiiS0omkXwQ8ZD");
+
         PagedList<Reference> references = facebook1.friendOperations().getFriends();
         facebook1.friendOperations().getMutualFriends(references.get(0).getId());
         return null;
@@ -161,7 +163,7 @@ public class FacebookServiceImpl implements FacebookService {
             snFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId() + "/picture");
             snFriend.setProfileURL("http://graph.facebook.com/" + reference.getId());
             snFriend.setSocialNetworkType("facebook");
-            snFriend.setSocialNetworkTypePicture("images/Facebook-logo.png");
+            snFriend.setSocialNetworkTypePicture("images/social/Facebook-logo.jpg");
             snFriends.add(snFriend);
         }
         return snFriends;

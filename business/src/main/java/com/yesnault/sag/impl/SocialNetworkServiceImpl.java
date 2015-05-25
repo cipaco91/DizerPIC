@@ -118,14 +118,12 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                     facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
                     facebook.userOperations().getUserProfile().getAbout());
         } else {
-            return new ProfileSN(linkedIn.profileOperations().getProfileId(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
+            return new ProfileSN(linkedIn.profileOperations().getProfileId(),  facebook.userOperations().getUserProfile().getGender(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
                     " " + linkedIn.profileOperations().getUserProfileFull().getLastName(),
-                    facebook.userOperations().getUserProfile().getGender(),
                     linkedIn.profileOperations().getUserProfileFull().getEmailAddress(),
-                    linkedIn.profileOperations().getUserProfileFull().getDateOfBirth().getDay() + "/" +
-                            linkedIn.profileOperations().getUserProfileFull().getDateOfBirth().getMonth() + "/" +
-                            linkedIn.profileOperations().getUserProfileFull().getDateOfBirth().getYear(),
-                    linkedIn.profileOperations().getUserProfileFull().getSummary(), linkedIn.profileOperations().getUserProfileFull().getLocation().getName(),
+                    facebook.userOperations().getUserProfile().getBirthday(),
+                    linkedIn.profileOperations().getUserProfileFull().getSummary(),
+                    linkedIn.profileOperations().getUserProfileFull().getLocation().getName(),
                     facebook.userOperations().getUserProfile().getRelationshipStatus());
         }
     }
