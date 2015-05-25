@@ -11,6 +11,8 @@ function ProfileCtrl($scope, $rootScope, $location, $window, ProfileService, Men
     $scope.secondTab = false;
     $scope.isLoginActive = false;
 
+    $scope.indexPhoto={};
+
     ProfileService.isLoginActive().success(function (response) {
         if (response == "false") {
             $scope.isLoginActive = false;
@@ -68,6 +70,11 @@ function ProfileCtrl($scope, $rootScope, $location, $window, ProfileService, Men
         ProfileService.photosProfile().success(function (response) {
             $scope.photosAlbums = response;
         });
+    };
+
+    $scope.setIndexPhoto = function (src) {
+        $scope.index=src;
+        $('#myModal').modal('show').css('display', 'grid');
     };
 
     $scope.clickSecondTab = function () {

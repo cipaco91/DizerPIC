@@ -109,9 +109,11 @@
                             <div class="tab-content">
                                 <ul class="img-grid">
                                     <div class="tab-content">
-                                    <li ng-repeat="photo in photosAlbums">
-                                        <img ng-src="{{photo.picture}}" width="140px" height="100px"/>
-                                    </li>
+                                        <li ng-repeat="photo in photosAlbums">
+                                            <a ng-click="setIndexPhoto(photo.source)">
+                                                <img ng-src="{{photo.source}}" width="140px" height="100px"/>
+                                            </a>
+                                        </li>
                                     </div>
                                 </ul>
                             </div>
@@ -130,9 +132,30 @@
                     </div>
                 </div>
 
+                <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="vertical-alignment-helper">
+                        <div class="modal-dialog vertical-align-center">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                   <img ng-src="{{index}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div id="myModal" class="modal fade" role="dialog" style="display: grid;" tabindex="-1">-->
+                     <!--&lt;!&ndash;aria-hidden="true" data-backdrop="static">&ndash;&gt;-->
+                    <!--<div class="modal-dialog">-->
+                        <!--<div class="modal-content">-->
+                            <!--<div class="modal-body">-->
+                                <!--<img ng-src="{{index}}" />-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
             </div>
-            <!-- /st-content-inner -->
         </div>
-        <!-- /st-content -->
     </div>
 </div>
