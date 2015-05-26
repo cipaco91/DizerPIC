@@ -1,15 +1,26 @@
-function ImagesPageCtrl($scope, $rootScope,$window,ProfileService) {
+function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService, MenuService) {
 
     $rootScope.bodylayout = 'bodyImagesPage';
 
     $scope.direction = 'left';
     $scope.currentIndex = 0;
-    $scope.slides={};
+    $scope.slides = {};
 
-    //$scope.setCurrentSlideIndex = function (index) {
-    //    $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
-    //    $scope.currentIndex = index;
-    //};
+    ProfileService.profileSN().success(function (response) {
+        $scope.userProfile = response;
+    });
+
+    MenuService.isConnectFacebook().success(function (response) {
+        $scope.facebookVisible = response;
+    });
+
+    MenuService.isConnectTwittter().success(function (response) {
+        $scope.twitterVisible = response;
+    });
+
+    MenuService.isConnectLinkedin().success(function (response) {
+        $scope.linkedinVisible = response;
+    });
 
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
@@ -25,8 +36,14 @@ function ImagesPageCtrl($scope, $rootScope,$window,ProfileService) {
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
     };
 
-    ProfileService.photosProfile().success(function (response) {
-        $scope.slides = response;
-    });
+    if ($routeParams.albumId == 0) {
+        ProfileService.photosProfile().success(function (response) {
+            $scope.slides = response;
+        });
+    } else {
+        ProfileService.photosFromAlbum($routeParams.albumId).success(function (response) {
+            $scope.slides = response;
+        });
+    }
 
 }
