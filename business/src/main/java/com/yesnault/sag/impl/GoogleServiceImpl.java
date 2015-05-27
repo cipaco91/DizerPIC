@@ -1,6 +1,7 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.GoogleService;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.google.api.Google;
@@ -37,6 +38,12 @@ public class GoogleServiceImpl implements GoogleService{
         PeoplePage peoplePage= google.plusOperations().getPeopleInCircles(google.plusOperations().getGoogleProfile().getId(),null);
         List<Person> persons=peoplePage.getItems();
         return getSnFriends(persons);
+    }
+
+    @Override
+    public List<SNFeed> findFeeds() {
+//        google.plusOperations().searchPublicActivities("home",null);
+        return null;
     }
 
     private List<SNFriend> getSnFriends( List<Person> persons) {
