@@ -11,58 +11,53 @@ function ProfileCtrl($scope, $rootScope, $location, $window, ProfileService, Men
     $scope.secondTab = false;
     $scope.isLoginActive = false;
 
-    $scope.indexPhoto={};
+    $scope.indexPhoto = {};
 
     ProfileService.isLoginActive().success(function (response) {
         if (response == "false") {
             $scope.isLoginActive = false;
             $location.path("/login");
-        }else{
+        } else {
             $scope.isLoginActive = true;
         }
     });
 
-        MenuService.isConnectFacebook().success(function (response) {
-            $scope.facebookVisible = response;
-            //if ($scope.facebookVisible == 'false' && $scope.twitterVisible == 'false' && $scope.linkedinVisible == 'false') {
-            //    $location.path("/home");
-            //}
-        });
+    MenuService.isConnectFacebook().success(function (response) {
+        $scope.facebookVisible = response;
+    });
 
-        MenuService.isConnectTwittter().success(function (response) {
-            $scope.twitterVisible = response;
-            //if ($scope.facebookVisible == 'false' && $scope.twitterVisible == 'false' && $scope.linkedinVisible == 'false') {
-            //    $location.path("/home");
-            //}
-        });
+    MenuService.isConnectTwittter().success(function (response) {
+        $scope.twitterVisible = response;
+    });
 
-        MenuService.isConnectLinkedin().success(function (response) {
-            $scope.linkedinVisible = response;
-            //if ($scope.facebookVisible == 'false' && $scope.twitterVisible == 'false' && $scope.linkedinVisible == 'false') {
-            //    $location.path("/home");
-            //}
-        });
+    MenuService.isConnectLinkedin().success(function (response) {
+        $scope.linkedinVisible = response;
+    });
 
-        ProfileService.findProfileImage().success(function (response) {
-            $scope.profileImage = response;
-        });
+    MenuService.isConnectGoogle().success(function (response) {
+        $scope.googleVisible = response;
+    });
 
-        ProfileService.profileSN().success(function (response) {
-            $scope.userProfile = response;
-        });
+    ProfileService.findProfileImage().success(function (response) {
+        $scope.profileImage = response;
+    });
 
-        ProfileService.photosProfile().success(function (response) {
-            $scope.photosProfile = response;
-            $scope.photosAlbums = response;
-        });
+    ProfileService.profileSN().success(function (response) {
+        $scope.userProfile = response;
+    });
 
-        ProfileService.friendsProfile().success(function (response) {
-            $scope.friends = response;
-        });
+    ProfileService.photosProfile().success(function (response) {
+        $scope.photosProfile = response;
+        $scope.photosAlbums = response;
+    });
 
-        FriendsService.albumsProfile().success(function (response) {
-            $scope.albums = response;
-        });
+    ProfileService.friendsProfile().success(function (response) {
+        $scope.friends = response;
+    });
+
+    FriendsService.albumsProfile().success(function (response) {
+        $scope.albums = response;
+    });
 
     $scope.clickFIrstTab = function () {
         $scope.firstTab = true;
@@ -73,7 +68,7 @@ function ProfileCtrl($scope, $rootScope, $location, $window, ProfileService, Men
     };
 
     $scope.setIndexPhoto = function (src) {
-        $location.path("/imagesPage/"+src);
+        $location.path("/imagesPage/" + src);
     };
 
     $scope.clickSecondTab = function () {
@@ -91,7 +86,7 @@ function ProfileCtrl($scope, $rootScope, $location, $window, ProfileService, Men
 
     $scope.showPhotosFromAlbum = function (albumId) {
         console.log(albumId);
-        $location.path("imagesPage/"+albumId);
+        $location.path("imagesPage/" + albumId);
         //ProfileService.photosFromAlbum(albumId).success(function (response) {
         //    $scope.photosAlbums = response;
         //});
