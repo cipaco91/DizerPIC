@@ -11,6 +11,7 @@ import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
 import org.apache.geronimo.mail.util.Base64;
 import org.springframework.social.facebook.api.*;
+import org.springframework.social.google.api.Google;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.linkedin.api.LinkedInProfiles;
@@ -45,6 +46,9 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 
     @Inject
     private Twitter twitter;
+
+    @Inject
+    private Google google;
 
     @Inject
     private UserProfileRepository userProfileRepository;

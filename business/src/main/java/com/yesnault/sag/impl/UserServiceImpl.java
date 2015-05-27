@@ -12,6 +12,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.social.facebook.api.Post;
+import org.springframework.social.google.api.Google;
 import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.twitter.api.Twitter;
@@ -49,6 +50,9 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private LinkedIn linkedIn;
+
+    @Inject
+    private Google google;
 
     @Override
     public List<User> findByLastname(String lastname) {
@@ -92,6 +96,7 @@ public class UserServiceImpl implements UserService {
         String userIdFacebook= facebook.userOperations().getUserProfile().getId();
         String userIdTwitter= Long.valueOf(twitter.userOperations().getProfileId()).toString();
         String userIdLinkedin= linkedIn.profileOperations().getProfileId();
+        String userIdGoogle=google.plusOperations().getGoogleProfile().getId();
 
         Set<String> providerUserIdsFacebook = new HashSet<String>();
         providerUserIdsFacebook.add(userIdFacebook);
@@ -115,6 +120,14 @@ public class UserServiceImpl implements UserService {
         for (String localUserId : localUserIdsLinkedin) {
             ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
             connectionRepository.removeConnection(new ConnectionKey("linkedin", userIdLinkedin));
+        }
+
+        Set<String> providerUserIdsGoogle = new HashSet<String>();
+        providerUserIdsGoogle.add(userIdGoogle);
+        Set<String> localUserIdsGoogle = usersConnectionRepository.findUserIdsConnectedTo("google", providerUserIdsGoogle);
+        for (String localUserId : localUserIdsGoogle) {
+            ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
+            connectionRepository.removeConnection(new ConnectionKey("google", userIdGoogle));
         }
 
         user.setLoginActive(false);
@@ -161,7 +174,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void setLoginActive(User user) {
-         user.setLoginActive(true);
-         userRepository.save(user);
+        if(user!=null) {
+            user.setLoginActive(true);
+            userRepository.save(user);
+        }
     }
 }

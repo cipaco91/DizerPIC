@@ -1,10 +1,10 @@
 function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService,$controller) {
 
-    //angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;
-        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'){
+        if($scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
+            &&$scope.googleVisible=='true'){
             UsersService.setLoginActive().success(function (response) {
                 $window.location.href="http://localhost:8080/social/#/profile";
             });
@@ -13,7 +13,8 @@ function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService,$controlle
 
     MenuService.isConnectTwittter().success(function (response) {
         $scope.twitterVisible=response;
-        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'){
+        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
+            &&$scope.googleVisible=='true'){
             UsersService.setLoginActive().success(function (response) {
                 $window.location.href="http://localhost:8080/social/#/profile";
             });
@@ -22,18 +23,34 @@ function HomeCtrl($scope, $rootScope,$window,UsersService,MenuService,$controlle
 
     MenuService.isConnectLinkedin().success(function (response) {
         $scope.linkedinVisible=response;
-        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'){
+        if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
+            &&$scope.googleVisible=='true'){
             UsersService.setLoginActive().success(function (response) {
                 $window.location.href="http://localhost:8080/social/#/profile";
             });
         }
     });
 
-
+    MenuService.isConnectGoogle().success(function (response) {
+        $scope.googleVisible=response;
+        if($scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
+            &&$scope.googleVisible=='true'){
+            UsersService.setLoginActive().success(function (response) {
+                $window.location.href="http://localhost:8080/social/#/profile";
+            });
+        }
+    });
 
     $scope.connectionFacebook = function() {
         console.log("redirect facebook");
         UsersService.loginSocialNetwork('facebook').success(function (response) {
+            $window.location.href=response;
+        });
+    };
+
+    $scope.connectionGoogle = function() {
+        console.log("redirect google");
+        UsersService.loginSocialNetwork('google').success(function (response) {
             $window.location.href=response;
         });
     };
