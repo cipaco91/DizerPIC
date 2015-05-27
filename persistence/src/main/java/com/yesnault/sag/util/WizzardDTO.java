@@ -19,11 +19,9 @@ public class WizzardDTO implements Serializable{
 
     private Boolean isLinkedin;
 
-    private String username;
+    private Boolean isGoogle;
 
-//    private String password;
-//
-//    private String repassword;
+    private String username;
 
     private String profileAbout;
 
@@ -42,14 +40,6 @@ public class WizzardDTO implements Serializable{
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-//    public String getPassword() {
-//        return password;
-//    }
-
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
 
     public String getUsername() {
         return username;
@@ -99,14 +89,6 @@ public class WizzardDTO implements Serializable{
         this.isFacebook = isFacebook;
     }
 
-//    public String getRepassword() {
-//        return repassword;
-//    }
-
-//    public void setRepassword(String repassword) {
-//        this.repassword = repassword;
-//    }
-
     public String getProfileAbout() {
         return profileAbout;
     }
@@ -145,5 +127,13 @@ public class WizzardDTO implements Serializable{
 
     public void setProfileCover(String profileCover) {
         this.profileCover = profileCover;
+    }
+
+    public Boolean getIsGoogle() {
+        return isGoogle;
+    }
+
+    public void setIsGoogle(Boolean isGoogle) {
+        this.isGoogle = isGoogle;
     }
 }

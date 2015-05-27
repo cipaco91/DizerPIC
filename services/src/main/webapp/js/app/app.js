@@ -16,6 +16,7 @@ app.config(function ($routeProvider) {
         .when('/profile', {  controller: ProfileCtrl, templateUrl: 'partials/profile/profile.html'})
         .when('/searchUsers', {  controller: SearchUsersCtrl, templateUrl: 'partials/users/searchUsers.html'})
         .when('/imagesPage/:albumId', {  controller: ImagesPageCtrl, templateUrl: 'partials/home/imagesPage.html'})
+        .when('/home/:facebook/:twitter/:linkedin:/:google', {  controller: HomeCtrl, templateUrl: 'partials/home/home.html' })
 
         // Administration
         .when('/admin/logs', {  controller: LogsCtrl, templateUrl: 'partials/admin/logs/list.html' })

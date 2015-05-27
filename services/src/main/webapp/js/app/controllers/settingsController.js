@@ -1,4 +1,4 @@
-function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
+function SettingsCtrl($scope, $location, $window, ProfileService, $controller) {
 
     angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
@@ -40,28 +40,34 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
         $scope.wizzardDTO.firstName = $scope.firstName;
         $scope.wizzardDTO.lastName = $scope.lastName;
         $scope.wizzardDTO.email = $scope.email;
-        $scope.wizzardDTO.profileImage=$scope.profileImage;
-        $scope.wizzardDTO.profileAbout=$scope.profileAbout;
-        $scope.wizzardDTO.profileFriend=$scope.profileFriend;
-        $scope.wizzardDTO.profileName=$scope.profileName;
-        $scope.wizzardDTO.profileCover=$scope.profileCover;
+        $scope.wizzardDTO.profileImage = $scope.profileImage;
+        $scope.wizzardDTO.profileAbout = $scope.profileAbout;
+        $scope.wizzardDTO.profileFriend = $scope.profileFriend;
+        $scope.wizzardDTO.profileName = $scope.profileName;
+        $scope.wizzardDTO.profileCover = $scope.profileCover;
 
-        if(angular.equals($scope.yesTwitter,true)){
-            $scope.wizzardDTO.isTwitter=true;
-        }else if(angular.equals($scope.noTwitter,true)){
-            $scope.wizzardDTO.isTwitter=false;
+        if (angular.equals($scope.yesTwitter, true)) {
+            $scope.wizzardDTO.isTwitter = true;
+        } else if (angular.equals($scope.noTwitter, true)) {
+            $scope.wizzardDTO.isTwitter = false;
         }
 
-        if(angular.equals($scope.yesFacebook,true)){
-            $scope.wizzardDTO.isFacebook=true;
-        }else if(angular.equals($scope.noFacebook,true)){
-            $scope.wizzardDTO.isFacebook=false;
+        if (angular.equals($scope.yesFacebook, true)) {
+            $scope.wizzardDTO.isFacebook = true;
+        } else if (angular.equals($scope.noFacebook, true)) {
+            $scope.wizzardDTO.isFacebook = false;
         }
 
-        if(angular.equals($scope.yesLinkedin,true)){
-            $scope.wizzardDTO.isLinkedin=true;
-        }else if(angular.equals($scope.noLinkedin,true)){
-            $scope.wizzardDTO.isLinkedin=false;
+        if (angular.equals($scope.yesLinkedin, true)) {
+            $scope.wizzardDTO.isLinkedin = true;
+        } else if (angular.equals($scope.noLinkedin, true)) {
+            $scope.wizzardDTO.isLinkedin = false;
+        }
+
+        if (angular.equals($scope.yesGoogle, true)) {
+            $scope.wizzardDTO.isGoogle = true;
+        } else if (angular.equals($scope.noGoogle, true)) {
+            $scope.wizzardDTO.isGoogle = false;
         }
 
         $scope.wizzardDTO.username = $scope.username;
@@ -73,7 +79,11 @@ function SettingsCtrl($scope, $location, $window, ProfileService,$controller) {
             $scope.wizzardDTO = response;
         });
 
-        $window.location.href = "http://localhost:8080/social/#/home"
+        $location.path("/home");
+        //
+        //$location.path("/home/" + $scope.wizzardDTO.isFacebook + "/" +
+        //$scope.wizzardDTO.isTwitter + "/" + $scope.wizzardDTO.isLinkedin + "/" +
+        //$scope.wizzardDTO.isGoogle);
     };
 
     $scope.setStepBack = function (step) {

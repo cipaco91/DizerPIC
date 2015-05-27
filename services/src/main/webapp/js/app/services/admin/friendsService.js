@@ -12,6 +12,9 @@ app.factory("FriendsService", function ($http) {
         findFriendsLinkedin: function () {
             return $http.get('rest/friendsLinkedin');
         },
+        findFriendsGoogle: function () {
+            return $http.get('rest/friendsGoogle');
+        },
         searchUsers: function (entity) {
             return $http.post('rest/searchUsers',entity);
         },

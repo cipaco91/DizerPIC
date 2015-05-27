@@ -52,6 +52,12 @@
                     </div>
                 </div>
 
+                <div class="row" data-toggle="isotope" ng-show="googleFriendsShow">
+                    <div data-ng-repeat="friend in friendsGoogle | filter: filterFunctionGoogle | orderBy: 'name'">
+                        <app-showresults friend="{{friend}}"></app-showresults>
+                    </div>
+                </div>
+
                 <br/><br/>
 
                 <!--<div class="row" data-toggle="isotope" ng-show="linkedinFriendsShow">-->

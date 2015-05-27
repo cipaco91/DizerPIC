@@ -9,7 +9,7 @@
                     <div class="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
                         <h1 class="page-section-heading">Create your profile</h1>
 
-                        <div class="wizard-container wizard-1" id="wizard-demo-1">
+                        <div class="wizard-container wizard-1" id="wizard-demo-1" style="width: 800px;">
                             <ul class="wiz-progress">
                                 <li class="{{first}}">Account Setup</li>
                                 <li class="{{social}}">Social Profiles</li>
@@ -72,6 +72,7 @@
                                             <label for="inlineCheckboxF3">No</label>
                                         </div>
                                     </div>
+
                                     <div class="form-group form-control-default">
                                         <label>Linkedin</label>
                                         <div class="checkbox checkbox-success checkbox-inline">
@@ -83,6 +84,19 @@
                                             <label for="inlineCheckboxL3">No</label>
                                         </div>
                                     </div>
+
+                                    <div class="form-group form-control-default">
+                                        <label>Google Plus</label>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckboxL4" ng-model="yesGoogle">
+                                            <label for="inlineCheckboxL4">Yes</label>
+                                        </div>
+                                        <div class="checkbox checkbox-success checkbox-inline">
+                                            <input type="checkbox" id="inlineCheckboxL33" ng-model="noGoogle" >
+                                            <label for="inlineCheckboxL33">No</label>
+                                        </div>
+                                    </div>
+
                                     <button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(2)">
                                         Previous
                                     </button>
@@ -96,99 +110,127 @@
 
                                         <h3 class="text-h4 margin-v-10 text-grey-400">Configure your profile</h3>
                                     </div>
-                                    <div class="form-group form-control-default">
+                                    <div class="form-group form-control-default" style="padding: 5px 5px;">
                                         <label>Profile Image:</label>
 
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesFacebook">
                                             <input type="radio" id="inlineRadio1"
                                                    ng-model="profileImage" value="facebook" name="radioInline1">
                                             <label for="inlineRadio1">Facebook</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesTwitter">
                                             <input type="radio" id="inlineRadio2" ng-model="profileImage" value="twitter"
                                                    name="radioInline2">
                                             <label for="inlineRadio2">Twitter</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+
+                                        <div class="radio radio-info radio-inline" ng-show="yesLinkedin">
                                             <input type="radio" id="inlineRadio3" ng-model="profileImage" value="linkedin"
                                                    name="radioInline3">
                                             <label for="inlineRadio3">Linkedin</label>
                                         </div>
+                                        <div class="radio radio-info radio-inline" ng-show="yesGoogle">
+                                            <input type="radio" id="inlineRadio4" ng-model="profileImage" value="google"
+                                                   name="radioInline3">
+                                            <label for="inlineRadio3">Google+</label>
+                                        </div>
                                     </div>
-                                    <div class="form-group form-control-default">
+                                    <div class="form-group form-control-default" style="padding: 5px 5px;">
                                         <label >Profile About:</label>
 
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesFacebook">
                                             <input type="radio" id="iinlineRadioAbout1"
                                                    ng-model="profileAbout" value="facebook" name="radioInline4">
                                             <label for="iinlineRadioAbout1">Facebook</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesTwitter">
                                             <input type="radio" id="iinlineRadioAbout2" ng-model="profileAbout"
                                                    value="twitter" name="radioInline5">
                                             <label for="iinlineRadioAbout2">Twitter</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesLinkedin">
                                             <input type="radio" id="iinlineRadioAbout3" ng-model="profileAbout"
                                                    value="linkedin" name="radioInline6">
                                             <label for="iinlineRadioAbout3">Linkedin</label>
                                         </div>
+                                        <div class="radio radio-info radio-inline" ng-show="yesGoogle">
+                                            <input type="radio" id="inlineRadio49" ng-model="profileAbout" value="google"
+                                                   name="radioInline3">
+                                            <label for="inlineRadio3">Google+</label>
+                                        </div>
                                     </div>
-                                    <div class="form-group form-control-default">
+                                    <div class="form-group form-control-default" style="padding: 5px 5px;">
                                         <label >Profile Friends</label>
 
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesFacebook">
                                             <input type="radio" id="iinlineRadioFriend1"
                                                    ng-model="profileFriend" value="facebook" name="radioInline7">
                                             <label for="iinlineRadioFriend1">Facebook</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesTwitter">
                                             <input type="radio" id="iinlineRadioFriend2" ng-model="profileFriend"
                                                    value="twitter" name="radioInline8">
                                             <label for="iinlineRadioFriend2">Twitter</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+
+                                        <div class="radio radio-info radio-inline" ng-show="yesLinkedin">
                                             <input type="radio" id="iinlineRadioFriend3" ng-model="profileFriend"
                                                    value="linkedin" name="radioInline9">
                                             <label for="iinlineRadioFriend3">Linkedin</label>
                                         </div>
+                                        <div class="radio radio-info radio-inline" ng-show="yesGoogle">
+                                            <input type="radio" id="inlineRadio439" ng-model="profileFriend" value="google"
+                                                   name="radioInline3">
+                                            <label for="inlineRadio3">Google+</label>
+                                        </div>
                                     </div>
-                                    <div class="form-group form-control-default">
+                                    <div class="form-group form-control-default" style="padding: 5px 5px;">
                                         <label >Profile Name</label>
 
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesFacebook">
                                             <input type="radio" id="inlineRadioName1"
                                                    ng-model="profileName" value="facebook" name="radioInline10">
                                             <label for="inlineRadioName1">Facebook</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesTwitter">
                                             <input type="radio" id="inlineRadioName2" ng-model="profileName" value="twitter"
                                                    name="radioInline11">
                                             <label for="inlineRadioName2">Twitter</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesLinkedin">
                                             <input type="radio" id="inlineRadioName3" ng-model="profileName" value="linkedin"
                                                    name="radioInline12">
                                             <label for="inlineRadioName3">Linkedin</label>
                                         </div>
+                                        <div class="radio radio-info radio-inline" ng-show="yesGoogle">
+                                            <input type="radio" id="inlineRadio2439" ng-model="profileName" value="google"
+                                                   name="radioInline3">
+                                            <label for="inlineRadio3">Google+</label>
+                                        </div>
                                     </div>
-                                    <div class="form-group form-control-default">
+                                    <div class="form-group form-control-default" style="padding: 5px 5px;">
                                         <label>Profile Cover</label>
 
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesFacebook">
                                             <input type="radio" id="inlineRadioCover1"
                                                    ng-model="profileCover" value="facebook" name="radioInline13">
                                             <label for="inlineRadioCover1">Facebook</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+                                        <div class="radio radio-info radio-inline" ng-show="yesTwitter">
                                             <input type="radio" id="inlineRadioCover2" ng-model="profileCover" value="twitter"
                                                    name="radioInline14">
                                             <label for="inlineRadioCover2">Twitter</label>
                                         </div>
-                                        <div class="radio radio-info radio-inline">
+
+                                        <div class="radio radio-info radio-inline"  ng-show="yesLinkedin">
                                             <input type="radio" id="inlineRadioCover3" ng-model="profileCover"
                                                    value="linkedin" name="radioInline15">
                                             <label for="inlineRadioCover3">Linkedin</label>
+                                        </div>
+                                        <div class="radio radio-info radio-inline" ng-show="yesGoogle">
+                                            <input type="radio" id="inlineRadio22439" ng-model="profileCover" value="google"
+                                                   name="radioInline3">
+                                            <label for="inlineRadio3">Google+</label>
                                         </div>
                                     </div>
                                     <button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(3)">
@@ -197,37 +239,6 @@
                                     <button type="button" class="wiz-next btn btn-primary" ng-click="finish()">Finish
                                     </button>
                                 </fieldset>
-                                <!--<fieldset class="step" ng-show="step4">-->
-                                    <!--&lt;!&ndash;    <ng-include src="'partials/settings/step3.html'"/> &ndash;&gt;-->
-                                    <!--<div class="page-section-heading">-->
-                                        <!--<h2 class="text-h3 margin-v-0">Personal account</h2>-->
-
-                                        <!--<h3 class="text-h4 margin-v-10 text-grey-400">Your personal details are safe-->
-                                            <!--with us</h3>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group form-control-default">-->
-                                        <!--<label for="wiz-fname">Username:</label>-->
-                                        <!--<input class="form-control" type="text" id="wiz-fname" ng-model="username"-->
-                                               <!--placeholder="Username"/>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group form-control-default">-->
-                                        <!--<label for="wiz-password">Password:</label>-->
-                                        <!--<input class="form-control" type="password" id="wiz-password"-->
-                                               <!--ng-model="password" placeholder="Last name"/>-->
-                                    <!--</div>-->
-                                    <!--<div class="form-group form-control-default">-->
-                                        <!--<label for="wiz-password2">Retype Password:</label>-->
-                                        <!--<input class="form-control" type="password" id="wiz-password2"-->
-                                               <!--ng-model="repassword" placeholder="Password"/>-->
-                                    <!--</div>-->
-
-                                    <!--<button type="button" class="wiz-prev btn btn-default" ng-click="setStepBack(4)">-->
-                                        <!--Previous-->
-                                    <!--</button>-->
-                                    <!--<button type="button" class="wiz-step btn btn-primary" data-target="0"-->
-                                            <!--ng-click="finish()">Submit-->
-                                    <!--</button>-->
-                                <!--</fieldset>-->
                             </form>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.friendsTwitter = {};
     $scope.friendsLinkedin = {};
     $scope.friendsFacebook = {};
+    $scope.friendsGoogle = {};
     $scope.profileImage = {};
     $scope.selectedItem = {};
     $scope.selectedItem.code = 'all';
@@ -19,12 +20,14 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.facebookFriendsShow=true;
     $scope.twitterFriendsShow=true;
     $scope.linkedinFriendsShow=true;
+    $scope.googleFriendsShow=true;
 
 
     $scope.codes = [{code: 'all', value: "All"}, {code: 'socialNetwork', value: "by Social Network"}, {code: 'name', value: "by Name"},
         {code: 'job', value: "by Job"}, {code: 'company', value: "by Company"}];
 
-    $scope.socialNetworks = [{code: 'facebook', value: "Facebook"}, {code: 'linkedin', value: "Linkedin"}, {code: 'twitter', value: "Twitter"}];
+    $scope.socialNetworks = [{code: 'facebook', value: "Facebook"}, {code: 'linkedin', value: "Linkedin"}, {code: 'twitter', value: "Twitter"},
+        {code: 'google', value: "Google Plus"}];
 
     $scope.changeSocial= function(){
         $scope.socialNetworkCode = $scope.selectedItemSocial.code;
@@ -33,16 +36,25 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.facebookFriendsShow=true;
             $scope.twitterFriendsShow=false;
             $scope.linkedinFriendsShow=false;
+            $scope.googleFriendsShow=false;
         }else if($scope.socialNetworkCode == 'linkedin'){
             console.log($scope.socialNetworkCode);
             $scope.facebookFriendsShow=false;
             $scope.twitterFriendsShow=false;
             $scope.linkedinFriendsShow=true;
+            $scope.googleFriendsShow=false;
+        }else if($scope.socialNetworkCode == 'google'){
+            console.log($scope.socialNetworkCode);
+            $scope.facebookFriendsShow=false;
+            $scope.twitterFriendsShow=false;
+            $scope.linkedinFriendsShow=false;
+            $scope.googleFriendsShow=true;
         }else{
             console.log($scope.socialNetworkCode);
             $scope.facebookFriendsShow=false;
             $scope.twitterFriendsShow=true;
             $scope.linkedinFriendsShow=false;
+            $scope.googleFriendsShow=false;
         }
     };
 
@@ -68,6 +80,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.facebookFriendsShow=true;
             $scope.twitterFriendsShow=true;
             $scope.linkedinFriendsShow=true;
+            $scope.googleFriendsShow=true;
         } else if ($scope.searchCode == 'socialNetwork') {
             $scope.bySocialNetworkShow = true;
             $scope.byNameShow = false;
@@ -115,6 +128,14 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             console.log("Error with FriendsService.findFriendsLinkedin" + resp);
         });
 
+    FriendsService.findFriendsGoogle().
+        success(function (users) {
+            $scope.friendsGoogle = users;
+        })
+        .error(function (resp) {
+            console.log("Error with FriendsService.findFriendsGoogle" + resp);
+        });
+
     $scope.filterFunctionLinkedin = function(element) {
        if($scope.name == ""){
            return true;
@@ -123,6 +144,13 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     };
 
     $scope.filterFunctionTwitter = function(element) {
+        if($scope.name == ""){
+            return true;
+        }
+        return element.name.indexOf($scope.name) >=0 ;
+    };
+
+    $scope.filterFunctionGoogle = function(element) {
         if($scope.name == ""){
             return true;
         }
