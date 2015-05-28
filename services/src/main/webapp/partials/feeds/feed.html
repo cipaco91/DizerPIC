@@ -33,17 +33,36 @@
                                                         </div>
                                                         <div class="panel-body">
                                                             <textarea name="status" class="form-control share-text"
-                                                                      rows="3"
+                                                                      rows="3" ng-change="changePost()"
+                                                                      ng-model="postText"
                                                                       placeholder="Share your status..."></textarea>
                                                         </div>
                                                         <div class="panel-footer share-buttons">
                                                             <a href="#"><i class="fa fa-map-marker"></i></a>
                                                             <a href="#"><i class="fa fa-photo"></i></a>
                                                             <a href="#"><i class="fa fa-video-camera"></i></a>
-                                                            <button type="submit"
-                                                                    class="btn btn-primary btn-xs pull-right display-none"
+                                                            <button type="submit" ng-show="postVisible" ng-click="postAction()"
+                                                                    class="btn btn-primary btn-xs pull-right"
                                                                     href="#">Post
                                                             </button>
+
+                                                            <a ng-show="postVisible" ng-click="clickFacebook()"
+                                                               class="{{classFacebook}}">
+                                                                <i class="icon-facebook"></i>
+                                                            </a>
+                                                            <a ng-show="postVisible" ng-click="clickTwitter()"
+                                                               class="{{classTwitter}}">
+                                                                <i class="icon-twitter"></i>
+                                                            </a>
+                                                            <a ng-show="postVisible" ng-click="clickLinkedin()"
+                                                               class="{{classLinkedin}}">
+                                                                <i class="icon-linkedin"></i>
+                                                            </a>
+                                                            <a ng-show="postVisible" ng-click="clickGoogle()"
+                                                               class="{{classGoogle}}">
+                                                                <i class="icon-google-plus"></i>
+                                                            </a>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -52,9 +71,9 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li ng-repeat="feed in feedFacebook" class="media media-clearfix-x" >
+                                <li ng-repeat="feed in feedFacebook" class="media media-clearfix-x">
                                     <div ng-if="feed.feedType == 'PHOTO'">
-                                       <div ng-include ="'partials/feeds/feedPhotoPostF.html'"></div>
+                                        <div ng-include="'partials/feeds/feedPhotoPostF.html'"></div>
                                     </div>
                                     <div ng-if="feed.feedType == 'VIDEO'">
                                         <ng-include src="'partials/feeds/feedVideoPostF.html'"></ng-include>
@@ -69,10 +88,10 @@
                                         <ng-include src="'partials/feeds/feedStatusStory.html'"></ng-include>
                                     </div>
                                     <div ng-if="feed.socialNetworkType == 'twitter'">
-                                        <div ng-include ="'partials/feeds/tweet.html'"></div>
+                                        <div ng-include="'partials/feeds/tweet.html'"></div>
                                     </div>
                                     <div ng-if="feed.socialNetworkType == 'linkedin'">
-                                        <div ng-include ="'partials/feeds/feedVirlL.html'"></div>
+                                        <div ng-include="'partials/feeds/feedVirlL.html'"></div>
                                     </div>
                                 </li>
                             </ul>
@@ -83,20 +102,20 @@
                 <!--</ul>-->
             </div>
             <!--<div class="col-md-3">-->
-                <!--<ul class="nav timeline-months">-->
-                    <!--<li class="active"><a href="#october"><i class="fa fa-calendar fa-fw"></i>October</a>-->
-                    <!--</li>-->
-                    <!--<li><a href="#september"><i class="fa fa-calendar fa-fw"></i>September</a>-->
-                    <!--</li>-->
-                    <!--<li><a href="#august"><i class="fa fa-calendar fa-fw"></i>August</a>-->
-                    <!--</li>-->
-                    <!--<li><a href="#july"><i class="fa fa-calendar fa-fw"></i>July</a>-->
-                    <!--</li>-->
-                    <!--<li><a href="#june"><i class="fa fa-calendar fa-fw"></i>June</a>-->
-                    <!--</li>-->
-                    <!--<li><a href="#may"><i class="fa fa-calendar fa-fw"></i>May</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
+            <!--<ul class="nav timeline-months">-->
+            <!--<li class="active"><a href="#october"><i class="fa fa-calendar fa-fw"></i>October</a>-->
+            <!--</li>-->
+            <!--<li><a href="#september"><i class="fa fa-calendar fa-fw"></i>September</a>-->
+            <!--</li>-->
+            <!--<li><a href="#august"><i class="fa fa-calendar fa-fw"></i>August</a>-->
+            <!--</li>-->
+            <!--<li><a href="#july"><i class="fa fa-calendar fa-fw"></i>July</a>-->
+            <!--</li>-->
+            <!--<li><a href="#june"><i class="fa fa-calendar fa-fw"></i>June</a>-->
+            <!--</li>-->
+            <!--<li><a href="#may"><i class="fa fa-calendar fa-fw"></i>May</a>-->
+            <!--</li>-->
+            <!--</ul>-->
             <!--</div>-->
         </div>
     </div>

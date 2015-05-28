@@ -112,7 +112,18 @@ body.bodyImagesPage {
     opacity: 1;
     /*background-image: url(../assets/img/paddle_next_fff.png);*/
 }
-
+.classFacebook{
+    background-color: #000000;
+}
+.classTwiter{
+    background-color: #000000;
+}
+.classLinkedin{
+    background-color: #000000;
+}
+.classGoogle{
+    background-color: #000000;
+}
 
 
 /*---------------------------------------------------------
