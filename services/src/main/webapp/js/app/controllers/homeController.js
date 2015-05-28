@@ -1,6 +1,6 @@
 function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuService,$controller) {
 
-
+    $rootScope.bodylayout = 'login2';
     $scope.facebookVisible=$routeParams.facebook;
     $scope.twitterVisible=$routeParams.twitter;
     $scope.linkedinVisible=$routeParams.linkedn;
@@ -37,7 +37,7 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
     });
 
     MenuService.isConnectGoogle().success(function (response) {
-        $scope.googleVisible2=response;
+        $scope.googleVisible=response;
         //if($scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
         //    &&$scope.googleVisible=='true'){
         //    UsersService.setLoginActive().success(function (response) {
