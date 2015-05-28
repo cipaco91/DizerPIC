@@ -70,7 +70,7 @@ public class SocialConfig implements SocialConfigurer {
 			facebookConnectionFactory.setScope("user_birthday, user_religion_politics, user_relationships, user_relationship_details, user_hometown, user_location, user_likes, user_education_history, user_work_history, user_website, user_groups, user_managed_groups, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_games_activity, user_tagged_places, user_posts, read_stream, read_mailbox, email, read_custom_friendlists, user_actions.books, user_actions.music, user_actions.video, user_actions.news, user_actions.fitness, public_profile");
 			cfConfig.addConnectionFactory(facebookConnectionFactory);
 			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("77f94iq6kehtaz", "GHoKSQzyrnMRMliR");
-			GoogleConnectionFactory googleConnectionFactory=new GoogleConnectionFactory("228405855270-fej1hiuj0vcc1nmb650o9nkprtn2bm4e.apps.googleusercontent.com","GofqiVBNd5W0iOxpGQpsjD5Z");
+			GoogleConnectionFactory googleConnectionFactory=new GoogleConnectionFactory("228405855270-fej1hiuj0vcc1nmb650o9nkprtn2bm4e.apps.googleusercontent.com","J7A5_WcixV7not4AHwnUoyrF");
 //			LinkedInConnectionFactory linkedInConnectionFactory=new LinkedInConnectionFactory("754fvz2njoxqfm", "rolyKemRYmBXxlDJ");
 //			linkedInConnectionFactory.setScope("r_fullprofile,r_basicprofile,rw_groups,w_share,r_network,rw_nus,r_emailaddress,rw_company_admin,w_messages");
 			cfConfig.addConnectionFactory(linkedInConnectionFactory);

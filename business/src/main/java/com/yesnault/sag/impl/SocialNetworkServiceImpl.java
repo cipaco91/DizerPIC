@@ -66,8 +66,11 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Inject
     private TwitterService twitterService;
 
+    @Inject
+    private GoogleService googleService;
+
     @Override
-    public void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String message) {
+    public void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, Boolean googleFlag, String message) {
         if (facebookFlag) {
             facebook.feedOperations().updateStatus(message);
         }
@@ -77,10 +80,14 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         if (linkedinFlag) {
             linkedIn.networkUpdateOperations().createNetworkUpdate(message);
         }
+
+        if (googleFlag) {
+            google.plusOperations().getActivities("").hashCode();
+        }
     }
 
     @Override
-    public void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String search) {
+    public void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, Boolean googleFlag, String search) {
         if (facebookFlag) {
             facebook.userOperations().search(search);
         }
@@ -91,6 +98,10 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             SearchParameters searchParameters = new SearchParameters();
             searchParameters.setFirstName(search);
             linkedIn.profileOperations().search(searchParameters);
+        }
+
+        if(googleFlag){
+            google.plusOperations().searchPeople(search,null);
         }
     }
 
@@ -103,6 +114,8 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             return "data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage());
         } else if ("twitter".equals(userProfile.getFromProfileImage())) {
             return twitter.userOperations().getUserProfile().getProfileImageUrl();
+        } else if ("google".equals(userProfile.getFromProfileImage())) {
+            return google.plusOperations().getGoogleProfile().getImageUrl();
         } else {
             return linkedinService.getUserProfile().getProfilePictureUrl();
         }
@@ -122,6 +135,13 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                     facebook.userOperations().getUserProfile().getGender(), twitter.userOperations().getUserProfile().getName(),
                     facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
                     facebook.userOperations().getUserProfile().getAbout());
+        } else if ("google".equals(userProfile.getFromProfileAbout())) {
+            Person person=google.plusOperations().getGoogleProfile();
+            return new ProfileSN(person.getId(),
+                    person.getGender(), facebook.userOperations().getUserProfile().getName(),
+                    linkedIn.profileOperations().getUserProfileFull().getEmailAddress(), person.getBirthday().toString(),
+                    person.getAboutMe(), "Bucuresti,Romania",
+                    "in_a_relationship".equals(person.getRelationshipStatus())?"In a relantionship":"Single");
         } else {
             return new ProfileSN(linkedIn.profileOperations().getProfileId(), facebook.userOperations().getUserProfile().getGender(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
                     " " + linkedIn.profileOperations().getUserProfileFull().getLastName(),
@@ -139,13 +159,19 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         if (user != null) {
             UserProfile userProfile = userProfileRepository.findByUser(user);
             if ("facebook".equals(userProfile.getFromProfileFriends())) {
-
             } else if ("twitter".equals(userProfile.getFromProfileFriends())) {
                 List<SNFriend> snFriendList = twitterService.getFollowers();
                 if (snFriendList.size() > 10) {
                     snFriends.addAll(twitterService.getFriends().subList(0, 10));
                 } else {
                     snFriends.addAll(twitterService.getFriends());
+                }
+            } else if ("google".equals(userProfile.getFromProfileFriends())) {
+                List<SNFriend> snFriendList = googleService.findFriends();
+                if (snFriendList.size() > 10) {
+                    snFriends.addAll(snFriendList.subList(0, 10));
+                } else {
+                    snFriends.addAll(snFriendList);
                 }
             } else {
                 snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));

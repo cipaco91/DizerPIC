@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface SocialNetworkService {
 
-    void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String message);
+    void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag,Boolean googleFlag, String message);
 
-    void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, String search);
+    void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag,Boolean googleFlag, String search);
 
     String profileImageURL(User user);
 

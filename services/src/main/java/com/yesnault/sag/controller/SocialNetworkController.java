@@ -41,18 +41,19 @@ public class SocialNetworkController {
     @Inject
     private FacebookService facebookService;
 
-    @RequestMapping(value = "/postStatus/{facebookFlag}/{twitterFlag}/{linkedinFlag}", method = RequestMethod.POST)
+    @RequestMapping(value = "/postStatus/{facebookFlag}/{twitterFlag}/{linkedinFlag}/{googleFlag}", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void postStatus(@PathVariable Boolean facebookFlag, @PathVariable Boolean twitterFlag,
-                           @PathVariable Boolean linkedinFlag, @RequestBody String message) {
-        socialNetworkService.updateStatus(facebookFlag, twitterFlag, linkedinFlag, message);
+                           @PathVariable Boolean linkedinFlag,  @PathVariable Boolean googleFlag,
+                           @RequestBody String message) {
+        socialNetworkService.updateStatus(facebookFlag, twitterFlag, linkedinFlag,googleFlag, message);
     }
 
     @RequestMapping(value = "/searchFriends", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
     List<User> searchFriends(@RequestBody String message) {
-        socialNetworkService.searchFriends(true,true,true,message);
+        socialNetworkService.searchFriends(true,true,true,true,message);
         return new ArrayList<User>();
     }
 
