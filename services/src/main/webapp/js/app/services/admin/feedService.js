@@ -17,6 +17,9 @@ app.factory("FeedService", function ($http) {
         },
         addLike: function (id) {
             return $http.post('rest/addLike/'+id);
+        },
+        postSocialNetwork: function (facebookFlag,twitterFlag,linkedinFlag,googleFlag,postText) {
+            return $http.post('rest/postStatus/'+facebookFlag+"/"+twitterFlag+"/"+linkedinFlag+"/"+googleFlag,postText);
         }
     }
 });

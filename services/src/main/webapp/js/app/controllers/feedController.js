@@ -49,37 +49,57 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, MenuService, $
     $scope.clickFacebook = function (src) {
         if ($scope.classFacebook == "classFacebook") {
             $scope.classFacebook = "";
+        } else {
+            $scope.classFacebook = "classFacebook";
         }
-        $scope.classFacebook = "classFacebook";
     };
 
     $scope.clickTwitter = function (src) {
         if ($scope.classTwitter == "classTwitter") {
             $scope.classTwitter = "";
+        } else {
+            $scope.classTwitter = "classTwitter";
         }
-        $scope.classTwitter = "classTwitter";
     };
 
     $scope.clickLinkedin = function (src) {
         if ($scope.classLinkedin == "classLinkedin") {
             $scope.classLinkedin = "";
+        } else {
+            $scope.classLinkedin = "classLinkedin";
         }
-        $scope.classLinkedin = "classLinkedin";
     };
 
     $scope.clickGoogle = function (src) {
         if ($scope.classGoogle == "classGoogle") {
             $scope.classGoogle = "";
+        } else {
+            $scope.classGoogle = "classGoogle";
         }
-        $scope.classGoogle = "classGoogle";
     };
 
     $scope.postAction = function (src) {
-        $scope.classGoogle = "";
-        $scope.classLinkedin = "";
-        $scope.classTwitter = "";
-        $scope.classFacebook = "";
-        $scope.postText="";
+        $scope.facebookFlag = $scope.classFacebook == "classFacebook";
+        $scope.twitterFlag = $scope.classTwitter == "classTwitter";
+        $scope.linkedinFlag = $scope.classLinkedin == "classLinkedin";
+        $scope.googleFlag = $scope.classGoogle == "classGoogle";
+
+        FeedService.postSocialNetwork($scope.facebookFlag, $scope.twitterFlag, $scope.linkedinFlag,   $scope.googleFlag,
+                         $scope.postText).success(function (users) {
+            $scope.classGoogle = "";
+            $scope.classLinkedin = "";
+            $scope.classTwitter = "";
+            $scope.classFacebook = "";
+            $scope.postText = "";
+        })
+            .error(function (resp) {
+                console.log("Error with FeedService.postSocialNetwork" + resp);
+            });
+        ;
+
+
+
+
     };
 
     //FeedService.findFeedLinkedin().
