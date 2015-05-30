@@ -30,7 +30,7 @@ public class UsersController {
     public
     @ResponseBody
     List<User> list() {
-        List<User> users = userService.findByLastname("ciprian");
+        List<User> users = userService.findByUsername("ciprian");
         if (users.size() > 0) {
             System.out.println(users.get(0).getLastname());
         }

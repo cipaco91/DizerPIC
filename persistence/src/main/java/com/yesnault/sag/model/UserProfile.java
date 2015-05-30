@@ -13,6 +13,18 @@ public class UserProfile extends AbstractEntity{
     @JoinColumn(name = "FK_USER_ID", referencedColumnName = "id")
     private User user;
 
+    @Column(name = "FACEBOOK_FLAG", nullable = false, insertable = true, updatable = true)
+    private Boolean facebookFlag;
+
+    @Column(name = "TWITTER_FLAG", nullable = false, insertable = true, updatable = true)
+    private Boolean twitterFlag;
+
+    @Column(name = "LINKEDIN_FLAG", nullable = false, insertable = true, updatable = true)
+    private Boolean linkedinFlag;
+
+    @Column(name = "GOOGLE_FLAG", nullable = false, insertable = true, updatable = true)
+    private Boolean googleFlag;
+
     @Column(name = "FROM_PROFILE_IMAGE", nullable = false, insertable = true, updatable = true)
     private String fromProfileImage;
 
@@ -74,5 +86,37 @@ public class UserProfile extends AbstractEntity{
 
     public void setFromProfileCover(String fromProfileCover) {
         this.fromProfileCover = fromProfileCover;
+    }
+
+    public Boolean getFacebookFlag() {
+        return facebookFlag;
+    }
+
+    public void setFacebookFlag(Boolean facebookFlag) {
+        this.facebookFlag = facebookFlag;
+    }
+
+    public Boolean getTwitterFlag() {
+        return twitterFlag;
+    }
+
+    public void setTwitterFlag(Boolean twitterFlag) {
+        this.twitterFlag = twitterFlag;
+    }
+
+    public Boolean getLinkedinFlag() {
+        return linkedinFlag;
+    }
+
+    public void setLinkedinFlag(Boolean linkedinFlag) {
+        this.linkedinFlag = linkedinFlag;
+    }
+
+    public Boolean getGoogleFlag() {
+        return googleFlag;
+    }
+
+    public void setGoogleFlag(Boolean googleFlag) {
+        this.googleFlag = googleFlag;
     }
 }

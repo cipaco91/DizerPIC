@@ -3,6 +3,7 @@ package com.yesnault.sag.impl;
 import com.yesnault.sag.interfaces.GoogleService;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
+import org.springframework.social.facebook.api.Album;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.plus.Activity;
@@ -44,6 +45,34 @@ public class GoogleServiceImpl implements GoogleService {
     @Override
     public List<SNFeed> findFeeds() {
         List<Activity> activities = google.plusOperations().searchPublicActivities("home", null).getItems();
+        for(Activity activity:activities){
+            SNFeed snFeed=new SNFeed();
+            snFeed.setSocialNetworkType("google");
+            snFeed.setFrom(new Reference(activity.getActor().getDisplayName(),activity.getActor().getDisplayName()));
+            snFeed.setPhotoFrom(activity.getActor().getImageUrl());
+            snFeed.setUpdatedTime(activity.getUpdated());
+            if(activity.getAttachments()!=null){
+                Activity.Attachment attachment=activity.getAttachments().get(0);
+                if(attachment instanceof Activity.Article){
+                    snFeed.setFeedType("article");
+                }else if(attachment instanceof Activity.Album){
+                    snFeed.setFeedType("album");
+                }else if(attachment instanceof Activity.Event){
+                    snFeed.setFeedType("event");
+                }else if(attachment instanceof Activity.Photo){
+                    snFeed.setPicture(attachment.getPreviewImageUrl());
+                    snFeed.setMessage(attachment.getContent());
+                    snFeed.setFeedType("photoGoogle");
+                }else if(attachment instanceof Activity.Video){
+                    snFeed.setFeedType("videoGoogle");
+                    snFeed.setSrc(((Activity.Video)attachment).getUrl());
+                    snFeed.setMessage(attachment.getContent());
+                }else if(attachment instanceof Activity.Audio){
+                    snFeed.setFeedType("audio");
+                }
+            }
+
+        }
         return null;
     }
 

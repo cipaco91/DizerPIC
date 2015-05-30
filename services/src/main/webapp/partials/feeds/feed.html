@@ -90,8 +90,11 @@
                                     <div ng-if="feed.socialNetworkType == 'twitter'">
                                         <div ng-include="'partials/feeds/tweet.html'"></div>
                                     </div>
-                                    <div ng-if="feed.socialNetworkType == 'linkedin'">
-                                        <div ng-include="'partials/feeds/feedVirlL.html'"></div>
+                                    <div ng-if="feed.feedType == 'photoGoogle'">
+                                        <div ng-include="'partials/feeds/feedPhotoGoogle.html'"></div>
+                                    </div>
+                                    <div ng-if="feed.feedType == 'videoGoogle'">
+                                        <div ng-include="'partials/feeds/feedVideoGoogle.html'"></div>
                                     </div>
                                 </li>
                             </ul>

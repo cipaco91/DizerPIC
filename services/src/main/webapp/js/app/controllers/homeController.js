@@ -6,6 +6,8 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
     $scope.linkedinVisible=$routeParams.linkedn;
     $scope.googleVisible=$routeParams.google;
 
+
+
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;
         //if($scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'

@@ -55,14 +55,8 @@ public class UserServiceImpl implements UserService {
     private Google google;
 
     @Override
-    public List<User> findByLastname(String lastname) {
-        try {
-            LinkedInProfile linkedInProfile = linkedIn.profileOperations().getUserProfile();
-            TwitterProfile twitterProfile = twitter.userOperations().getUserProfile();
-            PagedList<Post> posts = facebook.feedOperations().getFeed();
-        } catch (Exception e) {
-        }
-        return userRepository.findByLastname(lastname);
+    public List<User> findByUsername(String lastname) {
+        return userRepository.findByUsername(lastname);
     }
 
     @Override
@@ -82,6 +76,10 @@ public class UserServiceImpl implements UserService {
         user = userRepository.save(user);
         UserProfile userProfile = new UserProfile();
         userProfile.setUser(user);
+        userProfile.setFacebookFlag(wizzardDTO.getIsFacebook());
+        userProfile.setTwitterFlag(wizzardDTO.getIsTwitter());
+        userProfile.setLinkedinFlag(wizzardDTO.getIsLinkedin());
+        userProfile.setGoogleFlag(wizzardDTO.getIsGoogle());
         userProfile.setFromProfileImage(wizzardDTO.getProfileImage());
         userProfile.setFromProfileAbout(wizzardDTO.getProfileAbout());
         userProfile.setFromProfileCover(wizzardDTO.getProfileCover());

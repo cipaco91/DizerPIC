@@ -265,6 +265,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     public List<SNFeed> getFeed() {
         List<SNFeed> snFeeds = facebookService.getFeed();
         snFeeds.addAll(twitterService.getFeed());
+        snFeeds.addAll(googleService.findFeeds());
 //        try {
 //            snFeeds.addAll(linkedinService.getFeed());
 //        }catch(Exception e){
