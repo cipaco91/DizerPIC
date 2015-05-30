@@ -75,6 +75,11 @@ public class SocialConfig implements SocialConfigurer {
 //			linkedInConnectionFactory.setScope("r_fullprofile,r_basicprofile,rw_groups,w_share,r_network,rw_nus,r_emailaddress,rw_company_admin,w_messages");
 			cfConfig.addConnectionFactory(linkedInConnectionFactory);
 			googleConnectionFactory.setScope("https://www.googleapis.com/auth/plus.login");
+//					"https://www.googleapis.com/auth/plus.stream.write," +
+//					"https://www.googleapis.com/auth/plus.circles.read," +
+//					"https://www.googleapis.com/auth/plus.circles.write,"+
+//					"https://www.googleapis.com/auth/plus.stream.read," +
+//					"https://www.googleapis.com/auth/plus.media.upload");
 			cfConfig.addConnectionFactory(googleConnectionFactory);
 			flag=false;
 		}
