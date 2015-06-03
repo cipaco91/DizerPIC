@@ -10,21 +10,21 @@
                 <label class="col-sm-3 control-label">First Name</label>
 
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="First Name:">
+                    <input type="text" class="form-control" placeholder="First Name:"  ng-model="firstName">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Last Name</label>
 
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="Last Name:">
+                    <input type="text" class="form-control" placeholder="Last Name:" ng-model="lastName">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">Email</label>
 
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" placeholder="Email: ">
+                    <input type="text" class="form-control" placeholder="Email: " ng-model="email">
                 </div>
             </div>
             <br>
@@ -51,12 +51,12 @@
 
                 <div class="col-sm-9">
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="inlineCheckbo11xF2" ng-model="yesFacebook">
+                        <input type="checkbox" id="inlineCheckbo11xF2" ng-model="yesTwitter">
                         <label for="inlineCheckbo11xF2">Yes</label>
                     </div>
 
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="inlineCheckboxF31ss" ng-model="noFacebook">
+                        <input type="checkbox" id="inlineCheckboxF31ss" ng-model="noTwitter">
                         <label for="inlineCheckboxF31ss">No</label>
                     </div>
                 </div>
@@ -67,12 +67,12 @@
 
                 <div class="col-sm-9">
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="inlineCheckboxF222" ng-model="yesFacebook">
+                        <input type="checkbox" id="inlineCheckboxF222" ng-model="yesLinkedin">
                         <label for="inlineCheckboxF222">Yes</label>
                     </div>
 
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="inlineCheckboxF3121" ng-model="noFacebook">
+                        <input type="checkbox" id="inlineCheckboxF3121" ng-model="noLinkedin">
                         <label for="inlineCheckboxF3121">No</label>
                     </div>
                 </div>
@@ -83,12 +83,12 @@
 
                 <div class="col-sm-9">
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="inlineCheckboxF233" ng-model="yesFacebook">
+                        <input type="checkbox" id="inlineCheckboxF233" ng-model="yesGoogle">
                         <label for="inlineCheckboxF233">Yes</label>
                     </div>
 
                     <div class="checkbox checkbox-success checkbox-inline">
-                        <input type="checkbox" id="inlineCheckboxF3111" ng-model="noFacebook">
+                        <input type="checkbox" id="inlineCheckboxF3111" ng-model="noGoogle">
                         <label for="inlineCheckboxF3111">No</label>
                     </div>
                 </div>
@@ -223,8 +223,8 @@
             </div>
 
             <div class="form-group margin-none">
-                <div >
-                    <button type="submit" class="btn btn-primary">Save</button>
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
                 </div>
             </div>
 

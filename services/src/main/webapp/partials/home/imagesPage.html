@@ -1,10 +1,5 @@
 <ng-include src="'partials/menu/menu.html'"></ng-include>
 
-
-<!--<div>-->
-    <!--<img ng-repeat="album in albums" ng-src="{{album.photoCover.picture}}">-->
-<!--</div>-->
-
 <div class="container slider">
     <img ng-repeat="slide in slides" style="width: 950px;height: 700px;margin-left: 70px;"
          ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.source}}">

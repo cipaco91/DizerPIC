@@ -72,6 +72,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, Boolean googleFlag, String message) {
         if (facebookFlag) {
+//            facebook.pageOperations().post()
             facebook.feedOperations().updateStatus(message);
         }
         if (twitterFlag) {
@@ -109,48 +110,54 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public String profileImageURL(User user) {
         UserProfile userProfile = userProfileRepository.findByUser(user);
-        if ("facebook".equals(userProfile.getFromProfileImage())) {
-            BASE64Encoder encoder = new BASE64Encoder();
-            return "data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage());
-        } else if ("twitter".equals(userProfile.getFromProfileImage())) {
-            return twitter.userOperations().getUserProfile().getProfileImageUrl();
-        } else if ("google".equals(userProfile.getFromProfileImage())) {
-            return google.plusOperations().getGoogleProfile().getImageUrl();
-        } else {
-            return linkedinService.getUserProfile().getProfilePictureUrl();
+        if(userProfile!=null) {
+            if ("facebook".equals(userProfile.getFromProfileImage())) {
+                BASE64Encoder encoder = new BASE64Encoder();
+                return "data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage());
+            } else if ("twitter".equals(userProfile.getFromProfileImage())) {
+                return twitter.userOperations().getUserProfile().getProfileImageUrl();
+            } else if ("google".equals(userProfile.getFromProfileImage())) {
+                return google.plusOperations().getGoogleProfile().getImageUrl();
+            } else {
+                return linkedinService.getUserProfile().getProfilePictureUrl();
+            }
         }
+        return "noPhoto";
     }
 
     @Override
     public ProfileSN getProfileUser(User user) {
         UserProfile userProfile = userProfileRepository.findByUser(user);
-        if ("facebook".equals(userProfile.getFromProfileAbout())) {
-            return new ProfileSN(facebook.userOperations().getUserProfile().getId(),
-                    facebook.userOperations().getUserProfile().getGender(), facebook.userOperations().getUserProfile().getName(),
-                    facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
-                    facebook.userOperations().getUserProfile().getAbout(), facebook.userOperations().getUserProfile().getLocation().getName(),
-                    facebook.userOperations().getUserProfile().getRelationshipStatus());
-        } else if ("twitter".equals(userProfile.getFromProfileAbout())) {
-            return new ProfileSN(Long.toString(twitter.userOperations().getUserProfile().getId()),
-                    facebook.userOperations().getUserProfile().getGender(), twitter.userOperations().getUserProfile().getName(),
-                    facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
-                    facebook.userOperations().getUserProfile().getAbout());
-        } else if ("google".equals(userProfile.getFromProfileAbout())) {
-            Person person=google.plusOperations().getGoogleProfile();
-            return new ProfileSN(person.getId(),
-                    person.getGender(), facebook.userOperations().getUserProfile().getName(),
-                    linkedIn.profileOperations().getUserProfileFull().getEmailAddress(), person.getBirthday().toString(),
-                    person.getAboutMe(), "Bucuresti,Romania",
-                    "in_a_relationship".equals(person.getRelationshipStatus())?"In a relantionship":"Single");
-        } else {
-            return new ProfileSN(linkedIn.profileOperations().getProfileId(), facebook.userOperations().getUserProfile().getGender(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
-                    " " + linkedIn.profileOperations().getUserProfileFull().getLastName(),
-                    linkedIn.profileOperations().getUserProfileFull().getEmailAddress(),
-                    facebook.userOperations().getUserProfile().getBirthday(),
-                    linkedIn.profileOperations().getUserProfileFull().getSummary(),
-                    linkedIn.profileOperations().getUserProfileFull().getLocation().getName(),
-                    facebook.userOperations().getUserProfile().getRelationshipStatus());
+        if(userProfile!=null) {
+            if ("facebook".equals(userProfile.getFromProfileAbout())) {
+                return new ProfileSN(facebook.userOperations().getUserProfile().getId(),
+                        facebook.userOperations().getUserProfile().getGender(), facebook.userOperations().getUserProfile().getName(),
+                        facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
+                        facebook.userOperations().getUserProfile().getAbout(), facebook.userOperations().getUserProfile().getLocation().getName(),
+                        facebook.userOperations().getUserProfile().getRelationshipStatus());
+            } else if ("twitter".equals(userProfile.getFromProfileAbout())) {
+                return new ProfileSN(Long.toString(twitter.userOperations().getUserProfile().getId()),
+                        facebook.userOperations().getUserProfile().getGender(), twitter.userOperations().getUserProfile().getName(),
+                        facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
+                        facebook.userOperations().getUserProfile().getAbout());
+            } else if ("google".equals(userProfile.getFromProfileAbout())) {
+                Person person = google.plusOperations().getGoogleProfile();
+                return new ProfileSN(person.getId(),
+                        person.getGender(), facebook.userOperations().getUserProfile().getName(),
+                        linkedIn.profileOperations().getUserProfileFull().getEmailAddress(), person.getBirthday().toString(),
+                        person.getAboutMe(), "Bucuresti,Romania",
+                        "in_a_relationship".equals(person.getRelationshipStatus()) ? "In a relantionship" : "Single");
+            } else {
+                return new ProfileSN(linkedIn.profileOperations().getProfileId(), facebook.userOperations().getUserProfile().getGender(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
+                        " " + linkedIn.profileOperations().getUserProfileFull().getLastName(),
+                        linkedIn.profileOperations().getUserProfileFull().getEmailAddress(),
+                        facebook.userOperations().getUserProfile().getBirthday(),
+                        linkedIn.profileOperations().getUserProfileFull().getSummary(),
+                        linkedIn.profileOperations().getUserProfileFull().getLocation().getName(),
+                        facebook.userOperations().getUserProfile().getRelationshipStatus());
+            }
         }
+        return new ProfileSN();
     }
 
     @Override
@@ -158,25 +165,27 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (user != null) {
             UserProfile userProfile = userProfileRepository.findByUser(user);
-            if ("facebook".equals(userProfile.getFromProfileFriends())) {
-            } else if ("twitter".equals(userProfile.getFromProfileFriends())) {
-                List<SNFriend> snFriendList = twitterService.getFollowers();
-                if (snFriendList.size() > 10) {
-                    snFriends.addAll(twitterService.getFriends().subList(0, 10));
+            if(userProfile!=null) {
+                if ("facebook".equals(userProfile.getFromProfileFriends())) {
+                } else if ("twitter".equals(userProfile.getFromProfileFriends())) {
+                    List<SNFriend> snFriendList = twitterService.getFollowers();
+                    if (snFriendList.size() > 10) {
+                        snFriends.addAll(twitterService.getFriends().subList(0, 10));
+                    } else {
+                        snFriends.addAll(twitterService.getFriends());
+                    }
+                } else if ("google".equals(userProfile.getFromProfileFriends())) {
+                    List<SNFriend> snFriendList = googleService.findFriends();
+                    if (snFriendList.size() > 10) {
+                        snFriends.addAll(snFriendList.subList(0, 10));
+                    } else {
+                        snFriends.addAll(snFriendList);
+                    }
                 } else {
-                    snFriends.addAll(twitterService.getFriends());
+                    snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));
                 }
-            } else if ("google".equals(userProfile.getFromProfileFriends())) {
-                List<SNFriend> snFriendList = googleService.findFriends();
-                if (snFriendList.size() > 10) {
-                    snFriends.addAll(snFriendList.subList(0, 10));
-                } else {
-                    snFriends.addAll(snFriendList);
-                }
-            } else {
-                snFriends.addAll(linkedinService.getSnFriends(linkedIn.connectionOperations().getConnections(1, 11)));
+                return snFriends;
             }
-            return snFriends;
         }
         return snFriends;
     }

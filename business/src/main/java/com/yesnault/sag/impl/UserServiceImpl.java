@@ -74,8 +74,14 @@ public class UserServiceImpl implements UserService {
         user.setProfileConf(true);
         user.setActive(true);
         user = userRepository.save(user);
-        UserProfile userProfile = new UserProfile();
-        userProfile.setUser(user);
+        UserProfile userProfile = null;
+        if(user.getUserProfile()==null){
+            userProfile = new UserProfile();
+            userProfile.setUser(user);
+        }else{
+            userProfile= user.getUserProfile();
+        }
+
         userProfile.setFacebookFlag(wizzardDTO.getIsFacebook());
         userProfile.setTwitterFlag(wizzardDTO.getIsTwitter());
         userProfile.setLinkedinFlag(wizzardDTO.getIsLinkedin());

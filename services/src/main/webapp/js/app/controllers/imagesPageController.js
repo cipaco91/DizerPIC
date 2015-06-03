@@ -6,21 +6,10 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
     $scope.currentIndex = 0;
     $scope.slides = {};
 
-    ProfileService.profileSN().success(function (response) {
-        $scope.userProfile = response;
-    });
-
-    MenuService.isConnectFacebook().success(function (response) {
-        $scope.facebookVisible = response;
-    });
-
-    MenuService.isConnectTwittter().success(function (response) {
-        $scope.twitterVisible = response;
-    });
-
-    MenuService.isConnectLinkedin().success(function (response) {
-        $scope.linkedinVisible = response;
-    });
+    //$scope.setCurrentSlideIndex = function (index) {
+    //    $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
+    //    $scope.currentIndex = index;
+    //};
 
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;

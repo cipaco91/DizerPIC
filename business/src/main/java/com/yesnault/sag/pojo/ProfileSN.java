@@ -23,6 +23,9 @@ public class ProfileSN implements Serializable{
 
     private String location;
 
+    public ProfileSN(){
+    }
+
     public ProfileSN(String id, String gender, String fullName, String email, String birthday, String about) {
         this.id = id;
         this.gender = gender;
