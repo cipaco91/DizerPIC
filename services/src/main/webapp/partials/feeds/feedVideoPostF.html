@@ -4,10 +4,11 @@
 
         <div>
             <a style="background: #fff;font-weight: 700;border: 1px solid #e8e8e8;padding: 4px;border-radius: 5px;margin-top: 5px;display: inline-block"
-                href="#"> {{feed.from.name}}</a>
+               href="#"> {{feed.from.name}}</a>
         </div>
         <div style="background: #fff;font-weight: 700;border: 1px solid #e8e8e8;padding: 4px;border-radius: 5px;margin-top: 5px;display: inline-block"
-             class="date">{{feed.createdTime | date:'dd-MM HH:mm'}}</div>
+             class="date">{{feed.createdTime | date:'dd-MM HH:mm'}}
+        </div>
     </div>
 </div>
 <div class="media-body">
@@ -21,8 +22,12 @@
                     <br/>
                     <label>{{feed.message}}</label>
                     <br/>
+
                     <div class="profile-icons">
-                        <a ng-click="addLike(feed.id)" style="color:blue;margin-left: 10px;">Like</a>
+                        <a ng-click="addLike(feed)"
+                           ng-show="likeShow" style="color:blue;margin-left: 10px;">Like</a>
+                        <a ng-click="unlike(feed)"
+                           ng-hide="likeShow" style="color:blue;margin-left: 10px;">Unlike</a>
                         <span><i class="fa fa-users"></i> {{feed.likesCount}} Likes</span>
                         <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
                         <img src="images/social/facebook-icon.png"
@@ -30,7 +35,7 @@
                     </div>
                     <br/>
                     <ul class="comments">
-                        <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds">
+                        <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds track by $index">
                             <div class="media-left">
                                 <a href="">
                                     <img src="{{commentFeed.photoCommentFrom}}" width="50px" class="img-circle">
@@ -45,7 +50,7 @@
                                 <a href="" class="comment-author">{{commentFeed.comment.from.name}}</a>
                                 <span>{{commentFeed.comment.message}}</span>
 
-                                <div class="comment-date">2 days</div>
+                                <div class="comment-date">{{commentFeed.commentDate}}</div>
                             </div>
                         </li>
                     </ul>
@@ -53,7 +58,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control"/>
                                                                         <span class="input-group-btn">
-                                <a ng-click="addComment(feed.id)" class="btn btn-default"><img src="images/accept.png"/></a>
+                                <a ng-click="addComment(feed)" class="btn btn-default"><img src="images/accept.png"/></a>
                             </span>
                         </div>
                     </li>

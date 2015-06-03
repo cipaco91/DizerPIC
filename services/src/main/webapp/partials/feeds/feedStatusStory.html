@@ -18,7 +18,10 @@
                     <label>{{feed.story}}</label>
                     <br/>
                     <div class="profile-icons">
-                        <a href="#" style="color:blue;margin-left: 10px;">Like</a>
+                        <a ng-click="addLike(feed)"
+                           ng-show="likeShow" style="color:blue;margin-left: 10px;">Like</a>
+                        <a ng-click="unlike(feed)"
+                           ng-hide="likeShow" style="color:blue;margin-left: 10px;">Unlike</a>
                         <span><i class="fa fa-users"></i> {{feed.likesCount}} Likes</span>
                         <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
                         <img src="images/social/facebook-icon.png"
@@ -26,7 +29,7 @@
                     </div>
                     <br/>
                     <ul class="comments">
-                        <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds">
+                        <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds track by $index">
                             <div class="media-left">
                                 <a href="">
                                     <img src="{{commentFeed.photoCommentFrom}}" width="50px" class="img-circle">
@@ -41,7 +44,7 @@
                                 <a href="" class="comment-author">{{commentFeed.comment.from.name}}</a>
                                 <span>{{commentFeed.comment.message}}</span>
 
-                                <div class="comment-date">2 days</div>
+                                <div class="comment-date">{{commentFeed.commentDate}}</div>
                             </div>
                         </li>
                         <li class="comment-form">

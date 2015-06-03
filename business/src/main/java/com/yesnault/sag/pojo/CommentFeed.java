@@ -13,6 +13,7 @@ public class CommentFeed implements Serializable{
 
     private Comment comment;
     private String photoCommentFrom;
+    private String commentDate;
 
     public Comment getComment() {
         return comment;
@@ -28,5 +29,13 @@ public class CommentFeed implements Serializable{
 
     public void setPhotoCommentFrom(String photoCommentFrom) {
         this.photoCommentFrom = photoCommentFrom;
+    }
+
+    public String getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
     }
 }

@@ -84,6 +84,13 @@ public class FacebookController {
         facebookService.addLike(id);
     }
 
+    @RequestMapping(value = "/unlike/{id}", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    void unlike(@PathVariable String id) {
+        facebookService.unlike(id);
+    }
+
 
 
 

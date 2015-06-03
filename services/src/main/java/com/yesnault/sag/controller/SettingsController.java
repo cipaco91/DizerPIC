@@ -1,15 +1,23 @@
 package com.yesnault.sag.controller;
 
+import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
+import com.yesnault.sag.pojo.CommentFeed;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.util.WizzardDTO;
+import org.springframework.social.facebook.api.Comment;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +28,9 @@ public class SettingsController {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private Facebook facebook;
 
     @RequestMapping(value = "/wizzardDTO", method = RequestMethod.GET, produces = "application/json")
     public
@@ -57,4 +68,17 @@ public class SettingsController {
         return userService.saveUserWizzardProfile(wizzardDTO, (User) httpServletRequest.getSession().getAttribute("user"));
     }
 
+    @RequestMapping(value = "/commentFeed", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    CommentFeed getCommentFeed(HttpServletRequest httpServletRequest) {
+        CommentFeed commentFeed = new CommentFeed();
+        commentFeed.setComment(new Comment(facebook.userOperations().getUserProfile().getId(),
+                new Reference(facebook.userOperations().getUserProfile().getId(),
+                        facebook.userOperations().getUserProfile().getName()), "frumos", new Date()));
+        commentFeed.setCommentDate("now");
+        BASE64Encoder encoder = new BASE64Encoder();
+        commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage()));
+        return commentFeed;
+    }
 }

@@ -21,6 +21,9 @@ app.factory("ProfileService", function ($http) {
         getWizzardDTO: function () {
             return $http.get('rest/wizzardDTO');
         },
+        getCommentFeed: function () {
+            return $http.get('rest/commentFeed');
+        },
         finishWizzardProfile: function (entity) {
             return $http.post('rest/finishWizzardProfile',entity);
         },

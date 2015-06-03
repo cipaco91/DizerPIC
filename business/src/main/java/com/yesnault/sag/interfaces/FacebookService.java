@@ -44,4 +44,6 @@ public interface FacebookService {
     String addComment(String id, String message);
 
     void addLike(String id);
+
+    void unlike(String id);
 }

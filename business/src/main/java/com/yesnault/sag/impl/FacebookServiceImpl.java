@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Ciprian on 3/22/2015.
@@ -155,6 +156,11 @@ public class FacebookServiceImpl implements FacebookService {
         facebook.likeOperations().like(id);
     }
 
+    @Override
+    public void unlike(String id) {
+        facebook.likeOperations().unlike(id);
+    }
+
     private List<SNFriend> getSnFriends(List<Reference> references) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Reference reference : references) {
@@ -203,6 +209,27 @@ public class FacebookServiceImpl implements FacebookService {
                             CommentFeed commentFeed = new CommentFeed();
                             commentFeed.setComment(comment);
                             commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                            long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
+                            long minutes= TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
+                                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
+
+                           if(minutes<60){
+                                commentFeed.setCommentDate(minutes+" minutes ago");
+                            }else if(minutes>60){
+                                long hours=minutes/60;
+                                if(hours == 1) {
+                                    commentFeed.setCommentDate(hours + " hour ago ");
+                                }else{
+                                    if(hours>24) {
+                                        long days = hours / 24;
+                                        commentFeed.setCommentDate(days + " days ago ");
+                                    }else{
+                                        commentFeed.setCommentDate(hours + " hours ago ");
+                                    }
+
+                                }
+                            }
+
                             commentFeeds.add(commentFeed);
                         }
                     } else {

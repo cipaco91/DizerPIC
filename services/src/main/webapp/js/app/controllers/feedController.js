@@ -1,4 +1,4 @@
-function FeedCtrl($scope, $location, FeedService, ProfileService, MenuService, $controller, $sce) {
+function FeedCtrl($scope, $location, FeedService, ProfileService,  $controller, $sce) {
 
     angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
@@ -8,14 +8,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, MenuService, $
     $scope.date = new Date();
     $scope.postVisible = false;
     $scope.postText = "";
-
-    //FeedService.findFeedTwitter().
-    //    success(function (users) {
-    //        $scope.feedTwitter = users;
-    //    })
-    //    .error(function (resp) {
-    //        console.log("Error with FriendsService.findFriendsTwitter" + resp);
-    //    });
+    $scope.likeShow=true;
 
     FeedService.findFeedFacebook().
         success(function (users) {
@@ -25,9 +18,18 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, MenuService, $
             console.log("Error with FriendsService.feedFacebook" + resp);
         });
 
-    $scope.addLike = function (feedId) {
-        console.log(feedId);
-        FeedService.addLike(feedId);
+    $scope.addLike = function (feed) {
+        console.log(feed.id);
+        FeedService.addLike(feed.id);
+        $scope.likeShow=false;
+        feed.likesCount=feed.likesCount+1;
+    };
+
+    $scope.unlike = function (feed) {
+        console.log(feed.id);
+        FeedService.unlike(feed.id);
+        $scope.likeShow=true;
+        feed.likesCount=feed.likesCount-1;
     };
 
     $scope.changePost = function () {
@@ -38,9 +40,14 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, MenuService, $
         }
     };
 
-    $scope.addComment = function (feedId) {
-        console.log(feedId);
-        FeedService.addComment(feedId, ':)');
+    $scope.addComment = function (feed) {
+        console.log(feed.id);
+        //FeedService.addComment(feed.id, $scope.postText);
+        feed.commentsCount=feed.commentsCount+1;
+        ProfileService.getCommentFeed().success(function (response) {
+            $scope.commentFeed = response;
+            feed.commentsFeeds.push($scope.commentFeed);
+        });
     };
 
     $scope.trustSrc = function (src) {
