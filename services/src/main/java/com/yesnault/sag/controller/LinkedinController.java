@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,13 +48,9 @@ public class LinkedinController {
     @RequestMapping(value = "/isConnectLinkedin", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    boolean isConnectLinkedin(){
-        return linkedinService.isConnectLinkedin();
+    boolean isConnectLinkedin(HttpServletRequest httpServletRequest){
+        User user = (User) httpServletRequest.getSession().getAttribute("user");
+        return linkedinService.isConnectLinkedin(user);
     }
-
-
-
-
-
 
 }

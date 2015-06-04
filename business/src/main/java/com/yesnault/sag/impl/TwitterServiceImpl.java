@@ -1,12 +1,13 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.TwitterService;
-import com.yesnault.sag.pojo.CommentFeed;
+import com.yesnault.sag.interfaces.UserService;
+import com.yesnault.sag.model.User;
+import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
-import org.springframework.social.linkedin.api.LinkedInProfile;
 import org.springframework.social.twitter.api.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +29,9 @@ public class TwitterServiceImpl implements TwitterService {
 
     @Inject
     private Twitter twitter;
+
+    @Inject
+    private UserService userService;
 
     @Override
     public List<SNFriend> getFriends() {
@@ -143,9 +147,17 @@ public class TwitterServiceImpl implements TwitterService {
     }
 
     @Override
-    public boolean isConnectTwitter() {
+    public boolean isConnectTwitter(User user) {
         try {
-            return twitter.userOperations() != null;
+
+            List<User> listUsers = userService.findByUsername(user.getUsername());
+            if(listUsers!=null&&listUsers.size()>0) {
+                UserProfile userProfile=listUsers.get(0).getUserProfile();
+                if (new Boolean(true).equals(userProfile.getTwitterFlag())) {
+                    return twitter.userOperations() != null;
+                }
+            }
+            return true;
         } catch (Exception e) {
             return false;
         }

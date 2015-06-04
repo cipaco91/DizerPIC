@@ -1,10 +1,12 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.GoogleService;
+import com.yesnault.sag.interfaces.UserService;
+import com.yesnault.sag.model.User;
+import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
-import org.springframework.social.facebook.api.Album;
 import org.springframework.social.facebook.api.Comment;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.google.api.Google;
@@ -29,10 +31,20 @@ public class GoogleServiceImpl implements GoogleService {
     @Inject
     private Google google;
 
+    @Inject
+    private UserService userService;
+
     @Override
-    public boolean isConnectGoogle() {
+    public boolean isConnectGoogle(User user) {
         try {
-            return google.plusOperations() != null;
+            List<User> listUsers = userService.findByUsername(user.getUsername());
+            if(listUsers!=null&&listUsers.size()>0) {
+                UserProfile userProfile=listUsers.get(0).getUserProfile();
+                if (new Boolean(true).equals(userProfile.getGoogleFlag())) {
+                    return google.plusOperations() != null;
+                }
+            }
+            return true;
         } catch (Exception e) {
             return false;
         }

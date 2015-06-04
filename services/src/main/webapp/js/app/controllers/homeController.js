@@ -1,4 +1,4 @@
-function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuService,$controller) {
+function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuService,$controller,$location) {
 
     $rootScope.bodylayout = 'login2';
     $scope.facebookVisible=$routeParams.facebook;
@@ -74,7 +74,8 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
     $scope.connectionTwitter = function() {
         console.log("redirect twitter");
         UsersService.loginSocialNetwork('twitter').success(function (response) {
-            $window.location.href = response;
+            //$window.location.href = response;
+            $location.path("/#/profile");
         });
     };
 }

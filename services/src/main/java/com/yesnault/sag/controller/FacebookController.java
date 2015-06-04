@@ -1,6 +1,7 @@
 package com.yesnault.sag.controller;
 
 import com.yesnault.sag.interfaces.FacebookService;
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +54,9 @@ public class FacebookController {
     @RequestMapping(value = "/isConnectFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    boolean isConnectFacebook(){
-        return facebookService.isConnectFacebook();
+    boolean isConnectFacebook(HttpServletRequest httpServletRequest) {
+        User user = (User) httpServletRequest.getSession().getAttribute("user");
+        return facebookService.isConnectFacebook(user);
     }
 
     @RequestMapping(value = "/albumsFacebook", method = RequestMethod.GET, produces = "application/json")
@@ -73,7 +76,7 @@ public class FacebookController {
     @RequestMapping(value = "/addComment/{id}/{message}", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
-    String addComment(@PathVariable String id,@PathVariable String message) {
+    String addComment(@PathVariable String id, @PathVariable String message) {
         return facebookService.addComment(id, message);
     }
 
@@ -90,10 +93,6 @@ public class FacebookController {
     void unlike(@PathVariable String id) {
         facebookService.unlike(id);
     }
-
-
-
-
 
 
 }

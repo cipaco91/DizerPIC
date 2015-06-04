@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public interface GoogleService {
 
-    boolean isConnectGoogle();
+    boolean isConnectGoogle(User user);
 
     List<SNFriend> findFriends();
 

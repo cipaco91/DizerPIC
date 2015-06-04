@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.LinkedinFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
@@ -28,7 +29,7 @@ public interface LinkedinService {
 
     List<LinkedinFeed> feeds();
 
-    boolean isConnectLinkedin();
+    boolean isConnectLinkedin(User user);
 
     List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles);
 

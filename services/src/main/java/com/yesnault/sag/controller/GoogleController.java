@@ -1,6 +1,7 @@
 package com.yesnault.sag.controller;
 
 import com.yesnault.sag.interfaces.GoogleService;
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.SNFriend;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -28,8 +30,9 @@ public class GoogleController {
     @RequestMapping(value = "/isConnectGoogle", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    boolean isConnectLinkedin(){
-        return googleService.isConnectGoogle();
+    boolean isConnectLinkedin(HttpServletRequest httpServletRequest){
+        User user = (User) httpServletRequest.getSession().getAttribute("user");
+        return googleService.isConnectGoogle(user);
     }
 
     @RequestMapping(value = "/friendsGoogle", method = RequestMethod.GET, produces = "application/json")

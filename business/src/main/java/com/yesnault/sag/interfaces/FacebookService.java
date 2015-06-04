@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
@@ -35,7 +36,7 @@ public interface FacebookService {
 
     PagedList<Photo> getPhotosProfile();
 
-    boolean isConnectFacebook();
+    boolean isConnectFacebook(User user);
 
     List<SNFriend> getCommonFriendsFacebook();
 

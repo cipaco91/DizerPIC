@@ -1,6 +1,9 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
+import com.yesnault.sag.interfaces.UserService;
+import com.yesnault.sag.model.User;
+import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.AlbumSN;
 import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.SNFeed;
@@ -8,8 +11,6 @@ import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
-import org.springframework.social.linkedin.api.LinkedInProfile;
-import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Encoder;
@@ -29,6 +30,9 @@ public class FacebookServiceImpl implements FacebookService {
 
     @Inject
     private Facebook facebook;
+
+    @Inject
+    private UserService userService;
 
     @Override
     public List<SNFeed> getFeed() {
@@ -123,9 +127,21 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public boolean isConnectFacebook() {
+    public boolean isConnectFacebook(User user) {
         try {
-            return facebook.userOperations() != null;
+
+            List<User> listUsers = userService.findByUsername(user.getUsername());
+            if(listUsers!=null&&listUsers.size()>0) {
+                UserProfile userProfile=listUsers.get(0).getUserProfile();
+                if (new Boolean(true).equals(userProfile.getFacebookFlag())) {
+                    return facebook.userOperations() != null;
+                }
+            }
+
+            if(new Boolean(true).equals(user.getUserProfile().getFacebookFlag())) {
+                return facebook.userOperations() != null;
+            }
+            return true;
         } catch (Exception e) {
             return false;
         }

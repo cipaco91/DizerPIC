@@ -1,12 +1,14 @@
 package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.LinkedinService;
+import com.yesnault.sag.interfaces.UserService;
+import com.yesnault.sag.model.User;
+import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.LinkedinFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.linkedin.api.*;
-import org.springframework.social.linkedin.api.impl.LinkedInTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,9 @@ public class LinkedinServiceImpl implements LinkedinService{
 
     @Inject
     private LinkedIn linkedIn;
+
+    @Inject
+    private UserService userService;
 
     @Override
     public LinkedInProfileFull getUserProfileFull() {
@@ -110,9 +115,16 @@ public class LinkedinServiceImpl implements LinkedinService{
     }
 
     @Override
-    public boolean isConnectLinkedin() {
+    public boolean isConnectLinkedin(User user) {
         try{
-            return linkedIn.communicationOperations()!=null;
+            List<User> listUsers = userService.findByUsername(user.getUsername());
+            if(listUsers!=null&&listUsers.size()>0) {
+                UserProfile userProfile=listUsers.get(0).getUserProfile();
+                if (new Boolean(true).equals(userProfile.getLinkedinFlag())) {
+                    return linkedIn.communicationOperations() != null;
+                }
+            }
+            return true;
         }catch (Exception e){
             return false;
         }

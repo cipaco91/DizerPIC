@@ -1,5 +1,6 @@
 package com.yesnault.sag.interfaces;
 
+import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.twitter.api.*;
@@ -39,7 +40,7 @@ public interface TwitterService {
 
     Trends getLocalTrends(long var1);
 
-    boolean isConnectTwitter();
+    boolean isConnectTwitter(User user);
 
     List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles);
 
