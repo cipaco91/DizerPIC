@@ -30,7 +30,7 @@ function ProfileCtrl($scope, $rootScope, $location, $window, ProfileService, Men
         $scope.twitterVisible = response;
     });
 
-    MenuService.isConnectLinkedin().success(function (response) {
+    MenuService.isConnectLinkedinMenu().success(function (response) {
         $scope.linkedinVisible = response;
     });
 

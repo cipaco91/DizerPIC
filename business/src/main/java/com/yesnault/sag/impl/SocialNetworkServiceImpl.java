@@ -144,7 +144,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                 Person person = google.plusOperations().getGoogleProfile();
                 return new ProfileSN(person.getId(),
                         person.getGender(), facebook.userOperations().getUserProfile().getName(),
-                        linkedIn.profileOperations().getUserProfileFull().getEmailAddress(), person.getBirthday().toString(),
+                        google.plusOperations().getGoogleProfile().getAccountEmail(), person.getBirthday().toString(),
                         person.getAboutMe(), "Bucuresti,Romania",
                         "in_a_relationship".equals(person.getRelationshipStatus()) ? "In a relantionship" : "Single");
             } else {
