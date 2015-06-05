@@ -131,6 +131,15 @@ public class LinkedinServiceImpl implements LinkedinService{
     }
 
     @Override
+    public boolean isConnectLinkedinMenu() {
+        try{
+            return linkedIn.communicationOperations() != null;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
     public List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles){
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for(LinkedInProfile linkedInProfile:linkedInProfiles){

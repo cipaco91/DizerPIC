@@ -31,6 +31,8 @@ public interface LinkedinService {
 
     boolean isConnectLinkedin(User user);
 
+    boolean isConnectLinkedinMenu();
+
     List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles);
 
     List<SNFeed> getFeed();

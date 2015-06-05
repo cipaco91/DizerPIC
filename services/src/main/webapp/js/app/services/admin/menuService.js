@@ -12,6 +12,9 @@ app.factory("MenuService", function ($http) {
         isConnectLinkedin: function () {
             return $http.get('rest/isConnectLinkedin');
         },
+        isConnectLinkedinMenu: function () {
+            return $http.get('rest/isConnectLinkedinMenu');
+        },
         isConnectGoogle: function () {
             return $http.get('rest/isConnectGoogle');
         }

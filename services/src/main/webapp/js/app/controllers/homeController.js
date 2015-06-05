@@ -29,7 +29,11 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
     });
 
     MenuService.isConnectLinkedin().success(function (response) {
-        $scope.linkedinVisible=response;
+        $scope.linkedinHomeVisible=response;
+        if(  $scope.linkedinHomeVisible == 'true'){
+             $scope.linkedinVisible=false;
+        }
+
         //if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
         //    &&$scope.googleVisible=='true'){
         //    UsersService.setLoginActive().success(function (response) {
@@ -74,8 +78,8 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
     $scope.connectionTwitter = function() {
         console.log("redirect twitter");
         UsersService.loginSocialNetwork('twitter').success(function (response) {
-            //$window.location.href = response;
-            $location.path("/#/profile");
+            $window.location.href = response;
+            //$location.path("/#/profile");
         });
     };
 }

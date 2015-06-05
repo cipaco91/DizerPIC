@@ -44,19 +44,21 @@ public class SettingsController {
             WizzardDTO wizzardDTO = new WizzardDTO();
             if (listUsers != null && listUsers.size() > 0) {
                 UserProfile userProfile = listUsers.get(0).getUserProfile();
-                wizzardDTO.setIsFacebook(userProfile.getFacebookFlag());
-                wizzardDTO.setIsGoogle(userProfile.getGoogleFlag());
-                wizzardDTO.setIsLinkedin(userProfile.getLinkedinFlag());
-                wizzardDTO.setIsTwitter(userProfile.getTwitterFlag());
-                wizzardDTO.setFirstName(user.getFirstname());
-                wizzardDTO.setLastName(user.getLastname());
-                wizzardDTO.setEmail("setEmail");
-                wizzardDTO.setProfileAbout(userProfile.getFromProfileAbout());
-                wizzardDTO.setProfileCover(userProfile.getFromProfileCover());
-                wizzardDTO.setProfileFriend(userProfile.getFromProfileFriends());
-                wizzardDTO.setProfileImage(userProfile.getFromProfileImage());
-                wizzardDTO.setProfileName(userProfile.getFromProfileName());
-            }
+                if (userProfile != null) {
+                    wizzardDTO.setIsFacebook(userProfile.getFacebookFlag());
+                    wizzardDTO.setIsGoogle(userProfile.getGoogleFlag());
+                    wizzardDTO.setIsLinkedin(userProfile.getLinkedinFlag());
+                    wizzardDTO.setIsTwitter(userProfile.getTwitterFlag());
+                    wizzardDTO.setFirstName(user.getFirstname());
+                    wizzardDTO.setLastName(user.getLastname());
+                    wizzardDTO.setEmail("setEmail");
+                    wizzardDTO.setProfileAbout(userProfile.getFromProfileAbout());
+                    wizzardDTO.setProfileCover(userProfile.getFromProfileCover());
+                    wizzardDTO.setProfileFriend(userProfile.getFromProfileFriends());
+                    wizzardDTO.setProfileImage(userProfile.getFromProfileImage());
+                    wizzardDTO.setProfileName(userProfile.getFromProfileName());
+                }
+            }else return new WizzardDTO();
             return wizzardDTO;
         }
     }

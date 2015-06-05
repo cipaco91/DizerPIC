@@ -53,4 +53,11 @@ public class LinkedinController {
         return linkedinService.isConnectLinkedin(user);
     }
 
+    @RequestMapping(value = "/isConnectLinkedinMenu", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    boolean isConnectLinkedinMenu(){
+        return linkedinService.isConnectLinkedinMenu();
+    }
+
 }
