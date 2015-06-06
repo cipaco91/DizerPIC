@@ -59,7 +59,7 @@ public class GoogleServiceImpl implements GoogleService {
 
     @Override
     public List<SNFeed> findFeeds() {
-        List<SNFeed> snFeeds=new ArrayList<>();
+        List<SNFeed> snFeeds=new ArrayList<SNFeed>();
         List<Activity> activities = google.plusOperations().searchPublicActivities("home", null).getItems();
         for(Activity activity:activities){
             SNFeed snFeed=new SNFeed();
@@ -95,7 +95,7 @@ public class GoogleServiceImpl implements GoogleService {
 
             List<ActivityComment> activityComments=google.plusOperations().getComments(activity.getId(), null).getItems();
             if(activityComments!=null&&activityComments.size()>0) {
-                List<CommentFeed> commentFeeds = new ArrayList<>();
+                List<CommentFeed> commentFeeds = new ArrayList<CommentFeed>();
                 for (ActivityComment activityComment : activityComments) {
                     CommentFeed commentFeed = new CommentFeed();
                     commentFeed.setPhotoCommentFrom(activityComment.getActor().getImageUrl());

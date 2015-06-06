@@ -65,7 +65,9 @@ public class SocialConfig implements SocialConfigurer {
 	@Override
 	public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
 		if(flag) {
-		    cfConfig.addConnectionFactory(new TwitterConnectionFactory("YR571S2JiVBOFyJS5MEg", "Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4"));
+//		    cfConfig.addConnectionFactory(new TwitterConnectionFactory("YR571S2JiVBOFyJS5MEg", "Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4"));
+			cfConfig.addConnectionFactory(new TwitterConnectionFactory("t5MXj1GAngzQpTRm2KqadWpX7", "Qx7cbMi6go1VYFaKzyyE2ylUwEwaWB6bExcWsW9DCbzGrEZIL3"));
+
 			FacebookConnectionFactory facebookConnectionFactory=new FacebookConnectionFactory("631469100286834", "41e4754bf5b580707709eb00168a329f", "dizerpicnew");
 			facebookConnectionFactory.setScope("publish_actions,user_birthday, user_religion_politics, user_relationships, user_relationship_details, user_hometown, user_location, user_likes, user_education_history, user_work_history, user_website, user_groups, user_managed_groups, user_events, user_photos, user_videos, user_friends, user_about_me, user_status, user_games_activity, user_tagged_places, user_posts, read_stream, read_mailbox, email, read_custom_friendlists, user_actions.books, user_actions.music, user_actions.video, user_actions.news, user_actions.fitness, public_profile");
 			cfConfig.addConnectionFactory(facebookConnectionFactory);

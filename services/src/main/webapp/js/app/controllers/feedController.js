@@ -1,4 +1,4 @@
-function FeedCtrl($scope, $location, FeedService, ProfileService,  $controller, $sce) {
+function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $sce) {
 
     angular.extend(this, $controller('ProfileCtrl', {$scope: $scope}));
 
@@ -8,7 +8,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService,  $controller, 
     $scope.date = new Date();
     $scope.postVisible = false;
     $scope.postText = "";
-    $scope.likeShow=true;
+    $scope.likeShow = true;
 
     FeedService.findFeedFacebook().
         success(function (users) {
@@ -21,15 +21,15 @@ function FeedCtrl($scope, $location, FeedService, ProfileService,  $controller, 
     $scope.addLike = function (feed) {
         console.log(feed.id);
         FeedService.addLike(feed.id);
-        $scope.likeShow=false;
-        feed.likesCount=feed.likesCount+1;
+        $scope.likeShow = false;
+        feed.likesCount = feed.likesCount + 1;
     };
 
     $scope.unlike = function (feed) {
         console.log(feed.id);
         FeedService.unlike(feed.id);
-        $scope.likeShow=true;
-        feed.likesCount=feed.likesCount-1;
+        $scope.likeShow = true;
+        feed.likesCount = feed.likesCount - 1;
     };
 
     $scope.changePost = function () {
@@ -43,7 +43,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService,  $controller, 
     $scope.addComment = function (feed) {
         console.log(feed.id);
         //FeedService.addComment(feed.id, $scope.postText);
-        feed.commentsCount=feed.commentsCount+1;
+        feed.commentsCount = feed.commentsCount + 1;
         ProfileService.getCommentFeed().success(function (response) {
             $scope.commentFeed = response;
             feed.commentsFeeds.push($scope.commentFeed);
@@ -91,20 +91,20 @@ function FeedCtrl($scope, $location, FeedService, ProfileService,  $controller, 
         $scope.linkedinFlag = $scope.classLinkedin == "classLinkedin";
         $scope.googleFlag = $scope.classGoogle == "classGoogle";
 
-        FeedService.postSocialNetwork($scope.facebookFlag, $scope.twitterFlag, $scope.linkedinFlag,   $scope.googleFlag,
-                         $scope.postText).success(function (users) {
-            $scope.classGoogle = "";
-            $scope.classLinkedin = "";
-            $scope.classTwitter = "";
-            $scope.classFacebook = "";
-            $scope.postText = "";
-        })
+        FeedService.postSocialNetwork($scope.facebookFlag, $scope.twitterFlag, $scope.linkedinFlag, $scope.googleFlag,
+            $scope.postText).success(function (feed) {
+                $scope.classGoogle = "";
+                $scope.classLinkedin = "";
+                $scope.classTwitter = "";
+                $scope.classFacebook = "";
+                $scope.postText = "";
+
+                $scope.feedFacebook.splice(0, 0, feed);
+            })
             .error(function (resp) {
                 console.log("Error with FeedService.postSocialNetwork" + resp);
             });
         ;
-
-
 
 
     };

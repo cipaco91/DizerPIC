@@ -3,33 +3,28 @@ package com.yesnault.sag.impl;
 import com.yesnault.sag.interfaces.*;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
+import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.ProfileSN;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.repository.UserProfileRepository;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
-import org.apache.geronimo.mail.util.Base64;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.google.api.Google;
 import org.springframework.social.google.api.plus.Person;
 import org.springframework.social.linkedin.api.LinkedIn;
-import org.springframework.social.linkedin.api.LinkedInProfile;
-import org.springframework.social.linkedin.api.LinkedInProfiles;
 import org.springframework.social.linkedin.api.SearchParameters;
-import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Encoder;
 
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,21 +65,36 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     private GoogleService googleService;
 
     @Override
-    public void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, Boolean googleFlag, String message) {
-        if (facebookFlag) {
-//            facebook.pageOperations().post()
-            facebook.feedOperations().updateStatus(message);
-        }
-        if (twitterFlag) {
-            twitter.timelineOperations().updateStatus(message);
-        }
+    public SNFeed updateStatus(Boolean facebookFlag, Boolean twitterFlag,
+                               Boolean linkedinFlag, Boolean googleFlag, String message, User user) {
+//        if (facebookFlag) {
+//            facebook.feedOperations().post(facebook.userOperations().getUserProfile().getId(),message);
+//        }
+//        if (twitterFlag) {
+//            twitter.timelineOperations().updateStatus(message);
+//        }
+
         if (linkedinFlag) {
             linkedIn.networkUpdateOperations().createNetworkUpdate(message);
         }
 
         if (googleFlag) {
-            google.plusOperations().getActivities("").hashCode();
         }
+
+        SNFeed snFeed=new SNFeed();
+        snFeed.setMessage(message);
+        snFeed.setPhotoFrom(profileImageURL(user));
+        snFeed.setSocialNetworkType("dizerpic");
+        snFeed.setFrom(new Reference(google.plusOperations().getGoogleProfile().getId(),
+                google.plusOperations().getGoogleProfile().getDisplayName()));
+        snFeed.setCommentsFeeds(new ArrayList<CommentFeed>());
+        snFeed.setLikesCount(0);
+        snFeed.setCreatedTime(new Date());
+        snFeed.setFacebookFlag(facebookFlag);
+        snFeed.setTwitterFlag(twitterFlag);
+        snFeed.setGoogleFlag(googleFlag);
+
+        return snFeed;
     }
 
     @Override
@@ -144,7 +154,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                 Person person = google.plusOperations().getGoogleProfile();
                 return new ProfileSN(person.getId(),
                         person.getGender(), facebook.userOperations().getUserProfile().getName(),
-                        google.plusOperations().getGoogleProfile().getAccountEmail(), person.getBirthday().toString(),
+                        facebook.userOperations().getUserProfile().getEmail(), person.getBirthday().toString(),
                         person.getAboutMe(), "Bucuresti,Romania",
                         "in_a_relationship".equals(person.getRelationshipStatus()) ? "In a relantionship" : "Single");
             } else {
@@ -191,16 +201,30 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     }
 
     @Override
-    public List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO) {
+    public List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO, User user) {
         List<UsersDTO> usersDTOs = new ArrayList<UsersDTO>();
         BASE64Encoder encoder = new BASE64Encoder();
         PagingParameters pagingParameters = new PagingParameters(10, 10, new Long(1000), new Long(1000));
 
-        PagedList<Reference> references = facebook.userOperations().search(searchUsersDTO.getName());
-        if (references != null && references.size() > 0) {
-//            List<Reference> referencesList=references.subList(0,19);
-            for (Reference reference : references) {
-                if (reference.getName().equals(searchUsersDTO.getName())) {
+        if(facebookService.isConnectFacebook(user)) {
+            PagedList<Reference> references = facebook.userOperations().search(searchUsersDTO.getName());
+            if (references != null && references.size() > 0) {
+                for (Reference reference : references) {
+                    if (reference.getName().equals(searchUsersDTO.getName())) {
+                        FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
+                        UsersDTO usersDTO = new UsersDTO();
+                        usersDTO.setName(facebookProfile.getName());
+                        usersDTO.setFirstName(facebookProfile.getFirstName());
+                        usersDTO.setLastName(facebookProfile.getLastName());
+                        usersDTO.setId(facebookProfile.getId());
+                        usersDTO.setProfileURL(facebookProfile.getLink());
+                        usersDTO.setImageURL("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(reference.getId())));
+                        usersDTO.setSocialNetType("facebook");
+                        usersDTOs.add(usersDTO);
+                    }
+                }
+            } else {
+                for (Reference reference : references) {
                     FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
                     UsersDTO usersDTO = new UsersDTO();
                     usersDTO.setName(facebookProfile.getName());
@@ -213,43 +237,34 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                     usersDTOs.add(usersDTO);
                 }
             }
-        } else {
-            for (Reference reference : references) {
-                FacebookProfile facebookProfile = facebook.userOperations().getUserProfile(reference.getId());
-                UsersDTO usersDTO = new UsersDTO();
-                usersDTO.setName(facebookProfile.getName());
-                usersDTO.setFirstName(facebookProfile.getFirstName());
-                usersDTO.setLastName(facebookProfile.getLastName());
-                usersDTO.setId(facebookProfile.getId());
-                usersDTO.setProfileURL(facebookProfile.getLink());
-                usersDTO.setImageURL("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(reference.getId())));
-                usersDTO.setSocialNetType("facebook");
-                usersDTOs.add(usersDTO);
-            }
         }
-        List<TwitterProfile> twitterProfiles = twitter.userOperations().searchForUsers(searchUsersDTO.getName());
-        if (twitterProfiles != null && twitterProfiles.size() > 0) {
-            for (TwitterProfile twitterProfile : twitterProfiles) {
-                UsersDTO userDTO = new UsersDTO();
-                userDTO.setName(twitterProfile.getName());
-                userDTO.setId(String.valueOf(twitterProfile.getId()));
-                userDTO.setSocialNetType("twitter");
-                userDTO.setImageURL(twitterProfile.getProfileImageUrl());
-                userDTO.setProfileURL(twitterProfile.getProfileUrl());
-                usersDTOs.add(userDTO);
+        if(twitterService.isConnectTwitter(user)) {
+            List<TwitterProfile> twitterProfiles = twitter.userOperations().searchForUsers(searchUsersDTO.getName());
+            if (twitterProfiles != null && twitterProfiles.size() > 0) {
+                for (TwitterProfile twitterProfile : twitterProfiles) {
+                    UsersDTO userDTO = new UsersDTO();
+                    userDTO.setName(twitterProfile.getName());
+                    userDTO.setId(String.valueOf(twitterProfile.getId()));
+                    userDTO.setSocialNetType("twitter");
+                    userDTO.setImageURL(twitterProfile.getProfileImageUrl());
+                    userDTO.setProfileURL(twitterProfile.getProfileUrl());
+                    usersDTOs.add(userDTO);
+                }
             }
         }
 
-        List<Person> personProfiles = google.plusOperations().personQuery().searchFor(searchUsersDTO.getName()).getPage().getItems();
-        if (personProfiles != null && personProfiles.size() > 0) {
-            for (Person person : personProfiles) {
-                UsersDTO userDTO = new UsersDTO();
-                userDTO.setName(person.getDisplayName());
-                userDTO.setId(person.getId());
-                userDTO.setSocialNetType("google");
-                userDTO.setImageURL(person.getImageUrl());
-                userDTO.setProfileURL(person.getUrl());
-                usersDTOs.add(userDTO);
+        if(googleService.isConnectGoogle(user)) {
+            List<Person> personProfiles = google.plusOperations().personQuery().searchFor(searchUsersDTO.getName()).getPage().getItems();
+            if (personProfiles != null && personProfiles.size() > 0) {
+                for (Person person : personProfiles) {
+                    UsersDTO userDTO = new UsersDTO();
+                    userDTO.setName(person.getDisplayName());
+                    userDTO.setId(person.getId());
+                    userDTO.setSocialNetType("google");
+                    userDTO.setImageURL(person.getImageUrl());
+                    userDTO.setProfileURL(person.getUrl());
+                    usersDTOs.add(userDTO);
+                }
             }
         }
 
@@ -271,10 +286,17 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     }
 
     @Override
-    public List<SNFeed> getFeed() {
-        List<SNFeed> snFeeds = facebookService.getFeed();
-        snFeeds.addAll(twitterService.getFeed());
-        snFeeds.addAll(googleService.findFeeds());
+    public List<SNFeed> getFeed(User user) {
+        List<SNFeed> snFeeds = new ArrayList<SNFeed>();
+        if(facebookService.isConnectFacebook(user)) {
+            snFeeds.addAll(facebookService.getFeed());
+        }
+        if(twitterService.isConnectTwitter(user)) {
+            snFeeds.addAll(twitterService.getFeed());
+        }
+        if(googleService.isConnectGoogle(user)) {
+            snFeeds.addAll(googleService.findFeeds());
+        }
 //        try {
 //            snFeeds.addAll(linkedinService.getFeed());
 //        }catch(Exception e){

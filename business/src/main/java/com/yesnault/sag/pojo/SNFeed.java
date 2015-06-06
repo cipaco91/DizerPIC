@@ -8,9 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by CParaschivescu on 4/9/2015.
- */
+
 public class SNFeed implements Serializable{
 
     private  String id;
@@ -58,6 +56,13 @@ public class SNFeed implements Serializable{
     private Integer commentsCount;
 
     private String src;
+
+    private Boolean facebookFlag;
+
+    private Boolean twitterFlag;
+
+    private Boolean googleFlag;
+
 
     public SNFeed(){
     }
@@ -266,5 +271,29 @@ public class SNFeed implements Serializable{
 
     public void setSrc(String src) {
         this.src = src;
+    }
+
+    public Boolean getFacebookFlag() {
+        return facebookFlag;
+    }
+
+    public void setFacebookFlag(Boolean facebookFlag) {
+        this.facebookFlag = facebookFlag;
+    }
+
+    public Boolean getTwitterFlag() {
+        return twitterFlag;
+    }
+
+    public void setTwitterFlag(Boolean twitterFlag) {
+        this.twitterFlag = twitterFlag;
+    }
+
+    public Boolean getGoogleFlag() {
+        return googleFlag;
+    }
+
+    public void setGoogleFlag(Boolean googleFlag) {
+        this.googleFlag = googleFlag;
     }
 }

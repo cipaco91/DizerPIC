@@ -46,19 +46,19 @@
                                                                     href="#">Post
                                                             </button>
 
-                                                            <a ng-show="postVisible" ng-click="clickFacebook()"
+                                                            <a ng-show="facebookVisible" ng-click="clickFacebook()"
                                                                class="{{classFacebook}}">
                                                                 <i class="icon-facebook"></i>
                                                             </a>
-                                                            <a ng-show="postVisible" ng-click="clickTwitter()"
+                                                            <a ng-show="twitterVisible" ng-click="clickTwitter()"
                                                                class="{{classTwitter}}">
                                                                 <i class="icon-twitter"></i>
                                                             </a>
-                                                            <a ng-show="postVisible" ng-click="clickLinkedin()"
+                                                            <a ng-show="linkedinVisible" ng-click="clickLinkedin()"
                                                                class="{{classLinkedin}}">
                                                                 <i class="icon-linkedin"></i>
                                                             </a>
-                                                            <a ng-show="postVisible" ng-click="clickGoogle()"
+                                                            <a ng-show="googleVisible" ng-click="clickGoogle()"
                                                                class="{{classGoogle}}">
                                                                 <i class="icon-google-plus"></i>
                                                             </a>
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li ng-repeat="feed in feedFacebook" class="media media-clearfix-x">
+                                <li ng-repeat="feed in feedFacebook track by $index" class="media media-clearfix-x">
                                     <div ng-if="feed.feedType == 'PHOTO'">
                                         <div ng-include="'partials/feeds/feedPhotoPostF.html'"></div>
                                     </div>
@@ -98,6 +98,9 @@
                                     </div>
                                     <div ng-if="feed.feedType == 'articleGoogle'">
                                         <div ng-include="'partials/feeds/feedArticleGoogle.html'"></div>
+                                    </div>
+                                    <div ng-if="feed.SNFeed.socialNetworkType == 'dizerpic'">
+                                        <ng-include src="'partials/feeds/feedDizerpic.html'"></ng-include>
                                     </div>
                                 </li>
                             </ul>

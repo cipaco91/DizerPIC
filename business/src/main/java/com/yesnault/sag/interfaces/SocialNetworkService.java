@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface SocialNetworkService {
 
-    void updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag,Boolean googleFlag, String message);
+    SNFeed updateStatus(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, Boolean googleFlag, String message, User user);
 
     void searchFriends(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag,Boolean googleFlag, String search);
 
@@ -25,7 +25,7 @@ public interface SocialNetworkService {
 
     List<SNFriend> getFriendsProfile(User user);
 
-    List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO);
+    List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO, User user);
 
-    List<SNFeed>getFeed();
+    List<SNFeed>getFeed(User user);
 }

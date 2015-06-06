@@ -41,12 +41,12 @@ public class SocialNetworkController {
     @Inject
     private FacebookService facebookService;
 
-    @RequestMapping(value = "/postStatus/{facebookFlag}/{twitterFlag}/{linkedinFlag}/{googleFlag}", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void postStatus(@PathVariable Boolean facebookFlag, @PathVariable Boolean twitterFlag,
+    @RequestMapping(value = "/postStatus/{facebookFlag}/{twitterFlag}/{linkedinFlag}/{googleFlag}/{message}", method = RequestMethod.GET)
+    public SNFeed postStatus(@PathVariable Boolean facebookFlag, @PathVariable Boolean twitterFlag,
                            @PathVariable Boolean linkedinFlag,  @PathVariable Boolean googleFlag,
-                           @RequestBody String message) {
-        socialNetworkService.updateStatus(facebookFlag, twitterFlag, linkedinFlag,googleFlag, message);
+                           @PathVariable String message,HttpServletRequest httpServletRequest) {
+        User user=(User)httpServletRequest.getSession().getAttribute("user");
+        return socialNetworkService.updateStatus(facebookFlag, twitterFlag, linkedinFlag,googleFlag, message,user);
     }
 
     @RequestMapping(value = "/searchFriends", method = RequestMethod.GET, produces = "application/json")
@@ -115,8 +115,9 @@ public class SocialNetworkController {
     @RequestMapping(value = "/searchUsers", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
-    List<UsersDTO> searchUsers(@RequestBody SearchUsersDTO searchUsersDTO) {
-        return socialNetworkService.findUsers(searchUsersDTO);
+    List<UsersDTO> searchUsers(@RequestBody SearchUsersDTO searchUsersDTO,HttpServletRequest httpServletRequest) {
+        User user=(User)httpServletRequest.getSession().getAttribute("user");
+        return socialNetworkService.findUsers(searchUsersDTO,user);
     }
 
     @RequestMapping(value = "/userDTO", method = RequestMethod.GET, produces = "application/json")
@@ -129,7 +130,8 @@ public class SocialNetworkController {
     @RequestMapping(value = "/feedsSocialNetwork", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFeed> feedsSocialNetwork() {
-        return socialNetworkService.getFeed();
+    List<SNFeed> feedsSocialNetwork(HttpServletRequest httpServletRequest) {
+        User user=(User)httpServletRequest.getSession().getAttribute("user");
+        return socialNetworkService.getFeed(user);
     }
 }

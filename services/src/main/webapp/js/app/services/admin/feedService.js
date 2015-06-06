@@ -22,7 +22,7 @@ app.factory("FeedService", function ($http) {
             return $http.post('rest/unlike/'+id);
         },
         postSocialNetwork: function (facebookFlag,twitterFlag,linkedinFlag,googleFlag,postText) {
-            return $http.post('rest/postStatus/'+facebookFlag+"/"+twitterFlag+"/"+linkedinFlag+"/"+googleFlag,postText);
+            return $http.get('rest/postStatus/'+facebookFlag+"/"+twitterFlag+"/"+linkedinFlag+"/"+googleFlag+"/"+postText);
         }
     }
 });
