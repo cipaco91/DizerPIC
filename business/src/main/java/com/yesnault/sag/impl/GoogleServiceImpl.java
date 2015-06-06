@@ -10,10 +10,7 @@ import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.facebook.api.Comment;
 import org.springframework.social.facebook.api.Reference;
 import org.springframework.social.google.api.Google;
-import org.springframework.social.google.api.plus.Activity;
-import org.springframework.social.google.api.plus.ActivityComment;
-import org.springframework.social.google.api.plus.PeoplePage;
-import org.springframework.social.google.api.plus.Person;
+import org.springframework.social.google.api.plus.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +57,24 @@ public class GoogleServiceImpl implements GoogleService {
     @Override
     public List<SNFeed> findFeeds() {
         List<SNFeed> snFeeds=new ArrayList<SNFeed>();
-        List<Activity> activities = google.plusOperations().searchPublicActivities("home", null).getItems();
+        ActivitiesPage activitiesPage=google.plusOperations().searchPublicActivities("home", null);
+        List<Activity> activities = activitiesPage.getItems();
+        int i=0;
+        while (activities != null) {
+            i++;
+            snFeeds.addAll(getSNFeeds(activities));
+            if (activitiesPage.getNextPageToken() == null || i==3) {
+                break;
+            }
+            activitiesPage=google.plusOperations().searchPublicActivities("home", activitiesPage.getNextPageToken());
+            activities = activitiesPage.getItems();
+        }
+
+        return snFeeds;
+    }
+
+    private List<SNFeed> getSNFeeds(List<Activity> activities){
+        List<SNFeed> snFeeds=new ArrayList<SNFeed>();
         for(Activity activity:activities){
             SNFeed snFeed=new SNFeed();
             snFeed.setSocialNetworkType("google");
@@ -89,9 +103,6 @@ public class GoogleServiceImpl implements GoogleService {
                 }
             }
             snFeed.setLikesCount(activity.getPlusOners());
-//            google.plusOperations().in
-
-//            google.plusOperations().getPerson()
 
             List<ActivityComment> activityComments=google.plusOperations().getComments(activity.getId(), null).getItems();
             if(activityComments!=null&&activityComments.size()>0) {
@@ -113,6 +124,7 @@ public class GoogleServiceImpl implements GoogleService {
     }
 
     private List<SNFriend> getSnFriends(List<Person> persons) {
+
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Person person : persons) {
             SNFriend snFriend = new SNFriend();

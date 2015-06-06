@@ -34,7 +34,7 @@
                                                         <div class="panel-body">
                                                             <textarea name="status" class="form-control share-text"
                                                                       rows="3" ng-change="changePost()"
-                                                                      ng-model="postText"
+                                                                      ng-model="postText" style="margin: 0px; width: 650px; height: 61px;"
                                                                       placeholder="Share your status..."></textarea>
                                                         </div>
                                                         <div class="panel-footer share-buttons">
@@ -45,6 +45,10 @@
                                                                     class="btn btn-primary btn-xs pull-right"
                                                                     href="#">Post
                                                             </button>
+
+                                                            <a ng-click="refresh()">
+                                                                <i class="fa fa-refresh"></i>
+                                                            </a>
 
                                                             <a ng-show="facebookVisible" ng-click="clickFacebook()"
                                                                class="{{classFacebook}}">
@@ -70,6 +74,7 @@
                                             <div class="clearfix"></div>
                                         </div>
                                     </div>
+
                                 </li>
                                 <li ng-repeat="feed in feedFacebook track by $index" class="media media-clearfix-x">
                                     <div ng-if="feed.feedType == 'PHOTO'">
@@ -105,6 +110,45 @@
                                 </li>
                             </ul>
                         </div>
+
+
+
+                        <div class="col-md-18">
+                        <div style="margin-bottom: 15px;padding-bottom: 15px">
+                            <form class="form-inline">
+                                <label>Filter:</label>
+                                <select ng-options="code as code.value for code in codes" style="font-weight: 400;" class="btn btn-primary"
+                                        ng-model="selectedItem" ng-change="update()"></select>
+                                </select>
+                                <div id="users-filter-trigger">
+                                    <div ng-show="bySocialNetworkShow">
+                                        <select ng-options="sn as sn.value for sn in socialNetworks" style="font-weight: 400;" class="btn btn-primary"
+                                                ng-model="selectedItemSocial" ng-change="changeSocial()"></select>
+                                        </select>
+                                    </div>
+                                    <div ng-show="byNameShow">
+                                        <input type="text" class="form-control" name="user-first" ng-model="name"
+                                               placeholder="Write Name" id="name"  ng-change="changeName()"/>
+                                        <!--<a href="#" class="btn btn-default" id="user-search-name"><i class="fa fa-search"></i> Search</a>-->
+                                    </div>
+                                    <div ng-show="byJobShow">
+                                        <input type="text" class="form-control" name="user-first" ng-model="jobName"
+                                               placeholder="Job Name" id="job" ng-change="changeJobName()"/>
+                                        <!--<a href="#" class="btn btn-default" id="user-search-job"><i class="fa fa-search"></i> Search</a>-->
+                                    </div>
+                                    <div ng-show="byCompanyShow">
+                                        <input type="text" class="form-control" name="user-first" ng-model="companyName"
+                                               placeholder="Company Name" id="company" ng-change="changeCompanyName()"/>
+                                        <!--<a href="#" class="btn btn-default" id="user-search-company"><i class="fa fa-search"></i> Search</a>-->
+                                    </div>
+                                </div>
+                                <!--<button ng-show="buttonSearch" class="btn btn-primary" ng-click="search()">Search</button>-->
+                                <a ng-click="search()" ng-show="buttonSearch" class="btn btn-default"
+                                   id="user-search-name"><i class="fa fa-search"></i> Search</a>
+                            </form>
+                        </div>
+                        </div>
+
                     </div>
                 </div>
                 <!--</li>-->

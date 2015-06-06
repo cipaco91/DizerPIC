@@ -109,6 +109,10 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
 
     };
 
+    $scope.codes = [{code: 'all', value: "All"},{code: 'Facebook', value: "Facebook"},{code: 'Twitter', value: "Twitter"},
+        {code: 'Linkedin', value: "Linkedin"},{code: 'Google+', value: "Google+"}
+    ];
+
     //FeedService.findFeedLinkedin().
     //    success(function (users) {
     //        $scope.feedLinkedin = users;
