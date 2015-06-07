@@ -10,6 +10,10 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.postText = "";
     $scope.likeShow = true;
 
+    $scope.selectedItem={};
+    $scope.selectedItem.code = 'all';
+    $scope.selectedItem.value = 'All';
+
     FeedService.findFeedFacebook().
         success(function (users) {
             $scope.feedFacebook = users;

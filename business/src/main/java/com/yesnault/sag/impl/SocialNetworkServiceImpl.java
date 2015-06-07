@@ -301,7 +301,8 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 //            snFeeds.addAll(linkedinService.getFeed());
 //        }catch(Exception e){
 //        }
-        Collections.shuffle(snFeeds);
+        Collections.sort(snFeeds);
+        Collections.reverse(snFeeds);
         return snFeeds;
     }
 
@@ -327,6 +328,8 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             snFeeds.addAll(linkedinService.getFeed());
             snFeeds.addAll(googleService.findFeeds());
         }
+        Collections.sort(snFeeds);
+        Collections.reverse(snFeeds);
         return snFeeds;
     }
 

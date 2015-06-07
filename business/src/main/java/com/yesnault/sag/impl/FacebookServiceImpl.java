@@ -17,6 +17,7 @@ import sun.misc.BASE64Encoder;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -234,6 +235,7 @@ public class FacebookServiceImpl implements FacebookService {
                         for (Comment comment : post.getComments().subList(0, 4)) {
                             CommentFeed commentFeed = new CommentFeed();
                             commentFeed.setComment(comment);
+                            commentFeed.setCreatedTime(comment.getCreatedTime());
                             commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
                             long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
                             long minutes= TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
@@ -262,10 +264,33 @@ public class FacebookServiceImpl implements FacebookService {
                         for (Comment comment : post.getComments()) {
                             CommentFeed commentFeed = new CommentFeed();
                             commentFeed.setComment(comment);
+                            commentFeed.setCreatedTime(comment.getCreatedTime());
                             commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                            long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
+                            long minutes= TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
+                                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
+
+                            if(minutes<60){
+                                commentFeed.setCommentDate(minutes+" minutes ago");
+                            }else if(minutes>60){
+                                long hours=minutes/60;
+                                if(hours == 1) {
+                                    commentFeed.setCommentDate(hours + " hour ago ");
+                                }else{
+                                    if(hours>24) {
+                                        long days = hours / 24;
+                                        commentFeed.setCommentDate(days + " days ago ");
+                                    }else{
+                                        commentFeed.setCommentDate(hours + " hours ago ");
+                                    }
+
+                                }
+                            }
+
                             commentFeeds.add(commentFeed);
                         }
                     }
+                    Collections.sort(commentFeeds);
                     snFeed.setCommentsFeeds(commentFeeds);
                 }
                 snFeed.setSharesCount(post.getSharesCount());

@@ -187,7 +187,7 @@ public class TwitterServiceImpl implements TwitterService {
 
     @Override
     public List<SNFeed> getMyPosts() {
-        List<Tweet> tweets = twitter.timelineOperations().getUserTimeline();
+        List<Tweet> tweets = twitter.timelineOperations().getUserTimeline(twitter.userOperations().getProfileId());
         return getSnFeeds(tweets);
     }
 
@@ -199,6 +199,7 @@ public class TwitterServiceImpl implements TwitterService {
             snFeed.setId(new Long(tweet.getId()).toString());
             snFeed.setFrom(new Reference(tweet.getFromUser(),tweet.getFromUser()));
             snFeed.setCreatedTime(tweet.getCreatedAt());
+            snFeed.setUpdatedTime(tweet.getCreatedAt());
             snFeed.setMessage(tweet.getText());
             snFeed.setPhotoFrom(tweet.getProfileImageUrl());
             snFeed.setSocialNetworkType("twitter");

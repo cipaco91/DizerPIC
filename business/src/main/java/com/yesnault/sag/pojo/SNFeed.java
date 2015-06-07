@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class SNFeed implements Serializable{
+public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     private  String id;
 
@@ -295,5 +295,12 @@ public class SNFeed implements Serializable{
 
     public void setGoogleFlag(Boolean googleFlag) {
         this.googleFlag = googleFlag;
+    }
+
+    @Override
+    public int compareTo(SNFeed snFeed) {
+        if (getUpdatedTime() == null || snFeed.getUpdatedTime() == null)
+            return 0;
+        return getUpdatedTime().compareTo(snFeed.getUpdatedTime());
     }
 }
