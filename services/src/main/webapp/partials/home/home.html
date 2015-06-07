@@ -1,25 +1,46 @@
 <ng-include src="'partials/menu/menu.html'"></ng-include>
 <form>
-    <h1>Manage Social Network</h1>
 
-    <a ng-hide="facebookVisible" ng-click="connectionFacebook()">
-        <img src="images/loginFacebook.png"
-             width="400"/>
-    </a>
+    <div class="row">
+        <div class="col-md-10 col-lg-8 col-md-offset-1 col-lg-offset-2">
+            <h1 class="page-section-heading">Manage social networks</h1>
 
-    <a ng-hide="linkedinHomeVisible" ng-click="connectionLinkedin()">
-        <img src="images/loginLinkedin.png"
-             width="400"/>
-    </a>
+            <div class="wizard-container wizard-1" id="wizard-demo-1" style="width: 800px;">
+                <!--<ul class="wiz-progress">-->
+                    <!--<li class="{{profile}}">Sign in with social networks</li>-->
+                <!--</ul>-->
+                <form data-toggle="wizard" class="max-width-400 h-center">
+                    <fieldset class="step">
+                        <div class="page-section-heading">
+                            <h2 class="text-h3 margin-v-0">Sign in with social networks</h2>
+                        </div>
 
-    <a ng-hide="twitterVisible" ng-click="connectionTwitter()">
-        <img src="images/loginTwitter.png"
-             width="400"/>
-    </a>
+                        <div class="form-group form-control-default" ng-hide="linkedinHomeVisible">
+                            <a  ng-click="connectionLinkedin()">
+                                <img src="images/loginLinkedin.png" width="300px;" style="margin-left: 200px;"/>
+                            </a>
+                        </div>
+                        <div class="form-group form-control-default" ng-hide="facebookVisible">
+                            <a  ng-click="connectionFacebook()">
+                                <img src="images/signinFacebook.png" width="300px;" style="margin-left: 200px;"/>
+                            </a>
+                        </div>
+                        <div class="form-group form-control-default" ng-hide="twitterVisible">
+                            <a  ng-click="connectionTwitter()">
+                                <img src="images/loginTwitter.png" width="300px;" style="margin-left: 200px;"/>
+                            </a>
+                        </div>
 
-    <a  ng-hide="googleVisible" ng-click="connectionGoogle()">
-        <img src="images/loginGoogle.png"
-             width="400"/>
-    </a>
+                        <div class="form-group form-control-default" ng-hide="googleVisible">
+                            <a  ng-click="connectionGoogle()">
+                                <img src="images/loginGoogle.png" width="300px;" style="margin-left: 200px;"/>
+                            </a>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </form>

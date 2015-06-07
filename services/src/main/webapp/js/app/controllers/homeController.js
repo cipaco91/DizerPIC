@@ -10,22 +10,10 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
 
     MenuService.isConnectFacebook().success(function (response) {
         $scope.facebookVisible=response;
-        //if($scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
-        //    &&$scope.googleVisible=='true'){
-        //    UsersService.setLoginActive().success(function (response) {
-        //        $window.location.href="http://localhost:8080/social/#/profile";
-        //    });
-        //}
     });
 
     MenuService.isConnectTwittter().success(function (response) {
         $scope.twitterVisible=response;
-        //if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
-        //    &&$scope.googleVisible=='true'){
-        //    UsersService.setLoginActive().success(function (response) {
-        //        $window.location.href="http://localhost:8080/social/#/profile";
-        //    });
-        //}
     });
 
     MenuService.isConnectLinkedin().success(function (response) {
@@ -33,26 +21,14 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
         if(  $scope.linkedinHomeVisible == 'true'){
              $scope.linkedinVisible=false;
         }
-
-        //if( $scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
-        //    &&$scope.googleVisible=='true'){
-        //    UsersService.setLoginActive().success(function (response) {
-        //        $window.location.href="http://localhost:8080/social/#/profile";
-        //    });
-        //}
     });
 
     MenuService.isConnectGoogle().success(function (response) {
         $scope.googleVisible=response;
-        //if($scope.facebookVisible=='true'&&$scope.twitterVisible=='true'&&$scope.linkedinVisible=='true'
-        //    &&$scope.googleVisible=='true'){
-        //    UsersService.setLoginActive().success(function (response) {
-        //        $window.location.href="http://localhost:8080/social/#/profile";
-        //    });
-        //}
-        //if($scope.googleVisible2=='true') {
-        //    $window.location.href = "http://localhost:8080/social/#/profile";
-        //}
+
+        if($scope.googleVisible=='true') {
+            $window.location.href = "http://localhost:8080/social/#/profile";
+        }
     });
 
     $scope.connectionFacebook = function() {
@@ -79,7 +55,6 @@ function HomeCtrl($scope, $rootScope,$routeParams,$window,UsersService,MenuServi
         console.log("redirect twitter");
         UsersService.loginSocialNetwork('twitter').success(function (response) {
             $window.location.href = response;
-            //$location.path("/#/profile");
         });
     };
 }
