@@ -1,6 +1,7 @@
 package com.yesnault.sag.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by CParaschivescu on 4/23/2015.
@@ -22,6 +23,8 @@ public class ProfileSN implements Serializable{
     private String statusRel;
 
     private String location;
+
+    private Date dateOfBirthday;
 
     public ProfileSN(){
     }
@@ -108,5 +111,13 @@ public class ProfileSN implements Serializable{
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Date getDateOfBirthday() {
+        return dateOfBirthday;
+    }
+
+    public void setDateOfBirthday(Date dateOfBirthday) {
+        this.dateOfBirthday = dateOfBirthday;
     }
 }

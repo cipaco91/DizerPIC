@@ -140,31 +140,36 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         UserProfile userProfile = userProfileRepository.findByUser(user);
         if (userProfile != null) {
             if ("facebook".equals(userProfile.getFromProfileAbout())) {
-                return new ProfileSN(facebook.userOperations().getUserProfile().getId(),
+                ProfileSN profileSN= new  ProfileSN(facebook.userOperations().getUserProfile().getId(),
                         facebook.userOperations().getUserProfile().getGender(), facebook.userOperations().getUserProfile().getName(),
                         facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
                         facebook.userOperations().getUserProfile().getAbout(), facebook.userOperations().getUserProfile().getLocation().getName(),
                         facebook.userOperations().getUserProfile().getRelationshipStatus());
+                profileSN.setDateOfBirthday(google.plusOperations().getGoogleProfile().getBirthday());
             } else if ("twitter".equals(userProfile.getFromProfileAbout())) {
-                return new ProfileSN(Long.toString(twitter.userOperations().getUserProfile().getId()),
+                ProfileSN profileSN= new ProfileSN(Long.toString(twitter.userOperations().getUserProfile().getId()),
                         facebook.userOperations().getUserProfile().getGender(), twitter.userOperations().getUserProfile().getName(),
                         facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
                         facebook.userOperations().getUserProfile().getAbout());
+                profileSN.setDateOfBirthday(google.plusOperations().getGoogleProfile().getBirthday());
             } else if ("google".equals(userProfile.getFromProfileAbout())) {
                 Person person = google.plusOperations().getGoogleProfile();
-                return new ProfileSN(person.getId(),
+                ProfileSN profileSN= new ProfileSN(person.getId(),
                         person.getGender(), facebook.userOperations().getUserProfile().getName(),
                         facebook.userOperations().getUserProfile().getEmail(), person.getBirthday().toString(),
                         person.getAboutMe(), "Bucuresti,Romania",
                         "in_a_relationship".equals(person.getRelationshipStatus()) ? "In a relantionship" : "Single");
+                profileSN.setDateOfBirthday(person.getBirthday());
+                return profileSN;
             } else {
-                return new ProfileSN(linkedIn.profileOperations().getProfileId(), facebook.userOperations().getUserProfile().getGender(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
+                ProfileSN profileSN= new ProfileSN(linkedIn.profileOperations().getProfileId(), facebook.userOperations().getUserProfile().getGender(), linkedIn.profileOperations().getUserProfileFull().getFirstName() +
                         " " + linkedIn.profileOperations().getUserProfileFull().getLastName(),
                         linkedIn.profileOperations().getUserProfileFull().getEmailAddress(),
                         facebook.userOperations().getUserProfile().getBirthday(),
                         linkedIn.profileOperations().getUserProfileFull().getSummary(),
                         linkedIn.profileOperations().getUserProfileFull().getLocation().getName(),
                         facebook.userOperations().getUserProfile().getRelationshipStatus());
+                profileSN.setDateOfBirthday(google.plusOperations().getGoogleProfile().getBirthday());
             }
         }
         return new ProfileSN();
