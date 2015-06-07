@@ -185,6 +185,12 @@ public class TwitterServiceImpl implements TwitterService {
         return getSnFeeds(tweets);
     }
 
+    @Override
+    public List<SNFeed> getMyPosts() {
+        List<Tweet> tweets = twitter.timelineOperations().getUserTimeline();
+        return getSnFeeds(tweets);
+    }
+
     private List<SNFeed> getSnFeeds(List<Tweet> tweets) {
         BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();

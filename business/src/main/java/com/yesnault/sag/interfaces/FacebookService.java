@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface FacebookService {
 
-    List<SNFeed>getFeed();
+    List<SNFeed> getFeed();
 
     void postUpdate(String message);
 
@@ -47,4 +47,6 @@ public interface FacebookService {
     void addLike(String id);
 
     void unlike(String id);
+
+    List<SNFeed> getMyPosts();
 }

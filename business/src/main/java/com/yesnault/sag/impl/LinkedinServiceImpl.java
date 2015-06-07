@@ -167,6 +167,11 @@ public class LinkedinServiceImpl implements LinkedinService{
         return null;
     }
 
+    @Override
+    public List<SNFeed> getMyPosts() {
+        return null;
+    }
+
     private List<SNFeed> getSnFeeds(List<LinkedInNetworkUpdate> linkedInNetworkUpdates) {
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
         for (LinkedInNetworkUpdate linkedInNetworkUpdate : linkedInNetworkUpdates) {

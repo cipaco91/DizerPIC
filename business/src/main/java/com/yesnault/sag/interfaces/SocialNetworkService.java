@@ -28,4 +28,10 @@ public interface SocialNetworkService {
     List<UsersDTO> findUsers(SearchUsersDTO searchUsersDTO, User user);
 
     List<SNFeed>getFeed(User user);
+
+    List<SNFeed> refreshFeed(String socialType);
+
+    SNFeed postPhoto(Boolean facebookFlag, Boolean twitterFlag,
+                     Boolean linkedinFlag, Boolean googleFlag, String message, User user);
+
 }

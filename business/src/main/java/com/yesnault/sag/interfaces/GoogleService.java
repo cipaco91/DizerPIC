@@ -16,4 +16,6 @@ public interface GoogleService {
     List<SNFriend> findFriends();
 
     List<SNFeed> findFeeds();
+
+    List<SNFeed> getMyPosts();
 }

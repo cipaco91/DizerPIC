@@ -81,7 +81,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         if (googleFlag) {
         }
 
-        SNFeed snFeed=new SNFeed();
+        SNFeed snFeed = new SNFeed();
         snFeed.setMessage(message);
         snFeed.setPhotoFrom(profileImageURL(user));
         snFeed.setSocialNetworkType("dizerpic");
@@ -111,8 +111,8 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             linkedIn.profileOperations().search(searchParameters);
         }
 
-        if(googleFlag){
-            google.plusOperations().searchPeople(search,null);
+        if (googleFlag) {
+            google.plusOperations().searchPeople(search, null);
         }
     }
 
@@ -120,7 +120,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public String profileImageURL(User user) {
         UserProfile userProfile = userProfileRepository.findByUser(user);
-        if(userProfile!=null) {
+        if (userProfile != null) {
             if ("facebook".equals(userProfile.getFromProfileImage())) {
                 BASE64Encoder encoder = new BASE64Encoder();
                 return "data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage());
@@ -138,7 +138,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public ProfileSN getProfileUser(User user) {
         UserProfile userProfile = userProfileRepository.findByUser(user);
-        if(userProfile!=null) {
+        if (userProfile != null) {
             if ("facebook".equals(userProfile.getFromProfileAbout())) {
                 return new ProfileSN(facebook.userOperations().getUserProfile().getId(),
                         facebook.userOperations().getUserProfile().getGender(), facebook.userOperations().getUserProfile().getName(),
@@ -175,7 +175,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (user != null) {
             UserProfile userProfile = userProfileRepository.findByUser(user);
-            if(userProfile!=null) {
+            if (userProfile != null) {
                 if ("facebook".equals(userProfile.getFromProfileFriends())) {
                 } else if ("twitter".equals(userProfile.getFromProfileFriends())) {
                     List<SNFriend> snFriendList = twitterService.getFollowers();
@@ -206,7 +206,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         BASE64Encoder encoder = new BASE64Encoder();
         PagingParameters pagingParameters = new PagingParameters(10, 10, new Long(1000), new Long(1000));
 
-        if(facebookService.isConnectFacebook(user)) {
+        if (facebookService.isConnectFacebook(user)) {
             PagedList<Reference> references = facebook.userOperations().search(searchUsersDTO.getName());
             if (references != null && references.size() > 0) {
                 for (Reference reference : references) {
@@ -238,7 +238,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                 }
             }
         }
-        if(twitterService.isConnectTwitter(user)) {
+        if (twitterService.isConnectTwitter(user)) {
             List<TwitterProfile> twitterProfiles = twitter.userOperations().searchForUsers(searchUsersDTO.getName());
             if (twitterProfiles != null && twitterProfiles.size() > 0) {
                 for (TwitterProfile twitterProfile : twitterProfiles) {
@@ -253,7 +253,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             }
         }
 
-        if(googleService.isConnectGoogle(user)) {
+        if (googleService.isConnectGoogle(user)) {
             List<Person> personProfiles = google.plusOperations().personQuery().searchFor(searchUsersDTO.getName()).getPage().getItems();
             if (personProfiles != null && personProfiles.size() > 0) {
                 for (Person person : personProfiles) {
@@ -288,13 +288,13 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public List<SNFeed> getFeed(User user) {
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
-        if(facebookService.isConnectFacebook(user)) {
+        if (facebookService.isConnectFacebook(user)) {
             snFeeds.addAll(facebookService.getFeed());
         }
-        if(twitterService.isConnectTwitter(user)) {
+        if (twitterService.isConnectTwitter(user)) {
             snFeeds.addAll(twitterService.getFeed());
         }
-        if(googleService.isConnectGoogle(user)) {
+        if (googleService.isConnectGoogle(user)) {
             snFeeds.addAll(googleService.findFeeds());
         }
 //        try {
@@ -304,4 +304,38 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         Collections.shuffle(snFeeds);
         return snFeeds;
     }
+
+    @Override
+    public List<SNFeed> refreshFeed(String socialType) {
+        List<SNFeed> snFeeds = new ArrayList<SNFeed>();
+        if ("facebook".equals(socialType)) {
+            return facebookService.getFeed();
+        } else if ("twitter".equals(socialType)) {
+            return twitterService.getFeed();
+        } else if ("linkedin".equals(socialType)) {
+            return linkedinService.getFeed();
+        } else if ("google".equals(socialType)) {
+            return googleService.findFeeds();
+        } else if ("myPosts".equals(socialType)) {
+            snFeeds.addAll(facebookService.getMyPosts());
+            snFeeds.addAll(twitterService.getMyPosts());
+//            snFeeds.addAll(linkedinService.getMyPosts());
+            snFeeds.addAll(googleService.getMyPosts());
+        } else {
+            snFeeds.addAll(facebookService.getFeed());
+            snFeeds.addAll(twitterService.getFeed());
+            snFeeds.addAll(linkedinService.getFeed());
+            snFeeds.addAll(googleService.findFeeds());
+        }
+        return snFeeds;
+    }
+
+    @Override
+    public SNFeed postPhoto(Boolean facebookFlag, Boolean twitterFlag, Boolean linkedinFlag, Boolean googleFlag, String message, User user) {
+        if (facebookFlag) {
+            facebook.feedOperations().post(facebook.userOperations().getUserProfile().getId(), message);
+        }
+        return null;
+    }
+
 }

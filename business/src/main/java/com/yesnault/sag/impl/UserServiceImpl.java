@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO,User user) {
+    public Boolean saveUserWizzardProfile(WizzardDTO wizzardDTO, User user) {
 
         user.setFirstname(wizzardDTO.getFirstName());
         user.setLastname(wizzardDTO.getLastName());
@@ -75,11 +75,11 @@ public class UserServiceImpl implements UserService {
         user.setActive(true);
         user = userRepository.save(user);
         UserProfile userProfile = null;
-        if(user.getUserProfile()==null){
+        if (user.getUserProfile() == null) {
             userProfile = new UserProfile();
             userProfile.setUser(user);
-        }else{
-            userProfile= user.getUserProfile();
+        } else {
+            userProfile = user.getUserProfile();
         }
 
         userProfile.setFacebookFlag(wizzardDTO.getIsFacebook());
@@ -97,41 +97,51 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void logoutFromSocialNetworks(User user) {
-        String userIdFacebook= facebook.userOperations().getUserProfile().getId();
-        String userIdTwitter= Long.valueOf(twitter.userOperations().getProfileId()).toString();
-        String userIdLinkedin= linkedIn.profileOperations().getProfileId();
-        String userIdGoogle=google.plusOperations().getGoogleProfile().getId();
+        user = userRepository.findByUsername(user.getUsername()).get(0);
+        UserProfile userProfile = user.getUserProfile();
 
-        Set<String> providerUserIdsFacebook = new HashSet<String>();
-        providerUserIdsFacebook.add(userIdFacebook);
-        Set<String> localUserIdsFacebook = usersConnectionRepository.findUserIdsConnectedTo("facebook", providerUserIdsFacebook);
-        for (String localUserId : localUserIdsFacebook) {
-            ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
-            connectionRepository.removeConnection(new ConnectionKey("facebook", userIdFacebook));
+        if (userProfile.getFacebookFlag()) {
+            String userIdFacebook = facebook.userOperations().getUserProfile().getId();
+            Set<String> providerUserIdsFacebook = new HashSet<String>();
+            providerUserIdsFacebook.add(userIdFacebook);
+            Set<String> localUserIdsFacebook = usersConnectionRepository.findUserIdsConnectedTo("facebook", providerUserIdsFacebook);
+            for (String localUserId : localUserIdsFacebook) {
+                ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
+                connectionRepository.removeConnection(new ConnectionKey("facebook", userIdFacebook));
+            }
         }
 
-        Set<String> providerUserIdsTwitter = new HashSet<String>();
-        providerUserIdsTwitter.add(userIdTwitter);
-        Set<String> localUserIdsTwitter = usersConnectionRepository.findUserIdsConnectedTo("twitter", providerUserIdsTwitter);
-        for (String localUserId : localUserIdsTwitter) {
-            ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
-            connectionRepository.removeConnection(new ConnectionKey("twitter", userIdTwitter));
+        if (userProfile.getTwitterFlag()) {
+            String userIdTwitter = Long.valueOf(twitter.userOperations().getProfileId()).toString();
+            Set<String> providerUserIdsTwitter = new HashSet<String>();
+            providerUserIdsTwitter.add(userIdTwitter);
+            Set<String> localUserIdsTwitter = usersConnectionRepository.findUserIdsConnectedTo("twitter", providerUserIdsTwitter);
+            for (String localUserId : localUserIdsTwitter) {
+                ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
+                connectionRepository.removeConnection(new ConnectionKey("twitter", userIdTwitter));
+            }
         }
 
-        Set<String> providerUserIdsLinkedin = new HashSet<String>();
-        providerUserIdsLinkedin.add(userIdLinkedin);
-        Set<String> localUserIdsLinkedin = usersConnectionRepository.findUserIdsConnectedTo("linkedin", providerUserIdsLinkedin);
-        for (String localUserId : localUserIdsLinkedin) {
-            ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
-            connectionRepository.removeConnection(new ConnectionKey("linkedin", userIdLinkedin));
+        if (userProfile.getLinkedinFlag()) {
+            String userIdLinkedin = linkedIn.profileOperations().getProfileId();
+            Set<String> providerUserIdsLinkedin = new HashSet<String>();
+            providerUserIdsLinkedin.add(userIdLinkedin);
+            Set<String> localUserIdsLinkedin = usersConnectionRepository.findUserIdsConnectedTo("linkedin", providerUserIdsLinkedin);
+            for (String localUserId : localUserIdsLinkedin) {
+                ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
+                connectionRepository.removeConnection(new ConnectionKey("linkedin", userIdLinkedin));
+            }
         }
 
-        Set<String> providerUserIdsGoogle = new HashSet<String>();
-        providerUserIdsGoogle.add(userIdGoogle);
-        Set<String> localUserIdsGoogle = usersConnectionRepository.findUserIdsConnectedTo("google", providerUserIdsGoogle);
-        for (String localUserId : localUserIdsGoogle) {
-            ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
-            connectionRepository.removeConnection(new ConnectionKey("google", userIdGoogle));
+        if (userProfile.getGoogleFlag()) {
+            String userIdGoogle = google.plusOperations().getGoogleProfile().getId();
+            Set<String> providerUserIdsGoogle = new HashSet<String>();
+            providerUserIdsGoogle.add(userIdGoogle);
+            Set<String> localUserIdsGoogle = usersConnectionRepository.findUserIdsConnectedTo("google", providerUserIdsGoogle);
+            for (String localUserId : localUserIdsGoogle) {
+                ConnectionRepository connectionRepository = usersConnectionRepository.createConnectionRepository(localUserId);
+                connectionRepository.removeConnection(new ConnectionKey("google", userIdGoogle));
+            }
         }
 
         user.setLoginActive(false);
@@ -144,17 +154,17 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return "notOK";
         } else {
-            if(user.getUserProfile() == null){
+            if (user.getUserProfile() == null) {
                 request.getSession().setAttribute("user", user);
                 user.setLoginActive(true);
                 userRepository.save(user);
                 return "okSettings";
-            }else if(!user.getLoginActive()){
+            } else if (!user.getLoginActive()) {
                 request.getSession().setAttribute("user", user);
                 user.setLoginActive(true);
                 userRepository.save(user);
                 return "okLoginSocialNetwork";
-            }else{
+            } else {
                 request.getSession().setAttribute("user", user);
                 user.setLoginActive(true);
                 userRepository.save(user);
@@ -164,8 +174,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String signUp(String username, String password,String firstName,String lastName) {
-        User user=new User();
+    public String signUp(String username, String password, String firstName, String lastName) {
+        User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         user.setActive(true);
@@ -178,7 +188,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void setLoginActive(User user) {
-        if(user!=null) {
+        if (user != null) {
             user.setLoginActive(true);
             userRepository.save(user);
         }

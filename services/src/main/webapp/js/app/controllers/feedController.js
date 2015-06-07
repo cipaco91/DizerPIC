@@ -104,22 +104,30 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
             .error(function (resp) {
                 console.log("Error with FeedService.postSocialNetwork" + resp);
             });
-        ;
-
-
     };
 
-    $scope.codes = [{code: 'all', value: "All"},{code: 'Facebook', value: "Facebook"},{code: 'Twitter', value: "Twitter"},
-        {code: 'Linkedin', value: "Linkedin"},{code: 'Google+', value: "Google+"}
+    $scope.codes = [{code: 'all', value: "All"},{code: 'facebook', value: "Facebook"},{code: 'twitter', value: "Twitter"},
+        {code: 'linkedin', value: "Linkedin"},{code: 'google', value: "Google+"},{code: 'myPosts', value: "My posts"}
     ];
 
-    //FeedService.findFeedLinkedin().
-    //    success(function (users) {
-    //        $scope.feedLinkedin = users;
-    //    })
-    //    .error(function (resp) {
-    //        console.log("Error with FriendsService.findFriendsTwitter" + resp);
-    //    });
+    $scope.refreshFeeds = function () {
+        FeedService.refreshFeeds($scope.selectedItem.code).
+            success(function (feeds) {
+                $scope.feedFacebook = feeds;
+            })
+            .error(function (resp) {
+                console.log("Error with FriendsService.refreshFeeds" + resp);
+            });
+    };
 
-
+    $scope.update = function () {
+        $scope.searchCode = $scope.selectedItem.code;
+        FeedService.refreshFeeds( $scope.searchCode).
+            success(function (feeds) {
+                $scope.feedFacebook = feeds;
+            })
+            .error(function (resp) {
+                console.log("Error with FriendsService.refreshFeeds" + resp);
+            });
+    };
 }

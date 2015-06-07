@@ -45,4 +45,6 @@ public interface TwitterService {
     List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles);
 
     List<SNFeed> getFeed();
+
+    List<SNFeed> getMyPosts();
 }

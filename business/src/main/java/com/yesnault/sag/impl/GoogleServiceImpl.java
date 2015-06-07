@@ -73,6 +73,25 @@ public class GoogleServiceImpl implements GoogleService {
         return snFeeds;
     }
 
+    @Override
+    public List<SNFeed> getMyPosts() {
+        List<SNFeed> snFeeds=new ArrayList<SNFeed>();
+        ActivitiesPage activitiesPage=google.plusOperations().getActivities(google.plusOperations().getGoogleProfile().getId());
+        List<Activity> activities = activitiesPage.getItems();
+        int i=0;
+        while (activities != null) {
+            i++;
+            snFeeds.addAll(getSNFeeds(activities));
+            if (activitiesPage.getNextPageToken() == null || i==3) {
+                break;
+            }
+            activitiesPage=google.plusOperations().activityQuery().getPage();
+            activities = activitiesPage.getItems();
+        }
+
+        return snFeeds;
+    }
+
     private List<SNFeed> getSNFeeds(List<Activity> activities){
         List<SNFeed> snFeeds=new ArrayList<SNFeed>();
         for(Activity activity:activities){

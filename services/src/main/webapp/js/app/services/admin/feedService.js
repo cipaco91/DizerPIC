@@ -23,6 +23,9 @@ app.factory("FeedService", function ($http) {
         },
         postSocialNetwork: function (facebookFlag,twitterFlag,linkedinFlag,googleFlag,postText) {
             return $http.get('rest/postStatus/'+facebookFlag+"/"+twitterFlag+"/"+linkedinFlag+"/"+googleFlag+"/"+postText);
+        },
+        refreshFeeds: function (socialType) {
+            return $http.get('rest/refreshFeeds/'+socialType);
         }
     }
 });

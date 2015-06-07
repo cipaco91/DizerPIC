@@ -6,6 +6,7 @@ import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.linkedin.api.*;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -36,4 +37,7 @@ public interface LinkedinService {
     List<SNFriend> getSnFriends(List<LinkedInProfile> linkedInProfiles);
 
     List<SNFeed> getFeed();
+
+    List<SNFeed> getMyPosts();
+
 }

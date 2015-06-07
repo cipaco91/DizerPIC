@@ -176,6 +176,16 @@ public class FacebookServiceImpl implements FacebookService {
         facebook.likeOperations().unlike(id);
     }
 
+    @Override
+    public List<SNFeed> getMyPosts() {
+        if (facebook != null) {
+            PagingParameters pagingParameters = new PagingParameters(10, 0, null, null);
+            PagedList<Post> posts = facebook.feedOperations().getFeed(pagingParameters);
+            return getSnFeeds(posts);
+        }
+        return new ArrayList<SNFeed>();
+    }
+
     private List<SNFriend> getSnFriends(List<Reference> references) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Reference reference : references) {
@@ -205,8 +215,9 @@ public class FacebookServiceImpl implements FacebookService {
                     snFeed.setCreatedTime(post.getUpdatedTime());
                 }
                 snFeed.setTo(post.getTo());
-                snFeed.setMessage(post.getMessage());
-                snFeed.setPicture(post.getPicture());
+                snFeed.setMessage(post.getMessage()!=null?post.getMessage():post.getStory()!=null?post.getStory():
+                post.getDescription()!=null?post.getDescription():"");
+
                 snFeed.setLink(post.getLink());
                 snFeed.setName(post.getName());
                 snFeed.setCaption(post.getCaption());
@@ -264,6 +275,10 @@ public class FacebookServiceImpl implements FacebookService {
                 snFeed.setPhotoFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(post.getFrom().getId())));
                 if ("VIDEO".equals(post.getType().name())) {
                     snFeed.setSrc(((VideoPost) post).getSource());
+                }
+
+                if ("PHOTO".equals(post.getType().name())) {
+                    snFeed.setPicture(facebook.mediaOperations().getPhoto(((PhotoPost) post).getPhotoId()).getSource());
                 }
 
                 if ("STATUS".equals(post.getType().name())) {
