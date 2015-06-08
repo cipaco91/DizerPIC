@@ -21,7 +21,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.twitterFriendsShow = true;
     $scope.linkedinFriendsShow = true;
     $scope.googleFriendsShow = true;
-
+    $scope.selectedItemSocial={};
 
     $scope.codes = [{code: 'all', value: "All"}, {code: 'socialNetwork', value: "by Social Network"}, {
         code: 'name',
@@ -110,7 +110,6 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.byCompanyShow = true;
         }
 
-        $scope.name
     };
 
     $scope.reset = function () {
@@ -122,6 +121,10 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         $scope.twitterFriendsShow = true;
         $scope.linkedinFriendsShow = true;
         $scope.googleFriendsShow = true;
+        $scope.selectedItem.code = 'all';
+        $scope.selectedItem.value = 'All';
+        $scope.name='';
+        $scope.search();
     };
 
     $scope.search = function () {
