@@ -29,6 +29,8 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.socialNetworks = [{code: 'facebook', value: "Facebook"}, {code: 'linkedin', value: "Linkedin"}, {code: 'twitter', value: "Twitter"},
         {code: 'google', value: "Google Plus"}];
 
+
+
     $scope.changeSocial= function(){
         $scope.socialNetworkCode = $scope.selectedItemSocial.code;
         if($scope.socialNetworkCode == 'facebook'){
@@ -83,84 +85,109 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.googleFriendsShow=true;
         } else if ($scope.searchCode == 'socialNetwork') {
             $scope.bySocialNetworkShow = true;
-            $scope.byNameShow = false;
-            $scope.byJobShow = false;
-            $scope.byCompanyShow = false;
+            //$scope.byNameShow = false;
+            //$scope.byJobShow = false;
+            //$scope.byCompanyShow = false;
         } else if ($scope.searchCode == 'name') {
             $scope.byNameShow = true;
-            $scope.bySocialNetworkShow = false;
-            $scope.byJobShow = false;
-            $scope.byCompanyShow = false;
+            //$scope.bySocialNetworkShow = false;
+            //$scope.byJobShow = false;
+            //$scope.byCompanyShow = false;
         } else if ($scope.searchCode == 'job') {
             $scope.byJobShow = true;
-            $scope.bySocialNetworkShow = false;
-            $scope.byNameShow = false;
-            $scope.byCompanyShow = false;
+            //$scope.bySocialNetworkShow = false;
+            //$scope.byNameShow = false;
+            //$scope.byCompanyShow = false;
         } else if ($scope.searchCode == 'company') {
-            $scope.byJobShow = false;
-            $scope.bySocialNetworkShow = false;
-            $scope.byNameShow = false;
+            //$scope.byJobShow = false;
+            //$scope.bySocialNetworkShow = false;
+            //$scope.byNameShow = false;
             $scope.byCompanyShow = true;
         }
+
+        $scope.name
     };
 
-    FriendsService.findFriendsTwitter().
-        success(function (users) {
-            $scope.friendsTwitter = users;
-        })
-        .error(function (resp) {
-            console.log("Error with FriendsService.findFriendsTwitter" + resp);
-        });
-
-    FriendsService.findFriendsFacebook().
-        success(function (users) {
-            $scope.friendsFacebook = users;
-        })
-        .error(function (resp) {
-            console.log("Error with FriendsService.findFriendsFacebook" + resp);
-        });
-
-    FriendsService.findFriendsLinkedin().
-        success(function (users) {
-            $scope.friendsLinkedin = users;
-        })
-        .error(function (resp) {
-            console.log("Error with FriendsService.findFriendsLinkedin" + resp);
-        });
-
-    FriendsService.findFriendsGoogle().
-        success(function (users) {
-            $scope.friendsGoogle = users;
-        })
-        .error(function (resp) {
-            console.log("Error with FriendsService.findFriendsGoogle" + resp);
-        });
-
-    $scope.filterFunctionLinkedin = function(element) {
-       if($scope.name == ""){
-           return true;
-       }
-        return element.name.indexOf($scope.name) >=0 ;
+    $scope.reset= function () {
+        $scope.bySocialNetworkShow = false;
+        $scope.byNameShow = false;
+        $scope.byJobShow = false;
+        $scope.byCompanyShow = false;
+        $scope.facebookFriendsShow=true;
+        $scope.twitterFriendsShow=true;
+        $scope.linkedinFriendsShow=true;
+        $scope.googleFriendsShow=true;
     };
 
-    $scope.filterFunctionTwitter = function(element) {
-        if($scope.name == ""){
-            return true;
-        }
-        return element.name.indexOf($scope.name) >=0 ;
+    $scope.search= function () {
+      $scope.changeSocial();
+        $scope.findFriends();
     };
 
-    $scope.filterFunctionGoogle = function(element) {
-        if($scope.name == ""){
-            return true;
-        }
-        return element.name.indexOf($scope.name) >=0 ;
+
+    $scope.findFriends= function () {
+        $scope.name=($scope.name!=null&&$scope.name!=undefined)?$scope.name:"null";
+        FriendsService.findFriendsTwitter($scope.name).
+            success(function (users) {
+                $scope.friendsTwitter = users;
+            })
+            .error(function (resp) {
+                console.log("Error with FriendsService.findFriendsTwitter" + resp);
+            });
+
+        FriendsService.findFriendsFacebook($scope.name).
+            success(function (users) {
+                $scope.friendsFacebook = users;
+            })
+            .error(function (resp) {
+                console.log("Error with FriendsService.findFriendsFacebook" + resp);
+            });
+
+        FriendsService.findFriendsLinkedin($scope.name).
+            success(function (users) {
+                $scope.friendsLinkedin = users;
+            })
+            .error(function (resp) {
+                console.log("Error with FriendsService.findFriendsLinkedin" + resp);
+            });
+
+        FriendsService.findFriendsGoogle($scope.name).
+            success(function (users) {
+                $scope.friendsGoogle = users;
+            })
+            .error(function (resp) {
+                console.log("Error with FriendsService.findFriendsGoogle" + resp);
+            });
+
     };
 
-    $scope.filterFunctionFacebook = function(element) {
-        if($scope.name == ""){
-            return true;
-        }
-        return element.name.indexOf($scope.name) >=0 ;
-    };
+    $scope.findFriends();
+
+    //$scope.filterFunctionLinkedin = function(element) {
+    //   if($scope.name == ""){
+    //       return true;
+    //   }
+    //    return element.name.indexOf($scope.name) >=0 ;
+    //};
+    //
+    //$scope.filterFunctionTwitter = function(element) {
+    //    if($scope.name == ""){
+    //        return true;
+    //    }
+    //    return element.name.indexOf($scope.name) >=0 ;
+    //};
+    //
+    //$scope.filterFunctionGoogle = function(element) {
+    //    if($scope.name == ""){
+    //        return true;
+    //    }
+    //    return element.name.indexOf($scope.name) >=0 ;
+    //};
+    //
+    //$scope.filterFunctionFacebook = function(element) {
+    //    if($scope.name == ""){
+    //        return true;
+    //    }
+    //    return element.name.indexOf($scope.name) >=0 ;
+    //};
 }

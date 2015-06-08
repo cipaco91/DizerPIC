@@ -37,10 +37,10 @@ public class FacebookController {
         return facebookService.getFeed();
     }
 
-    @RequestMapping(value = "/friendsFacebook", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsFacebook/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsFacebook() {
+    List<SNFriend> friendsFacebook(@PathVariable String name) {
         return facebookService.getFriendsFacebook();
     }
 

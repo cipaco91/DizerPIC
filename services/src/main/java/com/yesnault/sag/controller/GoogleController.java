@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.social.google.api.Google;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,10 +36,10 @@ public class GoogleController {
         return googleService.isConnectGoogle(user);
     }
 
-    @RequestMapping(value = "/friendsGoogle", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsGoogle/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsGoogle() {
+    List<SNFriend> friendsGoogle(@PathVariable String name) {
         return googleService.findFriends();
     }
 }

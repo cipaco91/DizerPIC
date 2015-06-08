@@ -3,17 +3,17 @@
 app.factory("FriendsService", function ($http) {
     return {
 
-        findFriendsFacebook: function () {
-            return $http.get('rest/friendsFacebook');
+        findFriendsFacebook: function (name) {
+            return $http.get('rest/friendsFacebook/'+name);
         },
-        findFriendsTwitter: function () {
-            return $http.get('rest/friendsTwitter');
+        findFriendsTwitter: function (name) {
+            return $http.get('rest/friendsTwitter/'+name);
         },
-        findFriendsLinkedin: function () {
-            return $http.get('rest/friendsLinkedin');
+        findFriendsLinkedin: function (name) {
+            return $http.get('rest/friendsLinkedin/'+name);
         },
-        findFriendsGoogle: function () {
-            return $http.get('rest/friendsGoogle');
+        findFriendsGoogle: function (name) {
+            return $http.get('rest/friendsGoogle/'+name);
         },
         searchUsers: function (entity) {
             return $http.post('rest/searchUsers',entity);

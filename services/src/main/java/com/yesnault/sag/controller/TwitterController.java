@@ -38,10 +38,10 @@ public class TwitterController {
         return twitterService.getHomeTimeline();
     }
 
-    @RequestMapping(value = "/friendsTwitter", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsTwitter/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsTwitter() {
+    List<SNFriend> friendsTwitter(@PathVariable String name) {
         return twitterService.getFriends();
     }
 
