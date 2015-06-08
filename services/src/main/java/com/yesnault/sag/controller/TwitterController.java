@@ -42,7 +42,13 @@ public class TwitterController {
     public
     @ResponseBody
     List<SNFriend> friendsTwitter(@PathVariable String name) {
-        return twitterService.getFriends();
+        String nameValue=null;
+        if("null".equals(name)){
+            nameValue=null;
+        }else{
+            nameValue=name;
+        }
+        return twitterService.getFriends(nameValue);
     }
 
     @RequestMapping(value = "/isConnectTwitter", method = RequestMethod.GET, produces = "application/json")

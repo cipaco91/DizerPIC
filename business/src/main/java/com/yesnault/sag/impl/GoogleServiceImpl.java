@@ -48,10 +48,10 @@ public class GoogleServiceImpl implements GoogleService {
     }
 
     @Override
-    public List<SNFriend> findFriends() {
+    public List<SNFriend> findFriends(String name) {
         PeoplePage peoplePage = google.plusOperations().getPeopleInCircles(google.plusOperations().getGoogleProfile().getId(), null);
         List<Person> persons = peoplePage.getItems();
-        return getSnFriends(persons);
+        return getSnFriends(persons,name);
     }
 
     @Override
@@ -142,18 +142,20 @@ public class GoogleServiceImpl implements GoogleService {
         return snFeeds;
     }
 
-    private List<SNFriend> getSnFriends(List<Person> persons) {
+    private List<SNFriend> getSnFriends(List<Person> persons,String name) {
 
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Person person : persons) {
-            SNFriend snFriend = new SNFriend();
-            snFriend.setId(person.getId());
-            snFriend.setName(person.getDisplayName());
-            snFriend.setProfileImageUrl(person.getImageUrl());
-            snFriend.setProfileURL(person.getUrl());
-            snFriend.setSocialNetworkType("google");
-            snFriend.setSocialNetworkTypePicture("images/googlePlus.jpg");
-            snFriends.add(snFriend);
+            if(name == null || person.getDisplayName().contains(name)) {
+                SNFriend snFriend = new SNFriend();
+                snFriend.setId(person.getId());
+                snFriend.setName(person.getDisplayName());
+                snFriend.setProfileImageUrl(person.getImageUrl());
+                snFriend.setProfileURL(person.getUrl());
+                snFriend.setSocialNetworkType("google");
+                snFriend.setSocialNetworkTypePicture("images/googlePlus.jpg");
+                snFriends.add(snFriend);
+            }
         }
         return snFriends;
     }

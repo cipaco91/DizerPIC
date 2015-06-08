@@ -51,11 +51,11 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public List<SNFriend> getFriendsFacebook() {
+    public List<SNFriend> getFriendsFacebook(String name) {
         if (facebook != null) {
             Facebook facebook1 = new FacebookTemplate("CAAIZBUVtow3IBAMFmEPY5WvG4Y5AUwmNb6JMYJ8xKACZC6YsqWYt86ZBtsllZAWZAO38RMetpgpaH7UwI1nnni1jdET409ZCbbh8LygUZCQIqPqE3zndZBrgpa3dut7bW4JCIuGQlYTap6vX834urnZAYfSUH88EHFGntnOj15eSTegaGifkWngRg");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
-            return getSnFriends(references);
+            return getSnFriends(references,name);
         }
         return new ArrayList<SNFriend>();
     }
@@ -187,17 +187,19 @@ public class FacebookServiceImpl implements FacebookService {
         return new ArrayList<SNFeed>();
     }
 
-    private List<SNFriend> getSnFriends(List<Reference> references) {
+    private List<SNFriend> getSnFriends(List<Reference> references,String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Reference reference : references) {
-            SNFriend snFriend = new SNFriend();
-            snFriend.setId(reference.getId());
-            snFriend.setName(reference.getName());
-            snFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId() + "/picture");
-            snFriend.setProfileURL("http://graph.facebook.com/" + reference.getId());
-            snFriend.setSocialNetworkType("facebook");
-            snFriend.setSocialNetworkTypePicture("images/social/Facebook-logo.jpg");
-            snFriends.add(snFriend);
+            if(name == null || reference.getName().contains(name)) {
+                SNFriend snFriend = new SNFriend();
+                snFriend.setId(reference.getId());
+                snFriend.setName(reference.getName());
+                snFriend.setProfileImageUrl("http://graph.facebook.com/" + reference.getId() + "/picture");
+                snFriend.setProfileURL("http://graph.facebook.com/" + reference.getId());
+                snFriend.setSocialNetworkType("facebook");
+                snFriend.setSocialNetworkTypePicture("images/social/Facebook-logo.jpg");
+                snFriends.add(snFriend);
+            }
         }
         return snFriends;
     }

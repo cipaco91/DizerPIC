@@ -18,7 +18,7 @@ public interface FacebookService {
 
     void postUpdate(String message);
 
-    List<SNFriend> getFriendsFacebook();
+    List<SNFriend> getFriendsFacebook(String name);
 
     FacebookProfile getUserProfile();
 

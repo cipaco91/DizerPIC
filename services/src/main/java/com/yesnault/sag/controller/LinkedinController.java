@@ -38,10 +38,10 @@ public class LinkedinController {
         return linkedinService.feeds();
     }
 
-    @RequestMapping(value = "/friendsLinkedin", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsLinkedin/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsLinkedin() {
+    List<SNFriend> friendsLinkedin(@PathVariable String name) {
         return linkedinService.getConnections();
     }
 

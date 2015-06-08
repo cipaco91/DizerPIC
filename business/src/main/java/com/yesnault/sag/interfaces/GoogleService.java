@@ -13,7 +13,7 @@ public interface GoogleService {
 
     boolean isConnectGoogle(User user);
 
-    List<SNFriend> findFriends();
+    List<SNFriend> findFriends(String name);
 
     List<SNFeed> findFeeds();
 

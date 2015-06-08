@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface TwitterService {
 
-    List<SNFriend> getFriends();
+    List<SNFriend> getFriends(String name);
 
-    List<SNFriend> getFollowers();
+    List<SNFriend> getFollowers(String name);
 
     List<DirectMessage> getDirectMessagesReceived();
 
@@ -42,7 +42,7 @@ public interface TwitterService {
 
     boolean isConnectTwitter(User user);
 
-    List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles);
+    List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name);
 
     List<SNFeed> getFeed();
 

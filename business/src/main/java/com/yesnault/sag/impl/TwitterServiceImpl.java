@@ -34,21 +34,21 @@ public class TwitterServiceImpl implements TwitterService {
     private UserService userService;
 
     @Override
-    public List<SNFriend> getFriends() {
+    public List<SNFriend> getFriends(String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFriends();
-            return getSnFriends(twitterProfiles);
+            return getSnFriends(twitterProfiles,name);
         }
         return snFriends;
     }
 
     @Override
-    public List<SNFriend> getFollowers() {
+    public List<SNFriend> getFollowers(String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFollowers();
-            return getSnFriends(twitterProfiles);
+            return getSnFriends(twitterProfiles,name);
         }
         return snFriends;
     }
@@ -164,17 +164,19 @@ public class TwitterServiceImpl implements TwitterService {
     }
 
     @Override
-    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles) {
+    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (TwitterProfile twitterProfile : twitterProfiles) {
-            SNFriend snFriend = new SNFriend();
-            snFriend.setId(Long.toString(twitterProfile.getId()));
-            snFriend.setName(twitterProfile.getScreenName());
-            snFriend.setProfileImageUrl(twitterProfile.getProfileImageUrl());
-            snFriend.setProfileURL(twitterProfile.getProfileUrl());
-            snFriend.setSocialNetworkType("twitter");
-            snFriend.setSocialNetworkTypePicture("images/logo_twitter.png");
-            snFriends.add(snFriend);
+            if(name == null || twitterProfile.getScreenName().contains(name)) {
+                SNFriend snFriend = new SNFriend();
+                snFriend.setId(Long.toString(twitterProfile.getId()));
+                snFriend.setName(twitterProfile.getScreenName());
+                snFriend.setProfileImageUrl(twitterProfile.getProfileImageUrl());
+                snFriend.setProfileURL(twitterProfile.getProfileUrl());
+                snFriend.setSocialNetworkType("twitter");
+                snFriend.setSocialNetworkTypePicture("images/logo_twitter.png");
+                snFriends.add(snFriend);
+            }
         }
         return snFriends;
     }

@@ -40,6 +40,12 @@ public class GoogleController {
     public
     @ResponseBody
     List<SNFriend> friendsGoogle(@PathVariable String name) {
-        return googleService.findFriends();
+        String nameValue=null;
+        if("null".equals(name)){
+            nameValue=null;
+        }else{
+            nameValue=name;
+        }
+        return googleService.findFriends(nameValue);
     }
 }

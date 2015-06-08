@@ -41,7 +41,13 @@ public class FacebookController {
     public
     @ResponseBody
     List<SNFriend> friendsFacebook(@PathVariable String name) {
-        return facebookService.getFriendsFacebook();
+        String nameValue=null;
+        if("null".equals(name)){
+            nameValue=null;
+        }else{
+            nameValue=name;
+        }
+        return facebookService.getFriendsFacebook(nameValue);
     }
 
     @RequestMapping(value = "/profileFacebook", method = RequestMethod.GET, produces = "application/json")
