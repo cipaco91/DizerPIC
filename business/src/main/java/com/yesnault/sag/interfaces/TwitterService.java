@@ -14,7 +14,7 @@ public interface TwitterService {
 
     List<SNFriend> getFriends(String name,Integer age1, Integer age2);
 
-    List<SNFriend> getFollowers(String name);
+    List<SNFriend> getFollowers(String name,Integer age1, Integer age2);
 
     List<DirectMessage> getDirectMessagesReceived();
 
@@ -42,7 +42,7 @@ public interface TwitterService {
 
     boolean isConnectTwitter(User user);
 
-    List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name);
+    List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name,Integer age1, Integer age2);
 
     List<SNFeed> getFeed();
 

@@ -183,14 +183,14 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             if (userProfile != null) {
                 if ("facebook".equals(userProfile.getFromProfileFriends())) {
                 } else if ("twitter".equals(userProfile.getFromProfileFriends())) {
-                    List<SNFriend> snFriendList = twitterService.getFollowers(null);
+                    List<SNFriend> snFriendList = twitterService.getFollowers(null,null,null);
                     if (snFriendList.size() > 10) {
-                        snFriends.addAll(twitterService.getFriends(null).subList(0, 10));
+                        snFriends.addAll(twitterService.getFriends(null,null,null).subList(0, 10));
                     } else {
-                        snFriends.addAll(twitterService.getFriends(null));
+                        snFriends.addAll(twitterService.getFriends(null,null,null));
                     }
                 } else if ("google".equals(userProfile.getFromProfileFriends())) {
-                    List<SNFriend> snFriendList = googleService.findFriends(null);
+                    List<SNFriend> snFriendList = googleService.findFriends(null,null,null);
                     if (snFriendList.size() > 10) {
                         snFriends.addAll(snFriendList.subList(0, 10));
                     } else {

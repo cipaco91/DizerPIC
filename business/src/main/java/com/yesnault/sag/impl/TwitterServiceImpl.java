@@ -2,6 +2,7 @@ package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.interfaces.UserService;
+import com.yesnault.sag.interfaces.UtilService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.SNFeed;
@@ -33,22 +34,25 @@ public class TwitterServiceImpl implements TwitterService {
     @Inject
     private UserService userService;
 
+    @Inject
+    private UtilService utilService;
+
     @Override
     public List<SNFriend> getFriends(String name,Integer age1, Integer age2) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFriends();
-            return getSnFriends(twitterProfiles,name);
+            return getSnFriends(twitterProfiles,name,age1,age2);
         }
         return snFriends;
     }
 
     @Override
-    public List<SNFriend> getFollowers(String name) {
+    public List<SNFriend> getFollowers(String name,Integer age1, Integer age2) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFollowers();
-            return getSnFriends(twitterProfiles,name);
+            return getSnFriends(twitterProfiles,name,age1,age2);
         }
         return snFriends;
     }
@@ -164,10 +168,10 @@ public class TwitterServiceImpl implements TwitterService {
     }
 
     @Override
-    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name) {
+    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name,Integer age1, Integer age2) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (TwitterProfile twitterProfile : twitterProfiles) {
-            if(name == null || twitterProfile.getScreenName().contains(name)) {
+            if(name == null || twitterProfile.getScreenName().contains(name) || utilService.ageVal(age1,age2)) {
                 SNFriend snFriend = new SNFriend();
                 snFriend.setId(Long.toString(twitterProfile.getId()));
                 snFriend.setName(twitterProfile.getScreenName());

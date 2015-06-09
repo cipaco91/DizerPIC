@@ -2,6 +2,7 @@ package com.yesnault.sag.impl;
 
 import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.interfaces.UserService;
+import com.yesnault.sag.interfaces.UtilService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
 import com.yesnault.sag.pojo.AlbumSN;
@@ -35,6 +36,9 @@ public class FacebookServiceImpl implements FacebookService {
     @Inject
     private UserService userService;
 
+    @Inject
+    private UtilService utilService;
+
     @Override
     public List<SNFeed> getFeed() {
         if (facebook != null) {
@@ -51,11 +55,11 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public List<SNFriend> getFriendsFacebook(String name,Integer age1, Integer age2) {
+    public List<SNFriend> getFriendsFacebook(String name, Integer age1, Integer age2) {
         if (facebook != null) {
             Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAGbyeZBiIaulvXBC5o5gR78MXZAeh96ieAzPLZCi7o2pLv3XWT0fwqtHi5UCDkn6QcTRRhEU6bnYhgIzaojjOHZC2rvyA70UcnTliiUZBYxHQAmjWjZClmIgszeyMEjiZB53j1m8aye8IpQaVBDfQAvUIQX28uPeXolh63u4sRnLzJG4tA87Xui9eKO1FQUdnzvZA3ZAsT0bFmKzd0Q05R0gZD");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
-            return getSnFriends(references,name);
+            return getSnFriends(references, name, age1, age2);
         }
         return new ArrayList<SNFriend>();
     }
@@ -131,14 +135,14 @@ public class FacebookServiceImpl implements FacebookService {
         try {
 
             List<User> listUsers = userService.findByUsername(user.getUsername());
-            if(listUsers!=null&&listUsers.size()>0) {
-                UserProfile userProfile=listUsers.get(0).getUserProfile();
+            if (listUsers != null && listUsers.size() > 0) {
+                UserProfile userProfile = listUsers.get(0).getUserProfile();
                 if (new Boolean(true).equals(userProfile.getFacebookFlag())) {
                     return facebook.userOperations() != null;
                 }
             }
 
-            if(new Boolean(true).equals(user.getUserProfile().getFacebookFlag())) {
+            if (new Boolean(true).equals(user.getUserProfile().getFacebookFlag())) {
                 return facebook.userOperations() != null;
             }
             return true;
@@ -164,7 +168,7 @@ public class FacebookServiceImpl implements FacebookService {
 
     @Override
     public String addComment(String id, String message) {
-        return facebook.commentOperations().addComment(id,message);
+        return facebook.commentOperations().addComment(id, message);
     }
 
     @Override
@@ -187,10 +191,11 @@ public class FacebookServiceImpl implements FacebookService {
         return new ArrayList<SNFeed>();
     }
 
-    private List<SNFriend> getSnFriends(List<Reference> references,String name) {
+    private List<SNFriend> getSnFriends(List<Reference> references, String name, Integer age1, Integer age2) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Reference reference : references) {
-            if(name == null || reference.getName().contains(name)) {
+            if (name == null || age1 == null || age2 == null ||
+                    reference.getName().contains(name) || utilService.ageVal(age1,age2)) {
                 SNFriend snFriend = new SNFriend();
                 snFriend.setId(reference.getId());
                 snFriend.setName(reference.getName());
@@ -208,7 +213,7 @@ public class FacebookServiceImpl implements FacebookService {
         BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
         for (Post post : posts) {
-            if("VIDEO".equals(post.getType().name())||"PHOTO".equals(post.getType().name())||"StatusOnlyFrom".equals(post.getType().name())) {
+            if ("VIDEO".equals(post.getType().name()) || "PHOTO".equals(post.getType().name()) || "StatusOnlyFrom".equals(post.getType().name())) {
                 SNFeed snFeed = new SNFeed();
                 snFeed.setId(post.getId());
                 snFeed.setFrom(post.getFrom());
@@ -218,8 +223,8 @@ public class FacebookServiceImpl implements FacebookService {
                     snFeed.setCreatedTime(post.getUpdatedTime());
                 }
                 snFeed.setTo(post.getTo());
-                snFeed.setMessage(post.getMessage()!=null?post.getMessage():post.getStory()!=null?post.getStory():
-                post.getDescription()!=null?post.getDescription():"");
+                snFeed.setMessage(post.getMessage() != null ? post.getMessage() : post.getStory() != null ? post.getStory() :
+                        post.getDescription() != null ? post.getDescription() : "");
 
                 snFeed.setLink(post.getLink());
                 snFeed.setName(post.getName());
@@ -240,20 +245,20 @@ public class FacebookServiceImpl implements FacebookService {
                             commentFeed.setCreatedTime(comment.getCreatedTime());
                             commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
                             long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
-                            long minutes= TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
-                                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
+                            long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
+                                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
 
-                           if(minutes<60){
-                                commentFeed.setCommentDate(minutes+" minutes ago");
-                            }else if(minutes>60){
-                                long hours=minutes/60;
-                                if(hours == 1) {
+                            if (minutes < 60) {
+                                commentFeed.setCommentDate(minutes + " minutes ago");
+                            } else if (minutes > 60) {
+                                long hours = minutes / 60;
+                                if (hours == 1) {
                                     commentFeed.setCommentDate(hours + " hour ago ");
-                                }else{
-                                    if(hours>24) {
+                                } else {
+                                    if (hours > 24) {
                                         long days = hours / 24;
                                         commentFeed.setCommentDate(days + " days ago ");
-                                    }else{
+                                    } else {
                                         commentFeed.setCommentDate(hours + " hours ago ");
                                     }
 
@@ -269,20 +274,20 @@ public class FacebookServiceImpl implements FacebookService {
                             commentFeed.setCreatedTime(comment.getCreatedTime());
                             commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
                             long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
-                            long minutes= TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
+                            long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
                                     TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
 
-                            if(minutes<60){
-                                commentFeed.setCommentDate(minutes+" minutes ago");
-                            }else if(minutes>60){
-                                long hours=minutes/60;
-                                if(hours == 1) {
+                            if (minutes < 60) {
+                                commentFeed.setCommentDate(minutes + " minutes ago");
+                            } else if (minutes > 60) {
+                                long hours = minutes / 60;
+                                if (hours == 1) {
                                     commentFeed.setCommentDate(hours + " hour ago ");
-                                }else{
-                                    if(hours>24) {
+                                } else {
+                                    if (hours > 24) {
                                         long days = hours / 24;
                                         commentFeed.setCommentDate(days + " days ago ");
-                                    }else{
+                                    } else {
                                         commentFeed.setCommentDate(hours + " hours ago ");
                                     }
 
