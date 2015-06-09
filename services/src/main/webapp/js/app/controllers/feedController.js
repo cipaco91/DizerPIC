@@ -32,10 +32,12 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.retweet = function (feed) {
         console.log(feed.id);
         //FeedService.retweet(feed.id);
+        feed.retweetsCount=feed.retweetsCount+1;
     };
 
     $scope.addTweetAtFavorites = function (feed) {
         console.log(feed.id);
+        feed.favoritesCount=feed.favoritesCount+1;
         //FeedService.addTweetAtFavorites(feed.id);
     };
 

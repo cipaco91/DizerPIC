@@ -147,8 +147,6 @@ public class SocialNetworkController {
     @ResponseBody
     List<SNFeed> refreshFeeds(@PathVariable("socialType") String socialType,HttpServletRequest httpServletRequest) {
         User user=(User)httpServletRequest.getSession().getAttribute("user");
-        return socialNetworkService.refreshFeed(socialType);
+        return socialNetworkService.refreshFeed(socialType,user);
     }
-
-
 }
