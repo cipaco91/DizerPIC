@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface TwitterService {
 
-    List<SNFriend> getFriends(String name);
+    List<SNFriend> getFriends(String name,Integer age1, Integer age2);
 
     List<SNFriend> getFollowers(String name);
 

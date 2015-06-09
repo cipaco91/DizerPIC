@@ -51,9 +51,9 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public List<SNFriend> getFriendsFacebook(String name) {
+    public List<SNFriend> getFriendsFacebook(String name,Integer age1, Integer age2) {
         if (facebook != null) {
-            Facebook facebook1 = new FacebookTemplate("CAAIZBUVtow3IBAMFmEPY5WvG4Y5AUwmNb6JMYJ8xKACZC6YsqWYt86ZBtsllZAWZAO38RMetpgpaH7UwI1nnni1jdET409ZCbbh8LygUZCQIqPqE3zndZBrgpa3dut7bW4JCIuGQlYTap6vX834urnZAYfSUH88EHFGntnOj15eSTegaGifkWngRg");
+            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAGbyeZBiIaulvXBC5o5gR78MXZAeh96ieAzPLZCi7o2pLv3XWT0fwqtHi5UCDkn6QcTRRhEU6bnYhgIzaojjOHZC2rvyA70UcnTliiUZBYxHQAmjWjZClmIgszeyMEjiZB53j1m8aye8IpQaVBDfQAvUIQX28uPeXolh63u4sRnLzJG4tA87Xui9eKO1FQUdnzvZA3ZAsT0bFmKzd0Q05R0gZD");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
             return getSnFriends(references,name);
         }

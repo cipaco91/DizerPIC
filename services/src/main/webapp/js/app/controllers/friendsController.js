@@ -27,7 +27,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         code: 'name',
         value: "by Name"
     },
-        {code: 'job', value: "by Job"}, {code: 'company', value: "by Company"}];
+        {code: 'age', value: "by Age"}, {code: 'company', value: "by Company"}];
 
     $scope.socialNetworks = [{code: 'facebook', value: "Facebook"}, {
         code: 'linkedin',
@@ -56,7 +56,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.twitterFriendsShow = false;
             $scope.linkedinFriendsShow = false;
             $scope.googleFriendsShow = true;
-        } else {
+        } else if ($scope.socialNetworkCode == 'twitter'){
             console.log($scope.socialNetworkCode);
             $scope.facebookFriendsShow = false;
             $scope.twitterFriendsShow = true;
@@ -84,6 +84,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.byNameShow = false;
             $scope.byJobShow = false;
             $scope.byCompanyShow = false;
+            $scope.byAgeShow = false;
             $scope.facebookFriendsShow = true;
             $scope.twitterFriendsShow = true;
             $scope.linkedinFriendsShow = true;
@@ -98,8 +99,8 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             //$scope.bySocialNetworkShow = false;
             //$scope.byJobShow = false;
             //$scope.byCompanyShow = false;
-        } else if ($scope.searchCode == 'job') {
-            $scope.byJobShow = true;
+        } else if ($scope.searchCode == 'age') {
+            $scope.byAgeShow = true;
             //$scope.bySocialNetworkShow = false;
             //$scope.byNameShow = false;
             //$scope.byCompanyShow = false;
@@ -115,7 +116,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.reset = function () {
         $scope.bySocialNetworkShow = false;
         $scope.byNameShow = false;
-        $scope.byJobShow = false;
+        $scope.byAgeShow = false;
         $scope.byCompanyShow = false;
         $scope.facebookFriendsShow = true;
         $scope.twitterFriendsShow = true;
@@ -139,7 +140,25 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         }else{
             $scope.valueName="null";
         }
-        FriendsService.findFriendsTwitter($scope.valueName).
+
+        if($scope.age1 != null && $scope.age1 != undefined && $scope.age1 != ''){
+            $scope.valueAge1=$scope.age1;
+        }else{
+            $scope.valueAge1=0;
+        }
+
+        if($scope.age2 != null && $scope.age2 != undefined && $scope.age2 != ''){
+            $scope.valueAge2=$scope.age2;
+        }else{
+            $scope.valueAge2=0;
+        }
+
+        $scope.friendsTwitter={};
+        $scope.friendsLinkedin={};
+        $scope.friendsFacebook={};
+        $scope.friendsGoogle={};
+
+        FriendsService.findFriendsTwitter($scope.valueName,$scope.valueAge1,$scope.valueAge2).
             success(function (users) {
                 $scope.friendsTwitter = users;
             })
@@ -147,7 +166,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
                 console.log("Error with FriendsService.findFriendsTwitter" + resp);
             });
 
-        FriendsService.findFriendsFacebook($scope.valueName).
+        FriendsService.findFriendsFacebook($scope.valueName,$scope.valueAge1,$scope.valueAge2).
             success(function (users) {
                 $scope.friendsFacebook = users;
             })
@@ -155,15 +174,15 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
                 console.log("Error with FriendsService.findFriendsFacebook" + resp);
             });
 
-        FriendsService.findFriendsLinkedin($scope.valueName).
-            success(function (users) {
-                $scope.friendsLinkedin = users;
-            })
-            .error(function (resp) {
-                console.log("Error with FriendsService.findFriendsLinkedin" + resp);
-            });
+        //FriendsService.findFriendsLinkedin($scope.valueName).
+        //    success(function (users) {
+        //        $scope.friendsLinkedin = users;
+        //    })
+        //    .error(function (resp) {
+        //        console.log("Error with FriendsService.findFriendsLinkedin" + resp);
+        //    });
 
-        FriendsService.findFriendsGoogle($scope.valueName).
+        FriendsService.findFriendsGoogle($scope.valueName,$scope.valueAge1,$scope.valueAge2).
             success(function (users) {
                 $scope.friendsGoogle = users;
             })

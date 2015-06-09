@@ -34,7 +34,7 @@ public class TwitterServiceImpl implements TwitterService {
     private UserService userService;
 
     @Override
-    public List<SNFriend> getFriends(String name) {
+    public List<SNFriend> getFriends(String name,Integer age1, Integer age2) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFriends();

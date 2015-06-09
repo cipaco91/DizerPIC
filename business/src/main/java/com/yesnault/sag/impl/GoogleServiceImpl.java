@@ -48,7 +48,7 @@ public class GoogleServiceImpl implements GoogleService {
     }
 
     @Override
-    public List<SNFriend> findFriends(String name) {
+    public List<SNFriend> findFriends(String name,Integer age1, Integer age2) {
         PeoplePage peoplePage = google.plusOperations().getPeopleInCircles(google.plusOperations().getGoogleProfile().getId(), null);
         List<Person> persons = peoplePage.getItems();
         return getSnFriends(persons,name);
