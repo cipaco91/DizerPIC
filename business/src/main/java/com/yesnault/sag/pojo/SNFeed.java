@@ -63,6 +63,10 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     private Boolean googleFlag;
 
+    private Integer retweetsCount;
+
+    private Integer favoritesCount;
+
 
     public SNFeed(){
     }
@@ -302,5 +306,21 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
         if (getUpdatedTime() == null || snFeed.getUpdatedTime() == null)
             return 0;
         return getUpdatedTime().compareTo(snFeed.getUpdatedTime());
+    }
+
+    public Integer getRetweetsCount() {
+        return retweetsCount;
+    }
+
+    public void setRetweetsCount(Integer retweetsCount) {
+        this.retweetsCount = retweetsCount;
+    }
+
+    public Integer getFavoritesCount() {
+        return favoritesCount;
+    }
+
+    public void setFavoritesCount(Integer favoritesCount) {
+        this.favoritesCount = favoritesCount;
     }
 }

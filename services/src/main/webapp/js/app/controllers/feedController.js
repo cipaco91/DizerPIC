@@ -29,6 +29,17 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
         feed.likesCount = feed.likesCount + 1;
     };
 
+    $scope.retweet = function (feed) {
+        console.log(feed.id);
+        FeedService.retweet(feed.id);
+
+    };
+
+    $scope.addTweetAtFavorites = function (feed) {
+        console.log(feed.id);
+        FeedService.retweet(feed.id);
+    };
+
     $scope.unlike = function (feed) {
         console.log(feed.id);
         FeedService.unlike(feed.id);

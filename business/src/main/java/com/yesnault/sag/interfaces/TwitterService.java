@@ -47,4 +47,8 @@ public interface TwitterService {
     List<SNFeed> getFeed();
 
     List<SNFeed> getMyPosts();
+
+    SNFeed retweet(long tweetId);
+
+    void addToFavorites(long tweetId);
 }

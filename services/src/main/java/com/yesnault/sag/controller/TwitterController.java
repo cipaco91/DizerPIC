@@ -3,8 +3,10 @@ package com.yesnault.sag.controller;
 import com.yesnault.sag.interfaces.TwitterService;
 import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.model.User;
+import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.repository.UserRepository;
+import com.yesnault.sag.util.WizzardDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -60,5 +62,20 @@ public class TwitterController {
     boolean isConnectTwitter(HttpServletRequest httpServletRequest){
         User user = (User) httpServletRequest.getSession().getAttribute("user");
         return twitterService.isConnectTwitter(user);
+    }
+
+    @RequestMapping(value = "/retweet/{tweetId}", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    SNFeed feedsTwitter(@PathVariable Long tweetId) {
+        return twitterService.retweet(tweetId);
+    }
+
+    @RequestMapping(value = "/addTweetAtFavorites/{tweetId}", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    String addTweetAtFavorites(@PathVariable Long tweetId) {
+         twitterService.addToFavorites(tweetId);
+        return "ok";
     }
 }

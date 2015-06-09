@@ -26,6 +26,12 @@ app.factory("FeedService", function ($http) {
         },
         refreshFeeds: function (socialType) {
             return $http.get('rest/refreshFeeds/'+socialType);
+        },
+        retweet: function (tweetId) {
+            return $http.post('rest/retweet/'+tweetId);
+        },
+        addTweetAtFavorites: function (tweetId) {
+            return $http.post('rest/addTweetAtFavorites/'+tweetId);
         }
     }
 });

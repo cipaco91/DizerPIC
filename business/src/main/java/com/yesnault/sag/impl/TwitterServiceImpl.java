@@ -42,6 +42,7 @@ public class TwitterServiceImpl implements TwitterService {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFriends();
+            twitter.timelineOperations().getRetweetsOfMe();
             return getSnFriends(twitterProfiles,name);
         }
         return snFriends;
@@ -197,6 +198,18 @@ public class TwitterServiceImpl implements TwitterService {
         return getSnFeeds(tweets);
     }
 
+    @Override
+    public SNFeed retweet(long tweetId) {
+        List<Tweet> tweets = new ArrayList<>();
+        tweets.add(twitter.timelineOperations().retweet(tweetId));
+        return getSnFeeds(tweets).get(0);
+    }
+
+    @Override
+    public void addToFavorites(long tweetId) {
+        twitter.timelineOperations().addToFavorites(tweetId);
+    }
+
     private List<SNFeed> getSnFeeds(List<Tweet> tweets) {
         BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
@@ -206,56 +219,19 @@ public class TwitterServiceImpl implements TwitterService {
             snFeed.setFrom(new Reference(tweet.getFromUser(),tweet.getFromUser()));
             snFeed.setCreatedTime(tweet.getCreatedAt());
             snFeed.setUpdatedTime(tweet.getCreatedAt());
-            snFeed.setMessage(tweet.getText());
+
             snFeed.setPhotoFrom(tweet.getProfileImageUrl());
             snFeed.setSocialNetworkType("twitter");
-//                snFeed.setPicture(tweet.);
-//                snFeed.setLink(post.getLink());
-//                snFeed.setName(post.getName());
-//                snFeed.setCaption(post.getCaption());
-//                snFeed.setDescription(post.getDescription());
-//                snFeed.setIcon(post.getIcon());
-//                snFeed.setApplication(post.getApplication());
-//                snFeed.setLikes(post.getLikes());
-//                snFeed.setLikesCount(post.getLikes() != null ? post.getLikes().size() : 0);
-//                snFeed.setCommentsCount(post.getComments() != null ? post.getComments().size() : 0);
-//
-//                if (post.getComments() != null) {
-//                    List<CommentFeed> commentFeeds = new ArrayList<CommentFeed>();
-//                    if (post.getComments().size() > 5) {
-//                        for (Comment comment : post.getComments().subList(0, 4)) {
-//                            CommentFeed commentFeed = new CommentFeed();
-//                            commentFeed.setComment(comment);
-//                            commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-//                            commentFeeds.add(commentFeed);
-//                        }
-//                    } else {
-//                        for (Comment comment : post.getComments()) {
-//                            CommentFeed commentFeed = new CommentFeed();
-//                            commentFeed.setComment(comment);
-//                            commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-//                            commentFeeds.add(commentFeed);
-//                        }
-//                    }
-//                    snFeed.setCommentsFeeds(commentFeeds);
-//                }
-//                snFeed.setSharesCount(post.getSharesCount());
-//                snFeed.setStory(post.getStory());
-//                snFeed.setFeedType(post.getType().name());
-//                snFeed.setSocialNetworkType("facebook");
-//                snFeed.setPhotoFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(post.getFrom().getId())));
-//                if ("VIDEO".equals(post.getType().name())) {
-//                    snFeed.setSrc(((VideoPost) post).getSource());
-//                }
-//
-//                if ("STATUS".equals(post.getType().name())) {
-//                    if (post.getTo() != null && post.getMessage() != null) {
-//                        snFeed.setFeedType("StatusFromTo");
-//                    } else if (post.getMessage() != null) {
-//                        snFeed.setFeedType("StatusOnlyFrom");
-//                    } else if (post.getStory() != null) {
-//                        snFeed.setFeedType("StatusStory");
-//                    }
+            if(tweet.getRetweetedStatus()!=null){
+                snFeed.setFeedType("retweet");
+                snFeed.setMessage(tweet.getRetweetedStatus().getText());
+                snFeed.setRetweetsCount(tweet.getRetweetedStatus().getRetweetCount());
+                snFeed.setFavoritesCount(tweet.getRetweetedStatus().getFavoriteCount());
+            }else{
+                snFeed.setFeedType("tweet");
+                snFeed.setMessage(tweet.getText());
+            }
+
             snFeeds.add(snFeed);
         }
         return snFeeds;

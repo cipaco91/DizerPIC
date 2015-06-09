@@ -92,8 +92,11 @@
                                     <div ng-if="feed.feedType == 'StatusStory'">
                                         <ng-include src="'partials/feeds/feedStatusStory.html'"></ng-include>
                                     </div>
-                                    <div ng-if="feed.socialNetworkType == 'twitter'">
+                                    <div ng-if="feed.feedType == 'tweet'">
                                         <div ng-include="'partials/feeds/tweet.html'"></div>
+                                    </div>
+                                    <div ng-if="feed.feedType == 'retweet'">
+                                        <div ng-include="'partials/feeds/retweet.html'"></div>
                                     </div>
                                     <div ng-if="feed.feedType == 'photoGoogle'">
                                         <div ng-include="'partials/feeds/feedPhotoGoogle.html'"></div>
