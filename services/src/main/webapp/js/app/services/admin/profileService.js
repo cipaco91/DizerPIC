@@ -29,6 +29,9 @@ app.factory("ProfileService", function ($http) {
         },
         isLoginActive: function () {
             return $http.get('rest/isLoginActive');
+        },
+        verifyContainsString: function (s1,s2) {
+            return $http.get('rest/verifyContainsString/'+s1+"/"+s2);
         }
     }
 });

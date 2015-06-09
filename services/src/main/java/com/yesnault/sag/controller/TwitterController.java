@@ -38,10 +38,10 @@ public class TwitterController {
         return twitterService.getHomeTimeline();
     }
 
-    @RequestMapping(value = "/friendsTwitter/{name}/{age1}/{age2}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsTwitter/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsTwitter(@PathVariable String name,@PathVariable Integer age1,@PathVariable Integer age2) {
+    List<SNFriend> friendsTwitter(@PathVariable String name) {
         String nameValue=null;
         Integer age1Value=null;
         Integer age2Value=null;
@@ -50,14 +50,8 @@ public class TwitterController {
         }else{
             nameValue=name;
         }
-        if(age1 != 0){
-            age1Value=age1;
-        }
 
-        if(age2 != 0){
-            age2Value=age2;
-        }
-        return twitterService.getFriends(nameValue,age1Value,age2Value);
+        return twitterService.getFriends(nameValue);
     }
 
     @RequestMapping(value = "/isConnectTwitter", method = RequestMethod.GET, produces = "application/json")

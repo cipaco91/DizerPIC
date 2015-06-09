@@ -16,20 +16,20 @@
                         <div id="users-filter-trigger" style="display: -webkit-inline-box;">
                             <div ng-show="bySocialNetworkShow">
                                 <select ng-options="sn as sn.value for sn in socialNetworks" style="font-weight: 400;" class="btn btn-primary"
-                                        ng-model="selectedItemSocial"></select>
+                                        ng-model="selectedItemSocial" ng-change="changeSocial()"></select>
                                 </select>
                             </div>
                             <div ng-show="byNameShow">
                                 <input type="text" class="form-control" name="user-first" ng-model="name"
                                        placeholder="Write Name" id="name"/>
                             </div>
-                            <div ng-show="byAgeShow">
-                                <input type="text" class="form-control" name="user-first" ng-model="age1"
-                                       placeholder="Write age" id="age1"/>
-                                <label> - </label>
-                                <input type="text" class="form-control" name="user-first" ng-model="age2"
-                                       placeholder="Write age" id="age2"/>
-                            </div>
+                            <!--<div ng-show="byAgeShow">-->
+                                <!--<input type="text" class="form-control" name="user-first" ng-model="age1"-->
+                                       <!--placeholder="Write age" id="age1"/>-->
+                                <!--<label> - </label>-->
+                                <!--<input type="text" class="form-control" name="user-first" ng-model="age2"-->
+                                       <!--placeholder="Write age" id="age2"/>-->
+                            <!--</div>-->
                         </div>
                     </form>
                     <div class="input-group-btn">
@@ -39,13 +39,13 @@
                 </div>
 
                 <div class="row" data-toggle="isotope" ng-show="twitterFriendsShow">
-                    <div data-ng-repeat="friend in friendsTwitter  | orderBy: 'name'">
+                    <div data-ng-repeat="friend in friendsTwitter | filter: filterFunctionTwitter   | orderBy: 'name'">
                         <app-showresults friend="{{friend}}"></app-showresults>
                     </div>
                 </div>
 
                 <div class="row" data-toggle="isotope" ng-show="googleFriendsShow">
-                    <div data-ng-repeat="friend in friendsGoogle  | orderBy: 'name'">
+                    <div data-ng-repeat="friend in friendsGoogle | filter: filterFunctionGoogle   | orderBy: 'name'">
                         <app-showresults friend="{{friend}}"></app-showresults>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                 <br/><br/>
 
                 <div class="row" data-toggle="isotope" ng-show="facebookFriendsShow">
-                    <div data-ng-repeat="friend in friendsFacebook | orderBy: 'name'">
+                    <div data-ng-repeat="friend in friendsFacebook | filter: filterFunctionFacebook  | orderBy: 'name'">
                         <app-showresults></app-showresults>
                     </div>
                 </div>

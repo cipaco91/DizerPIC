@@ -10,4 +10,6 @@ public interface UtilService {
     Integer getAgeByBirthday(Date birthday);
 
     Boolean ageVal( Integer age1, Integer age2);
+
+
 }

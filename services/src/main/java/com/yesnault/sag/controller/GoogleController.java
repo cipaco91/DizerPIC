@@ -36,26 +36,18 @@ public class GoogleController {
         return googleService.isConnectGoogle(user);
     }
 
-    @RequestMapping(value = "/friendsGoogle/{name}/{age1}/{age2}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsGoogle/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsGoogle(@PathVariable String name,@PathVariable Integer age1,@PathVariable Integer age2) {
+    List<SNFriend> friendsGoogle(@PathVariable String name) {
         String nameValue=null;
-        Integer age1Value=null;
-        Integer age2Value=null;
+
         if("null".equals(name)){
             nameValue=null;
         }else{
             nameValue=name;
         }
 
-        if(age1 != 0){
-            age1Value=age1;
-        }
-
-        if(age2 != 0){
-            age2Value=age2;
-        }
-        return googleService.findFriends(nameValue,age1Value,age2Value);
+        return googleService.findFriends(nameValue);
     }
 }

@@ -125,6 +125,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         $scope.selectedItem.code = 'all';
         $scope.selectedItem.value = 'All';
         $scope.name='';
+        $scope.update();
         $scope.search();
     };
 
@@ -141,24 +142,12 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
             $scope.valueName="null";
         }
 
-        if($scope.age1 != null && $scope.age1 != undefined && $scope.age1 != ''){
-            $scope.valueAge1=$scope.age1;
-        }else{
-            $scope.valueAge1=0;
-        }
-
-        if($scope.age2 != null && $scope.age2 != undefined && $scope.age2 != ''){
-            $scope.valueAge2=$scope.age2;
-        }else{
-            $scope.valueAge2=0;
-        }
-
         $scope.friendsTwitter={};
         $scope.friendsLinkedin={};
         $scope.friendsFacebook={};
         $scope.friendsGoogle={};
 
-        FriendsService.findFriendsTwitter($scope.valueName,$scope.valueAge1,$scope.valueAge2).
+        FriendsService.findFriendsTwitter($scope.valueName).
             success(function (users) {
                 $scope.friendsTwitter = users;
             })
@@ -166,7 +155,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
                 console.log("Error with FriendsService.findFriendsTwitter" + resp);
             });
 
-        FriendsService.findFriendsFacebook($scope.valueName,$scope.valueAge1,$scope.valueAge2).
+        FriendsService.findFriendsFacebook($scope.valueName).
             success(function (users) {
                 $scope.friendsFacebook = users;
             })
@@ -182,7 +171,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
         //        console.log("Error with FriendsService.findFriendsLinkedin" + resp);
         //    });
 
-        FriendsService.findFriendsGoogle($scope.valueName,$scope.valueAge1,$scope.valueAge2).
+        FriendsService.findFriendsGoogle($scope.valueName).
             success(function (users) {
                 $scope.friendsGoogle = users;
             })
@@ -194,31 +183,34 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
 
     $scope.findFriends();
 
-    //$scope.filterFunctionLinkedin = function(element) {
-    //   if($scope.name == ""){
-    //       return true;
-    //   }
-    //    return element.name.indexOf($scope.name) >=0 ;
-    //};
-    //
-    //$scope.filterFunctionTwitter = function(element) {
-    //    if($scope.name == ""){
-    //        return true;
-    //    }
-    //    return element.name.indexOf($scope.name) >=0 ;
-    //};
-    //
-    //$scope.filterFunctionGoogle = function(element) {
-    //    if($scope.name == ""){
-    //        return true;
-    //    }
-    //    return element.name.indexOf($scope.name) >=0 ;
-    //};
-    //
-    //$scope.filterFunctionFacebook = function(element) {
-    //    if($scope.name == ""){
-    //        return true;
-    //    }
-    //    return element.name.indexOf($scope.name) >=0 ;
-    //};
+    $scope.filterFunctionLinkedin = function(element) {
+       if($scope.name == "" || $scope.name.length > 3){
+           return true;
+       }
+        return true;
+        //return ProfileService.verifyContainsString( element.name,$scope.name);
+    };
+
+    $scope.filterFunctionTwitter = function(element) {
+        if($scope.name == "" || $scope.name.length > 3){
+            return true;
+        }
+        return true;
+        //return ProfileService.verifyContainsString( element.name,$scope.name);
+    };
+
+    $scope.filterFunctionGoogle = function(element) {
+        if($scope.name == "" || $scope.name.length > 3){
+            return true;
+        }
+        return true;
+        //return ProfileService.verifyContainsString( element.name,$scope.name);
+    };
+
+    $scope.filterFunctionFacebook = function(element) {
+        if($scope.name == "" || $scope.name.length > 3){
+            return true;
+        }
+        return ProfileService.verifyContainsString( element.name,$scope.name);
+    };
 }

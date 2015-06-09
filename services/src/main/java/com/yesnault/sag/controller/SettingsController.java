@@ -83,4 +83,12 @@ public class SettingsController {
         commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage()));
         return commentFeed;
     }
+
+    @RequestMapping(value = "/verifyContainsString/{fullName}/{searchName}", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    Boolean verifyContainsString(@PathVariable String fullName, @PathVariable String searchName,HttpServletRequest httpServletRequest) {
+       return fullName.contains(searchName);
+    }
+
 }

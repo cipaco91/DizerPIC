@@ -37,10 +37,10 @@ public class FacebookController {
         return facebookService.getFeed();
     }
 
-    @RequestMapping(value = "/friendsFacebook/{name}/{age1}/{age2}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/friendsFacebook/{name}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<SNFriend> friendsFacebook(@PathVariable String name,@PathVariable Integer age1,@PathVariable Integer age2) {
+    List<SNFriend> friendsFacebook(@PathVariable String name) {
         String nameValue=null;
         Integer age1Value=null;
         Integer age2Value=null;
@@ -50,14 +50,8 @@ public class FacebookController {
             nameValue=name;
         }
 
-        if(age1 != 0){
-            age1Value=age1;
-        }
 
-        if(age2 != 0){
-            age2Value=age2;
-        }
-        return facebookService.getFriendsFacebook(nameValue,age1Value,age2Value);
+        return facebookService.getFriendsFacebook(nameValue);
     }
 
     @RequestMapping(value = "/profileFacebook", method = RequestMethod.GET, produces = "application/json")

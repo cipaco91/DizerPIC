@@ -38,21 +38,21 @@ public class TwitterServiceImpl implements TwitterService {
     private UtilService utilService;
 
     @Override
-    public List<SNFriend> getFriends(String name,Integer age1, Integer age2) {
+    public List<SNFriend> getFriends(String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFriends();
-            return getSnFriends(twitterProfiles,name,age1,age2);
+            return getSnFriends(twitterProfiles,name);
         }
         return snFriends;
     }
 
     @Override
-    public List<SNFriend> getFollowers(String name,Integer age1, Integer age2) {
+    public List<SNFriend> getFollowers(String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         if (twitter != null) {
             CursoredList<TwitterProfile> twitterProfiles = twitter.friendOperations().getFollowers();
-            return getSnFriends(twitterProfiles,name,age1,age2);
+            return getSnFriends(twitterProfiles,name);
         }
         return snFriends;
     }
@@ -168,10 +168,10 @@ public class TwitterServiceImpl implements TwitterService {
     }
 
     @Override
-    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name,Integer age1, Integer age2) {
+    public List<SNFriend> getSnFriends(CursoredList<TwitterProfile> twitterProfiles,String name) {
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (TwitterProfile twitterProfile : twitterProfiles) {
-            if(name == null || twitterProfile.getScreenName().contains(name) || utilService.ageVal(age1,age2)) {
+            if(name == null || twitterProfile.getScreenName().contains(name) ) {
                 SNFriend snFriend = new SNFriend();
                 snFriend.setId(Long.toString(twitterProfile.getId()));
                 snFriend.setName(twitterProfile.getScreenName());

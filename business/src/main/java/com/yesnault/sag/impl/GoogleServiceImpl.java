@@ -52,10 +52,10 @@ public class GoogleServiceImpl implements GoogleService {
     }
 
     @Override
-    public List<SNFriend> findFriends(String name,Integer age1, Integer age2) {
+    public List<SNFriend> findFriends(String name) {
         PeoplePage peoplePage = google.plusOperations().getPeopleInCircles(google.plusOperations().getGoogleProfile().getId(), null);
         List<Person> persons = peoplePage.getItems();
-        return getSnFriends(persons,name,age1,age2);
+        return getSnFriends(persons,name);
     }
 
     @Override
@@ -146,11 +146,11 @@ public class GoogleServiceImpl implements GoogleService {
         return snFeeds;
     }
 
-    private List<SNFriend> getSnFriends(List<Person> persons,String name,Integer age1, Integer age2) {
+    private List<SNFriend> getSnFriends(List<Person> persons,String name) {
 
         List<SNFriend> snFriends = new ArrayList<SNFriend>();
         for (Person person : persons) {
-            if(name == null || person.getDisplayName().contains(name) || utilService.ageVal(age1,age2)) {
+            if(name == null || person.getDisplayName().contains(name)) {
                 SNFriend snFriend = new SNFriend();
                 snFriend.setId(person.getId());
                 snFriend.setName(person.getDisplayName());
