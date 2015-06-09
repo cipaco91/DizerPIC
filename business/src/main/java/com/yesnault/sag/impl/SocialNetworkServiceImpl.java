@@ -312,7 +312,7 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     }
 
     @Override
-    public List<SNFeed> refreshFeed(String socialType) {
+    public List<SNFeed> refreshFeed(String socialType,User user) {
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
         if ("facebook".equals(socialType)) {
             return facebookService.getFeed();
@@ -322,20 +322,23 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
             return linkedinService.getFeed();
         } else if ("google".equals(socialType)) {
             return googleService.findFeeds();
+        } else if ("myFavorites".equals(socialType)) {
+            return favoritesFeeds();
         } else if ("myPosts".equals(socialType)) {
             snFeeds.addAll(facebookService.getMyPosts());
             snFeeds.addAll(twitterService.getMyPosts());
-//            snFeeds.addAll(linkedinService.getMyPosts());
             snFeeds.addAll(googleService.getMyPosts());
         } else {
-            snFeeds.addAll(facebookService.getFeed());
-            snFeeds.addAll(twitterService.getFeed());
-            snFeeds.addAll(linkedinService.getFeed());
-            snFeeds.addAll(googleService.findFeeds());
+            getFeed(user);
         }
         Collections.sort(snFeeds);
         Collections.reverse(snFeeds);
         return snFeeds;
+    }
+
+    @Override
+    public List<SNFeed> favoritesFeeds() {
+        return twitterService.favoritesTweets();
     }
 
     @Override

@@ -135,6 +135,13 @@ public class SocialNetworkController {
         return socialNetworkService.getFeed(user);
     }
 
+    @RequestMapping(value = "/favoritesTweets", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<SNFeed> favoritesTweets(HttpServletRequest httpServletRequest) {
+        return socialNetworkService.favoritesFeeds();
+    }
+
     @RequestMapping(value = "/refreshFeeds/{socialType}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody

@@ -27,6 +27,9 @@ app.factory("FeedService", function ($http) {
         refreshFeeds: function (socialType) {
             return $http.get('rest/refreshFeeds/'+socialType);
         },
+        favoritesTweets: function () {
+            return $http.get('rest/favoritesTweets');
+        },
         retweet: function (tweetId) {
             return $http.post('rest/retweet/'+tweetId);
         },

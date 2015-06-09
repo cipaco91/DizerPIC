@@ -51,4 +51,6 @@ public interface TwitterService {
     SNFeed retweet(long tweetId);
 
     void addToFavorites(long tweetId);
+
+    List<SNFeed> favoritesTweets();
 }

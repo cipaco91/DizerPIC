@@ -67,6 +67,14 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     private Integer favoritesCount;
 
+    private String photoFromRetweet;
+
+    private String nameFromRetweet;
+
+    private Date dateFromRetweet;
+
+    private String messageFromRetweet;
+
 
     public SNFeed(){
     }
@@ -322,5 +330,37 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     public void setFavoritesCount(Integer favoritesCount) {
         this.favoritesCount = favoritesCount;
+    }
+
+    public String getPhotoFromRetweet() {
+        return photoFromRetweet;
+    }
+
+    public void setPhotoFromRetweet(String photoFromRetweet) {
+        this.photoFromRetweet = photoFromRetweet;
+    }
+
+    public String getNameFromRetweet() {
+        return nameFromRetweet;
+    }
+
+    public void setNameFromRetweet(String nameFromRetweet) {
+        this.nameFromRetweet = nameFromRetweet;
+    }
+
+    public Date getDateFromRetweet() {
+        return dateFromRetweet;
+    }
+
+    public void setDateFromRetweet(Date dateFromRetweet) {
+        this.dateFromRetweet = dateFromRetweet;
+    }
+
+    public String getMessageFromRetweet() {
+        return messageFromRetweet;
+    }
+
+    public void setMessageFromRetweet(String messageFromRetweet) {
+        this.messageFromRetweet = messageFromRetweet;
     }
 }

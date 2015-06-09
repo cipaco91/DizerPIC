@@ -15,8 +15,21 @@
             <div class="col-md-18">
                 <div class="panel panel-default">
                     <br/>
-                    <label style="margin-left: 10px;">{{feed.message}}</label>
+
+                    <label style="margin-left: 10px;color: #0084B4 ;">{{feed.message}}</label>
                     <br/>
+                    <br/>
+                    <div style="display: flex;">
+                    <div class="user-wrapper">
+                        <img style="margin-left: 25px;" src="{{feed.photoFromRetweet}}" alt="people" class="img-circle" width="40"/>
+
+                        <div><a style="background: #fff;font-weight: 700;border: 1px solid #e8e8e8;padding: 4px;border-radius: 5px;margin-top: 5px;display: inline-block"
+                                href="#">{{feed.nameFromRetweet}}</a>
+                        </div>
+
+                    </div>
+                        <label style="margin-left: 10px;">{{feed.messageFromRetweet}}</label>
+                    </div>
                     <div class="profile-icons">
                         <a ng-click="retweet(feed)" style="color:blue;margin-left: 10px;">Add to favorites</a>
 

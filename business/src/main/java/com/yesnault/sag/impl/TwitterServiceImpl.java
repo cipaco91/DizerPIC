@@ -210,6 +210,12 @@ public class TwitterServiceImpl implements TwitterService {
         twitter.timelineOperations().addToFavorites(tweetId);
     }
 
+    @Override
+    public List<SNFeed> favoritesTweets() {
+        List<Tweet> tweets=twitter.timelineOperations().getFavorites();
+        return getSnFeeds(tweets);
+    }
+
     private List<SNFeed> getSnFeeds(List<Tweet> tweets) {
         BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
@@ -224,12 +230,18 @@ public class TwitterServiceImpl implements TwitterService {
             snFeed.setSocialNetworkType("twitter");
             if(tweet.getRetweetedStatus()!=null){
                 snFeed.setFeedType("retweet");
-                snFeed.setMessage(tweet.getRetweetedStatus().getText());
+                snFeed.setMessageFromRetweet(tweet.getRetweetedStatus().getText());
                 snFeed.setRetweetsCount(tweet.getRetweetedStatus().getRetweetCount());
                 snFeed.setFavoritesCount(tweet.getRetweetedStatus().getFavoriteCount());
+                snFeed.setPhotoFromRetweet(tweet.getRetweetedStatus().getProfileImageUrl());
+                snFeed.setNameFromRetweet(tweet.getRetweetedStatus().getFromUser());
+                snFeed.setDateFromRetweet(tweet.getRetweetedStatus().getCreatedAt());
+                snFeed.setMessage(tweet.getUser().getName()+" retweeted from:");
             }else{
                 snFeed.setFeedType("tweet");
                 snFeed.setMessage(tweet.getText());
+                snFeed.setRetweetsCount(tweet.getRetweetCount());
+                snFeed.setFavoritesCount(tweet.getFavoriteCount());
             }
 
             snFeeds.add(snFeed);

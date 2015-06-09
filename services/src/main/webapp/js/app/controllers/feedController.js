@@ -31,13 +31,12 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
 
     $scope.retweet = function (feed) {
         console.log(feed.id);
-        FeedService.retweet(feed.id);
-
+        //FeedService.retweet(feed.id);
     };
 
     $scope.addTweetAtFavorites = function (feed) {
         console.log(feed.id);
-        FeedService.retweet(feed.id);
+        //FeedService.addTweetAtFavorites(feed.id);
     };
 
     $scope.unlike = function (feed) {
@@ -122,7 +121,8 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     };
 
     $scope.codes = [{code: 'all', value: "All"},{code: 'facebook', value: "Facebook"},{code: 'twitter', value: "Twitter"},
-        {code: 'linkedin', value: "Linkedin"},{code: 'google', value: "Google+"},{code: 'myPosts', value: "My posts"}
+        {code: 'linkedin', value: "Linkedin"},{code: 'google', value: "Google+"},{code: 'myPosts', value: "My posts"},
+        {code: 'myFavorites', value: "My favorites"}
     ];
 
     $scope.refreshFeeds = function () {
