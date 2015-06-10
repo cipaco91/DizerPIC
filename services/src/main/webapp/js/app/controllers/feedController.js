@@ -66,9 +66,23 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
         console.log(feed.id);
         //FeedService.addComment(feed.id, $scope.postText);
         feed.commentsCount = feed.commentsCount + 1;
-        ProfileService.getCommentFeed().success(function (response) {
+        ProfileService.getCommentFeed(feed.postText).success(function (response) {
             $scope.commentFeed = response;
+            if(feed.commentsFeeds == null) feed.commentsFeeds={};
             feed.commentsFeeds.push($scope.commentFeed);
+            feed.postText="";
+        });
+    };
+
+    $scope.addCommentNoFacebook = function (feed) {
+        console.log(feed.id);
+        //FeedService.addComment(feed.id, $scope.postText);
+        feed.commentsCount = feed.commentsCount + 1;
+        ProfileService.getCommentFeed(feed.postText).success(function (response) {
+            $scope.commentFeed = response;
+            if(feed.commentsFeeds == null) feed.commentsFeeds={};
+            feed.commentsFeeds.push($scope.commentFeed);
+            feed.postText="";
         });
     };
 

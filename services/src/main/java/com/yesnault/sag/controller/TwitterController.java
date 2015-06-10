@@ -78,4 +78,12 @@ public class TwitterController {
          twitterService.addToFavorites(tweetId);
         return "ok";
     }
+
+    @RequestMapping(value = "/removeFromFavorites/{tweetId}", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    String removeFromFavorites(@PathVariable Long tweetId) {
+        twitterService.removeFromFavorites(tweetId);
+        return "ok";
+    }
 }

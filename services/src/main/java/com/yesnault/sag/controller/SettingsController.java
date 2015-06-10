@@ -70,14 +70,14 @@ public class SettingsController {
         return userService.saveUserWizzardProfile(wizzardDTO, (User) httpServletRequest.getSession().getAttribute("user"));
     }
 
-    @RequestMapping(value = "/commentFeed", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/commentFeed/{postText}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    CommentFeed getCommentFeed(HttpServletRequest httpServletRequest) {
+    CommentFeed getCommentFeed(@PathVariable String postText,HttpServletRequest httpServletRequest) {
         CommentFeed commentFeed = new CommentFeed();
         commentFeed.setComment(new Comment(facebook.userOperations().getUserProfile().getId(),
                 new Reference(facebook.userOperations().getUserProfile().getId(),
-                        facebook.userOperations().getUserProfile().getName()), "frumos", new Date()));
+                        facebook.userOperations().getUserProfile().getName()), postText, new Date()));
         commentFeed.setCommentDate("now");
         BASE64Encoder encoder = new BASE64Encoder();
         commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage()));

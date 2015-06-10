@@ -75,6 +75,8 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     private String messageFromRetweet;
 
+    private String postText;
+
 
     public SNFeed(){
     }
@@ -362,5 +364,13 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     public void setMessageFromRetweet(String messageFromRetweet) {
         this.messageFromRetweet = messageFromRetweet;
+    }
+
+    public String getPostText() {
+        return postText;
+    }
+
+    public void setPostText(String postText) {
+        this.postText = postText;
     }
 }

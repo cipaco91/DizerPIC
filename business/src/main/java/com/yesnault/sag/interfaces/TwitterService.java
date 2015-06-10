@@ -52,5 +52,7 @@ public interface TwitterService {
 
     void addToFavorites(long tweetId);
 
+    void removeFromFavorites(long tweetId);
+
     List<SNFeed> favoritesTweets();
 }

@@ -30,7 +30,7 @@
                     </div>
                     <br/>
                     <ul class="comments">
-                        <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds">
+                        <li clas="media" ng-repeat="commentFeed in feed.commentsFeeds track by $index">
                             <div class="media-left">
                                 <a href="">
                                     <img src="{{commentFeed.photoCommentFrom}}" width="50px" class="img-circle">
@@ -45,12 +45,12 @@
                                 <a href="" class="comment-author">{{commentFeed.comment.from.name}}</a>
                                 <span>{{commentFeed.comment.message}}</span>
 
-                                <div class="comment-date">2 days</div>
+                                <div class="comment-date">{{commentFeed.commentDate}}</div>
                             </div>
                         </li>
                         <li class="comment-form">
                             <div class="input-group">
-                                <input type="text" class="form-control"/>
+                                <input type="text" class="form-control" ng-model="feed.postText"/>
                     <span class="input-group-btn">
                     <a ng-click="addComment(feed.id)" class="btn btn-default"><img src="images/accept.png"/></a>
                     </span>

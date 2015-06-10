@@ -5,6 +5,7 @@ import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.interfaces.UtilService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
+import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
@@ -211,6 +212,11 @@ public class TwitterServiceImpl implements TwitterService {
     }
 
     @Override
+    public void removeFromFavorites(long tweetId) {
+          twitter.timelineOperations().removeFromFavorites(tweetId);
+    }
+
+    @Override
     public List<SNFeed> favoritesTweets() {
         List<Tweet> tweets=twitter.timelineOperations().getFavorites();
         return getSnFeeds(tweets);
@@ -243,6 +249,9 @@ public class TwitterServiceImpl implements TwitterService {
                 snFeed.setRetweetsCount(tweet.getRetweetCount());
                 snFeed.setFavoritesCount(tweet.getFavoriteCount());
             }
+
+            List<CommentFeed> commentFeeds = new ArrayList<CommentFeed>();
+            snFeed.setCommentsFeeds(commentFeeds);
 
             snFeeds.add(snFeed);
         }

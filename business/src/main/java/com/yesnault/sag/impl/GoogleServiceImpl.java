@@ -140,7 +140,6 @@ public class GoogleServiceImpl implements GoogleService {
                 snFeed.setCommentsFeeds(commentFeeds);
                 snFeed.setCommentsCount(commentFeeds.size());
             }
-
             snFeeds.add(snFeed);
         }
         return snFeeds;
