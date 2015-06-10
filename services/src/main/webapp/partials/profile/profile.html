@@ -122,7 +122,9 @@
                             <div class="tab-content">
                                 <ul class="img-grid">
                                     <li ng-repeat="album in albums">
-                                        <img ng-src="{{album.photoCover.picture}}" width="140px" height="100px"/>
+                                        <a ng-click="showPhotosFromAlbum(album.album.id)">
+                                            <img ng-src="{{album.photoCover.picture}}" width="140px" height="100px"/>
+                                        </a>
                                         <a ng-click="showPhotosFromAlbum(album.album.id)">{{album.album.name}}</a>
                                     </li>
                                 </ul>

@@ -5,29 +5,17 @@
         <img style="width: 700px;" ng-src="{{slide.photo.source}}">
 
         <div style="width:300px;">
-            <!--<div class="media-left">-->
-                <!--<a href="">-->
-                    <!--<img src="{{slide.profilePicture}}" width="150px" class="img-circle">-->
-                <!--</a>-->
-            <!--</div>-->
-            <!--<div class="media-body">-->
-                <!--<div class="pull-right dropdown" data-show-hover="li">-->
-                    <!--<a href="#" data-toggle="dropdown" class="toggle-button">-->
-                    <!--</a>-->
-                <!--</div>-->
-                <!--<a href="" class="comment-author">{{slide.profileName}}</a>-->
 
-            <!--</div>-->
             <div class="media-left">
-                <div class="user-wrapper">
+                <div class="user-wrapper" style="display: -webkit-box;margin-left: 20px;margin-top: 20px;">
                     <img src="{{slide.profilePicture}}" alt="people" class="img-circle"
                          width="80"/>
 
-                    <div><a href="#">{{slide.profileName}}</a>
+                    <div style="  margin-top: 30px;font-size: 20px;margin-left: 5px;"><label>{{slide.profileName}}</label>
                     </div>
                 </div>
             </div>
-            <br/><br/>
+            <br/><br/><br/>
             <ul class="comments" style="list-style-type: none;">
                 <li clas="media" ng-repeat="commentFeed in slide.commentFeeds track by $index">
                     <div class="media-left">
@@ -45,6 +33,7 @@
 
                     </div>
                 </li>
+                <br/>
                 <li class="comment-form">
                     <div class="input-group">
                         <input type="text" class="form-control" ng-model="feed.postText"/>
