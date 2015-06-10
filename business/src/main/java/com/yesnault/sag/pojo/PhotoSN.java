@@ -14,6 +14,8 @@ public class PhotoSN implements Serializable{
 
     private List<CommentFeed> commentFeeds;
 
+    private Integer commentsCount;
+
     private String profileName;
 
     private String profilePicture;
@@ -58,5 +60,13 @@ public class PhotoSN implements Serializable{
 
     public void setPostText(String postText) {
         this.postText = postText;
+    }
+
+    public Integer getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(Integer commentsCount) {
+        this.commentsCount = commentsCount;
     }
 }

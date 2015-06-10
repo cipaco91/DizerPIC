@@ -2,8 +2,9 @@
 
 <div class="container slider" ng-repeat="slide in slides" ng-hide="!isCurrentSlideIndex($index)">
     <div style="display: flex;">
-        <img style="width: 700px;" ng-src="{{slide.photo.source}}">
-
+        <div style="width: 700px;">
+        <img  ng-src="{{slide.photo.source}}">
+        </div>
         <div style="width:300px;">
 
             <div class="media-left">
@@ -11,7 +12,8 @@
                     <img src="{{slide.profilePicture}}" alt="people" class="img-circle"
                          width="80"/>
 
-                    <div style="  margin-top: 30px;font-size: 20px;margin-left: 5px;"><label>{{slide.profileName}}</label>
+                    <div style="  margin-top: 30px;font-size: 20px;margin-left: 5px;">
+                        <label>{{slide.profileName}}</label>
                     </div>
                 </div>
             </div>
@@ -30,12 +32,12 @@
                         </div>
                         <a href="" class="comment-author">{{commentFeed.comment.from.name}}</a>
                         <span>{{commentFeed.comment.message}}</span>
-
                     </div>
                 </li>
                 <br/>
                 <li class="comment-form">
                     <div class="input-group">
+                        <label ng-show="slide.commentsCount==0">Add comment</label>
                         <input type="text" class="form-control" ng-model="slide.postText"/>
                                                                         <span class="input-group-btn">
                                 <a ng-click="addCommentFacebook(slide)" class="btn btn-default"><img
