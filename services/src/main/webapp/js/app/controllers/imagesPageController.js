@@ -44,7 +44,7 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
     $scope.addCommentFacebook = function (slide) {
         console.log(slide.id);
         //FeedService.addComment(slide.id, $scope.postText);
-        ProfileService.getCommentFeed($scope.postText).success(function (response) {
+        ProfileService.getCommentFeed(slide.postText).success(function (response) {
             $scope.commentFeed = response;
             if(slide.commentFeeds == null) slide.commentFeeds={};
             slide.commentFeeds.push($scope.commentFeed);

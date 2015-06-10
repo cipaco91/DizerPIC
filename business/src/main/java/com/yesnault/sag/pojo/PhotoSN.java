@@ -18,6 +18,8 @@ public class PhotoSN implements Serializable{
 
     private String profilePicture;
 
+    private String postText;
+
     public List<CommentFeed> getCommentFeeds() {
         return commentFeeds;
     }
@@ -48,5 +50,13 @@ public class PhotoSN implements Serializable{
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getPostText() {
+        return postText;
+    }
+
+    public void setPostText(String postText) {
+        this.postText = postText;
     }
 }
