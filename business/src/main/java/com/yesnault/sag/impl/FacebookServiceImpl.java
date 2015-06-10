@@ -168,7 +168,8 @@ public class FacebookServiceImpl implements FacebookService {
             PhotoSN photoSN=new PhotoSN();
             photoSN.setPhoto(photo);
             List<CommentFeed> commentFeeds=getComments(photo.getId());
-            photoSN.setCommentFeeds(commentFeeds);
+            if(commentFeeds == null) photoSN.setCommentFeeds(new ArrayList<CommentFeed>());
+            else  photoSN.setCommentFeeds(commentFeeds);
             photoSN.setProfileName(photo.getFrom().getName());
             photoSN.setProfilePicture(imageProfile);
             photoSNs.add(photoSN);

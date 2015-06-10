@@ -64,7 +64,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
 
     $scope.addComment = function (feed) {
         console.log(feed.id);
-        //FeedService.addComment(feed.id, $scope.postText);
+        //FeedService.addComment(feed.id, feed.postText);
         feed.commentsCount = feed.commentsCount + 1;
         ProfileService.getCommentFeed(feed.postText).success(function (response) {
             $scope.commentFeed = response;
@@ -76,7 +76,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
 
     $scope.addCommentNoFacebook = function (feed) {
         console.log(feed.id);
-        //FeedService.addComment(feed.id, $scope.postText);
+        //FeedService.addComment(feed.id, feed.postText);
         feed.commentsCount = feed.commentsCount + 1;
         ProfileService.getCommentFeed(feed.postText).success(function (response) {
             $scope.commentFeed = response;
