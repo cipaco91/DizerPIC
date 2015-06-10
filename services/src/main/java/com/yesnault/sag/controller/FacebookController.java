@@ -3,6 +3,7 @@ package com.yesnault.sag.controller;
 import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.AlbumSN;
+import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.SearchUsersDTO;
@@ -104,5 +105,11 @@ public class FacebookController {
         facebookService.unlike(id);
     }
 
+    @RequestMapping(value = "/commentsFeed/{objectId}", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<CommentFeed> commentsFeed(@PathVariable String objectId) {
+        return facebookService.getComments(objectId);
+    }
 
 }

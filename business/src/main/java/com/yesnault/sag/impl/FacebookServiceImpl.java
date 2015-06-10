@@ -12,6 +12,7 @@ import com.yesnault.sag.pojo.SNFriend;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.social.linkedin.api.Comments;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sun.misc.BASE64Encoder;
@@ -189,6 +190,21 @@ public class FacebookServiceImpl implements FacebookService {
             return getSnFeeds(posts);
         }
         return new ArrayList<SNFeed>();
+    }
+
+    @Override
+    public List<CommentFeed> getComments(String objectId) {
+        PagedList<Comment> commentsPage=facebook.commentOperations().getComments(objectId);
+        List<CommentFeed> commentFeeds=new ArrayList<>();
+        for(Comment comment:commentsPage){
+            CommentFeed commentFeed=new CommentFeed();
+            commentFeed.setComment(comment);
+            commentFeed.setCommentDate(comment.getCreatedTime().toString());
+            commentFeed.setPhotoCommentFrom("http://graph.facebook.com/" + comment.getFrom().getId() + "/picture");
+            commentFeed.setCreatedTime(comment.getCreatedTime());
+            commentFeeds.add(commentFeed);
+        }
+        return commentFeeds;
     }
 
     private List<SNFriend> getSnFriends(List<Reference> references, String name) {

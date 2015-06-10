@@ -1,10 +1,10 @@
 <ng-include src="'partials/menu/menu.html'"></ng-include>
 
-<div class="container slider">
+<div class="container slider" >
     <img ng-repeat="slide in slides" style="width: 950px;height: 700px;margin-left: 70px;"
          ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.source}}">
 
-    <a class="arrow prev" ng-click="prevSlide()">Previous</a>
+    <a class="arrow prev"  ng-click="prevSlide()">Previous</a>
     <a class="arrow next"  ng-click="nextSlide()">Next</a>
 
 </div>

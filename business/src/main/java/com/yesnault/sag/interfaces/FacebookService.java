@@ -2,6 +2,7 @@ package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.pojo.AlbumSN;
+import com.yesnault.sag.pojo.CommentFeed;
 import com.yesnault.sag.pojo.SNFeed;
 import com.yesnault.sag.pojo.SNFriend;
 import com.yesnault.sag.util.UsersDTO;
@@ -49,4 +50,6 @@ public interface FacebookService {
     void unlike(String id);
 
     List<SNFeed> getMyPosts();
+
+    List<CommentFeed> getComments(String objectId);
 }
