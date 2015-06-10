@@ -31,7 +31,7 @@ app.factory("FeedService", function ($http) {
             return $http.get('rest/favoritesTweets');
         },
         retweet: function (tweetId) {
-            return $http.post('rest/retweet/'+tweetId);
+            return $http.get('rest/retweet/'+tweetId);
         },
         addTweetAtFavorites: function (tweetId) {
             return $http.post('rest/addTweetAtFavorites/'+tweetId);

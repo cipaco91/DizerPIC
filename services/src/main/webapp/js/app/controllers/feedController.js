@@ -32,6 +32,12 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.retweet = function (feed) {
         console.log(feed.id);
         //FeedService.retweet(feed.id);
+        FeedService.retweet(feed.id).success(function (feedResponse) {
+                $scope.feedFacebook.splice(0, 0, feedResponse);
+            })
+            .error(function (resp) {
+                console.log("Error with FeedService.postSocialNetwork" + resp);
+            });
         feed.retweetsCount=feed.retweetsCount+1;
     };
 
