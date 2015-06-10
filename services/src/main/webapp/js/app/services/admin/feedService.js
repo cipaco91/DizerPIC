@@ -38,6 +38,9 @@ app.factory("FeedService", function ($http) {
         },
         removeFromFavorites: function (tweetId) {
             return $http.post('rest/removeFromFavorites/'+tweetId);
+        },
+        comments: function (objectId) {
+            return $http.get('rest/commentsFeed/'+objectId);
         }
     }
 });

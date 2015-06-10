@@ -1,10 +1,7 @@
 package com.yesnault.sag.interfaces;
 
 import com.yesnault.sag.model.User;
-import com.yesnault.sag.pojo.AlbumSN;
-import com.yesnault.sag.pojo.CommentFeed;
-import com.yesnault.sag.pojo.SNFeed;
-import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.pojo.*;
 import com.yesnault.sag.util.UsersDTO;
 import org.springframework.social.facebook.api.*;
 
@@ -41,7 +38,7 @@ public interface FacebookService {
 
     List<SNFriend> getCommonFriendsFacebook();
 
-    List<Photo> getPhotosFromAlbum(String albumId);
+    List<PhotoSN> getPhotosFromAlbum(String albumId);
 
     String addComment(String id, String message);
 

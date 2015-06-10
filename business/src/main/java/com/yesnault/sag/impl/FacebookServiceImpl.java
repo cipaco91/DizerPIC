@@ -5,10 +5,7 @@ import com.yesnault.sag.interfaces.UserService;
 import com.yesnault.sag.interfaces.UtilService;
 import com.yesnault.sag.model.User;
 import com.yesnault.sag.model.UserProfile;
-import com.yesnault.sag.pojo.AlbumSN;
-import com.yesnault.sag.pojo.CommentFeed;
-import com.yesnault.sag.pojo.SNFeed;
-import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.pojo.*;
 import org.springframework.social.ExpiredAuthorizationException;
 import org.springframework.social.facebook.api.*;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -163,8 +160,20 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public List<Photo> getPhotosFromAlbum(String albumId) {
-        return new ArrayList<Photo>(facebook.mediaOperations().getPhotos(albumId));
+    public List<PhotoSN> getPhotosFromAlbum(String albumId) {
+        List<Photo> photos = new ArrayList<Photo>(facebook.mediaOperations().getPhotos(albumId));
+        List<PhotoSN> photoSNs=new ArrayList<>();
+        String imageProfile="http://graph.facebook.com/" + facebook.userOperations().getUserProfile().getId()+ "/picture";
+        for(Photo photo:photos){
+            PhotoSN photoSN=new PhotoSN();
+            photoSN.setPhoto(photo);
+            List<CommentFeed> commentFeeds=getComments(photo.getId());
+            photoSN.setCommentFeeds(commentFeeds);
+            photoSN.setProfileName(photo.getFrom().getName());
+            photoSN.setProfilePicture(imageProfile);
+            photoSNs.add(photoSN);
+        }
+        return photoSNs;
     }
 
     @Override

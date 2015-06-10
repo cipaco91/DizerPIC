@@ -2,10 +2,7 @@ package com.yesnault.sag.controller;
 
 import com.yesnault.sag.interfaces.FacebookService;
 import com.yesnault.sag.model.User;
-import com.yesnault.sag.pojo.AlbumSN;
-import com.yesnault.sag.pojo.CommentFeed;
-import com.yesnault.sag.pojo.SNFeed;
-import com.yesnault.sag.pojo.SNFriend;
+import com.yesnault.sag.pojo.*;
 import com.yesnault.sag.util.SearchUsersDTO;
 import com.yesnault.sag.util.UsersDTO;
 import org.slf4j.Logger;
@@ -80,7 +77,7 @@ public class FacebookController {
     @RequestMapping(value = "/photosFromAlbum/{albumId}", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<Photo> getPhotosFromAlbum(@PathVariable String albumId) {
+    List<PhotoSN> getPhotosFromAlbum(@PathVariable String albumId) {
         return facebookService.getPhotosFromAlbum(albumId);
     }
 

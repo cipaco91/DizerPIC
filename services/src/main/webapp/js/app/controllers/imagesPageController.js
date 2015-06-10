@@ -1,4 +1,4 @@
-function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService, MenuService) {
+function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService, MenuService,FeedService) {
 
     $rootScope.bodylayout = 'bodyImagesPage';
 
@@ -15,13 +15,19 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
         return $scope.currentIndex === index;
     };
 
-    $scope.prevSlide = function () {
+    $scope.prevSlide = function (slide) {
         $scope.direction = 'left';
+        //FeedService.comments(slide.id).success(function (response) {
+        //    $scope.commentsFeeds = response;
+        //});
         $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
     };
 
-    $scope.nextSlide = function () {
+    $scope.nextSlide = function (slide) {
         $scope.direction = 'right';
+        //FeedService.comments(slide.id).success(function (response) {
+        //    $scope.commentsFeeds = response;
+        //});
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
     };
 
