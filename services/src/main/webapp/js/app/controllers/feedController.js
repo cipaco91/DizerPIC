@@ -29,6 +29,12 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
         feed.likesCount = feed.likesCount + 1;
     };
 
+    $scope.addPlus = function (feed) {
+        console.log(feed.id);
+        $scope.likeShow = false;
+        feed.likesCount = feed.likesCount + 1;
+    };
+
     $scope.retweet = function (feed) {
         console.log(feed.id);
         //FeedService.retweet(feed.id);
@@ -50,6 +56,12 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.unlike = function (feed) {
         console.log(feed.id);
         FeedService.unlike(feed.id);
+        $scope.likeShow = true;
+        feed.likesCount = feed.likesCount - 1;
+    };
+
+    $scope.deletePlus = function (feed) {
+        console.log(feed.id);
         $scope.likeShow = true;
         feed.likesCount = feed.likesCount - 1;
     };
