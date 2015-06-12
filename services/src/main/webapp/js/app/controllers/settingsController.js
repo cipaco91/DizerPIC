@@ -79,11 +79,8 @@ function SettingsCtrl($scope, $location, $window, ProfileService, $controller) {
             $scope.wizzardDTO = response;
         });
 
-        $location.path("/home");
-        //
-        //$location.path("/home/" + $scope.wizzardDTO.isFacebook + "/" +
-        //$scope.wizzardDTO.isTwitter + "/" + $scope.wizzardDTO.isLinkedin + "/" +
-        //$scope.wizzardDTO.isGoogle);
+        $window.location.href = "http://localhost:8080/social/#/home";
+
     };
 
     $scope.setStepBack = function (step) {
