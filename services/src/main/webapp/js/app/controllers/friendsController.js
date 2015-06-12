@@ -25,9 +25,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
 
     $scope.codes = [{code: 'all', value: "All"}, {code: 'socialNetwork', value: "by Social Network"}, {
         code: 'name',
-        value: "by Name"
-    },
-        {code: 'age', value: "by Age"}, {code: 'company', value: "by Company"}];
+        value: "by Name"}];
 
     $scope.socialNetworks = [{code: 'facebook', value: "Facebook"}, {
         code: 'linkedin',
