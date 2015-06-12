@@ -1,4 +1,4 @@
-function LoginCtrl($scope, $rootScope, $location, $window, UsersService,ProfileService) {
+function LoginCtrl($scope, $rootScope, $location, $window, UsersService, ProfileService) {
     $rootScope.bodylayout = 'login';
 
     $scope.messageFlag = false;
@@ -9,9 +9,9 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService,ProfileS
     $scope.messageSign = "Sign In";
 
     ProfileService.isLoginActive().success(function (response) {
-        if(response == "false") {
+        if (response == "false") {
             $location.path("login");
-        }else{
+        } else {
             $location.path("profile");
         }
     });
@@ -49,12 +49,15 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService,ProfileS
         if ($scope.passwordSignUp != $scope.rePasswordSignUp) {
             $scope.messageFlagSignUp = true;
         } else {
-            UsersService.signUp($scope.usernameSignUp, $scope.passwordSignUp,$scope.firstName,$scope.lastName).success(function (response) {
+            UsersService.signUp($scope.usernameSignUp, $scope.passwordSignUp, $scope.firstName, $scope.lastName).success(function (response) {
                 if (response == 'okSignUp') {
                     console.log("okSignUp");
                     $scope.loginForm = true;
                     $scope.signUpForm = false;
                     $scope.messageSign = "Sign In";
+                } else if (response == 'existsUsername') {
+                    $scope.messageFlagSignUp = true;
+                    $scope.messageError='This username already exists!!!';
                 }
             });
         }

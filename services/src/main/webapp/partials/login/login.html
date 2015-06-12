@@ -4,8 +4,8 @@
             <h1>{{messageSign}}</h1>
 
             <div class="panel panel-default text-center">
-                <img src="images/social-media.png" style="width: 200px;">
-
+                <!--<img src="images/social-media.png" style="width: 200px;">bestwebsitepros1.png-->
+                <img src="images/bestwebsitepros1.png" style="width: 200px;">
                 <div class="panel-body" ng-show="loginForm">
                     <input class="form-control" type="text" placeholder="Username" ng-model="username">
                     <input class="form-control" type="password" placeholder="Enter Password" ng-model="password">
@@ -21,7 +21,7 @@
                     <input class="form-control" type="password" placeholder="Enter Password" ng-model="passwordSignUp">
                     <input class="form-control" type="password" placeholder="Retype Password" ng-model="rePasswordSignUp">
                     <a ng-click="signUp2()" class="btn btn-primary">Sign up <i class="fa fa-fw fa-unlock-alt"></i></a>
-                    <label ng-show="messageFlagSignUp" style="color:red">Passwords are not the same!!!</label>
+                    <label ng-show="messageFlagSignUp" style="color:red">{{messageError}}</label>
                 </div>
             </div>
         </div>
