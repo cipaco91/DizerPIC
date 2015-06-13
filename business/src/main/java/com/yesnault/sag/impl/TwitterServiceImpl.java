@@ -201,7 +201,7 @@ public class TwitterServiceImpl implements TwitterService {
 
     @Override
     public SNFeed retweet(long tweetId) {
-        List<Tweet> tweets = new ArrayList<>();
+        List<Tweet> tweets = new ArrayList<Tweet>();
         tweets.add(twitter.timelineOperations().retweet(tweetId));
         return getSnFeeds(tweets).get(0);
     }

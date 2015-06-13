@@ -14,6 +14,9 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.selectedItem.code = 'all';
     $scope.selectedItem.value = 'All';
 
+    $scope.facebookLikesFlag=true;
+    $scope.twitterTweetsFlag=false;
+
     FeedService.findFeedFacebook().
         success(function (users) {
             $scope.feedFacebook = users;
@@ -27,6 +30,16 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
         FeedService.addLike(feed.id);
         $scope.likeShow = false;
         feed.likesCount = feed.likesCount + 1;
+    };
+
+    $scope.showLikesFacebook = function () {
+        $scope.facebookLikesFlag = true;
+        $scope.twitterTweetsFlag = false;
+    };
+
+    $scope.showTweets = function () {
+        $scope.facebookLikesFlag = false;
+        $scope.twitterTweetsFlag = true;
     };
 
     $scope.addPlus = function (feed) {
