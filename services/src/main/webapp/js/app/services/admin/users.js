@@ -30,8 +30,8 @@ app.factory("UsersService", function ($http) {
         findAll: function () {N
             return $http.get('rest/users');
         },
-        signUp: function (username,password,firstName,lastName) {
-            return $http.post('rest/signUp/'+username+'/'+password+'/'+firstName+'/'+lastName);
+        signUp: function (username,password) {
+            return $http.post('rest/signUp/'+username+'/'+password);
         },
         login: function (username,password) {
             return $http.post('rest/login/'+username+'/'+password);

@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String signUp(String username, String password, String firstName, String lastName) {
+    public String signUp(String username, String password) {
         List<User> users=userRepository.findByUsername(username);
         if(users == null || users.size() == 0) {
             User user = new User();
@@ -184,8 +184,6 @@ public class UserServiceImpl implements UserService {
             user.setPassword(password);
             user.setActive(true);
             user.setLoginActive(false);
-            user.setFirstname(firstName);
-            user.setLastname(lastName);
             userRepository.save(user);
         }else{
             return "existsUsername";

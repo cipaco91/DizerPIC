@@ -49,7 +49,7 @@ function LoginCtrl($scope, $rootScope, $location, $window, UsersService, Profile
         if ($scope.passwordSignUp != $scope.rePasswordSignUp) {
             $scope.messageFlagSignUp = true;
         } else {
-            UsersService.signUp($scope.usernameSignUp, $scope.passwordSignUp, $scope.firstName, $scope.lastName).success(function (response) {
+            UsersService.signUp($scope.usernameSignUp, $scope.passwordSignUp).success(function (response) {
                 if (response == 'okSignUp') {
                     console.log("okSignUp");
                     $scope.loginForm = true;

@@ -8,10 +8,10 @@ import javax.persistence.*;
 @Table(name = "USER")
 public class User extends AbstractEntity {
 
-    @Column(name = "FIRST_NAME", nullable = false, insertable = true, updatable = true)
+    @Column(name = "FIRST_NAME", insertable = true, updatable = true)
     private String firstname;
 
-    @Column(name = "LAST_NAME", nullable = false, insertable = true, updatable = true)
+    @Column(name = "LAST_NAME",  insertable = true, updatable = true)
     private String lastname;
 
     @Column(name = "USERNAME", nullable = false, insertable = true, updatable = true)

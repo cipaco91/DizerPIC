@@ -23,9 +23,9 @@
 
                     <div class="profile-icons">
                         <a ng-click="addPlus(feed)"
-                           ng-show="likeShow" style="color:blue;margin-left: 10px;">Plus</a>
+                           ng-show="feed.likeShow" style="color:blue;margin-left: 10px;">Plus</a>
                         <a ng-click="deletePlus(feed)"
-                           ng-hide="likeShow" style="color:blue;margin-left: 10px;">Delete Plus</a>
+                           ng-hide="feed.likeShow" style="color:blue;margin-left: 10px;">Delete Plus</a>
                         <span><i class="fa fa-users"></i> {{feed.likesCount}} Pluses</span>
                         <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
                         <img src="images/social/google-icon.png"

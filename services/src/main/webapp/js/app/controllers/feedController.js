@@ -28,7 +28,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.addLike = function (feed) {
         console.log(feed.id);
         FeedService.addLike(feed.id);
-        $scope.likeShow = false;
+        feed.likeShow = false;
         feed.likesCount = feed.likesCount + 1;
     };
 
@@ -44,7 +44,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
 
     $scope.addPlus = function (feed) {
         console.log(feed.id);
-        $scope.likeShow = false;
+        feed.likeShow = false;
         feed.likesCount = feed.likesCount + 1;
     };
 
@@ -69,13 +69,13 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
     $scope.unlike = function (feed) {
         console.log(feed.id);
         FeedService.unlike(feed.id);
-        $scope.likeShow = true;
+        feed.likeShow = true;
         feed.likesCount = feed.likesCount - 1;
     };
 
     $scope.deletePlus = function (feed) {
         console.log(feed.id);
-        $scope.likeShow = true;
+        feed.likeShow = true;
         feed.likesCount = feed.likesCount - 1;
     };
 

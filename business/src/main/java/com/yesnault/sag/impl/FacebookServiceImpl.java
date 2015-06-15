@@ -249,6 +249,7 @@ public class FacebookServiceImpl implements FacebookService {
                 snFeed.setId(post.getId());
                 snFeed.setFrom(post.getFrom());
                 snFeed.setCreatedTime(post.getCreatedTime());
+                snFeed.setLikeShow(true);
                 snFeed.setUpdatedTime(post.getUpdatedTime());
                 if (post.getCreatedTime() != null && post.getUpdatedTime() != null && post.getCreatedTime().compareTo(post.getUpdatedTime()) < 0) {
                     snFeed.setCreatedTime(post.getUpdatedTime());

@@ -77,6 +77,8 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     private String postText;
 
+    private Boolean likeShow;
+
 
     public SNFeed(){
     }
@@ -372,5 +374,13 @@ public class SNFeed implements Serializable, Comparable<SNFeed>{
 
     public void setPostText(String postText) {
         this.postText = postText;
+    }
+
+    public Boolean getLikeShow() {
+        return likeShow;
+    }
+
+    public void setLikeShow(Boolean likeShow) {
+        this.likeShow = likeShow;
     }
 }
