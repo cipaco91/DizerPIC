@@ -122,7 +122,7 @@ public class LinkedinServiceImpl implements LinkedinService{
                 UserProfile userProfile=listUsers.get(0).getUserProfile();
                 if (new Boolean(true).equals(userProfile.getLinkedinFlag())) {
                     return linkedIn.communicationOperations() != null;
-                }
+                }else return true;
             }
             return true;
         }catch (Exception e){

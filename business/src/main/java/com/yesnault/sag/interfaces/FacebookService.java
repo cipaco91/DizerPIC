@@ -22,7 +22,7 @@ public interface FacebookService {
 
     PagedList<Reference> search(String var1);
 
-    List<AlbumSN> getAlbums();
+    List<AlbumSN> getAlbums(User user);
 
     PagedList<Photo> getPhotos(String var1);
 
@@ -32,7 +32,7 @@ public interface FacebookService {
 
     byte [] getProfileImage();
 
-    PagedList<Photo> getPhotosProfile();
+    PagedList<Photo> getPhotosProfile(User user);
 
     boolean isConnectFacebook(User user);
 

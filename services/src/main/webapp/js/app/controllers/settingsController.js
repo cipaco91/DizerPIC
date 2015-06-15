@@ -80,7 +80,6 @@ function SettingsCtrl($scope, $location, $window, ProfileService, $controller) {
         });
 
         $window.location.href = "http://localhost:8080/social/#/home";
-
     };
 
     $scope.setStepBack = function (step) {

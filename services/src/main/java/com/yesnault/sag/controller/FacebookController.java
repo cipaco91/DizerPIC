@@ -70,8 +70,9 @@ public class FacebookController {
     @RequestMapping(value = "/albumsFacebook", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    List<AlbumSN> albumsFacebook() {
-        return facebookService.getAlbums();
+    List<AlbumSN> albumsFacebook(HttpServletRequest httpServletRequest) {
+        User user = (User) httpServletRequest.getSession().getAttribute("user");
+        return facebookService.getAlbums(user);
     }
 
     @RequestMapping(value = "/photosFromAlbum/{albumId}", method = RequestMethod.GET, produces = "application/json")

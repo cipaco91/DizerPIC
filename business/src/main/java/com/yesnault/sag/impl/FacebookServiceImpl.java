@@ -79,9 +79,9 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public List<AlbumSN> getAlbums() {
+    public List<AlbumSN> getAlbums(User user) {
         List<AlbumSN> albumSNs = new ArrayList<AlbumSN>();
-        if (facebook != null) {
+        if(isConnectFacebook(user)) {
             List<Album> albums = facebook.mediaOperations().getAlbums();
             for (Album album : albums) {
                 AlbumSN albumSN = new AlbumSN();
@@ -123,9 +123,12 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
-    public PagedList<Photo> getPhotosProfile() {
-        String userId = facebook.userOperations().getUserProfile().getId();
-        return facebook.mediaOperations().getPhotos(userId);
+    public PagedList<Photo> getPhotosProfile(User user) {
+        if(isConnectFacebook(user)) {
+            String userId = facebook.userOperations().getUserProfile().getId();
+            return facebook.mediaOperations().getPhotos(userId);
+        }
+        return null;
     }
 
     @Override

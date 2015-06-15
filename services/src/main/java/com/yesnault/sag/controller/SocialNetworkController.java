@@ -93,9 +93,10 @@ public class SocialNetworkController {
     @RequestMapping(value = "/photosProfile", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
-    PagedList<Photo> photosProfile() {
+    PagedList<Photo> photosProfile(HttpServletRequest httpServletRequest) {
         //todo get 3 photos from facebbok,twiiter,linkedn
-        return facebookService.getPhotosProfile();
+        User user=(User)httpServletRequest.getSession().getAttribute("user");
+        return facebookService.getPhotosProfile(user);
     }
 
     @RequestMapping(value = "/profileImage", method = RequestMethod.GET, produces = "application/json")
