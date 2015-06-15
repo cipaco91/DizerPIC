@@ -165,7 +165,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<PhotoSN> getPhotosFromAlbum(String albumId) {
         List<Photo> photos = new ArrayList<Photo>(facebook.mediaOperations().getPhotos(albumId));
-        List<PhotoSN> photoSNs=new ArrayList<>();
+        List<PhotoSN> photoSNs=new ArrayList<PhotoSN>();
         String imageProfile="http://graph.facebook.com/" + facebook.userOperations().getUserProfile().getId()+ "/picture";
         for(Photo photo:photos){
             PhotoSN photoSN=new PhotoSN();
@@ -214,7 +214,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<CommentFeed> getComments(String objectId) {
         PagedList<Comment> commentsPage=facebook.commentOperations().getComments(objectId);
-        List<CommentFeed> commentFeeds=new ArrayList<>();
+        List<CommentFeed> commentFeeds=new ArrayList<CommentFeed>();
         for(Comment comment:commentsPage){
             CommentFeed commentFeed=new CommentFeed();
             commentFeed.setComment(comment);
