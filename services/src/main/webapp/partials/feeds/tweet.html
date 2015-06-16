@@ -20,10 +20,10 @@
                     <label style="margin-left: 10px;">{{feed.message}}</label>
                     <br/>
                     <div class="profile-icons">
-                        <a ng-click="retweet(feed)" style="color:blue;margin-left: 10px;">Retweet</a>
-                        <a ng-click="addTweetAtFavorites(feed)" style="color:blue;margin-left: 10px;">Add to favorites</a>
+                        <a ng-click="retweet(feed)" title="Retweet" style="margin-left: 10px;"><img width="30" src="images/retweet.png"/></a>
+                        <a ng-click="addTweetAtFavorites(feed)" title="Add to favorites" style="margin-left: 10px;"><img width="30" src="images/addToFavorites.jpg"/></a>
 
-                        <span><i class="fa fa-users"></i> {{feed.retweetsCount}}  Retweets</span>
+                        <span>{{feed.retweetsCount}}  Retweets</span>
                         <span><i class="fa fa-users"></i> {{feed.favoritesCount}} Favorites</span>
                         <img src="images/social/twiiter-icon.png" style="margin-left: 60px;"
                              class="img-circle" width="30"/>

@@ -22,11 +22,11 @@
 
                     <div class="profile-icons">
                         <a ng-click="addPlus(feed)"
-                           ng-show="feed.likeShow" style="color:blue;margin-left: 10px;">Plus</a>
+                           ng-show="feed.likeShow" style="margin-left: 10px;"><img width="30" src="images/plus.png"/></a>
                         <a ng-click="deletePlus(feed)"
-                           ng-hide="feed.likeShow" style="color:blue;margin-left: 10px;">Delete Plus</a>
-                        <span><i class="fa fa-users"></i> {{feed.likesCount}} Pluses</span>
-                        <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
+                           ng-hide="feed.likeShow" style="margin-left: 10px;"><img width="30" src="images/minus.png"/></a>
+                        <span> {{feed.likesCount}} Pluses</span>
+                        <span><i  class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
                         <img src="images/social/google-icon.png"
                              class="img-circle" width="30" style="margin-left: 35px;"/>
                     </div>

@@ -104,6 +104,7 @@ public class GoogleServiceImpl implements GoogleService {
             snFeed.setFrom(new Reference(activity.getActor().getDisplayName(),activity.getActor().getDisplayName()));
             snFeed.setPhotoFrom(activity.getActor().getImageUrl());
             snFeed.setUpdatedTime(activity.getUpdated());
+            snFeed.setLikeShow(true);
             if(activity.getAttachments()!=null&&activity.getAttachments().size()>0){
                 Activity.Attachment attachment=activity.getAttachments().get(0);
                 if(attachment instanceof Activity.Article){
