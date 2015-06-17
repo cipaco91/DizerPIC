@@ -67,7 +67,7 @@ public class GoogleServiceImpl implements GoogleService {
         while (activities != null) {
             i++;
             snFeeds.addAll(getSNFeeds(activities));
-            if (activitiesPage.getNextPageToken() == null || i==3) {
+            if (activitiesPage.getNextPageToken() == null || i==2) {
                 break;
             }
             activitiesPage=google.plusOperations().searchPublicActivities("home", activitiesPage.getNextPageToken());

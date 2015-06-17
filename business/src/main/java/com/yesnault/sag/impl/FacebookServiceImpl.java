@@ -55,7 +55,7 @@ public class FacebookServiceImpl implements FacebookService {
     @Override
     public List<SNFriend> getFriendsFacebook(String name) {
         if (facebook != null) {
-            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAMLsiEJaFnjSKCuZA4uR6C9PfLzZAook72QaTg5yOuq1UoMJIJRTJSKYoKmup6OZCevZC5kZC48O8KlGGwOo6Ho7xTSamdZChcsjG4A5pXkozIloW01t7pGfNSEmMRc3gTIhbaCXEcIumKiXrM89wufpirIqbJFlcqedlAabHMt241YlaLzqxcvxS6pq8MKivFhBWxGClqlfGr4spzlPIZD");
+            Facebook facebook1 = new FacebookTemplate("CAACEdEose0cBAOhlmacMlnLEXESvbwEUf88WU7eXqdw2prHaoZA0Mdc5VOcEaMVe61rhBR727KKKSrInYSh2iIuQfZBr4rSp50c3MAniLyIinimFOFa3aOceP9XMxFWeVeK0KMk0U5JH1lAC5rBhEaZCHbbZCUAKG8OKR5wI3kKDlKT1AuS2EfsL6QxHjdPpBLXTbJ9biI5EMk4YZBsmQS1IuKX1xR6wZD");
             PagedList<Reference> references = facebook1.friendOperations().getFriends();
             return getSnFriends(references, name);
         }
@@ -247,7 +247,7 @@ public class FacebookServiceImpl implements FacebookService {
         BASE64Encoder encoder = new BASE64Encoder();
         List<SNFeed> snFeeds = new ArrayList<SNFeed>();
         for (Post post : posts) {
-            if ("VIDEO".equals(post.getType().name()) || "PHOTO".equals(post.getType().name()) || "StatusOnlyFrom".equals(post.getType().name())) {
+            if ("VIDEO".equals(post.getType().name()) || "PHOTO".equals(post.getType().name()) || "STATUS".equals(post.getType().name())) {
                 SNFeed snFeed = new SNFeed();
                 snFeed.setId(post.getId());
                 snFeed.setFrom(post.getFrom());
@@ -270,72 +270,9 @@ public class FacebookServiceImpl implements FacebookService {
                 snFeed.setLikes(post.getLikes());
                 snFeed.setLikesCount(post.getLikes() != null ? post.getLikes().size() : 0);
                 snFeed.setCommentsCount(post.getComments() != null ? post.getComments().size() : 0);
+                snFeed.setCommentsFeeds(new ArrayList<CommentFeed>());
 
-                if (post.getComments() != null) {
-                    List<CommentFeed> commentFeeds = new ArrayList<CommentFeed>();
-                    if (post.getComments().size() > 5) {
-                        for (Comment comment : post.getComments().subList(0, 4)) {
-                            CommentFeed commentFeed = new CommentFeed();
-                            commentFeed.setComment(comment);
-                            commentFeed.setCreatedTime(comment.getCreatedTime());
-                            commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-                            long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
-                            long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
-                                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
 
-                            if (minutes < 60) {
-                                commentFeed.setCommentDate(minutes + " minutes ago");
-                            } else if (minutes > 60) {
-                                long hours = minutes / 60;
-                                if (hours == 1) {
-                                    commentFeed.setCommentDate(hours + " hour ago ");
-                                } else {
-                                    if (hours > 24) {
-                                        long days = hours / 24;
-                                        commentFeed.setCommentDate(days + " days ago ");
-                                    } else {
-                                        commentFeed.setCommentDate(hours + " hours ago ");
-                                    }
-
-                                }
-                            }
-
-                            commentFeeds.add(commentFeed);
-                        }
-                    } else {
-                        for (Comment comment : post.getComments()) {
-                            CommentFeed commentFeed = new CommentFeed();
-                            commentFeed.setComment(comment);
-                            commentFeed.setCreatedTime(comment.getCreatedTime());
-                            commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
-                            long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
-                            long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
-                                    TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
-
-                            if (minutes < 60) {
-                                commentFeed.setCommentDate(minutes + " minutes ago");
-                            } else if (minutes > 60) {
-                                long hours = minutes / 60;
-                                if (hours == 1) {
-                                    commentFeed.setCommentDate(hours + " hour ago ");
-                                } else {
-                                    if (hours > 24) {
-                                        long days = hours / 24;
-                                        commentFeed.setCommentDate(days + " days ago ");
-                                    } else {
-                                        commentFeed.setCommentDate(hours + " hours ago ");
-                                    }
-
-                                }
-                            }
-
-                            commentFeeds.add(commentFeed);
-                        }
-                    }
-                    Collections.sort(commentFeeds);
-                    snFeed.setCommentsFeeds(commentFeeds);
-                }
-                snFeed.setSharesCount(post.getSharesCount());
                 snFeed.setStory(post.getStory());
                 snFeed.setFeedType(post.getType().name());
                 snFeed.setSocialNetworkType("facebook");
@@ -346,6 +283,73 @@ public class FacebookServiceImpl implements FacebookService {
 
                 if ("PHOTO".equals(post.getType().name())) {
                     snFeed.setPicture(facebook.mediaOperations().getPhoto(((PhotoPost) post).getPhotoId()).getSource());
+                    if (post.getComments() != null) {
+                        List<CommentFeed> commentFeeds = new ArrayList<CommentFeed>();
+                        if (post.getComments().size() > 5) {
+                            List<Comment> subComments= post.getComments().subList(0, 2);
+                            for (Comment comment :subComments) {
+                                CommentFeed commentFeed = new CommentFeed();
+                                commentFeed.setComment(comment);
+                                commentFeed.setCreatedTime(comment.getCreatedTime());
+                                commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                                long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
+                                long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
+                                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
+
+                                if (minutes < 60) {
+                                    commentFeed.setCommentDate(minutes + " minutes ago");
+                                } else if (minutes > 60) {
+                                    long hours = minutes / 60;
+                                    if (hours == 1) {
+                                        commentFeed.setCommentDate(hours + " hour ago ");
+                                    } else {
+                                        if (hours > 24) {
+                                            long days = hours / 24;
+                                            commentFeed.setCommentDate(days + " days ago ");
+                                        } else {
+                                            commentFeed.setCommentDate(hours + " hours ago ");
+                                        }
+
+                                    }
+                                }
+
+                                commentFeeds.add(commentFeed);
+                            }
+                        } else {
+                            for (Comment comment : post.getComments()) {
+                                CommentFeed commentFeed = new CommentFeed();
+                                commentFeed.setComment(comment);
+                                commentFeed.setCreatedTime(comment.getCreatedTime());
+                                commentFeed.setPhotoCommentFrom("data:image/jpeg;base64," + encoder.encode(facebook.userOperations().getUserProfileImage(comment.getFrom().getId())));
+                                long timeDiff = Math.abs(new Date().getTime() - comment.getCreatedTime().getTime());
+                                long minutes = TimeUnit.MILLISECONDS.toMinutes(timeDiff) -
+                                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(timeDiff));
+
+                                if (minutes < 60) {
+                                    commentFeed.setCommentDate(minutes + " minutes ago");
+                                } else if (minutes > 60) {
+                                    long hours = minutes / 60;
+                                    if (hours == 1) {
+                                        commentFeed.setCommentDate(hours + " hour ago ");
+                                    } else {
+                                        if (hours > 24) {
+                                            long days = hours / 24;
+                                            commentFeed.setCommentDate(days + " days ago ");
+                                        } else {
+                                            commentFeed.setCommentDate(hours + " hours ago ");
+                                        }
+
+                                    }
+                                }
+                                commentFeeds.add(commentFeed);
+                            }
+                        }
+                        Collections.sort(commentFeeds);
+                        snFeed.setCommentsFeeds(commentFeeds);
+                    }else{
+                        snFeed.setCommentsFeeds(new ArrayList<CommentFeed>());
+                        snFeed.setCommentsCount(0);
+                    }
                 }
 
                 if ("STATUS".equals(post.getType().name())) {
