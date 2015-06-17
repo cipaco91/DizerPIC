@@ -6,10 +6,7 @@ function SearchUsersCtrl($scope, $location, FriendsService, ProfileService, Menu
     $scope.buttonSearch=false;
     $scope.searchUserDTO={};
     $scope.usersShow=false;
-    $scope.selectedItem={};
-    $scope.selectedItem.code='name';
-    $scope.selectedItem.value='by Name';
-
+    $scope.selectedItem={code: 'name', value: "by Name"};
 
     $scope.codes = [{code: 'all', value: "All"},{code: 'name', value: "by Name"}];
 
