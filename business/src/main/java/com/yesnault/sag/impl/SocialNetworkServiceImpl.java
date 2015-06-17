@@ -74,12 +74,12 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
 //            twitter.timelineOperations().updateStatus(message);
 //        }
 
-        if (linkedinFlag) {
-            linkedIn.networkUpdateOperations().createNetworkUpdate(message);
-        }
-
-        if (googleFlag) {
-        }
+//        if (linkedinFlag) {
+//            linkedIn.networkUpdateOperations().createNetworkUpdate(message);
+//        }
+//
+//        if (googleFlag) {
+//        }
 
         SNFeed snFeed = new SNFeed();
         snFeed.setMessage(message);

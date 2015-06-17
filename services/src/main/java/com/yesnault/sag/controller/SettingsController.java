@@ -43,7 +43,8 @@ public class SettingsController {
             List<User> listUsers = userService.findByUsername(user.getUsername());
             WizzardDTO wizzardDTO = new WizzardDTO();
             if (listUsers != null && listUsers.size() > 0) {
-                UserProfile userProfile = listUsers.get(0).getUserProfile();
+                user= listUsers.get(0);
+                UserProfile userProfile = user.getUserProfile();
                 if (userProfile != null) {
                     wizzardDTO.setIsFacebook(userProfile.getFacebookFlag());
                     wizzardDTO.setIsGoogle(userProfile.getGoogleFlag());

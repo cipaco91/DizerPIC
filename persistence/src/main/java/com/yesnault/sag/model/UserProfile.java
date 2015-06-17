@@ -13,16 +13,16 @@ public class UserProfile extends AbstractEntity{
     @JoinColumn(name = "FK_USER_ID", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "FACEBOOK_FLAG", nullable = false, insertable = true, updatable = true)
+    @Column(name = "FACEBOOK_FLAG",insertable = true, updatable = true)
     private Boolean facebookFlag;
 
-    @Column(name = "TWITTER_FLAG", nullable = false, insertable = true, updatable = true)
+    @Column(name = "TWITTER_FLAG",  insertable = true, updatable = true)
     private Boolean twitterFlag;
 
-    @Column(name = "LINKEDIN_FLAG", nullable = false, insertable = true, updatable = true)
+    @Column(name = "LINKEDIN_FLAG", insertable = true, updatable = true)
     private Boolean linkedinFlag;
 
-    @Column(name = "GOOGLE_FLAG", nullable = false, insertable = true, updatable = true)
+    @Column(name = "GOOGLE_FLAG", insertable = true, updatable = true)
     private Boolean googleFlag;
 
     @Column(name = "FROM_PROFILE_IMAGE", nullable = false, insertable = true, updatable = true)
