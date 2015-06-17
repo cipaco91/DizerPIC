@@ -93,6 +93,7 @@ public class UserServiceImpl implements UserService {
         userProfile.setFromProfileCover(wizzardDTO.getProfileCover());
         userProfile.setFromProfileFriends(wizzardDTO.getProfileFriend());
         userProfile.setFromProfileName(wizzardDTO.getProfileName());
+        userProfile.setEmail(wizzardDTO.getEmail());
         userProfileRepository.save(userProfile);
         return true;
     }

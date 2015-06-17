@@ -40,6 +40,9 @@ public class UserProfile extends AbstractEntity{
     @Column(name = "FROM_PROFILE_COVER", nullable = false, insertable = true, updatable = true)
     private String fromProfileCover;
 
+    @Column(name = "email", insertable = true, updatable = true)
+    private String email;
+
     public User getUser() {
         return user;
     }
@@ -118,5 +121,13 @@ public class UserProfile extends AbstractEntity{
 
     public void setGoogleFlag(Boolean googleFlag) {
         this.googleFlag = googleFlag;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

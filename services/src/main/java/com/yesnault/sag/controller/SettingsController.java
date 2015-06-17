@@ -51,16 +51,17 @@ public class SettingsController {
                     wizzardDTO.setIsTwitter(userProfile.getTwitterFlag());
                     wizzardDTO.setFirstName(user.getFirstname());
                     wizzardDTO.setLastName(user.getLastname());
-                    wizzardDTO.setEmail("setEmail");
+                    wizzardDTO.setEmail(userProfile.getEmail());
                     wizzardDTO.setProfileAbout(userProfile.getFromProfileAbout());
                     wizzardDTO.setProfileCover(userProfile.getFromProfileCover());
                     wizzardDTO.setProfileFriend(userProfile.getFromProfileFriends());
                     wizzardDTO.setProfileImage(userProfile.getFromProfileImage());
                     wizzardDTO.setProfileName(userProfile.getFromProfileName());
+                    return wizzardDTO;
                 }
             }else return new WizzardDTO();
-            return wizzardDTO;
         }
+        return new WizzardDTO();
     }
 
     @RequestMapping(value = "/finishWizzardProfile", method = RequestMethod.POST, produces = "application/json")
