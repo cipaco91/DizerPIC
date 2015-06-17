@@ -182,7 +182,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     $scope.findFriends();
 
     $scope.filterFunctionLinkedin = function(element) {
-       if($scope.name == "" || $scope.name.length > 3){
+       if($scope.name == "" ){
            return true;
        }
         return true;
@@ -190,7 +190,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     };
 
     $scope.filterFunctionTwitter = function(element) {
-        if($scope.name == "" || $scope.name.length > 3){
+        if($scope.name == "" ){
             return true;
         }
         return true;
@@ -198,7 +198,7 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     };
 
     $scope.filterFunctionGoogle = function(element) {
-        if($scope.name == "" || $scope.name.length > 3){
+        if($scope.name == "" ){
             return true;
         }
         return true;
@@ -206,9 +206,10 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
     };
 
     $scope.filterFunctionFacebook = function(element) {
-        if($scope.name == "" || $scope.name.length > 3){
+        if($scope.name == ""){
             return true;
         }
-        return ProfileService.verifyContainsString( element.name,$scope.name);
+        return true;
+        //return ProfileService.verifyContainsString( element.name,$scope.name);
     };
 }
