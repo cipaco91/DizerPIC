@@ -34,12 +34,11 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
 
     $scope.addCommentFacebook = function (slide) {
         console.log(slide.id);
-        //FeedService.addComment(slide.id, $scope.postText);
+        FeedService.addComment(slide.id, $scope.postText);
         ProfileService.getCommentFeed(slide.postText).success(function (response) {
             $scope.commentFeed = response;
-            if(slide.commentFeeds == null) slide.commentFeeds={};
             slide.commentFeeds.push($scope.commentFeed);
-            feed.commentsCount = feed.commentsCount + 1;
+            slide.commentsCount = slide.commentsCount + 1;
             slide.postText="";
         });
     };

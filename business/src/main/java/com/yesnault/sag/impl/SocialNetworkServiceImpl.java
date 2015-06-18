@@ -67,12 +67,12 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
     @Override
     public SNFeed updateStatus(Boolean facebookFlag, Boolean twitterFlag,
                                Boolean linkedinFlag, Boolean googleFlag, String message, User user) {
-//        if (facebookFlag) {
-//            facebook.feedOperations().post(facebook.userOperations().getUserProfile().getId(),message);
-//        }
-//        if (twitterFlag) {
-//            twitter.timelineOperations().updateStatus(message);
-//        }
+        if (facebookFlag) {
+            facebook.feedOperations().post(facebook.userOperations().getUserProfile().getId(),message);
+        }
+        if (twitterFlag) {
+            twitter.timelineOperations().updateStatus(message);
+        }
 
 //        if (linkedinFlag) {
 //            linkedIn.networkUpdateOperations().createNetworkUpdate(message);
@@ -87,8 +87,10 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
         snFeed.setSocialNetworkType("dizerpic");
         snFeed.setFrom(new Reference(google.plusOperations().getGoogleProfile().getId(),
                 google.plusOperations().getGoogleProfile().getDisplayName()));
+        snFeed.setLikeShow(true);
         snFeed.setCommentsFeeds(new ArrayList<CommentFeed>());
         snFeed.setLikesCount(0);
+        snFeed.setCommentsCount(0);
         snFeed.setCreatedTime(new Date());
         snFeed.setFacebookFlag(facebookFlag);
         snFeed.setTwitterFlag(twitterFlag);
@@ -146,12 +148,16 @@ public class SocialNetworkServiceImpl implements SocialNetworkService {
                         facebook.userOperations().getUserProfile().getAbout(), facebook.userOperations().getUserProfile().getLocation().getName(),
                         facebook.userOperations().getUserProfile().getRelationshipStatus());
                 profileSN.setDateOfBirthday(google.plusOperations().getGoogleProfile().getBirthday());
+                return profileSN;
             } else if ("twitter".equals(userProfile.getFromProfileAbout())) {
-                ProfileSN profileSN= new ProfileSN(Long.toString(twitter.userOperations().getUserProfile().getId()),
-                        facebook.userOperations().getUserProfile().getGender(), twitter.userOperations().getUserProfile().getName(),
-                        facebook.userOperations().getUserProfile().getEmail(), facebook.userOperations().getUserProfile().getBirthday(),
-                        facebook.userOperations().getUserProfile().getAbout());
-                profileSN.setDateOfBirthday(google.plusOperations().getGoogleProfile().getBirthday());
+                Person person = google.plusOperations().getGoogleProfile();
+                ProfileSN profileSN= new ProfileSN(person.getId(),
+                        person.getGender(), facebook.userOperations().getUserProfile().getName(),
+                        facebook.userOperations().getUserProfile().getEmail(), person.getBirthday().toString(),
+                        person.getAboutMe(), "Bucuresti,Romania",
+                        "in_a_relationship".equals(person.getRelationshipStatus()) ? "In a relantionship" : "Single");
+                profileSN.setDateOfBirthday(person.getBirthday());
+                return profileSN;
             } else if ("google".equals(userProfile.getFromProfileAbout())) {
                 Person person = google.plusOperations().getGoogleProfile();
                 ProfileSN profileSN= new ProfileSN(person.getId(),
