@@ -141,6 +141,9 @@ public class FacebookServiceImpl implements FacebookService {
             for(Photo photo:photos){
                 PhotoSN photoSN=new PhotoSN();
                 photoSN.setPhoto(photo);
+                photoSN.setLikesCount(facebook.likeOperations().getLikes(photo.getId()) != null ?
+                        facebook.likeOperations().getLikes(photo.getId()).size() : 0);
+                photoSN.setLikeShow(true);
                 List<CommentFeed> commentFeeds=getComments(photo.getId());
                 if(commentFeeds == null) {
                     photoSN.setCommentFeeds(new ArrayList<CommentFeed>());
@@ -194,11 +197,13 @@ public class FacebookServiceImpl implements FacebookService {
     public List<PhotoSN> getPhotosFromAlbum(String albumId) {
         List<Photo> photos = new ArrayList<Photo>(facebook.mediaOperations().getPhotos(albumId));
         List<PhotoSN> photoSNs=new ArrayList<PhotoSN>();
-        String imageProfile="http://graph.facebook.com/" + facebook.userOperations().getUserProfile().getId()+ "/picture";
-        for(Photo photo:photos){
-            PhotoSN photoSN=new PhotoSN();
+        String imageProfile="http://graph.facebook.com/" + facebook.userOperations().getUserProfile().getId() + "/picture";
+        for (Photo photo : photos) {
+            PhotoSN photoSN = new PhotoSN();
             photoSN.setPhoto(photo);
-            photoSN.setLikesCount(facebook.likeOperations().getLikes(photo.getId()).size());
+            photoSN.setLikesCount(facebook.likeOperations().getLikes(photo.getId())!=null?
+                    facebook.likeOperations().getLikes(photo.getId()).size():0);
+            photoSN.setLikeShow(true);
             List<CommentFeed> commentFeeds=getComments(photo.getId());
             if(commentFeeds == null) {
                 photoSN.setCommentFeeds(new ArrayList<CommentFeed>());

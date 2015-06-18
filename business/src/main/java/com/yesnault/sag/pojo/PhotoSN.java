@@ -24,6 +24,8 @@ public class PhotoSN implements Serializable{
 
     private String postText;
 
+    private Boolean likeShow;
+
     public List<CommentFeed> getCommentFeeds() {
         return commentFeeds;
     }
@@ -78,5 +80,13 @@ public class PhotoSN implements Serializable{
 
     public void setLikesCount(Integer likesCount) {
         this.likesCount = likesCount;
+    }
+
+    public Boolean getLikeShow() {
+        return likeShow;
+    }
+
+    public void setLikeShow(Boolean likeShow) {
+        this.likeShow = likeShow;
     }
 }

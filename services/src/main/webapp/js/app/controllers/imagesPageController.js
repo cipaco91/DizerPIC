@@ -52,4 +52,18 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
         });
     };
 
+    $scope.addLike = function (feed) {
+        console.log(feed.id);
+        FeedService.addLike(feed.photo.id);
+        feed.likeShow = false;
+        feed.likesCount = feed.likesCount + 1;
+    };
+
+    $scope.unlike = function (feed) {
+        console.log(feed.id);
+        FeedService.unlike(feed.photo.id);
+        feed.likeShow = true;
+        feed.likesCount = feed.likesCount - 1;
+    };
+
 }
