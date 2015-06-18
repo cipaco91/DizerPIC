@@ -48,6 +48,7 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
             $scope.commentFeed = response;
             if(slide.commentFeeds == null) slide.commentFeeds={};
             slide.commentFeeds.push($scope.commentFeed);
+            feed.commentsCount = feed.commentsCount + 1;
             slide.postText="";
         });
     };
