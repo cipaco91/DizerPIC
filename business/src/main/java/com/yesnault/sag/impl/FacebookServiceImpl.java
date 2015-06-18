@@ -132,6 +132,34 @@ public class FacebookServiceImpl implements FacebookService {
     }
 
     @Override
+    public List<PhotoSN> imagesPageFacebook(User user) {
+        if(isConnectFacebook(user)) {
+            String userId = facebook.userOperations().getUserProfile().getId();
+            PagedList<Photo> photos= facebook.mediaOperations().getPhotos(userId);
+            List<PhotoSN> photoSNs=new ArrayList<PhotoSN>();
+            String imageProfile="http://graph.facebook.com/" + facebook.userOperations().getUserProfile().getId()+ "/picture";
+            for(Photo photo:photos){
+                PhotoSN photoSN=new PhotoSN();
+                photoSN.setPhoto(photo);
+                List<CommentFeed> commentFeeds=getComments(photo.getId());
+                if(commentFeeds == null) {
+                    photoSN.setCommentFeeds(new ArrayList<CommentFeed>());
+                    photoSN.setCommentsCount(0);
+                } else{
+                    photoSN.setCommentFeeds(commentFeeds);
+                    photoSN.setCommentsCount(commentFeeds.size());
+                }
+
+                photoSN.setProfileName(photo.getFrom().getName());
+                photoSN.setProfilePicture(imageProfile);
+                photoSNs.add(photoSN);
+            }
+            return photoSNs;
+        }
+        return null;
+    }
+
+    @Override
     public boolean isConnectFacebook(User user) {
         try {
 
@@ -170,6 +198,7 @@ public class FacebookServiceImpl implements FacebookService {
         for(Photo photo:photos){
             PhotoSN photoSN=new PhotoSN();
             photoSN.setPhoto(photo);
+            photoSN.setLikesCount(facebook.likeOperations().getLikes(photo.getId()).size());
             List<CommentFeed> commentFeeds=getComments(photo.getId());
             if(commentFeeds == null) {
                 photoSN.setCommentFeeds(new ArrayList<CommentFeed>());

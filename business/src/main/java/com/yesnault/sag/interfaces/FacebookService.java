@@ -34,6 +34,8 @@ public interface FacebookService {
 
     PagedList<Photo> getPhotosProfile(User user);
 
+    List<PhotoSN> imagesPageFacebook(User user);
+
     boolean isConnectFacebook(User user);
 
     List<SNFriend> getCommonFriendsFacebook();

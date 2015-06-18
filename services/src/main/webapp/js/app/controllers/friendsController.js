@@ -181,35 +181,49 @@ function FriendsCtrl($scope, $location, FriendsService, ProfileService, MenuServ
 
     $scope.findFriends();
 
-    $scope.filterFunctionLinkedin = function(element) {
-       if($scope.name == "" ){
-           return true;
-       }
-        return true;
-        //return ProfileService.verifyContainsString( element.name,$scope.name);
-    };
+    //$scope.filterFunctionLinkedin = function(element) {
+    //   if($scope.name == "" ){
+    //       return true;
+    //   }
+    //
+    //   ProfileService.verifyContainsString(element.name,$scope.name).
+    //        success(function (response) {
+    //            return response;
+    //        })
+    //        .error(function (resp) {
+    //           return false;
+    //        });
+    //};
 
     $scope.filterFunctionTwitter = function(element) {
         if($scope.name == "" ){
             return true;
         }
-        return true;
-        //return ProfileService.verifyContainsString( element.name,$scope.name);
+
+        if(element.name.toLowerCase().indexOf($scope.name.toLowerCase()) >= 0 ){
+            return true;
+        }
     };
 
     $scope.filterFunctionGoogle = function(element) {
         if($scope.name == "" ){
             return true;
         }
-        return true;
-        //return ProfileService.verifyContainsString( element.name,$scope.name);
+
+        if(element.name.toLowerCase().indexOf($scope.name.toLowerCase()) >= 0 ){
+            return true;
+        }
+
     };
 
     $scope.filterFunctionFacebook = function(element) {
         if($scope.name == ""){
             return true;
         }
-        return true;
-        //return ProfileService.verifyContainsString( element.name,$scope.name);
+
+        if(element.name.toLowerCase().indexOf($scope.name.toLowerCase()) >= 0 ){
+            return true;
+        }
+
     };
 }

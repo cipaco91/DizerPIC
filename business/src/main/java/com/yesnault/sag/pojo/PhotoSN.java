@@ -16,6 +16,8 @@ public class PhotoSN implements Serializable{
 
     private Integer commentsCount;
 
+    private Integer likesCount;
+
     private String profileName;
 
     private String profilePicture;
@@ -68,5 +70,13 @@ public class PhotoSN implements Serializable{
 
     public void setCommentsCount(Integer commentsCount) {
         this.commentsCount = commentsCount;
+    }
+
+    public Integer getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(Integer likesCount) {
+        this.likesCount = likesCount;
     }
 }

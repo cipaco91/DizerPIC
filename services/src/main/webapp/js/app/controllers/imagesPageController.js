@@ -32,7 +32,7 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
     };
 
     if ($routeParams.albumId == 0) {
-        ProfileService.photosProfile().success(function (response) {
+        ProfileService.imagesPageFacebook().success(function (response) {
             $scope.slides = response;
         });
     } else {

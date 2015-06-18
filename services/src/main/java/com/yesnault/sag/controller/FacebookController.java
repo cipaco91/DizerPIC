@@ -82,6 +82,14 @@ public class FacebookController {
         return facebookService.getPhotosFromAlbum(albumId);
     }
 
+    @RequestMapping(value = "/imagesPageFacebook", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<PhotoSN> photosProfileFacebook(HttpServletRequest httpServletRequest) {
+        User user=(User)httpServletRequest.getSession().getAttribute("user");
+        return facebookService.imagesPageFacebook(user);
+    }
+
     @RequestMapping(value = "/addComment/{id}/{message}", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
