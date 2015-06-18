@@ -6,10 +6,6 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
     $scope.currentIndex = 0;
     $scope.slides = {};
 
-    //$scope.setCurrentSlideIndex = function (index) {
-    //    $scope.direction = (index > $scope.currentIndex) ? 'left' : 'right';
-    //    $scope.currentIndex = index;
-    //};
 
     $scope.isCurrentSlideIndex = function (index) {
         return $scope.currentIndex === index;
@@ -17,17 +13,12 @@ function ImagesPageCtrl($scope, $rootScope,$routeParams, $window, ProfileService
 
     $scope.prevSlide = function (slide) {
         $scope.direction = 'left';
-        //FeedService.comments(slide.id).success(function (response) {
-        //    $scope.commentsFeeds = response;
-        //});
+
         $scope.currentIndex = ($scope.currentIndex < $scope.slides.length - 1) ? ++$scope.currentIndex : 0;
     };
 
     $scope.nextSlide = function (slide) {
         $scope.direction = 'right';
-        //FeedService.comments(slide.id).success(function (response) {
-        //    $scope.commentsFeeds = response;
-        //});
         $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
     };
 
