@@ -144,7 +144,7 @@ function FeedCtrl($scope, $location, FeedService, ProfileService, $controller, $
         }
     };
 
-    $scope.postAction = function (src) {
+    $scope.postAction = function () {
         $scope.facebookFlag = $scope.classFacebook == "classFacebook";
         $scope.twitterFlag = $scope.classTwitter == "classTwitter";
         $scope.linkedinFlag = $scope.classLinkedin == "classLinkedin";

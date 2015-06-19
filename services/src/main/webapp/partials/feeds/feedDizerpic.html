@@ -18,9 +18,9 @@
                     <h4 style="margin-left: 10px;">{{feed.SNFeed.message}}</h4>
                     <br/>
                     <div class="profile-icons" ng-show="facebookLikesFlag">
-                        <a ng-click="addLike(feed)"
-                           ng-show="feed.likeShow" title="Like" style="color:blue;margin-left: 10px;"><img width="30" src="images/like.jpg"/></a>
-                        <a ng-click="unlike(feed)"
+                        <a ng-click="addLike(feed.SNFeed)" ng-hide="feed.SNFeed.likeShow"
+                            title="Like" style="color:blue;margin-left: 10px;"><img width="30" src="images/like.jpg"/></a>
+                        <a ng-click="unlike(feed.SNFeed)"
                            ng-hide="feed.likeShow" title="Unlike" style="color:blue;margin-left: 10px;"><img width="30" src="images/unlike.png"/></a>
                         <span> {{feed.likesCount}} Likes</span>
                         <span><i class="fa fa-users"></i> {{feed.commentsCount}} Comments</span>
@@ -35,11 +35,11 @@
                     </div>
 
                     <div class="profile-icons" ng-show="twitterTweetsFlag">
-                        <a ng-click="retweet(feed)" title="Retweet" style="margin-left: 10px;"><img width="30" src="images/retweet.png"/></a>
-                        <a ng-click="addTweetAtFavorites(feed)" title="Add to favorites" style="margin-left: 10px;"><img width="30" src="images/addToFavorites.jpg"/></a>
+                        <a ng-click="retweet(feed.SNFeed)" title="Retweet" style="margin-left: 10px;"><img width="30" src="images/retweet.png"/></a>
+                        <a ng-click="addTweetAtFavorites(feed.SNFeed)" title="Add to favorites" style="margin-left: 10px;"><img width="30" src="images/addToFavorites.jpg"/></a>
 
-                        <span>{{feed.retweetsCount}}  Retweets</span>
-                        <span><i class="fa fa-users"></i> {{feed.favoritesCount}} Favorites</span>
+                        <span>{{feed.SNFeed.retweetsCount}}  Retweets</span>
+                        <span><i class="fa fa-users"></i> {{feed.SNFeed.favoritesCount}} Favorites</span>
                         <a ng-show="{{feed.SNFeed.facebookFlag}}" ng-click="showLikesFacebook()"><img src="images/social/facebook-icon.png"
                                                                        class="img-circle" width="30" /></a>
 
@@ -74,7 +74,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" ng-model="feed.postText"/>
                                                                         <span class="input-group-btn">
-                                <a ng-click="addComment(feed)" class="btn btn-default"><img src="images/accept.png"/></a>
+                                <a ng-click="addComment(feed.SNFeed)" class="btn btn-default"><img src="images/accept.png"/></a>
                             </span>
                             </div>
                         </li>
